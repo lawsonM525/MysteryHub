@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Your Story - Mystery Hub</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        .upload-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #131313;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.2);
+            border: 1px solid rgba(255, 77, 148, 0.1);
+        }
+        
+        .upload-title {
+            color: #ff4d94;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        
+        .upload-description {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #aaa;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #1a1a1a;
+            color: #f5f5f5;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #ff4d94;
+            outline: none;
+        }
+        
+        .form-group textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .image-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #333;
+            border-radius: 5px;
+            padding: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        
+        .image-upload:hover {
+            border-color: #ff4d94;
+        }
+        
+        .image-upload i {
+            font-size: 3rem;
+            color: #ff4d94;
+            margin-bottom: 15px;
+        }
+        
+        .image-upload-text {
+            color: #aaa;
+        }
+        
+        .image-upload-text span {
+            color: #ff4d94;
+            text-decoration: underline;
+        }
+        
+        .image-preview {
+            width: 100%;
+            max-height: 300px;
+            overflow: hidden;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .image-preview img {
+            width: 100%;
+            height: auto;
+        }
+        
+        .editor-toolbar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .editor-btn {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            color: #f5f5f5;
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .editor-btn:hover {
+            background-color: rgba(255, 77, 148, 0.1);
+            border-color: #ff4d94;
+        }
+        
+        .editor-divider {
+            width: 1px;
+            height: 30px;
+            background-color: #333;
+            margin: 0 5px;
+        }
+        
+        .tags-input {
+            margin-top: 5px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background-color: rgba(255, 77, 148, 0.1);
+            color: #ff4d94;
+            padding: 5px 10px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .tag i {
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        
+        .tags-input input {
+            flex: 1;
+            min-width: 150px;
+            background: none;
+            border: none;
+            padding: 5px;
+            color: #f5f5f5;
+        }
+        
+        .tags-input input:focus {
+            outline: none;
+        }
+        
+        .submit-btn {
+            background-color: #ff4d94;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: #ff1a75;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4);
+        }
+        
+        .terms-checkbox {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .terms-checkbox input {
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        
+        .terms-checkbox label {
+            font-size: 0.9rem;
+            color: #aaa;
+            line-height: 1.5;
+        }
+        
+        .terms-checkbox a {
+            color: #ff4d94;
+            text-decoration: none;
+        }
+        
+        .terms-checkbox a:hover {
+            text-decoration: underline;
+        }
+        
+        .draft-btn {
+            background-color: transparent;
+            color: #ff4d94;
+            border: 1px solid #ff4d94;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 10px;
+        }
+        
+        .draft-btn:hover {
+            background-color: rgba(255, 77, 148, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .button-group {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .button-group .submit-btn {
+            width: auto;
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Mystery Hub</div>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../games/game1.html">Games</a></li>
+                    <li><a href="blog.html" class="active">Blogs</a></li>
+                    <li><a href="../movies/movies.html">Movies</a></li>
+                    <li><a href="../profile.html">Profile</a></li>
+                    <li class="profile-pic">
+                        <img src="https://i.pravatar.cc/150?img=12" alt="User Profile">
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Upload Form Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="upload-container">
+                <h1 class="upload-title">Share Your Mystery Story</h1>
+                <p class="upload-description">
+                    Have a fascinating true crime story, unsolved mystery, or cold case to share? 
+                    Use the form below to contribute to our community of mystery enthusiasts.
+                </p>
+                
+                <form id="upload-form" action="../backend/save_story.php" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="post-title">Story Title</label>
+                        <input type="text" id="post-title" name="post-title" placeholder="Enter a captivating title..." required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="post-category">Category</label>
+                            <select id="post-category" name="post-category" required>
+                                <option value="" disabled selected>Select a category</option>
+                                <option value="true-crime">True Crime</option>
+                                <option value="cold-cases">Cold Cases</option>
+                                <option value="unsolved-mysteries">Unsolved Mysteries</option>
+                                <option value="serial-killers">Serial Killers</option>
+                                <option value="disappearances">Disappearances</option>
+                                <option value="conspiracies">Conspiracies</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="read-time">Estimated Read Time (minutes)</label>
+                            <input type="number" id="read-time" name="read-time" min="1" max="60" placeholder="e.g., 5" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="post-excerpt">Short Excerpt/Summary (max 200 characters)</label>
+                        <textarea id="post-excerpt" name="post-excerpt" maxlength="200" placeholder="Write a brief summary that will appear in the story card..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Featured Image</label>
+                        <div class="image-upload" id="image-upload-area">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p class="image-upload-text">Drag and drop an image here, or <span>browse</span></p>
+                            <p class="image-upload-text">Recommended size: 1200 x 800 pixels. Max size: 2MB</p>
+                            <input type="file" id="image-input" name="featured-image" accept="image/*" style="display: none;" required>
+                        </div>
+                        <div class="image-preview" id="image-preview">
+                            <img id="preview-img" src="#" alt="Preview">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="post-content">Story Content</label>
+                        <div class="editor-toolbar">
+                            <button type="button" class="editor-btn" title="Bold"><i class="fas fa-bold"></i></button>
+                            <button type="button" class="editor-btn" title="Italic"><i class="fas fa-italic"></i></button>
+                            <button type="button" class="editor-btn" title="Underline"><i class="fas fa-underline"></i></button>
+                            <div class="editor-divider"></div>
+                            <button type="button" class="editor-btn" title="Heading"><i class="fas fa-heading"></i></button>
+                            <button type="button" class="editor-btn" title="Quote"><i class="fas fa-quote-right"></i></button>
+                            <button type="button" class="editor-btn" title="List"><i class="fas fa-list-ul"></i></button>
+                            <button type="button" class="editor-btn" title="Numbered List"><i class="fas fa-list-ol"></i></button>
+                            <div class="editor-divider"></div>
+                            <button type="button" class="editor-btn" title="Insert Link"><i class="fas fa-link"></i></button>
+                            <button type="button" class="editor-btn" title="Insert Image"><i class="fas fa-image"></i></button>
+                        </div>
+                        <textarea id="post-content" name="post-content" placeholder="Write your story here..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="post-tags">Tags (press Enter after each tag)</label>
+                        <div class="tags-input" id="tags-container">
+                            <input type="text" id="tag-input" placeholder="Add tags...">
+                        </div>
+                        <input type="hidden" id="post-tags" name="post-tags">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Sources & References (optional)</label>
+                        <textarea name="post-sources" placeholder="List your sources and references here..."></textarea>
+                    </div>
+                    
+                    <div class="terms-checkbox">
+                        <input type="checkbox" id="terms-checkbox" name="terms-agreement" required>
+                        <label for="terms-checkbox">
+                            I confirm that this content is factually accurate to the best of my knowledge, does not infringe on any copyrights, 
+                            and complies with the <a href="#">Mystery Hub Community Guidelines</a>. I understand that false information or 
+                            inappropriate content may result in removal of the post and possible account restrictions.
+                        </label>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="button" id="save-draft-btn" class="draft-btn">Save as Draft</button>
+                        <button type="submit" class="submit-btn">Publish Story</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="../games/game1.html">Games</a></li>
+                <li><a href="blog.html">Stories</a></li>
+                <li><a href="../movies/movies.html">Movies</a></li>
+            </ul>
+            <p class="copyright">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Image upload functionality
+            const imageUploadArea = document.getElementById('image-upload-area');
+            const imageInput = document.getElementById('image-input');
+            const imagePreview = document.getElementById('image-preview');
+            const previewImg = document.getElementById('preview-img');
+            
+            imageUploadArea.addEventListener('click', function() {
+                imageInput.click();
+            });
+            
+            imageUploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.style.borderColor = '#ff4d94';
+                this.style.backgroundColor = 'rgba(255, 77, 148, 0.05)';
+            });
+            
+            imageUploadArea.addEventListener('dragleave', function() {
+                this.style.borderColor = '#333';
+                this.style.backgroundColor = 'transparent';
+            });
+            
+            imageUploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.style.borderColor = '#333';
+                this.style.backgroundColor = 'transparent';
+                
+                if (e.dataTransfer.files.length) {
+                    imageInput.files = e.dataTransfer.files;
+                    displayImagePreview();
+                }
+            });
+            
+            imageInput.addEventListener('change', displayImagePreview);
+            
+            function displayImagePreview() {
+                if (imageInput.files && imageInput.files[0]) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        previewImg.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                        imageUploadArea.style.display = 'none';
+                    }
+                    
+                    reader.readAsDataURL(imageInput.files[0]);
+                }
+            }
+            
+            // Tags functionality
+            const tagsContainer = document.getElementById('tags-container');
+            const tagInput = document.getElementById('tag-input');
+            const postTagsInput = document.getElementById('post-tags');
+            let tags = [];
+            
+            tagInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ',') {
+                    e.preventDefault();
+                    
+                    const tagText = this.value.trim();
+                    if (tagText && !tags.includes(tagText)) {
+                        addTag(tagText);
+                        this.value = '';
+                        updateHiddenInput();
+                    }
+                }
+            });
+            
+            function addTag(text) {
+                tags.push(text);
+                
+                const tag = document.createElement('div');
+                tag.className = 'tag';
+                tag.innerHTML = text + '<i class="fas fa-times"></i>';
+                
+                tag.querySelector('i').addEventListener('click', function() {
+                    tag.remove();
+                    tags = tags.filter(t => t !== text);
+                    updateHiddenInput();
+                });
+                
+                tagsContainer.insertBefore(tag, tagInput);
+            }
+            
+            function updateHiddenInput() {
+                postTagsInput.value = JSON.stringify(tags);
+            }
+            
+            // Editor toolbar functionality (simplified demo)
+            const editorButtons = document.querySelectorAll('.editor-btn');
+            const contentTextarea = document.getElementById('post-content');
+            
+            editorButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // This is a simplified demo. In a real app, this would implement formatting
+                    const action = this.getAttribute('title').toLowerCase();
+                    alert(`${action} formatting would be applied in a real rich text editor.`);
+                });
+            });
+            
+            // Form submission
+            const uploadForm = document.getElementById('upload-form');
+            
+            uploadForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // In a real app, this would submit to the server
+                alert('Your story has been submitted! In a real app, this would save to the database.');
+                // Redirect to blog list
+                window.location.href = 'blog.html';
+            });
+            
+            // Save as draft
+            const saveDraftBtn = document.getElementById('save-draft-btn');
+            
+            saveDraftBtn.addEventListener('click', function() {
+                alert('Story saved as draft! You can access it from your profile page.');
+            });
+        });
+    </script>
+</body>
+</html>

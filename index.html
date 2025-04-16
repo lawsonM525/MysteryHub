@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mystery Hub - Your Portal to the World of Mysteries</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script>
+        window.MYSTERY_HUB_CONFIG = {
+            navbarClock: true
+        };
+    </script>
+    <script src="clock/clock.js"></script>
 </head>
 <body>
     <!-- Header with Navigation -->
@@ -14,11 +20,11 @@
             <nav>
                 <div class="logo">Mystery Hub</div>
                 <ul class="nav-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Games</a></li>
-                    <li><a href="#">Blogs</a></li>
-                    <li><a href="#">Movies</a></li>
-                    <li><a href="#">Sign Up</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="games/game1.html">Games</a></li>
+                    <li><a href="blog/blog.html">Blogs</a></li>
+                    <li><a href="movies/movies.html">Movies</a></li>
+                    <li><a href="Pages/login.html" id="login-btn">Login</a></li>
                     <li class="profile-pic">
                         <img src="https://i.pravatar.cc/150?img=12" alt="User Profile">
                     </li>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Mystery Hub</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        .profile-container {
+            max-width: 1000px;
+            margin: 50px auto;
+        }
+        
+        .profile-header {
+            background-color: #131313;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.2);
+            border: 1px solid rgba(255, 77, 148, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #ff4d94;
+            margin-right: 30px;
+        }
+        
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-info {
+            flex: 1;
+        }
+        
+        .profile-name {
+            font-size: 2rem;
+            color: #ff4d94;
+            margin-bottom: 10px;
+        }
+        
+        .profile-username {
+            color: #aaa;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .profile-stat {
+            background-color: rgba(255, 77, 148, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        
+        .edit-profile-btn {
+            padding: 10px 20px;
+            background-color: #ff4d94;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+        
+        .edit-profile-btn:hover {
+            background-color: #ff1a75;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4);
+        }
+        
+        .profile-tabs {
+            display: flex;
+            background-color: #131313;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+        }
+        
+        .profile-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .profile-tab.active {
+            background-color: #1a1a1a;
+            border-bottom: 3px solid #ff4d94;
+            color: #ff4d94;
+        }
+        
+        .profile-tab:hover:not(.active) {
+            background-color: #1a1a1a;
+        }
+        
+        .profile-content {
+            background-color: #131313;
+            border-radius: 0 0 10px 10px;
+            padding: 30px;
+            min-height: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .saved-items {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .saved-item {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        
+        .saved-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .saved-item-img {
+            height: 150px;
+            overflow: hidden;
+        }
+        
+        .saved-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .saved-item-content {
+            padding: 15px;
+        }
+        
+        .saved-item-title {
+            font-weight: 500;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .saved-item-category {
+            display: inline-block;
+            padding: 3px 10px;
+            background-color: rgba(255, 77, 148, 0.1);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: #ff4d94;
+            margin-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #1a1a1a;
+            color: #f5f5f5;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #ff4d94;
+            outline: none;
+        }
+        
+        .save-changes-btn {
+            padding: 10px 20px;
+            background-color: #ff4d94;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .save-changes-btn:hover {
+            background-color: #ff1a75;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Mystery Hub</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="games/game1.html">Games</a></li>
+                    <li><a href="blog/blog.html">Blogs</a></li>
+                    <li><a href="movies/movies.html">Movies</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li class="profile-pic">
+                        <img src="https://i.pravatar.cc/150?img=12" alt="User Profile">
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Profile Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <img src="https://i.pravatar.cc/150?img=12" alt="User Avatar">
+                    </div>
+                    <div class="profile-info">
+                        <h2 class="profile-name">Jane Doe</h2>
+                        <p class="profile-username">@mysterylover</p>
+                        <div class="profile-stats">
+                            <div class="profile-stat">
+                                <i class="fas fa-gamepad"></i> 5 Games Played
+                            </div>
+                            <div class="profile-stat">
+                                <i class="fas fa-book-open"></i> 8 Stories Saved
+                            </div>
+                            <div class="profile-stat">
+                                <i class="fas fa-film"></i> 12 Movies Rated
+                            </div>
+                        </div>
+                        <button class="edit-profile-btn" id="edit-profile-btn">Edit Profile</button>
+                    </div>
+                </div>
+                
+                <div class="profile-tabs">
+                    <div class="profile-tab active" data-tab="saved-games">Saved Games</div>
+                    <div class="profile-tab" data-tab="saved-stories">Saved Stories</div>
+                    <div class="profile-tab" data-tab="saved-movies">Rated Movies</div>
+                    <div class="profile-tab" data-tab="settings">Account Settings</div>
+                </div>
+                
+                <div class="profile-content">
+                    <!-- Saved Games Tab -->
+                    <div class="tab-content active" id="saved-games">
+                        <div class="saved-items">
+                            <div class="saved-item">
+                                <div class="saved-item-img">
+                                    <img src="assets/images/game1.jpg" alt="Mystery Game">
+                                </div>
+                                <div class="saved-item-content">
+                                    <span class="saved-item-category">Game</span>
+                                    <h3 class="saved-item-title">The Vanishing Artifact</h3>
+                                    <p>Progress: 75% Complete</p>
+                                </div>
+                            </div>
+                            
+                            <div class="saved-item">
+                                <div class="saved-item-img">
+                                    <img src="assets/images/game2.jpg" alt="Mystery Game">
+                                </div>
+                                <div class="saved-item-content">
+                                    <span class="saved-item-category">Game</span>
+                                    <h3 class="saved-item-title">Murder at Midnight</h3>
+                                    <p>Progress: 100% Complete</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Saved Stories Tab -->
+                    <div class="tab-content" id="saved-stories">
+                        <div class="saved-items">
+                            <div class="saved-item">
+                                <div class="saved-item-img">
+                                    <img src="assets/images/blog1.jpg" alt="Blog Post">
+                                </div>
+                                <div class="saved-item-content">
+                                    <span class="saved-item-category">True Crime</span>
+                                    <h3 class="saved-item-title">The Zodiac Killer</h3>
+                                    <p>Saved: Apr 12, 2025</p>
+                                </div>
+                            </div>
+                            
+                            <div class="saved-item">
+                                <div class="saved-item-img">
+                                    <img src="assets/images/blog2.jpg" alt="Blog Post">
+                                </div>
+                                <div class="saved-item-content">
+                                    <span class="saved-item-category">Cold Case</span>
+                                    <h3 class="saved-item-title">The Black Dahlia</h3>
+                                    <p>Saved: Apr 10, 2025</p>
+                                </div>
+                            </div>
+                            
+                            <div class="saved-item">
+                                <div class="saved-item-img">
+                                    <img src="assets/images/blog3.jpg" alt="Blog Post">
+                                </div>
+                                <div class="saved-item-content">
+                                    <span class="saved-item-category">Unsolved</span>
+                                    <h3 class="saved-item-title">The Somerton Man</h3>
+                                    <p>Saved: Apr 5, 2025</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Rated Movies Tab -->
+                    <div class="tab-content" id="saved-movies">
+                        <div class="saved-items">
+                            <div class="saved-item">
+                                <div class="saved-item-img">
+                                    <img src="assets/images/movie1.jpg" alt="Movie">
+                                </div>
+                                <div class="saved-item-content">
+                                    <span class="saved-item-category">Movie</span>
+                                    <h3 class="saved-item-title">Knives Out</h3>
+                                    <p>Your Rating: ⭐⭐⭐⭐⭐</p>
+                                </div>
+                            </div>
+                            
+                            <div class="saved-item">
+                                <div class="saved-item-img">
+                                    <img src="assets/images/movie2.jpg" alt="Movie">
+                                </div>
+                                <div class="saved-item-content">
+                                    <span class="saved-item-category">Movie</span>
+                                    <h3 class="saved-item-title">Shutter Island</h3>
+                                    <p>Your Rating: ⭐⭐⭐⭐</p>
+                                </div>
+                            </div>
+                            
+                            <div class="saved-item">
+                                <div class="saved-item-img">
+                                    <img src="assets/images/movie3.jpg" alt="Movie">
+                                </div>
+                                <div class="saved-item-content">
+                                    <span class="saved-item-category">Movie</span>
+                                    <h3 class="saved-item-title">Gone Girl</h3>
+                                    <p>Your Rating: ⭐⭐⭐⭐⭐</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Account Settings Tab -->
+                    <div class="tab-content" id="settings">
+                        <form id="profile-settings-form">
+                            <div class="form-group">
+                                <label for="display-name">Display Name</label>
+                                <input type="text" id="display-name" name="display-name" value="Jane Doe">
+                            </div>
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" id="username" name="username" value="mysterylover">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" value="jane.doe@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="bio">Bio</label>
+                                <textarea id="bio" name="bio" rows="4">Mystery enthusiast and amateur detective. I love solving puzzles and reading true crime stories.</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">New Password (leave blank to keep current)</label>
+                                <input type="password" id="new-password" name="new-password">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm New Password</label>
+                                <input type="password" id="confirm-password" name="confirm-password">
+                            </div>
+                            <button type="submit" class="save-changes-btn">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="games/game1.html">Games</a></li>
+                <li><a href="blog/blog.html">Stories</a></li>
+                <li><a href="movies/movies.html">Movies</a></li>
+            </ul>
+            <p class="copyright">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.profile-tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to current tab and content
+                    this.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Form submission handling
+            const profileForm = document.getElementById('profile-settings-form');
+            if (profileForm) {
+                profileForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // In a real app, this would send data to the backend
+                    alert('Profile updated successfully!');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

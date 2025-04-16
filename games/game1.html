@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Vanishing Artifact - Mystery Hub</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script>
+        window.MYSTERY_HUB_CONFIG = {
+            navbarClock: true
+        };
+    </script>
+    <script src="../clock/clock.js"></script>
+    <style>
+        .game-container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #131313;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.2);
+            border: 1px solid rgba(255, 77, 148, 0.1);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-container::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 77, 148, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .game-title {
+            text-align: center;
+            color: #ff4d94;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+        
+        .game-description {
+            margin-bottom: 30px;
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .game-scene {
+            position: relative;
+            min-height: 400px;
+            background-color: #0a0a0a;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            background-image: url('../assets/images/game1-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        
+        .game-scene-title {
+            color: #ff4d94;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .game-dialogue {
+            background-color: rgba(10, 10, 10, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ff4d94;
+            margin-bottom: 20px;
+        }
+        
+        .game-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .game-option {
+            background-color: #1a1a1a;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 77, 148, 0.1);
+        }
+        
+        .game-option:hover {
+            background-color: rgba(255, 77, 148, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.2);
+        }
+        
+        .game-inventory {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .inventory-item {
+            width: 50px;
+            height: 50px;
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 77, 148, 0.2);
+        }
+        
+        .inventory-item:hover {
+            background-color: rgba(255, 77, 148, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .inventory-item.empty {
+            color: #555;
+        }
+        
+        .game-progress {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #1a1a1a;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #ff4d94;
+            width: 25%; /* Starting progress */
+        }
+        
+        .hint-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: transparent;
+            color: #ff4d94;
+            border: 1px solid #ff4d94;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .hint-btn:hover {
+            background-color: rgba(255, 77, 148, 0.1);
+        }
+        
+        /* Hidden until needed */
+        .game-scene[data-scene="2"], 
+        .game-scene[data-scene="3"], 
+        .game-scene[data-scene="4"] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Mystery Hub</div>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="#" class="active">Games</a></li>
+                    <li><a href="../blog/blog.html">Blogs</a></li>
+                    <li><a href="../movies/movies.html">Movies</a></li>
+                    <li><a href="../login.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Game Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="game-container">
+                <h1 class="game-title">The Vanishing Artifact</h1>
+                <p class="game-description">
+                    A priceless artifact has vanished from the National Museum. As a renowned detective, 
+                    you've been called to investigate the mysterious disappearance and track down the thief.
+                </p>
+                
+                <div class="game-inventory">
+                    <div class="inventory-item empty" data-item="none"><i class="fas fa-question"></i></div>
+                    <div class="inventory-item empty" data-item="none"><i class="fas fa-question"></i></div>
+                    <div class="inventory-item empty" data-item="none"><i class="fas fa-question"></i></div>
+                    <div class="inventory-item empty" data-item="none"><i class="fas fa-question"></i></div>
+                </div>
+                
+                <!-- Scene 1 -->
+                <div class="game-scene" data-scene="1">
+                    <h3 class="game-scene-title">The Museum Entrance</h3>
+                    <div class="game-dialogue">
+                        <p>
+                            <strong>Museum Director:</strong> "Thank you for coming, Detective. The Midnight Star, 
+                            our most valuable diamond, was stolen last night. Our security cameras were disabled, 
+                            and there's no sign of forced entry. Where would you like to begin your investigation?"
+                        </p>
+                    </div>
+                    <div class="game-options">
+                        <div class="game-option" data-next="2">
+                            <p>Examine the display case where the artifact was kept</p>
+                        </div>
+                        <div class="game-option" data-next="3">
+                            <p>Check the security office and camera footage</p>
+                        </div>
+                        <div class="game-option" data-next="4">
+                            <p>Interview the museum staff</p>
+                        </div>
+                        <div class="game-option" data-next="5">
+                            <p>Look for evidence outside the museum</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Scene 2 (Hidden initially) -->
+                <div class="game-scene" data-scene="2">
+                    <h3 class="game-scene-title">The Empty Display Case</h3>
+                    <div class="game-dialogue">
+                        <p>
+                            You examine the display case carefully. The glass hasn't been broken, suggesting the thief 
+                            had access to the security system. You notice a very fine powder residue on the edge of the display.
+                            There are also small fingerprints that don't match the cleaning staff's records.
+                        </p>
+                    </div>
+                    <div class="game-options">
+                        <div class="game-option" data-next="6">
+                            <p>Collect the powder residue as evidence</p>
+                        </div>
+                        <div class="game-option" data-next="3">
+                            <p>Now check the security office</p>
+                        </div>
+                        <div class="game-option" data-next="4">
+                            <p>Talk to the staff about who had access</p>
+                        </div>
+                        <div class="game-option" data-next="1">
+                            <p>Return to the entrance and rethink your approach</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-progress">
+                    <p>Progress: <span id="progress-text">25%</span></p>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <button class="hint-btn" id="hint-btn">Get a Hint</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Links -->
+    <section class="other-games">
+        <div class="container">
+            <h2 class="section-title">Other Mystery Games</h2>
+            <div class="feature-container">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Murder at Midnight</h3>
+                    <p>Solve a mysterious murder case in a secluded mansion during a stormy night.</p>
+                    <a href="game2.html" class="cta-btn">Play Now</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h3>Escape the Crypt</h3>
+                    <p>You're trapped in an ancient crypt filled with puzzles. Can you escape before time runs out?</p>
+                    <a href="game3.html" class="cta-btn">Play Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Games</a></li>
+                <li><a href="../blog/blog.html">Stories</a></li>
+                <li><a href="../movies/movies.html">Movies</a></li>
+            </ul>
+            <p class="copyright">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Game state
+            let currentScene = 1;
+            let inventory = ['none', 'none', 'none', 'none'];
+            let progress = 25;
+            
+            // Get elements
+            const gameOptions = document.querySelectorAll('.game-option');
+            const gameScenes = document.querySelectorAll('.game-scene');
+            const progressFill = document.querySelector('.progress-fill');
+            const progressText = document.getElementById('progress-text');
+            const hintBtn = document.getElementById('hint-btn');
+            
+            // Handle option clicks
+            gameOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const nextScene = this.getAttribute('data-next');
+                    
+                    // Hide current scene
+                    document.querySelector(`.game-scene[data-scene="${currentScene}"]`).style.display = 'none';
+                    
+                    // Show next scene
+                    const nextSceneElement = document.querySelector(`.game-scene[data-scene="${nextScene}"]`);
+                    
+                    // If scene exists, show it
+                    if (nextSceneElement) {
+                        nextSceneElement.style.display = 'flex';
+                        currentScene = nextScene;
+                        
+                        // Update progress
+                        progress += 15;
+                        if (progress > 100) progress = 100;
+                        
+                        progressFill.style.width = `${progress}%`;
+                        progressText.textContent = `${progress}%`;
+                    } else {
+                        // If scene doesn't exist yet (for demo purposes)
+                        alert('This part of the game is still under development. Please try another option.');
+                        document.querySelector(`.game-scene[data-scene="${currentScene}"]`).style.display = 'flex';
+                    }
+                });
+            });
+            
+            // Handle hint button
+            hintBtn.addEventListener('click', function() {
+                let hint = '';
+                
+                switch(currentScene) {
+                    case '1':
+                        hint = 'The display case might have clues about how the thief gained access.';
+                        break;
+                    case '2':
+                        hint = 'The powder residue could be a key piece of evidence.';
+                        break;
+                    default:
+                        hint = 'Look carefully at all the options and think about what a detective would do first.';
+                }
+                
+                alert(`Hint: ${hint}`);
+            });
+            
+            // Handle inventory clicks (for future implementation)
+            const inventoryItems = document.querySelectorAll('.inventory-item');
+            inventoryItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const itemType = this.getAttribute('data-item');
+                    if (itemType !== 'none') {
+                        alert(`Item: ${itemType}`);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

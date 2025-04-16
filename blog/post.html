@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Zodiac Killer: America's Most Infamous Unsolved Case - Mystery Hub</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        .post-container {
+            max-width: 800px;
+            margin: 50px auto;
+        }
+        
+        .post-header {
+            margin-bottom: 30px;
+        }
+        
+        .post-category {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: rgba(255, 77, 148, 0.1);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+            color: #ff4d94;
+        }
+        
+        .post-title {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .post-meta {
+            display: flex;
+            align-items: center;
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        
+        .post-author {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+        
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .post-date, .post-comments {
+            margin-right: 20px;
+        }
+        
+        .post-featured-image {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .post-featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .post-content {
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        .post-content p {
+            margin-bottom: 20px;
+        }
+        
+        .post-content h2 {
+            color: #ff4d94;
+            margin: 30px 0 15px;
+            font-size: 1.8rem;
+        }
+        
+        .post-content h3 {
+            color: #ff4d94;
+            margin: 25px 0 15px;
+            font-size: 1.5rem;
+        }
+        
+        .post-content ul, .post-content ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .post-content li {
+            margin-bottom: 10px;
+        }
+        
+        .post-content blockquote {
+            border-left: 4px solid #ff4d94;
+            padding: 15px 20px;
+            margin: 20px 0;
+            background-color: rgba(255, 77, 148, 0.05);
+            font-style: italic;
+        }
+        
+        .post-content img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 0;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+            margin-bottom: 30px;
+        }
+        
+        .post-actions-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .like-btn, .save-btn {
+            display: flex;
+            align-items: center;
+            background: none;
+            border: none;
+            color: #aaa;
+            cursor: pointer;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+        
+        .like-btn i, .save-btn i {
+            margin-right: 5px;
+            font-size: 1.2rem;
+        }
+        
+        .like-btn:hover, .save-btn:hover {
+            color: #ff4d94;
+        }
+        
+        .liked {
+            color: #ff4d94;
+        }
+        
+        .post-actions-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .share-btn {
+            margin-left: 10px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .share-facebook {
+            background-color: #3b5998;
+        }
+        
+        .share-twitter {
+            background-color: #1da1f2;
+        }
+        
+        .share-reddit {
+            background-color: #ff4500;
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        .post-author-bio {
+            background-color: #131313;
+            border-radius: 10px;
+            padding: 30px;
+            display: flex;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 77, 148, 0.1);
+        }
+        
+        .author-avatar-large {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .author-avatar-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info {
+            flex: 1;
+        }
+        
+        .author-name {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #ff4d94;
+        }
+        
+        .author-bio {
+            color: #aaa;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+        
+        .follow-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: transparent;
+            border: 1px solid #ff4d94;
+            color: #ff4d94;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .follow-btn:hover {
+            background-color: rgba(255, 77, 148, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .comments-section {
+            margin-top: 50px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: #ff4d94;
+            margin-bottom: 30px;
+        }
+        
+        .comment-form {
+            margin-bottom: 30px;
+        }
+        
+        .comment-input {
+            width: 100%;
+            padding: 15px;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #f5f5f5;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .comment-input:focus {
+            outline: none;
+            border-color: #ff4d94;
+        }
+        
+        .comment-submit {
+            padding: 10px 20px;
+            background-color: #ff4d94;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        
+        .comment-submit:hover {
+            background-color: #ff1a75;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4);
+        }
+        
+        .comment {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .comment:last-child {
+            border-bottom: none;
+        }
+        
+        .comment-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .comment-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .comment-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .comment-info {
+            flex: 1;
+        }
+        
+        .comment-author {
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+        
+        .comment-date {
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+        
+        .comment-content {
+            line-height: 1.6;
+            color: #ccc;
+        }
+        
+        .comment-actions {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .comment-action {
+            margin-right: 15px;
+            font-size: 0.85rem;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .comment-action:hover {
+            color: #ff4d94;
+        }
+        
+        .comment-action i {
+            margin-right: 5px;
+        }
+        
+        .related-posts {
+            margin-top: 50px;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .related-card {
+            background-color: #131313;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 77, 148, 0.1);
+        }
+        
+        .related-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 77, 148, 0.3);
+        }
+        
+        .related-image {
+            height: 150px;
+            overflow: hidden;
+        }
+        
+        .related-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .related-content {
+            padding: 15px;
+        }
+        
+        .related-category {
+            display: inline-block;
+            padding: 3px 8px;
+            background-color: rgba(255, 77, 148, 0.1);
+            border-radius: 10px;
+            font-size: 0.7rem;
+            margin-bottom: 8px;
+            color: #ff4d94;
+        }
+        
+        .related-title {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .related-date {
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+        
+        @media (max-width: 768px) {
+            .post-title {
+                font-size: 2rem;
+            }
+            
+            .post-featured-image {
+                height: 300px;
+            }
+            
+            .post-author-bio {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .author-avatar-large {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Mystery Hub</div>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../games/game1.html">Games</a></li>
+                    <li><a href="blog.html" class="active">Blogs</a></li>
+                    <li><a href="../movies/movies.html">Movies</a></li>
+                    <li><a href="../login.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="post-container">
+                <div class="post-header">
+                    <span class="post-category">Serial Killers</span>
+                    <h1 class="post-title">The Zodiac Killer: America's Most Infamous Unsolved Case</h1>
+                    <div class="post-meta">
+                        <div class="post-author">
+                            <div class="author-avatar">
+                                <img src="../assets/images/author1.jpg" alt="Author">
+                            </div>
+                            <span>By Michelle Lawson</span>
+                        </div>
+                        <div class="post-date">
+                            <i class="far fa-calendar"></i> April 15, 2025
+                        </div>
+                        <div class="post-comments">
+                            <i class="far fa-comment"></i> 42 Comments
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="post-featured-image">
+                    <img src="../assets/images/blog-featured.jpg" alt="The Zodiac Killer">
+                </div>
+                
+                <div class="post-content">
+                    <p>
+                        In the late 1960s, a mysterious figure terrorized Northern California, murdering at least five people 
+                        and taunting police with cryptic letters and ciphers. Despite one of the most intensive manhunts in 
+                        history, the Zodiac Killer was never caught. More than 50 years later, the case continues to fascinate 
+                        and perplex investigators and amateur sleuths alike.
+                    </p>
+                    
+                    <h2>The Confirmed Victims</h2>
+                    
+                    <p>
+                        The Zodiac Killer's confirmed victims were young couples in secluded areas, plus a lone taxi driver. 
+                        The confirmed attacks include:
+                    </p>
+                    
+                    <ul>
+                        <li>
+                            <strong>December 20, 1968:</strong> David Faraday (17) and Betty Lou Jensen (16) were shot and killed 
+                            on Lake Herman Road in Vallejo.
+                        </li>
+                        <li>
+                            <strong>July 4, 1969:</strong> Michael Mageau (19) and Darlene Ferrin (22) were shot at Blue Rock Springs 
+                            Park in Vallejo. Ferrin died, but Mageau survived.
+                        </li>
+                        <li>
+                            <strong>September 27, 1969:</strong> Bryan Hartnell (20) and Cecelia Shepard (22) were stabbed at Lake 
+                            Berryessa in Napa County. Hartnell survived, but Shepard died.
+                        </li>
+                        <li>
+                            <strong>October 11, 1969:</strong> Taxi driver Paul Stine (29) was shot in the Presidio Heights 
+                            neighborhood of San Francisco.
+                        </li>
+                    </ul>
+                    
+                    <h2>The Letters and Ciphers</h2>
+                    
+                    <p>
+                        What made the Zodiac case particularly unusual was the killer's communication with the public. Between 1969 
+                        and 1974, he sent numerous letters to Bay Area newspapers, including the San Francisco Chronicle, the San 
+                        Francisco Examiner, and the Vallejo Times-Herald.
+                    </p>
+                    
+                    <p>
+                        Many of these letters included ciphers or coded messages. The first cipher was cracked in 1969 by a high 
+                        school teacher and his wife. It began with the chilling words: "I LIKE KILLING PEOPLE BECAUSE IT IS SO MUCH 
+                        FUN."
+                    </p>
+                    
+                    <blockquote>
+                        "I am not afraid of the gas chamber because it will send me to paradice [sic] all the sooner because I now 
+                        have enough slaves to work for me." - The Zodiac Killer
+                    </blockquote>
+                    
+                    <p>
+                        A second cipher, known as the "340 cipher" (named for its 340 characters), remained unsolved for 51 years until 
+                        it was finally cracked in December 2020 by a team of amateur code-breakers.
+                    </p>
+                    
+                    <h2>The Investigation</h2>
+                    
+                    <p>
+                        Despite one of the largest manhunts in U.S. history, the Zodiac Killer was never caught. Over the decades, 
+                        investigators have considered more than 2,500 suspects. Among the most notable were:
+                    </p>
+                    
+                    <ul>
+                        <li>
+                            <strong>Arthur Leigh Allen:</strong> A former elementary school teacher who was the prime suspect for many 
+                            years. He was identified by survivor Michael Mageau in a photo lineup in 1991, 20 years after the shooting. 
+                            Allen died in 1992 before he could be charged. DNA evidence later appeared to clear him.
+                        </li>
+                        <li>
+                            <strong>Rick Marshall:</strong> A film projectionist who became a suspect when investigators noted similarities 
+                            between his handwriting and the Zodiac letters.
+                        </li>
+                        <li>
+                            <strong>Lawrence Kane:</strong> A businessman who was identified by Kathleen Johns, a woman who claimed to have 
+                            been abducted by the Zodiac in 1970 (though this attack is not confirmed to be the work of the Zodiac).
+                        </li>
+                    </ul>
+                    
+                    <h2>The Legacy</h2>
+                    
+                    <p>
+                        The Zodiac case has had a profound impact on American popular culture, inspiring books, movies (including David 
+                        Fincher's 2007 film "Zodiac"), TV shows, and countless amateur investigations. The case remains officially open 
+                        in multiple jurisdictions.
+                    </p>
+                    
+                    <p>
+                        In recent years, advances in forensic technology have offered new hope. In 2018, investigators used genetic 
+                        genealogy to identify the Golden State Killer, another long-unidentified California serial killer. Similar 
+                        techniques might one day identify the Zodiac.
+                    </p>
+                    
+                    <p>
+                        Until then, the Zodiac remains one of America's most enduring criminal mysteries, a shadowy figure who killed 
+                        at least five people, claimed to have killed many more, and then vanished, leaving behind a legacy of fear, 
+                        fascination, and unanswered questions.
+                    </p>
+                </div>
+                
+                <div class="post-actions">
+                    <div class="post-actions-left">
+                        <button class="like-btn" id="like-btn">
+                            <i class="far fa-heart"></i> <span id="like-count">124</span> Likes
+                        </button>
+                        <button class="save-btn" id="save-btn">
+                            <i class="far fa-bookmark"></i> Save
+                        </button>
+                    </div>
+                    <div class="post-actions-right">
+                        <span>Share:</span>
+                        <a href="#" class="share-btn share-facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="share-btn share-twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="share-btn share-reddit"><i class="fab fa-reddit-alien"></i></a>
+                    </div>
+                </div>
+                
+                <div class="post-author-bio">
+                    <div class="author-avatar-large">
+                        <img src="../assets/images/author1.jpg" alt="Author">
+                    </div>
+                    <div class="author-info">
+                        <h3 class="author-name">Michelle Lawson</h3>
+                        <p class="author-bio">
+                            Michelle is a true crime enthusiast and researcher with a background in criminology. 
+                            She has spent over a decade studying unsolved cases and has contributed to several 
+                            books and documentaries on the subject. When not investigating cold cases, she enjoys 
+                            mystery novels and hiking with her dog.
+                        </p>
+                        <button class="follow-btn">Follow Author</button>
+                    </div>
+                </div>
+                
+                <div class="comments-section">
+                    <h2 class="section-title">Comments (42)</h2>
+                    
+                    <div class="comment-form">
+                        <textarea class="comment-input" placeholder="Share your thoughts..."></textarea>
+                        <button class="comment-submit">Post Comment</button>
+                    </div>
+                    
+                    <div class="comments-list">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <div class="comment-avatar">
+                                    <img src="../assets/images/user1.jpg" alt="User">
+                                </div>
+                                <div class="comment-info">
+                                    <div class="comment-author">John Smith</div>
+                                    <div class="comment-date">April 15, 2025 at 10:24 AM</div>
+                                </div>
+                            </div>
+                            <div class="comment-content">
+                                <p>
+                                    Fascinating article! I've been interested in the Zodiac case for years. The fact that the 340 cipher was 
+                                    only cracked in 2020 shows just how complex this case is. I wonder if we'll ever know the truth?
+                                </p>
+                            </div>
+                            <div class="comment-actions">
+                                <span class="comment-action"><i class="far fa-heart"></i> Like (12)</span>
+                                <span class="comment-action"><i class="far fa-reply"></i> Reply</span>
+                            </div>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <div class="comment-avatar">
+                                    <img src="../assets/images/user2.jpg" alt="User">
+                                </div>
+                                <div class="comment-info">
+                                    <div class="comment-author">Sarah Johnson</div>
+                                    <div class="comment-date">April 15, 2025 at 1:45 PM</div>
+                                </div>
+                            </div>
+                            <div class="comment-content">
+                                <p>
+                                    I think DNA genealogy will eventually solve this case, just like it did with the Golden State Killer. 
+                                    It's just a matter of time before technology catches up with these cold cases.
+                                </p>
+                            </div>
+                            <div class="comment-actions">
+                                <span class="comment-action"><i class="far fa-heart"></i> Like (8)</span>
+                                <span class="comment-action"><i class="far fa-reply"></i> Reply</span>
+                            </div>
+                        </div>
+                        
+                        <div class="comment">
+                            <div class="comment-header">
+                                <div class="comment-avatar">
+                                    <img src="../assets/images/user3.jpg" alt="User">
+                                </div>
+                                <div class="comment-info">
+                                    <div class="comment-author">Robert Chen</div>
+                                    <div class="comment-date">April 16, 2025 at 9:12 AM</div>
+                                </div>
+                            </div>
+                            <div class="comment-content">
+                                <p>
+                                    Great write-up, Michelle! Have you looked into the theory that the Zodiac may have committed crimes in other 
+                                    states as well? Some researchers have suggested connections to unsolved cases in the Midwest.
+                                </p>
+                            </div>
+                            <div class="comment-actions">
+                                <span class="comment-action"><i class="far fa-heart"></i> Like (5)</span>
+                                <span class="comment-action"><i class="far fa-reply"></i> Reply</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="related-posts">
+                    <h2 class="section-title">Related Stories</h2>
+                    
+                    <div class="related-grid">
+                        <div class="related-card">
+                            <div class="related-image">
+                                <img src="../assets/images/blog1.jpg" alt="Black Dahlia">
+                            </div>
+                            <div class="related-content">
+                                <span class="related-category">Cold Cases</span>
+                                <h3 class="related-title">The Black Dahlia Murder</h3>
+                                <div class="related-date">April 12, 2025</div>
+                            </div>
+                        </div>
+                        
+                        <div class="related-card">
+                            <div class="related-image">
+                                <img src="../assets/images/blog6.jpg" alt="Jack the Ripper">
+                            </div>
+                            <div class="related-content">
+                                <span class="related-category">Serial Killers</span>
+                                <h3 class="related-title">Jack the Ripper: The Whitechapel Murders</h3>
+                                <div class="related-date">March 25, 2025</div>
+                            </div>
+                        </div>
+                        
+                        <div class="related-card">
+                            <div class="related-image">
+                                <img src="../assets/images/blog-related3.jpg" alt="BTK Killer">
+                            </div>
+                            <div class="related-content">
+                                <span class="related-category">Serial Killers</span>
+                                <h3 class="related-title">The BTK Killer: How He Was Finally Caught</h3>
+                                <div class="related-date">February 18, 2025</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="../games/game1.html">Games</a></li>
+                <li><a href="#">Stories</a></li>
+                <li><a href="../movies/movies.html">Movies</a></li>
+            </ul>
+            <p class="copyright">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Like button functionality
+            const likeBtn = document.getElementById('like-btn');
+            const likeCount = document.getElementById('like-count');
+            let isLiked = false;
+            
+            likeBtn.addEventListener('click', function() {
+                if (!isLiked) {
+                    likeBtn.innerHTML = '<i class="fas fa-heart"></i> <span id="like-count">' + (parseInt(likeCount.textContent) + 1) + '</span> Likes';
+                    likeBtn.classList.add('liked');
+                    isLiked = true;
+                } else {
+                    likeBtn.innerHTML = '<i class="far fa-heart"></i> <span id="like-count">' + (parseInt(likeCount.textContent) - 1) + '</span> Likes';
+                    likeBtn.classList.remove('liked');
+                    isLiked = false;
+                }
+            });
+            
+            // Save button functionality
+            const saveBtn = document.getElementById('save-btn');
+            let isSaved = false;
+            
+            saveBtn.addEventListener('click', function() {
+                if (!isSaved) {
+                    saveBtn.innerHTML = '<i class="fas fa-bookmark"></i> Saved';
+                    isSaved = true;
+                    alert('Story saved to your profile!');
+                } else {
+                    saveBtn.innerHTML = '<i class="far fa-bookmark"></i> Save';
+                    isSaved = false;
+                    alert('Story removed from your saved items.');
+                }
+            });
+            
+            // Comment form
+            const commentForm = document.querySelector('.comment-form');
+            const commentInput = document.querySelector('.comment-input');
+            const commentSubmit = document.querySelector('.comment-submit');
+            
+            commentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const commentText = commentInput.value.trim();
+                if (commentText) {
+                    alert('Comment submitted! In a real app, this would be saved to the database.');
+                    commentInput.value = '';
+                }
+            });
+            
+            commentSubmit.addEventListener('click', function() {
+                const commentText = commentInput.value.trim();
+                if (commentText) {
+                    alert('Comment submitted! In a real app, this would be saved to the database.');
+                    commentInput.value = '';
+                }
+            });
+            
+            // Comment actions
+            const commentActions = document.querySelectorAll('.comment-action');
+            
+            commentActions.forEach(action => {
+                action.addEventListener('click', function() {
+                    if (this.textContent.includes('Like')) {
+                        alert('You liked this comment!');
+                    } else if (this.textContent.includes('Reply')) {
+                        alert('Reply feature coming soon!');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

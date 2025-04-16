@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Mystery Hub</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        .dashboard-container {
+            max-width: 1000px;
+            margin: 50px auto;
+        }
+        
+        .welcome-section {
+            background-color: #131313;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.2);
+            border: 1px solid rgba(255, 77, 148, 0.1);
+        }
+        
+        .welcome-section h2 {
+            color: #ff4d94;
+            margin-bottom: 15px;
+        }
+        
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background-color: #131313;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 77, 148, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 77, 148, 0.2);
+            border: 1px solid rgba(255, 77, 148, 0.3);
+        }
+        
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #ff4d94;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #aaa;
+        }
+        
+        .recent-activity {
+            background-color: #131313;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 77, 148, 0.1);
+        }
+        
+        .recent-activity h3 {
+            color: #ff4d94;
+            margin-bottom: 20px;
+        }
+        
+        .activity-list {
+            list-style: none;
+        }
+        
+        .activity-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 77, 148, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #ff4d94;
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .activity-time {
+            font-size: 0.85rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Mystery Hub</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="games/game1.html">Games</a></li>
+                    <li><a href="blog/blog.html">Blogs</a></li>
+                    <li><a href="movies/movies.html">Movies</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li class="profile-pic">
+                        <img src="https://i.pravatar.cc/150?img=12" alt="User Profile">
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="dashboard-container">
+                <div class="welcome-section">
+                    <h2>Welcome back, <span id="username">User</span>!</h2>
+                    <p>Here's an overview of your activity on Mystery Hub.</p>
+                </div>
+                
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="stat-value">2</div>
+                        <div class="stat-label">Games Played</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">Stories Read</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Movies Rated</div>
+                    </div>
+                </div>
+                
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <ul class="activity-list">
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">You played "The Vanishing Artifact"</div>
+                                <div class="activity-time">Today, 10:23 AM</div>
+                            </div>
+                        </li>
+                        
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">You commented on "The Zodiac Killer"</div>
+                                <div class="activity-time">Yesterday, 3:45 PM</div>
+                            </div>
+                        </li>
+                        
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-film"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">You rated "Knives Out" 5 stars</div>
+                                <div class="activity-time">Apr 14, 2025</div>
+                            </div>
+                        </li>
+                        
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">You saved "The Black Dahlia Case" to favorites</div>
+                                <div class="activity-time">Apr 12, 2025</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="games/game1.html">Games</a></li>
+                <li><a href="blog/blog.html">Stories</a></li>
+                <li><a href="movies/movies.html">Movies</a></li>
+            </ul>
+            <p class="copyright">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Fetch user data (would come from backend in production)
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('username').textContent = 'Guest'; // Replace with actual username from session
+        });
+    </script>
+</body>
+</html>

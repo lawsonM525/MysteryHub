@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Murder at Midnight - Mystery Hub</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script>
+        window.MYSTERY_HUB_CONFIG = {
+            navbarClock: true
+        };
+    </script>
+    <script src="../clock/clock.js"></script>
+    <style>
+        .game-container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #131313;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.2);
+            border: 1px solid rgba(255, 77, 148, 0.1);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-container::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 77, 148, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .game-title {
+            text-align: center;
+            color: #ff4d94;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+        
+        .game-description {
+            margin-bottom: 30px;
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .game-scene {
+            position: relative;
+            min-height: 400px;
+            background-color: #0a0a0a;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            background-image: url('../assets/images/game2-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        
+        .game-scene::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.3), rgba(10, 10, 10, 0.8));
+            z-index: 1;
+        }
+        
+        .game-scene-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .game-scene-title {
+            color: #ff4d94;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .game-dialogue {
+            background-color: rgba(10, 10, 10, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ff4d94;
+            margin-bottom: 20px;
+        }
+        
+        .game-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .game-option {
+            background-color: #1a1a1a;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 77, 148, 0.1);
+        }
+        
+        .game-option:hover {
+            background-color: rgba(255, 77, 148, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.2);
+        }
+        
+        .game-clues {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .clue-item {
+            background-color: #1a1a1a;
+            border-radius: 5px;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 77, 148, 0.2);
+        }
+        
+        .clue-item.active {
+            background-color: rgba(255, 77, 148, 0.2);
+            border-color: #ff4d94;
+        }
+        
+        .clue-item:hover {
+            background-color: rgba(255, 77, 148, 0.1);
+        }
+        
+        .suspect-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .suspect-card {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 77, 148, 0.1);
+        }
+        
+        .suspect-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.2);
+        }
+        
+        .suspect-card.selected {
+            border-color: #ff4d94;
+            background-color: rgba(255, 77, 148, 0.1);
+        }
+        
+        .suspect-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            overflow: hidden;
+            border: 2px solid #333;
+        }
+        
+        .suspect-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .suspect-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .suspect-role {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+        
+        .game-progress {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #1a1a1a;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #ff4d94;
+            width: 20%; /* Starting progress */
+        }
+        
+        .hint-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: transparent;
+            color: #ff4d94;
+            border: 1px solid #ff4d94;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .hint-btn:hover {
+            background-color: rgba(255, 77, 148, 0.1);
+        }
+        
+        .notebook {
+            background-color: #0a0a0a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 1px solid #333;
+        }
+        
+        .notebook-title {
+            font-size: 1.2rem;
+            color: #ff4d94;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .notebook-title i {
+            margin-right: 10px;
+        }
+        
+        .notebook-content {
+            font-family: 'Courier New', monospace;
+            color: #ddd;
+            line-height: 1.5;
+        }
+        
+        /* Hidden until needed */
+        .game-scene[data-scene="2"], 
+        .game-scene[data-scene="3"], 
+        .game-scene[data-scene="4"] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Mystery Hub</div>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="#" class="active">Games</a></li>
+                    <li><a href="../blog/blog.html">Blogs</a></li>
+                    <li><a href="../movies/movies.html">Movies</a></li>
+                    <li><a href="../login.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Game Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="game-container">
+                <h1 class="game-title">Murder at Midnight</h1>
+                <p class="game-description">
+                    A wealthy businessman has been found dead in his study during his own dinner party at his secluded mansion. 
+                    As a renowned detective, you must interview the suspects, gather clues, and solve the mystery before the killer strikes again.
+                </p>
+                
+                <div class="game-clues">
+                    <div class="clue-item" data-clue="1">Invitation</div>
+                    <div class="clue-item" data-clue="2">Guest List</div>
+                </div>
+                
+                <!-- Scene 1 -->
+                <div class="game-scene" data-scene="1">
+                    <div class="game-scene-content">
+                        <h3 class="game-scene-title">The Grand Entrance</h3>
+                        <div class="game-dialogue">
+                            <p>
+                                <strong>Detective:</strong> "I arrived at Blackwood Manor just after midnight. The mansion looms ahead, 
+                                rain pouring down as thunder crashes in the distance. The butler, seemingly unsurprised by my arrival, 
+                                leads me to the study where Mr. Blackwood's body was discovered."
+                            </p>
+                            <p>
+                                <strong>Butler:</strong> "The police are on their way, but they won't arrive until morning due to the storm 
+                                washing out the bridge. Everyone who was at the dinner party is still here, gathered in the drawing room."
+                            </p>
+                        </div>
+                        <div class="game-options">
+                            <div class="game-option" data-next="2">
+                                <p>Examine the body and crime scene first</p>
+                            </div>
+                            <div class="game-option" data-next="3">
+                                <p>Interview the guests immediately</p>
+                            </div>
+                            <div class="game-option" data-next="4">
+                                <p>Ask the butler for more information</p>
+                            </div>
+                            <div class="game-option" data-next="5">
+                                <p>Check the security of the mansion</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Scene 2 (Hidden initially) -->
+                <div class="game-scene" data-scene="2">
+                    <div class="game-scene-content">
+                        <h3 class="game-scene-title">The Study</h3>
+                        <div class="game-dialogue">
+                            <p>
+                                Mr. Blackwood's body lies slumped over his desk. You notice a spilled glass of whiskey, 
+                                a letter opener with traces of blood, and an open safe behind a painting. The time of death 
+                                appears to be around 11:30 PM, during the dinner party. There are no signs of a struggle.
+                            </p>
+                        </div>
+                        <div class="game-options">
+                            <div class="game-option" data-next="6">
+                                <p>Examine the whiskey glass more closely</p>
+                            </div>
+                            <div class="game-option" data-next="7">
+                                <p>Investigate the open safe</p>
+                            </div>
+                            <div class="game-option" data-next="3">
+                                <p>Now go interview the guests</p>
+                            </div>
+                            <div class="game-option" data-next="1">
+                                <p>Return to the entrance and reconsider your approach</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="notebook">
+                    <div class="notebook-title">
+                        <i class="fas fa-book"></i> Detective's Notes
+                    </div>
+                    <div class="notebook-content">
+                        <p>Location: Blackwood Manor</p>
+                        <p>Victim: Richard Blackwood, 58, businessman</p>
+                        <p>Time of death: Approx. 11:30 PM</p>
+                        <p>Suspects: All dinner guests + household staff</p>
+                        <p>Key clues: ???</p>
+                    </div>
+                </div>
+                
+                <div class="game-progress">
+                    <p>Progress: <span id="progress-text">20%</span></p>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <button class="hint-btn" id="hint-btn">Get a Hint</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Links -->
+    <section class="other-games">
+        <div class="container">
+            <h2 class="section-title">Other Mystery Games</h2>
+            <div class="feature-container">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>The Vanishing Artifact</h3>
+                    <p>Solve the mystery of a stolen priceless artifact from the National Museum.</p>
+                    <a href="game1.html" class="cta-btn">Play Now</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h3>Escape the Crypt</h3>
+                    <p>You're trapped in an ancient crypt filled with puzzles. Can you escape before time runs out?</p>
+                    <a href="game3.html" class="cta-btn">Play Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Games</a></li>
+                <li><a href="../blog/blog.html">Stories</a></li>
+                <li><a href="../movies/movies.html">Movies</a></li>
+            </ul>
+            <p class="copyright">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Game state
+            let currentScene = 1;
+            let cluesFound = [];
+            let progress = 20;
+            
+            // Get elements
+            const gameOptions = document.querySelectorAll('.game-option');
+            const gameScenes = document.querySelectorAll('.game-scene');
+            const progressFill = document.querySelector('.progress-fill');
+            const progressText = document.getElementById('progress-text');
+            const hintBtn = document.getElementById('hint-btn');
+            const clueItems = document.querySelectorAll('.clue-item');
+            
+            // Handle option clicks
+            gameOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const nextScene = this.getAttribute('data-next');
+                    
+                    // Hide current scene
+                    document.querySelector(`.game-scene[data-scene="${currentScene}"]`).style.display = 'none';
+                    
+                    // Show next scene
+                    const nextSceneElement = document.querySelector(`.game-scene[data-scene="${nextScene}"]`);
+                    
+                    // If scene exists, show it
+                    if (nextSceneElement) {
+                        nextSceneElement.style.display = 'flex';
+                        currentScene = nextScene;
+                        
+                        // Add clues based on scene
+                        if (nextScene === '2' && !cluesFound.includes('bloodstain')) {
+                            addClue('Bloodstain');
+                            cluesFound.push('bloodstain');
+                        } else if (nextScene === '6' && !cluesFound.includes('poison')) {
+                            addClue('Poison Residue');
+                            cluesFound.push('poison');
+                        }
+                        
+                        // Update progress
+                        progress += 15;
+                        if (progress > 100) progress = 100;
+                        
+                        progressFill.style.width = `${progress}%`;
+                        progressText.textContent = `${progress}%`;
+                    } else {
+                        // If scene doesn't exist yet (for demo purposes)
+                        alert('This part of the game is still under development. Please try another option.');
+                        document.querySelector(`.game-scene[data-scene="${currentScene}"]`).style.display = 'flex';
+                    }
+                });
+            });
+            
+            // Handle clue clicks
+            clueItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const clueId = this.getAttribute('data-clue');
+                    let clueInfo = '';
+                    
+                    switch(clueId) {
+                        case '1':
+                            clueInfo = 'Invitation: A formal dinner party invitation from Mr. Blackwood, dated one week ago.';
+                            break;
+                        case '2':
+                            clueInfo = 'Guest List: Six guests were invited - Mrs. Victoria Blackwood (wife), Dr. James Morgan (family doctor), Ms. Eleanor Reed (business partner), Mr. Thomas Webb (lawyer), Ms. Sophia Chen (assistant), and Mr. Robert Pierce (old friend).';
+                            break;
+                        default:
+                            clueInfo = 'Examining this clue...';
+                    }
+                    
+                    alert(clueInfo);
+                    this.classList.add('active');
+                });
+            });
+            
+            // Function to add new clue item
+            function addClue(clueName) {
+                const cluesContainer = document.querySelector('.game-clues');
+                const newClue = document.createElement('div');
+                newClue.className = 'clue-item';
+                newClue.textContent = clueName;
+                newClue.setAttribute('data-clue', cluesFound.length + 3); // +3 because we start with 2 clues
+                
+                newClue.addEventListener('click', function() {
+                    let clueInfo = `${clueName}: You discovered this while investigating.`;
+                    alert(clueInfo);
+                    this.classList.add('active');
+                });
+                
+                cluesContainer.appendChild(newClue);
+            }
+            
+            // Handle hint button
+            hintBtn.addEventListener('click', function() {
+                let hint = '';
+                
+                switch(currentScene) {
+                    case '1':
+                        hint = 'Examining the crime scene first will give you important clues about what happened.';
+                        break;
+                    case '2':
+                        hint = 'Look at the whiskey glass closely - there might be evidence of foul play.';
+                        break;
+                    default:
+                        hint = 'Look for inconsistencies in what people tell you, and gather as many clues as possible.';
+                }
+                
+                alert(`Hint: ${hint}`);
+            });
+        });
+    </script>
+</body>
+</html>

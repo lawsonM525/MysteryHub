@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystery Movies - Mystery Hub</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script>
+        window.MYSTERY_HUB_CONFIG = {
+            navbarClock: true
+        };
+    </script>
+    <script src="../clock/clock.js"></script>
+    <style>
+        .movies-container {
+            max-width: 1200px;
+            margin: 50px auto;
+        }
+        
+        .movies-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .movies-title {
+            font-size: 2.5rem;
+            color: #ff4d94;
+            margin-bottom: 15px;
+        }
+        
+        .movies-description {
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Slideshow Styles */
+        .slideshow-container {
+            position: relative;
+            height: 600px;
+            background-color: #0a0a0a;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            margin-bottom: 50px;
+        }
+        
+        .slideshow-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            z-index: 1;
+        }
+        
+        .slideshow-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+        
+        .movie-poster {
+            flex: 1;
+            height: 100%;
+            overflow: hidden;
+            background-color: #080808;
+        }
+        
+        .movie-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .slideshow-slide:hover .movie-poster img {
+            transform: scale(1.05);
+        }
+        
+        .movie-info {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .movie-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #131313 100%);
+            z-index: -1;
+        }
+        
+        .movie-category {
+            display: inline-block;
+            padding: 5px 15px;
+            background-color: rgba(255, 77, 148, 0.1);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            color: #ff4d94;
+        }
+        
+        .movie-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+            line-height: 1.2;
+        }
+        
+        .movie-year {
+            font-size: 1.2rem;
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+        
+        .movie-rating {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .stars {
+            display: flex;
+            margin-right: 10px;
+        }
+        
+        .star {
+            color: #555;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .star.filled {
+            color: #ff4d94;
+        }
+        
+        .star:hover {
+            color: #ff4d94;
+        }
+        
+        .rating-count {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        .movie-plot {
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+        
+        .movie-director,
+        .movie-cast {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .movie-director span,
+        .movie-cast span {
+            color: #aaa;
+        }
+        
+        .movie-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .movie-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .watch-btn {
+            background-color: #ff4d94;
+            color: #fff;
+            border: none;
+        }
+        
+        .watch-btn:hover {
+            background-color: #ff1a75;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4);
+        }
+        
+        .save-btn {
+            background-color: transparent;
+            color: #ff4d94;
+            border: 1px solid #ff4d94;
+        }
+        
+        .save-btn:hover {
+            background-color: rgba(255, 77, 148, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .slideshow-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            z-index: 10;
+        }
+        
+        .slideshow-dots {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #555;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .dot.active {
+            background-color: #ff4d94;
+            transform: scale(1.2);
+        }
+        
+        .slideshow-arrows {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 10;
+        }
+        
+        .arrow {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .arrow:hover {
+            background-color: rgba(255, 77, 148, 0.8);
+            transform: scale(1.1);
+        }
+        
+        /* Top Rated Movies */
+        .top-movies-section {
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: #ff4d94;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+        
+        .movie-card {
+            background-color: #131313;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 77, 148, 0.1);
+        }
+        
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(255, 77, 148, 0.2);
+            border: 1px solid rgba(255, 77, 148, 0.3);
+        }
+        
+        .movie-card-poster {
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .movie-card-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .movie-card:hover .movie-card-poster img {
+            transform: scale(1.05);
+        }
+        
+        .movie-card-content {
+            padding: 20px;
+        }
+        
+        .movie-card-category {
+            display: inline-block;
+            padding: 3px 10px;
+            background-color: rgba(255, 77, 148, 0.1);
+            border-radius: 15px;
+            font-size: 0.7rem;
+            margin-bottom: 10px;
+            color: #ff4d94;
+        }
+        
+        .movie-card-title {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .movie-card-year {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+        
+        .movie-card-rating {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .movie-card-rating i {
+            color: #ff4d94;
+            margin-right: 5px;
+        }
+        
+        @media (max-width: 992px) {
+            .slideshow-slide {
+                flex-direction: column;
+            }
+            
+            .movie-poster {
+                height: 300px;
+            }
+            
+            .slideshow-container {
+                height: auto;
+            }
+            
+            .movies-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .movies-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .movie-info {
+                padding: 20px;
+            }
+            
+            .movie-title {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .movies-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Mystery Hub</div>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../games/game1.html">Games</a></li>
+                    <li><a href="../blog/blog.html">Blogs</a></li>
+                    <li><a href="#" class="active">Movies</a></li>
+                    <li><a href="../login.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Movies Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="movies-container">
+                <div class="movies-header">
+                    <h1 class="movies-title">Mystery Movie Recommendations</h1>
+                    <p class="movies-description">
+                        Discover the best mystery and thriller movies recommended by our community. 
+                        From classic whodunits to mind-bending psychological thrillers, find your next favorite film.
+                    </p>
+                </div>
+                
+                <!-- Featured Movies Slideshow -->
+                <div class="slideshow-container">
+                    <!-- Slide 1 -->
+                    <div class="slideshow-slide active" data-index="0">
+                        <div class="movie-poster">
+                            <img src="../assets/images/movie1.jpg" alt="Knives Out">
+                        </div>
+                        <div class="movie-info">
+                            <span class="movie-category">Mystery Comedy</span>
+                            <h2 class="movie-title">Knives Out</h2>
+                            <div class="movie-year">2019</div>
+                            <div class="movie-rating">
+                                <div class="stars" data-movie-id="1">
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                </div>
+                                <span class="rating-count">(4.8/5 from 324 ratings)</span>
+                            </div>
+                            <p class="movie-plot">
+                                When renowned crime novelist Harlan Thrombey is found dead at his estate, 
+                                the inquisitive Detective Benoit Blanc is mysteriously enlisted to investigate. 
+                                From Harlan's dysfunctional family to his devoted staff, Blanc sifts through a web 
+                                of red herrings and self-serving lies to uncover the truth behind Thrombey's untimely death.
+                            </p>
+                            <div class="movie-director">
+                                <strong>Director:</strong> <span>Rian Johnson</span>
+                            </div>
+                            <div class="movie-cast">
+                                <strong>Cast:</strong> <span>Daniel Craig, Chris Evans, Ana de Armas, Jamie Lee Curtis, Christopher Plummer</span>
+                            </div>
+                            <div class="movie-actions">
+                                <a href="https://www.imdb.com/title/tt8946378/" target="_blank" class="movie-btn watch-btn">Watch Trailer</a>
+                                <button class="movie-btn save-btn" data-movie-id="1">Save to Favorites</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2 -->
+                    <div class="slideshow-slide" data-index="1">
+                        <div class="movie-poster">
+                            <img src="../assets/images/movie2.jpg" alt="Shutter Island">
+                        </div>
+                        <div class="movie-info">
+                            <span class="movie-category">Psychological Thriller</span>
+                            <h2 class="movie-title">Shutter Island</h2>
+                            <div class="movie-year">2010</div>
+                            <div class="movie-rating">
+                                <div class="stars" data-movie-id="2">
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star"></i>
+                                </div>
+                                <span class="rating-count">(4.3/5 from 289 ratings)</span>
+                            </div>
+                            <p class="movie-plot">
+                                In 1954, U.S. Marshal Teddy Daniels and his partner Chuck Aule travel to Shutter Island, 
+                                home to Ashecliffe Hospital for the criminally insane, to investigate the disappearance of a 
+                                patient. As Teddy unravels the island's mysteries, he begins to question everything, including his own sanity.
+                            </p>
+                            <div class="movie-director">
+                                <strong>Director:</strong> <span>Martin Scorsese</span>
+                            </div>
+                            <div class="movie-cast">
+                                <strong>Cast:</strong> <span>Leonardo DiCaprio, Mark Ruffalo, Ben Kingsley, Michelle Williams</span>
+                            </div>
+                            <div class="movie-actions">
+                                <a href="https://www.imdb.com/title/tt1130884/" target="_blank" class="movie-btn watch-btn">Watch Trailer</a>
+                                <button class="movie-btn save-btn" data-movie-id="2">Save to Favorites</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 3 -->
+                    <div class="slideshow-slide" data-index="2">
+                        <div class="movie-poster">
+                            <img src="../assets/images/movie3.jpg" alt="Gone Girl">
+                        </div>
+                        <div class="movie-info">
+                            <span class="movie-category">Psychological Thriller</span>
+                            <h2 class="movie-title">Gone Girl</h2>
+                            <div class="movie-year">2014</div>
+                            <div class="movie-rating">
+                                <div class="stars" data-movie-id="3">
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                </div>
+                                <span class="rating-count">(4.7/5 from 312 ratings)</span>
+                            </div>
+                            <p class="movie-plot">
+                                With his wife's disappearance becoming the focus of an intense media circus, 
+                                Nick Dunne finds himself under increasing scrutiny from the police and the public. 
+                                As the pressure mounts, his portrait of a blissful union begins to crumble, and his lies 
+                                and deceit become suspect. Did he kill his wife?
+                            </p>
+                            <div class="movie-director">
+                                <strong>Director:</strong> <span>David Fincher</span>
+                            </div>
+                            <div class="movie-cast">
+                                <strong>Cast:</strong> <span>Ben Affleck, Rosamund Pike, Neil Patrick Harris, Tyler Perry</span>
+                            </div>
+                            <div class="movie-actions">
+                                <a href="https://www.imdb.com/title/tt2267998/" target="_blank" class="movie-btn watch-btn">Watch Trailer</a>
+                                <button class="movie-btn save-btn" data-movie-id="3">Save to Favorites</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 4 -->
+                    <div class="slideshow-slide" data-index="3">
+                        <div class="movie-poster">
+                            <img src="../assets/images/movie4.jpg" alt="Se7en">
+                        </div>
+                        <div class="movie-info">
+                            <span class="movie-category">Crime Thriller</span>
+                            <h2 class="movie-title">Se7en</h2>
+                            <div class="movie-year">1995</div>
+                            <div class="movie-rating">
+                                <div class="stars" data-movie-id="4">
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star half"></i>
+                                </div>
+                                <span class="rating-count">(4.6/5 from 278 ratings)</span>
+                            </div>
+                            <p class="movie-plot">
+                                Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins 
+                                as his motives. As they track the killer's methodical murders, they delve deeper into a 
+                                disturbing labyrinth of urban horrors, leading to a shocking and unforgettable conclusion.
+                            </p>
+                            <div class="movie-director">
+                                <strong>Director:</strong> <span>David Fincher</span>
+                            </div>
+                            <div class="movie-cast">
+                                <strong>Cast:</strong> <span>Brad Pitt, Morgan Freeman, Gwyneth Paltrow, Kevin Spacey</span>
+                            </div>
+                            <div class="movie-actions">
+                                <a href="https://www.imdb.com/title/tt0114369/" target="_blank" class="movie-btn watch-btn">Watch Trailer</a>
+                                <button class="movie-btn save-btn" data-movie-id="4">Save to Favorites</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slideshow Controls -->
+                    <div class="slideshow-arrows">
+                        <div class="arrow prev-arrow">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                        <div class="arrow next-arrow">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="slideshow-controls">
+                        <div class="slideshow-dots">
+                            <div class="dot active" data-slide="0"></div>
+                            <div class="dot" data-slide="1"></div>
+                            <div class="dot" data-slide="2"></div>
+                            <div class="dot" data-slide="3"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Top Rated Movies -->
+                <div class="top-movies-section">
+                    <h2 class="section-title">Top Rated Mystery Movies</h2>
+                    
+                    <div class="movies-grid">
+                        <!-- Movie Card 1 -->
+                        <div class="movie-card">
+                            <div class="movie-card-poster">
+                                <img src="../assets/images/movie5.jpg" alt="The Silence of the Lambs">
+                            </div>
+                            <div class="movie-card-content">
+                                <span class="movie-card-category">Crime Thriller</span>
+                                <h3 class="movie-card-title">The Silence of the Lambs</h3>
+                                <div class="movie-card-year">1991</div>
+                                <div class="movie-card-rating">
+                                    <i class="fas fa-star"></i> 4.8 (356 ratings)
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Movie Card 2 -->
+                        <div class="movie-card">
+                            <div class="movie-card-poster">
+                                <img src="../assets/images/movie6.jpg" alt="Memento">
+                            </div>
+                            <div class="movie-card-content">
+                                <span class="movie-card-category">Neo-noir Thriller</span>
+                                <h3 class="movie-card-title">Memento</h3>
+                                <div class="movie-card-year">2000</div>
+                                <div class="movie-card-rating">
+                                    <i class="fas fa-star"></i> 4.5 (289 ratings)
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Movie Card 3 -->
+                        <div class="movie-card">
+                            <div class="movie-card-poster">
+                                <img src="../assets/images/movie7.jpg" alt="The Usual Suspects">
+                            </div>
+                            <div class="movie-card-content">
+                                <span class="movie-card-category">Neo-noir Mystery</span>
+                                <h3 class="movie-card-title">The Usual Suspects</h3>
+                                <div class="movie-card-year">1995</div>
+                                <div class="movie-card-rating">
+                                    <i class="fas fa-star"></i> 4.7 (312 ratings)
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Movie Card 4 -->
+                        <div class="movie-card">
+                            <div class="movie-card-poster">
+                                <img src="../assets/images/movie8.jpg" alt="Zodiac">
+                            </div>
+                            <div class="movie-card-content">
+                                <span class="movie-card-category">Crime Drama</span>
+                                <h3 class="movie-card-title">Zodiac</h3>
+                                <div class="movie-card-year">2007</div>
+                                <div class="movie-card-rating">
+                                    <i class="fas fa-star"></i> 4.4 (267 ratings)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="../games/game1.html">Games</a></li>
+                <li><a href="../blog/blog.html">Stories</a></li>
+                <li><a href="#">Movies</a></li>
+            </ul>
+            <p class="copyright">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Slideshow functionality
+            const slides = document.querySelectorAll('.slideshow-slide');
+            const dots = document.querySelectorAll('.dot');
+            const prevArrow = document.querySelector('.prev-arrow');
+            const nextArrow = document.querySelector('.next-arrow');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+            
+            // Auto-advance slideshow
+            let slideshowInterval = setInterval(nextSlide, 6000);
+            
+            function showSlide(index) {
+                // Reset interval on manual navigation
+                clearInterval(slideshowInterval);
+                slideshowInterval = setInterval(nextSlide, 6000);
+                
+                // Hide all slides and remove active class from dots
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                // Show current slide and add active class to current dot
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+                
+                currentSlide = index;
+            }
+            
+            function nextSlide() {
+                const nextIndex = (currentSlide + 1) % totalSlides;
+                showSlide(nextIndex);
+            }
+            
+            function prevSlide() {
+                const prevIndex = (currentSlide - 1 + totalSlides) % totalSlides;
+                showSlide(prevIndex);
+            }
+            
+            // Event listeners for arrows
+            prevArrow.addEventListener('click', prevSlide);
+            nextArrow.addEventListener('click', nextSlide);
+            
+            // Event listeners for dots
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const slideIndex = parseInt(this.getAttribute('data-slide'));
+                    showSlide(slideIndex);
+                });
+            });
+            
+            // Rating functionality
+            const starContainers = document.querySelectorAll('.stars');
+            
+            starContainers.forEach(container => {
+                const stars = container.querySelectorAll('.star');
+                const movieId = container.getAttribute('data-movie-id');
+                
+                stars.forEach((star, index) => {
+                    star.addEventListener('click', function() {
+                        // Set all stars up to current one as filled
+                        for (let i = 0; i <= index; i++) {
+                            stars[i].classList.add('filled');
+                        }
+                        
+                        // Set all stars after current one as not filled
+                        for (let i = index + 1; i < stars.length; i++) {
+                            stars[i].classList.remove('filled');
+                        }
+                        
+                        // In a real app, this would send the rating to the server
+                        const rating = index + 1;
+                        alert(`You rated "${slides[currentSlide].querySelector('.movie-title').textContent}" ${rating} stars out of 5! Your rating has been saved.`);
+                    });
+                    
+                    star.addEventListener('mouseover', function() {
+                        // Preview rating on hover
+                        for (let i = 0; i <= index; i++) {
+                            stars[i].classList.add('hover');
+                        }
+                    });
+                    
+                    star.addEventListener('mouseout', function() {
+                        // Remove preview
+                        stars.forEach(s => s.classList.remove('hover'));
+                    });
+                });
+            });
+            
+            // Save to favorites functionality
+            const saveBtns = document.querySelectorAll('.save-btn');
+            
+            saveBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const movieId = this.getAttribute('data-movie-id');
+                    const movieTitle = this.closest('.slideshow-slide').querySelector('.movie-title').textContent;
+                    
+                    // In a real app, this would save to the user's favorites in the database
+                    alert(`Added "${movieTitle}" to your favorites!`);
+                    
+                    // Update button text
+                    this.textContent = 'Saved to Favorites';
+                    this.disabled = true;
+                });
+            });
+            
+            // Make movie cards clickable
+            const movieCards = document.querySelectorAll('.movie-card');
+            
+            movieCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const movieTitle = this.querySelector('.movie-card-title').textContent;
+                    alert(`You clicked on "${movieTitle}". In a complete app, this would open the movie details page.`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

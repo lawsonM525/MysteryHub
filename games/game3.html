@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape the Crypt - Mystery Hub</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        .game-container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #131313;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.2);
+            border: 1px solid rgba(255, 77, 148, 0.1);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-container::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 77, 148, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .game-title {
+            text-align: center;
+            color: #ff4d94;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+        
+        .game-description {
+            margin-bottom: 30px;
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .game-timer {
+            background-color: rgba(255, 77, 148, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 77, 148, 0.3);
+        }
+        
+        .timer-display {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff4d94;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .timer-label {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 5px;
+        }
+        
+        .game-puzzle {
+            position: relative;
+            min-height: 350px;
+            background-color: #0a0a0a;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            background-image: url('../assets/images/game3-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .game-puzzle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.5), rgba(10, 10, 10, 0.8));
+            z-index: 1;
+        }
+        
+        .puzzle-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .puzzle-title {
+            color: #ff4d94;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .puzzle-description {
+            background-color: rgba(10, 10, 10, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #ff4d94;
+            margin-bottom: 20px;
+        }
+        
+        .symbol-puzzle {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .symbol {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 77, 148, 0.1);
+        }
+        
+        .symbol:hover {
+            background-color: rgba(255, 77, 148, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .symbol.selected {
+            background-color: rgba(255, 77, 148, 0.2);
+            border-color: #ff4d94;
+        }
+        
+        .puzzle-input {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .puzzle-input input {
+            flex: 1;
+            padding: 12px 15px;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 5px 0 0 5px;
+            color: #f5f5f5;
+            font-size: 1rem;
+        }
+        
+        .puzzle-input input:focus {
+            outline: none;
+            border-color: #ff4d94;
+        }
+        
+        .puzzle-input button {
+            background-color: #ff4d94;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .puzzle-input button:hover {
+            background-color: #ff1a75;
+        }
+        
+        .inventory-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .inventory-item {
+            width: 50px;
+            height: 50px;
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 77, 148, 0.2);
+        }
+        
+        .inventory-item:hover {
+            background-color: rgba(255, 77, 148, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .inventory-item.empty {
+            color: #555;
+        }
+        
+        .room-map {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .room {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 77, 148, 0.1);
+        }
+        
+        .room:hover {
+            background-color: rgba(255, 77, 148, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .room.current {
+            background-color: rgba(255, 77, 148, 0.2);
+            border-color: #ff4d94;
+        }
+        
+        .room.locked {
+            background-color: #1a1a1a;
+            color: #555;
+            cursor: not-allowed;
+        }
+        
+        .room.locked:hover {
+            transform: none;
+        }
+        
+        .room-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .room-name {
+            font-size: 0.85rem;
+        }
+        
+        .game-progress {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #1a1a1a;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #ff4d94;
+            width: 15%; /* Starting progress */
+        }
+        
+        .hint-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: transparent;
+            color: #ff4d94;
+            border: 1px solid #ff4d94;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .hint-btn:hover {
+            background-color: rgba(255, 77, 148, 0.1);
+        }
+        
+        /* Hidden until needed */
+        .game-puzzle[data-puzzle="2"], 
+        .game-puzzle[data-puzzle="3"], 
+        .game-puzzle[data-puzzle="4"] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Mystery Hub</div>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="#" class="active">Games</a></li>
+                    <li><a href="../blog/blog.html">Blogs</a></li>
+                    <li><a href="../movies/movies.html">Movies</a></li>
+                    <li><a href="../login.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Game Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="game-container">
+                <h1 class="game-title">Escape the Crypt</h1>
+                <p class="game-description">
+                    You wake up trapped in an ancient crypt filled with puzzles and hidden mechanisms. 
+                    Your only way out is to solve the puzzles before the oxygen runs out. Can you escape in time?
+                </p>
+                
+                <div class="game-timer">
+                    <div class="timer-display" id="timer-display">60:00</div>
+                    <div class="timer-label">Time Remaining to Escape</div>
+                </div>
+                
+                <div class="inventory-bar">
+                    <div class="inventory-item empty" data-item="none"><i class="fas fa-question"></i></div>
+                    <div class="inventory-item empty" data-item="none"><i class="fas fa-question"></i></div>
+                    <div class="inventory-item empty" data-item="none"><i class="fas fa-question"></i></div>
+                    <div class="inventory-item empty" data-item="none"><i class="fas fa-question"></i></div>
+                </div>
+                
+                <!-- Puzzle 1 -->
+                <div class="game-puzzle" data-puzzle="1">
+                    <div class="puzzle-content">
+                        <h3 class="puzzle-title">The Entrance Chamber</h3>
+                        <div class="puzzle-description">
+                            <p>
+                                You find yourself in a dimly lit chamber with ancient symbols carved into the walls. 
+                                Four pedestals stand before you, each with a different symbol. A stone door blocks your path, 
+                                with an inscription: "Arrange the symbols in the correct order to proceed."
+                            </p>
+                        </div>
+                        
+                        <div class="symbol-puzzle">
+                            <div class="symbol" data-symbol="sun">☀️</div>
+                            <div class="symbol" data-symbol="moon">🌙</div>
+                            <div class="symbol" data-symbol="star">⭐</div>
+                            <div class="symbol" data-symbol="cloud">☁️</div>
+                            <div class="symbol" data-symbol="fire">🔥</div>
+                            <div class="symbol" data-symbol="water">💧</div>
+                            <div class="symbol" data-symbol="earth">🌍</div>
+                            <div class="symbol" data-symbol="wind">💨</div>
+                        </div>
+                        
+                        <div class="puzzle-input">
+                            <input type="text" id="symbol-sequence" placeholder="Enter the correct symbol sequence..." readonly>
+                            <button id="check-sequence-btn">Check</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Puzzle 2 (Hidden initially) -->
+                <div class="game-puzzle" data-puzzle="2">
+                    <div class="puzzle-content">
+                        <h3 class="puzzle-title">The Ancient Library</h3>
+                        <div class="puzzle-description">
+                            <p>
+                                You've entered a vast library with dusty tomes and scrolls. A locked cabinet contains what appears 
+                                to be a key item. To open it, you must solve the riddle inscribed on a nearby tablet.
+                            </p>
+                            <p class="puzzle-riddle">
+                                <em>"I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?"</em>
+                            </p>
+                        </div>
+                        
+                        <div class="puzzle-input">
+                            <input type="text" id="riddle-answer" placeholder="Enter your answer...">
+                            <button id="check-riddle-btn">Solve</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="room-map">
+                    <div class="room current" data-room="1">
+                        <div class="room-icon"><i class="fas fa-door-open"></i></div>
+                        <div class="room-name">Entrance</div>
+                    </div>
+                    <div class="room locked" data-room="2">
+                        <div class="room-icon"><i class="fas fa-book"></i></div>
+                        <div class="room-name">Library</div>
+                    </div>
+                    <div class="room locked" data-room="3">
+                        <div class="room-icon"><i class="fas fa-flask"></i></div>
+                        <div class="room-name">Laboratory</div>
+                    </div>
+                    <div class="room locked" data-room="4">
+                        <div class="room-icon"><i class="fas fa-cross"></i></div>
+                        <div class="room-name">Ritual Room</div>
+                    </div>
+                    <div class="room locked" data-room="5">
+                        <div class="room-icon"><i class="fas fa-gem"></i></div>
+                        <div class="room-name">Treasury</div>
+                    </div>
+                    <div class="room locked" data-room="6">
+                        <div class="room-icon"><i class="fas fa-skull"></i></div>
+                        <div class="room-name">Catacombs</div>
+                    </div>
+                    <div class="room locked" data-room="7">
+                        <div class="room-icon"><i class="fas fa-chess-rook"></i></div>
+                        <div class="room-name">Central Hall</div>
+                    </div>
+                    <div class="room locked" data-room="8">
+                        <div class="room-icon"><i class="fas fa-key"></i></div>
+                        <div class="room-name">Exit Chamber</div>
+                    </div>
+                    <div class="room locked" data-room="9">
+                        <div class="room-icon"><i class="fas fa-question"></i></div>
+                        <div class="room-name">???</div>
+                    </div>
+                </div>
+                
+                <div class="game-progress">
+                    <p>Progress: <span id="progress-text">15%</span></p>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <button class="hint-btn" id="hint-btn">Get a Hint</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Links -->
+    <section class="other-games">
+        <div class="container">
+            <h2 class="section-title">Other Mystery Games</h2>
+            <div class="feature-container">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>The Vanishing Artifact</h3>
+                    <p>Solve the mystery of a stolen priceless artifact from the National Museum.</p>
+                    <a href="game1.html" class="cta-btn">Play Now</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Murder at Midnight</h3>
+                    <p>Solve a mysterious murder case in a secluded mansion during a stormy night.</p>
+                    <a href="game2.html" class="cta-btn">Play Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Games</a></li>
+                <li><a href="../blog/blog.html">Stories</a></li>
+                <li><a href="../movies/movies.html">Movies</a></li>
+            </ul>
+            <p class="copyright">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Game state
+            let currentPuzzle = 1;
+            let inventory = ['none', 'none', 'none', 'none'];
+            let progress = 15;
+            let symbolSequence = [];
+            let timeRemaining = 60 * 60; // 60 minutes in seconds
+            
+            // Get elements
+            const timerDisplay = document.getElementById('timer-display');
+            const symbolElements = document.querySelectorAll('.symbol');
+            const symbolSequenceInput = document.getElementById('symbol-sequence');
+            const checkSequenceBtn = document.getElementById('check-sequence-btn');
+            const riddleAnswerInput = document.getElementById('riddle-answer');
+            const checkRiddleBtn = document.getElementById('check-riddle-btn');
+            const progressFill = document.querySelector('.progress-fill');
+            const progressText = document.getElementById('progress-text');
+            const hintBtn = document.getElementById('hint-btn');
+            const rooms = document.querySelectorAll('.room');
+            
+            // Timer function
+            const timer = setInterval(function() {
+                timeRemaining--;
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timer);
+                    alert('You ran out of time! The oxygen is depleted and you have failed to escape the crypt.');
+                    timeRemaining = 0;
+                }
+                
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+            
+            // Handle symbol clicks
+            symbolElements.forEach(symbol => {
+                symbol.addEventListener('click', function() {
+                    const symbolValue = this.getAttribute('data-symbol');
+                    
+                    // Toggle selection
+                    if (this.classList.contains('selected')) {
+                        this.classList.remove('selected');
+                        symbolSequence = symbolSequence.filter(s => s !== symbolValue);
+                    } else {
+                        this.classList.add('selected');
+                        symbolSequence.push(symbolValue);
+                    }
+                    
+                    // Update input field
+                    symbolSequenceInput.value = symbolSequence.join(' - ');
+                });
+            });
+            
+            // Handle sequence check
+            checkSequenceBtn.addEventListener('click', function() {
+                const correctSequence = ['moon', 'star', 'sun', 'cloud']; // Example solution
+                
+                if (symbolSequence.length !== 4) {
+                    alert('You need to select exactly 4 symbols.');
+                    return;
+                }
+                
+                // Check if solution is correct
+                let isCorrect = true;
+                for (let i = 0; i < correctSequence.length; i++) {
+                    if (symbolSequence[i] !== correctSequence[i]) {
+                        isCorrect = false;
+                        break;
+                    }
+                }
+                
+                if (isCorrect) {
+                    alert('The symbols align correctly! The stone door rumbles open, revealing the ancient library.');
+                    
+                    // Hide current puzzle, show next
+                    document.querySelector(`.game-puzzle[data-puzzle="1"]`).style.display = 'none';
+                    document.querySelector(`.game-puzzle[data-puzzle="2"]`).style.display = 'flex';
+                    currentPuzzle = 2;
+                    
+                    // Add item to inventory
+                    addItemToInventory('🔑');
+                    
+                    // Unlock next room
+                    document.querySelector(`.room[data-room="2"]`).classList.remove('locked');
+                    document.querySelector(`.room[data-room="1"]`).classList.remove('current');
+                    document.querySelector(`.room[data-room="2"]`).classList.add('current');
+                    
+                    // Update progress
+                    progress += 15;
+                    progressFill.style.width = `${progress}%`;
+                    progressText.textContent = `${progress}%`;
+                } else {
+                    alert('The symbols glow red briefly, then fade. That doesn\'t seem to be the correct sequence.');
+                    
+                    // Reset selections
+                    symbolElements.forEach(symbol => symbol.classList.remove('selected'));
+                    symbolSequence = [];
+                    symbolSequenceInput.value = '';
+                }
+            });
+            
+            // Handle riddle check
+            if (checkRiddleBtn) {
+                checkRiddleBtn.addEventListener('click', function() {
+                    const answer = riddleAnswerInput.value.toLowerCase().trim();
+                    
+                    if (answer === 'map' || answer === 'a map') {
+                        alert('Correct! The cabinet unlocks, revealing an ancient key.');
+                        addItemToInventory('🗝️');
+                        
+                        // Update progress
+                        progress += 15;
+                        progressFill.style.width = `${progress}%`;
+                        progressText.textContent = `${progress}%`;
+                        
+                        // Unlock next room
+                        document.querySelector(`.room[data-room="3"]`).classList.remove('locked');
+                        document.querySelector(`.room[data-room="2"]`).classList.remove('current');
+                        document.querySelector(`.room[data-room="3"]`).classList.add('current');
+                        
+                        // This is demo only - in a real game we'd show the next puzzle
+                        alert('You can now access the laboratory. (This section is still under development)');
+                    } else {
+                        alert('That doesn\'t seem to be the correct answer. Try again.');
+                    }
+                });
+            }
+            
+            // Function to add item to inventory
+            function addItemToInventory(itemIcon) {
+                for (let i = 0; i < inventory.length; i++) {
+                    if (inventory[i] === 'none') {
+                        inventory[i] = itemIcon;
+                        
+                        // Update UI
+                        const inventoryItem = document.querySelectorAll('.inventory-item')[i];
+                        inventoryItem.innerHTML = itemIcon;
+                        inventoryItem.classList.remove('empty');
+                        inventoryItem.setAttribute('data-item', itemIcon);
+                        
+                        break;
+                    }
+                }
+            }
+            
+            // Handle hint button
+            hintBtn.addEventListener('click', function() {
+                let hint = '';
+                
+                switch(currentPuzzle) {
+                    case 1:
+                        hint = 'Think about the natural order of celestial bodies in the sky. The moon appears at night, followed by stars, then the sun rises, bringing clouds with it.';
+                        break;
+                    case 2:
+                        hint = 'What has cities, mountains, and water, but is not a real place? It represents places visually.';
+                        break;
+                    default:
+                        hint = 'Explore your current room carefully and try to interact with all available objects.';
+                }
+                
+                alert(`Hint: ${hint}`);
+            });
+        });
+    </script>
+</body>
+</html>
