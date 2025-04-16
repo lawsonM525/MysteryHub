@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- This is a hangman game with animated JS graphics in the form of the stickman character -->
- <!-- The hangman clues are clues to give you the name of the killer -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,14 +14,33 @@
     </script>
     <script src="../clock/clock.js"></script>
     <style>
+        :root {
+            --folder-red: #a02c2c;
+            --stamp-red: #9e2a2b;
+            --aged-paper: #e8e0cf;
+            --aged-paper-dark: #d8d0bf;
+            --ink-color: #333;
+            --typewriter-color: #222;
+            --folder-tab: #876;
+            --faded-ink: #555;
+            --manila-folder: #e6ddc6;
+        }
+        
+        body {
+            background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
+            background-color: var(--aged-paper);
+            color: var(--ink-color);
+            font-family: 'Cutive Mono', monospace;
+        }
+        
         .game-container {
             max-width: 900px;
             margin: 50px auto;
-            background-color: var(--aged-paper);
+            background-color: var(--manila-folder);
             border-radius: 5px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--folder-red);
-            padding: 30px;
+            border: 1px solid var(--folder-tab);
+            padding: 40px 30px 30px;
             position: relative;
             overflow: hidden;
         }
@@ -32,12 +48,12 @@
         .game-container::before {
             content: '';
             position: absolute;
-            top: -20px;
-            right: -20px;
-            width: 100px;
-            height: 100px;
-            background-color: rgba(160, 44, 44, 0.1);
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
+            opacity: 0.4;
             z-index: 0;
         }
         
@@ -47,8 +63,23 @@
             color: var(--folder-red);
             margin-bottom: 20px;
             font-size: 2.5rem;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .game-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--folder-red);
+            opacity: 0.5;
         }
         
         .game-description {
@@ -58,116 +89,176 @@
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            color: #333;
+            color: var(--ink-color);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            padding: 15px;
+            border-left: 3px solid var(--folder-red);
+            background-color: rgba(255, 255, 255, 0.4);
         }
         
-        .game-scene {
+        /* Hangman specific styles */
+        .hangman-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
             position: relative;
-            min-height: 400px;
-            background-color: var(--aged-paper-dark);
-            border-radius: 8px;
-            padding: 30px;
-            margin-bottom: 30px;
-            background-image: url('../assets/images/game1-bg.jpg');
-            background-size: cover;
-            background-position: center;
+            z-index: 1;
+        }
+        
+        .hangman-left {
+            flex: 1;
+            min-width: 300px;
+            background-color: rgba(255, 255, 255, 0.6);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .hangman-left::before {
+            content: 'CRIME SCENE';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background-color: var(--folder-red);
+            color: white;
+            padding: 2px 15px;
+            font-size: 0.8rem;
+            font-family: 'Special Elite', cursive;
+            border-radius: 3px;
+        }
+        
+        .hangman-right {
+            flex: 1;
+            min-width: 300px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
-            border: 1px solid #876;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2) inset;
         }
         
-        .game-scene-title {
-            font-family: 'Special Elite', cursive;
-            color: var(--folder-red);
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-        
-        .game-dialogue {
-            background-color: rgba(232, 224, 207, 0.9);
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid var(--folder-red);
+        #canvas {
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            display: block;
             margin-bottom: 20px;
-            font-family: 'Cutive Mono', monospace;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            border: 1px solid var(--folder-tab);
         }
         
-        .game-options {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-        
-        .game-option {
-            background-color: var(--aged-paper);
-            padding: 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 1px solid #876;
-            font-family: 'Cutive Mono', monospace;
-            color: #333;
-        }
-        
-        .game-option:hover {
-            background-color: rgba(160, 44, 44, 0.1);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .game-inventory {
+        .word-display {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
+            margin: 25px 0;
+            gap: 10px;
         }
         
-        .inventory-item {
-            width: 50px;
-            height: 50px;
-            background-color: var(--aged-paper);
-            border-radius: 8px;
+        .letter-box {
+            width: 30px;
+            height: 40px;
+            border-bottom: 3px solid var(--folder-red);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
+            font-family: 'Special Elite', cursive;
+            text-transform: uppercase;
+            color: var(--folder-red);
+        }
+        
+        .keyboard {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 8px;
+            margin-top: 20px;
+        }
+        
+        .keyboard-btn {
+            background-color: var(--manila-folder);
+            border: 1px solid var(--folder-tab);
+            border-radius: 3px;
+            padding: 8px 0;
+            font-family: 'Special Elite', cursive;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s;
-            border: 1px solid #876;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
-        .inventory-item:hover {
+        .keyboard-btn:hover {
             background-color: rgba(160, 44, 44, 0.1);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
         
-        .inventory-item.empty {
-            color: #876;
+        .keyboard-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #ddd;
+            transform: none;
         }
         
-        .game-progress {
+        .game-status {
+            background-color: rgba(255, 255, 255, 0.6);
+            padding: 15px 20px;
+            border-radius: 5px;
+            font-family: 'Special Elite', cursive;
             margin-top: 20px;
             text-align: center;
-            font-family: 'Special Elite', cursive;
+            min-height: 60px;
+            border-left: 3px solid var(--folder-red);
         }
         
-        .progress-bar {
-            height: 8px;
-            background-color: var(--aged-paper-dark);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 10px;
-            border: 1px solid #876;
+        .clue-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 5px;
+            position: relative;
         }
         
-        .progress-fill {
-            height: 100%;
+        .clue-section::before {
+            content: 'CASE EVIDENCE';
+            position: absolute;
+            top: -10px;
+            left: 20px;
             background-color: var(--folder-red);
-            width: 25%; /* Starting progress */
+            color: white;
+            padding: 2px 15px;
+            font-size: 0.8rem;
+            font-family: 'Special Elite', cursive;
+            border-radius: 3px;
+        }
+        
+        .clue-box {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 3px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            padding-left: 40px;
+            display: none;
+        }
+        
+        .clue-box.visible {
+            display: block;
+        }
+        
+        .clue-box::before {
+            content: attr(data-clue-number);
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 25px;
+            height: 25px;
+            background-color: var(--folder-red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Special Elite', cursive;
         }
         
         .hint-btn {
@@ -185,13 +276,26 @@
         
         .hint-btn:hover {
             background-color: rgba(160, 44, 44, 0.1);
+            transform: translateY(-3px);
         }
         
-        /* Hidden until needed */
-        .game-scene[data-scene="2"], 
-        .game-scene[data-scene="3"], 
-        .game-scene[data-scene="4"] {
-            display: none;
+        .new-game-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--folder-red);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+            font-family: 'Special Elite', cursive;
+            text-align: center;
+        }
+        
+        .new-game-btn:hover {
+            background-color: var(--stamp-red);
+            transform: translateY(-3px);
         }
         
         /* Case file decorations */
@@ -200,38 +304,118 @@
             top: -15px;
             right: 30px;
             background-color: var(--folder-red);
-            color: var(--aged-paper);
+            color: white;
             padding: 5px 15px;
             font-family: 'Special Elite', cursive;
-            transform: rotate(5deg);
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+            z-index: 10;
         }
         
         .case-status {
             position: absolute;
             top: 20px;
-            right: -35px;
+            right: -40px;
             background-color: var(--stamp-red);
-            color: var(--aged-paper);
-            padding: 8px 40px;
+            color: white;
+            padding: 5px 30px;
             transform: rotate(45deg);
             font-family: 'Special Elite', cursive;
-            font-weight: bold;
-            text-transform: uppercase;
+            font-size: 0.9rem;
             letter-spacing: 1px;
-            font-size: 14px;
-            opacity: 0.9;
+            z-index: 5;
         }
         
         .paper-clip {
-            width: 30px;
-            height: 80px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M80,20c0-11-9-20-20-20S40,9,40,20v70c0,5.5,4.5,10,10,10s10-4.5,10-10V30c0-2.8-2.2-5-5-5s-5,2.2-5,5v50h-10V30c0-8.3,6.7-15,15-15s15,6.7,15,15v60c0,11-9,20-20,20s-20-9-20-20V20C30,9,39,0,50,0s20,9,20,20v70h-10V20z" fill="%23888"/></svg>');
             position: absolute;
-            top: -5px;
-            left: 30px;
-            z-index: 10;
+            top: -10px;
+            left: 50px;
+            width: 30px;
+            height: 60px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 200"><path d="M80,20c0-11-9-20-20-20S40,9,40,20v140c0,11,9,20,20,20s20-9,20-20V40c0-5.5-4.5-10-10-10s-10,4.5-10,10v100c0,5.5,4.5,10,10,10s10-4.5,10-10V40" fill="%23888"/></svg>');
+            transform: rotate(-10deg);
             opacity: 0.7;
+            z-index: 11;
+        }
+        
+        .other-games {
+            max-width: 900px;
+            margin: 30px auto;
+        }
+        
+        .game-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .game-link-card {
+            background-color: var(--manila-folder);
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: var(--ink-color);
+            display: block;
+            border: 1px solid var(--folder-tab);
+        }
+        
+        .game-link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .game-link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .game-link-title {
+            font-family: 'Special Elite', cursive;
+            color: var(--folder-red);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .game-link-desc {
+            font-family: 'Cutive Mono', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .handwritten-note {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-family: 'Homemade Apple', cursive;
+            font-size: 0.8rem;
+            color: var(--stamp-red);
+            transform: rotate(-5deg);
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .hangman-wrapper {
+                flex-direction: column;
+            }
+            
+            .keyboard {
+                grid-template-columns: repeat(9, 1fr);
+            }
         }
     </style>
 </head>
@@ -240,108 +424,94 @@
     
     <!-- File Stamp Decoration -->
     <div class="file-stamp">
-        <span>ACTIVE INVESTIGATION</span>
+        <span>TOP SECRET</span>
+    </div>
+    
+    <!-- Paper Clip Decoration -->
+    <div class="paper-clip"></div>
+    
+    <!-- Case Number -->
+    <div class="case-number">
+        <span>CASE #MH-2025-01</span>
     </div>
 
     <!-- Header with Navigation -->
     <header>
-        <div class="container">
-            <nav class="vintage-navbar">
-                <div class="logo typewriter-text">Mystery Hub</div>
-                <ul class="nav-links">
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="#" class="active">Games</a></li>
-                    <li><a href="../blog/blog.html">Blogs</a></li>
-                    <li><a href="../movies/movies.html">Movies</a></li>
-                    <li><a href="../Pages/login.html" class="file-btn">Login</a></li>
-                </ul>
-            </nav>
-        </div>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="../index.html">
+                    <h1>Mystery<span>Hub</span></h1>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="game1.html" class="active">Field Operations</a></li>
+                <li><a href="../blog/blog.html">Case Files</a></li>
+                <li><a href="../movies/movies.html">Surveillance Footage</a></li>
+                <li><a href="../Pages/login.html" id="login-btn" class="file-btn">Agent Login</a></li>
+            </ul>
+            <!-- Digital Clock -->
+            <div id="digital-clock" class="digital-clock">
+                <span class="time">00:00:00</span>
+                <span class="date">01/01/2025</span>
+            </div>
+        </nav>
     </header>
 
-    <!-- Game Content -->
     <section class="main-content">
         <div class="container">
             <div class="game-container">
                 <div class="evidence-tag">EXHIBIT A</div>
-                <div class="case-status">UNSOLVED</div>
+                <div class="case-status">ACTIVE</div>
                 <div class="paper-clip"></div>
                 
-                <h1 class="game-title">The Vanishing Artifact</h1>
+                <h1 class="game-title">The Kayla Case Files</h1>
                 <p class="game-description">
-                    A priceless artifact has vanished from the National Museum. As a renowned detective, 
-                    you've been called to the scene to investigate the mysterious disappearance.
-                    Your reputation for solving impossible cases precedes you. Can you recover the stolen artifact
-                    before it's lost forever?
+                    <strong>MISSION BRIEFING:</strong> Kayla Bennett, 23, was found murdered in her apartment on April 12, 2025. 
+                    The killer left a series of cryptic clues at the crime scene. Your task is to decipher these clues by 
+                    completing this hangman puzzle to reveal the killer's identity. Each incorrect guess brings us closer 
+                    to losing crucial evidence. Proceed with caution, detective.
                 </p>
                 
-                <div class="game-inventory">
-                    <div class="inventory-item empty" data-item="none"><i class="fas fa-question"></i></div>
-                    <div class="inventory-item empty" data-item="none"><i class="fas fa-question"></i></div>
-                    <div class="inventory-item empty" data-item="none"><i class="fas fa-question"></i></div>
-                    <div class="inventory-item empty" data-item="none"><i class="fas fa-question"></i></div>
-                </div>
-                
-                <div class="game-scene" data-scene="1">
-                    <div class="game-scene-title">The Museum - Main Hall</div>
-                    <div class="game-dialogue">
-                        "Detective, we're grateful you could come on such short notice," the museum curator says,
-                        wringing his hands nervously. "The Emerald Scarab disappeared sometime between closing last night
-                        and opening this morning. No alarms were triggered, and all security footage shows nothing unusual."
+                <div class="hangman-wrapper">
+                    <div class="hangman-left">
+                        <div class="word-display" id="wordDisplay">
+                            <!-- Letter boxes will be generated here via JavaScript -->
+                        </div>
+                        
+                        <div class="keyboard" id="keyboard">
+                            <!-- Keyboard buttons will be generated here via JavaScript -->
+                        </div>
+                        
+                        <div class="game-status" id="gameStatus">
+                            Start guessing letters to identify the suspect...
+                        </div>
                     </div>
-                    <div class="game-options">
-                        <div class="game-option" data-next="2" data-action="examine">Examine the empty display case</div>
-                        <div class="game-option" data-next="3" data-action="interview">Interview the security guard</div>
-                        <div class="game-option" data-next="4" data-action="camera">Check the security camera footage</div>
-                        <div class="game-option" data-next="5" data-action="perimeter">Inspect the museum perimeter</div>
-                    </div>
-                </div>
-                
-                <div class="game-scene" data-scene="2">
-                    <div class="game-scene-title">The Empty Display Case</div>
-                    <div class="game-dialogue">
-                        You approach the glass case where the Emerald Scarab was displayed. The glass is intact with no
-                        signs of forced entry. You notice a small amount of fine powder around the lock mechanism. Upon closer
-                        inspection, you find what appears to be a partial fingerprint on the underside of the case.
-                    </div>
-                    <div class="game-options">
-                        <div class="game-option" data-item="fingerprint" data-action="collect">Collect the fingerprint sample</div>
-                        <div class="game-option" data-next="1" data-action="return">Return to the main hall</div>
+                    
+                    <div class="hangman-right">
+                        <canvas id="canvas" width="300" height="300"></canvas>
+                        
+                        <button class="hint-btn" id="hintBtn">Request Evidence <i class="fas fa-lightbulb"></i></button>
+                        <button class="new-game-btn" id="newGameBtn">New Investigation</button>
                     </div>
                 </div>
                 
-                <div class="game-scene" data-scene="3">
-                    <div class="game-scene-title">Security Guard's Station</div>
-                    <div class="game-dialogue">
-                        The night guard, James, appears nervous as you question him. "I made all my rounds as scheduled, I swear!
-                        Nothing seemed out of place. Although..." he pauses, "there was a new janitor last night. Never seen him before.
-                        Kept to himself, but I didn't think much of it at the time."
+                <div class="clue-section">
+                    <div class="clue-box" data-clue-number="1">
+                        Victim's phone revealed frequent communications with a male contact saved as "J" in the weeks before her death.
                     </div>
-                    <div class="game-options">
-                        <div class="game-option" data-item="janitor-info" data-action="note">Make a note about the new janitor</div>
-                        <div class="game-option" data-next="1" data-action="return">Return to the main hall</div>
+                    <div class="clue-box" data-clue-number="2">
+                        Security camera footage shows a figure in a dark jacket entering Kayla's building at 11:32 PM on the night of the murder.
                     </div>
-                </div>
-                
-                <div class="game-scene" data-scene="4">
-                    <div class="game-scene-title">Security Office</div>
-                    <div class="game-dialogue">
-                        The security footage seems normal at first glance. As you scrutinize the overnight recordings,
-                        you notice a brief 30-second glitch in the camera covering the Emerald Scarab's display case.
-                        The timestamp shows 2:17 AM, precisely when the guard would have been making rounds in another wing.
+                    <div class="clue-box" data-clue-number="3">
+                        Forensic analysis discovered foreign DNA under the victim's fingernails, suggesting a struggle.
                     </div>
-                    <div class="game-options">
-                        <div class="game-option" data-item="camera-glitch" data-action="copy">Copy the suspicious footage</div>
-                        <div class="game-option" data-next="1" data-action="return">Return to the main hall</div>
+                    <div class="clue-box" data-clue-number="4">
+                        An anonymous tip mentioned seeing a red sports car parked outside Kayla's apartment complex on the night of the murder.
                     </div>
-                </div>
-                
-                <div class="game-progress">
-                    <p>Case Progress: 25%</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
+                    <div class="clue-box" data-clue-number="5">
+                        The medical examiner's report indicates the murder weapon was likely a kitchen knife from the victim's own apartment.
                     </div>
-                    <button class="hint-btn">Request Case File</button>
                 </div>
             </div>
         </div>
@@ -350,25 +520,18 @@
     <!-- Game Links -->
     <section class="other-games">
         <div class="container">
-            <h2 class="section-title typewriter-text">Other Investigations</h2>
-            <div class="feature-container">
-                <div class="feature-card case-file">
-                    <div class="file-tab">
-                        <span>02</span>
-                    </div>
-                    <h3 class="typewriter-text">Missing Person: The Playwright</h3>
-                    <p>A famous playwright has disappeared during the premiere of his latest work. Investigate the theater and uncover the truth behind his vanishing.</p>
-                    <a href="game2.html" class="cta-btn vintage-btn">Open Case</a>
-                </div>
+            <div class="game-links">
+                <a href="game2.html" class="game-link-card">
+                    <h3 class="game-link-title">Murder at Midnight</h3>
+                    <p class="game-link-desc">An interactive crime scene investigation where you must examine evidence and identify the culprit among multiple suspects.</p>
+                    <span class="handwritten-note">Case #MH-2025-02</span>
+                </a>
                 
-                <div class="feature-card case-file">
-                    <div class="file-tab">
-                        <span>03</span>
-                    </div>
-                    <h3 class="typewriter-text">Murder on Crimson Lane</h3>
-                    <p>A prominent businessman has been found murdered in his mansion. Your detective skills are needed to solve this classic whodunit.</p>
-                    <a href="game3.html" class="cta-btn vintage-btn">Open Case</a>
-                </div>
+                <a href="game3.html" class="game-link-card">
+                    <h3 class="game-link-title">The Missing Manuscript</h3>
+                    <p class="game-link-desc">A valuable historical manuscript has been stolen from a secure museum. Follow the trail of cryptic clues to recover it.</p>
+                    <span class="handwritten-note">Case #MH-2025-03</span>
+                </a>
             </div>
         </div>
     </section>
@@ -378,127 +541,243 @@
         <div class="container">
             <div class="footer-content">
                 <ul class="footer-links">
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="../games/game1.html">Games</a></li>
-                    <li><a href="../blog/blog.html">Stories</a></li>
-                    <li><a href="../movies/movies.html">Movies</a></li>
+                    <li><a href="../index.html">Headquarters</a></li>
+                    <li><a href="game1.html">Field Operations</a></li>
+                    <li><a href="../blog/blog.html">Case Files</a></li>
+                    <li><a href="../movies/movies.html">Surveillance Footage</a></li>
+                    <li><a href="../Pages/login.html">Agent Login</a></li>
                 </ul>
                 
                 <p class="copyright handwritten-note">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
             </div>
         </div>
     </footer>
-
+    
     <script>
+        // Hangman Game Logic
         document.addEventListener('DOMContentLoaded', function() {
-            // Game state
-            let currentScene = 1;
-            let inventory = ['none', 'none', 'none', 'none'];
+            // Variables
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const wordDisplay = document.getElementById('wordDisplay');
+            const keyboard = document.getElementById('keyboard');
+            const gameStatus = document.getElementById('gameStatus');
+            const hintBtn = document.getElementById('hintBtn');
+            const newGameBtn = document.getElementById('newGameBtn');
+            const clueBoxes = document.querySelectorAll('.clue-box');
             
-            // DOM elements
-            const gameScenes = document.querySelectorAll('.game-scene');
-            const gameOptions = document.querySelectorAll('.game-option');
-            const inventoryItems = document.querySelectorAll('.inventory-item');
-            const progressFill = document.querySelector('.progress-fill');
-            const progressText = document.querySelector('.game-progress p');
-            const hintBtn = document.querySelector('.hint-btn');
+            let words = ['JACKSON', 'JAMESON', 'JENKINS', 'JOHNSON', 'JACOBSON'];
+            let selectedWord = '';
+            let guessedLetters = [];
+            let wrongGuesses = 0;
+            let maxWrongGuesses = 6;
+            let currentClueIndex = 0;
+            let gameOver = false;
             
-            // Progress tracking
-            let progress = 25;
-            
-            // Initialize the first scene
-            showScene(currentScene);
-            
-            // Event listeners for game options
-            gameOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    const nextScene = this.getAttribute('data-next');
-                    const action = this.getAttribute('data-action');
-                    const itemToCollect = this.getAttribute('data-item');
-                    
-                    if (itemToCollect && !inventory.includes(itemToCollect)) {
-                        // Add item to inventory
-                        const emptySlot = inventory.indexOf('none');
-                        if (emptySlot !== -1) {
-                            inventory[emptySlot] = itemToCollect;
-                            updateInventory();
-                            progress += 15;
-                            updateProgress();
-                        }
-                    }
-                    
-                    if (nextScene) {
-                        showScene(nextScene);
-                    }
-                });
-            });
-            
-            // Event listeners for inventory items
-            inventoryItems.forEach((item, index) => {
-                item.addEventListener('click', function() {
-                    const itemType = inventory[index];
-                    if (itemType !== 'none') {
-                        alert(`Examining: ${itemType}`);
-                    }
-                });
-            });
-            
-            // Hint button
-            hintBtn.addEventListener('click', function() {
-                alert("Hint: Pay close attention to the timing of events. The security footage glitch occurred when the guard was away from that section.");
-            });
-            
-            // Helper functions
-            function showScene(sceneNumber) {
-                gameScenes.forEach(scene => {
-                    if (scene.getAttribute('data-scene') === sceneNumber) {
-                        scene.style.display = 'flex';
-                    } else {
-                        scene.style.display = 'none';
-                    }
-                });
-                currentScene = sceneNumber;
-            }
-            
-            function updateInventory() {
-                inventoryItems.forEach((item, index) => {
-                    const itemType = inventory[index];
-                    if (itemType !== 'none') {
-                        item.innerHTML = getIconForItem(itemType);
-                        item.classList.remove('empty');
-                        item.setAttribute('data-item', itemType);
-                    } else {
-                        item.innerHTML = '<i class="fas fa-question"></i>';
-                        item.classList.add('empty');
-                        item.setAttribute('data-item', 'none');
-                    }
-                });
-            }
-            
-            function getIconForItem(itemType) {
-                const icons = {
-                    'fingerprint': '<i class="fas fa-fingerprint"></i>',
-                    'janitor-info': '<i class="fas fa-clipboard"></i>',
-                    'camera-glitch': '<i class="fas fa-video"></i>',
-                    'key-card': '<i class="fas fa-key"></i>',
-                    'note': '<i class="fas fa-sticky-note"></i>'
-                };
-                return icons[itemType] || '<i class="fas fa-question"></i>';
-            }
-            
-            function updateProgress() {
-                if (progress > 100) progress = 100;
-                progressFill.style.width = `${progress}%`;
-                progressText.textContent = `Case Progress: ${progress}%`;
+            // Initialize the game
+            function initGame() {
+                selectedWord = words[Math.floor(Math.random() * words.length)];
+                guessedLetters = [];
+                wrongGuesses = 0;
+                gameOver = false;
                 
-                // Update case status
-                const caseStatus = document.querySelector('.case-status');
-                if (progress >= 100) {
-                    caseStatus.textContent = "SOLVED";
-                    caseStatus.style.backgroundColor = "#2a623d";
+                // Hide all clue boxes
+                clueBoxes.forEach(box => {
+                    box.classList.remove('visible');
+                });
+                currentClueIndex = 0;
+                
+                // Create word display
+                createWordDisplay();
+                
+                // Create keyboard
+                createKeyboard();
+                
+                // Draw empty gallows
+                drawHangman();
+                
+                gameStatus.textContent = 'Start guessing letters to identify the suspect...';
+                gameStatus.style.color = 'var(--ink-color)';
+            }
+            
+            // Create word display
+            function createWordDisplay() {
+                wordDisplay.innerHTML = '';
+                for (let i = 0; i < selectedWord.length; i++) {
+                    const letterBox = document.createElement('div');
+                    letterBox.classList.add('letter-box');
+                    letterBox.textContent = guessedLetters.includes(selectedWord[i]) ? selectedWord[i] : '';
+                    wordDisplay.appendChild(letterBox);
                 }
             }
+            
+            // Create keyboard
+            function createKeyboard() {
+                keyboard.innerHTML = '';
+                for (let i = 65; i <= 90; i++) {
+                    const letter = String.fromCharCode(i);
+                    const button = document.createElement('button');
+                    button.classList.add('keyboard-btn');
+                    button.textContent = letter;
+                    
+                    if (guessedLetters.includes(letter)) {
+                        button.classList.add('disabled');
+                        button.disabled = true;
+                    }
+                    
+                    button.addEventListener('click', function() {
+                        if (!gameOver && !guessedLetters.includes(letter)) {
+                            guessLetter(letter);
+                            button.classList.add('disabled');
+                            button.disabled = true;
+                        }
+                    });
+                    
+                    keyboard.appendChild(button);
+                }
+            }
+            
+            // Draw hangman
+            function drawHangman() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = '#333';
+                ctx.beginPath();
+                
+                // Draw gallows
+                ctx.moveTo(50, 270);
+                ctx.lineTo(250, 270);
+                ctx.moveTo(100, 270);
+                ctx.lineTo(100, 50);
+                ctx.lineTo(200, 50);
+                ctx.lineTo(200, 80);
+                ctx.stroke();
+                
+                // Draw hangman parts based on wrong guesses
+                if (wrongGuesses >= 1) {
+                    // Head
+                    ctx.beginPath();
+                    ctx.arc(200, 110, 30, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+                
+                if (wrongGuesses >= 2) {
+                    // Body
+                    ctx.beginPath();
+                    ctx.moveTo(200, 140);
+                    ctx.lineTo(200, 210);
+                    ctx.stroke();
+                }
+                
+                if (wrongGuesses >= 3) {
+                    // Left arm
+                    ctx.beginPath();
+                    ctx.moveTo(200, 160);
+                    ctx.lineTo(150, 180);
+                    ctx.stroke();
+                }
+                
+                if (wrongGuesses >= 4) {
+                    // Right arm
+                    ctx.beginPath();
+                    ctx.moveTo(200, 160);
+                    ctx.lineTo(250, 180);
+                    ctx.stroke();
+                }
+                
+                if (wrongGuesses >= 5) {
+                    // Left leg
+                    ctx.beginPath();
+                    ctx.moveTo(200, 210);
+                    ctx.lineTo(150, 250);
+                    ctx.stroke();
+                }
+                
+                if (wrongGuesses >= 6) {
+                    // Right leg
+                    ctx.beginPath();
+                    ctx.moveTo(200, 210);
+                    ctx.lineTo(250, 250);
+                    ctx.stroke();
+                    
+                    // Draw X's for eyes
+                    ctx.beginPath();
+                    ctx.moveTo(190, 100);
+                    ctx.lineTo(180, 110);
+                    ctx.moveTo(180, 100);
+                    ctx.lineTo(190, 110);
+                    
+                    ctx.moveTo(220, 100);
+                    ctx.lineTo(210, 110);
+                    ctx.moveTo(210, 100);
+                    ctx.lineTo(220, 110);
+                    ctx.stroke();
+                }
+            }
+            
+            // Guess letter
+            function guessLetter(letter) {
+                guessedLetters.push(letter);
+                
+                if (selectedWord.includes(letter)) {
+                    // Correct guess
+                    createWordDisplay();
+                    
+                    // Check if word is complete
+                    const isWordComplete = selectedWord.split('').every(char => guessedLetters.includes(char));
+                    
+                    if (isWordComplete) {
+                        gameOver = true;
+                        gameStatus.textContent = `Case solved! The killer is ${selectedWord}. Arrest warrant issued.`;
+                        gameStatus.style.color = 'green';
+                        
+                        // Show all clues
+                        clueBoxes.forEach(box => {
+                            box.classList.add('visible');
+                        });
+                    }
+                } else {
+                    // Incorrect guess
+                    wrongGuesses++;
+                    drawHangman();
+                    showNextClue();
+                    
+                    if (wrongGuesses >= maxWrongGuesses) {
+                        gameOver = true;
+                        gameStatus.textContent = `Investigation failed. The killer was ${selectedWord}.`;
+                        gameStatus.style.color = 'var(--stamp-red)';
+                        
+                        // Show all clues
+                        clueBoxes.forEach(box => {
+                            box.classList.add('visible');
+                        });
+                    } else {
+                        gameStatus.textContent = `Wrong guess! ${maxWrongGuesses - wrongGuesses} attempts remaining.`;
+                    }
+                }
+            }
+            
+            // Show next clue
+            function showNextClue() {
+                if (currentClueIndex < clueBoxes.length) {
+                    clueBoxes[currentClueIndex].classList.add('visible');
+                    currentClueIndex++;
+                }
+            }
+            
+            // Event listeners
+            hintBtn.addEventListener('click', function() {
+                if (!gameOver && currentClueIndex < clueBoxes.length) {
+                    showNextClue();
+                }
+            });
+            
+            newGameBtn.addEventListener('click', function() {
+                initGame();
+            });
+            
+            // Start the game
+            initGame();
         });
     </script>
 </body>

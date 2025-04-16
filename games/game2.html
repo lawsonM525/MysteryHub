@@ -6,6 +6,7 @@
     <title>Murder at Midnight - Mystery Hub</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Homemade+Apple&family=Cutive+Mono&display=swap" rel="stylesheet">
     <script>
         window.MYSTERY_HUB_CONFIG = {
             navbarClock: true
@@ -13,14 +14,33 @@
     </script>
     <script src="../clock/clock.js"></script>
     <style>
+        :root {
+            --folder-red: #a02c2c;
+            --stamp-red: #9e2a2b;
+            --aged-paper: #e8e0cf;
+            --aged-paper-dark: #d8d0bf;
+            --ink-color: #333;
+            --typewriter-color: #222;
+            --folder-tab: #876;
+            --faded-ink: #555;
+            --manila-folder: #e6ddc6;
+        }
+        
+        body {
+            background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
+            background-color: var(--aged-paper);
+            color: var(--ink-color);
+            font-family: 'Cutive Mono', monospace;
+        }
+        
         .game-container {
             max-width: 900px;
             margin: 50px auto;
-            background-color: #131313;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.2);
-            border: 1px solid rgba(255, 77, 148, 0.1);
-            padding: 30px;
+            background-color: var(--manila-folder);
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--folder-tab);
+            padding: 40px 30px 30px;
             position: relative;
             overflow: hidden;
         }
@@ -28,356 +48,504 @@
         .game-container::before {
             content: '';
             position: absolute;
-            top: -20px;
-            right: -20px;
-            width: 100px;
-            height: 100px;
-            background-color: rgba(255, 77, 148, 0.1);
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
+            opacity: 0.4;
             z-index: 0;
         }
         
         .game-title {
+            font-family: 'Special Elite', cursive;
             text-align: center;
-            color: #ff4d94;
+            color: var(--folder-red);
             margin-bottom: 20px;
             font-size: 2.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .game-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--folder-red);
+            opacity: 0.5;
         }
         
         .game-description {
+            font-family: 'Cutive Mono', monospace;
             margin-bottom: 30px;
             text-align: center;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            color: var(--ink-color);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            padding: 15px;
+            border-left: 3px solid var(--folder-red);
+            background-color: rgba(255, 255, 255, 0.4);
         }
         
-        .game-scene {
+        /* Case file decorations */
+        .evidence-tag {
+            position: absolute;
+            top: -15px;
+            right: 30px;
+            background-color: var(--folder-red);
+            color: white;
+            padding: 5px 15px;
+            font-family: 'Special Elite', cursive;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        
+        .case-status {
+            position: absolute;
+            top: 20px;
+            right: -40px;
+            background-color: var(--stamp-red);
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-family: 'Special Elite', cursive;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            z-index: 5;
+        }
+        
+        .paper-clip {
+            position: absolute;
+            top: -10px;
+            left: 50px;
+            width: 30px;
+            height: 60px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 200"><path d="M80,20c0-11-9-20-20-20S40,9,40,20v140c0,11,9,20,20,20s20-9,20-20V40c0-5.5-4.5-10-10-10s-10,4.5-10,10v100c0,5.5,4.5,10,10,10s10-4.5,10-10V40" fill="%23888"/></svg>');
+            transform: rotate(-10deg);
+            opacity: 0.7;
+            z-index: 11;
+        }
+        
+        /* Crime scene game specific styles */
+        .crime-scene {
             position: relative;
-            min-height: 400px;
-            background-color: #0a0a0a;
-            border-radius: 8px;
-            padding: 30px;
-            margin-bottom: 30px;
-            background-image: url('../assets/images/game2-bg.jpg');
+            background-image: url('../assets/images/crime-scene-bg.jpg');
             background-size: cover;
             background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
+            height: 400px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            border: 1px solid var(--folder-tab);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
         
-        .game-scene::before {
-            content: '';
+        .crime-scene-overlay {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.3), rgba(10, 10, 10, 0.8));
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
             z-index: 1;
         }
         
-        .game-scene-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .game-scene-title {
-            color: #ff4d94;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-        
-        .game-dialogue {
-            background-color: rgba(10, 10, 10, 0.8);
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #ff4d94;
-            margin-bottom: 20px;
-        }
-        
-        .game-options {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-        
-        .game-option {
-            background-color: #1a1a1a;
-            padding: 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 1px solid rgba(255, 77, 148, 0.1);
-        }
-        
-        .game-option:hover {
-            background-color: rgba(255, 77, 148, 0.1);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.2);
-        }
-        
-        .game-clues {
+        .evidence-marker {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: var(--folder-red);
+            border-radius: 50%;
             display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .clue-item {
-            background-color: #1a1a1a;
-            border-radius: 5px;
-            padding: 8px 15px;
-            font-size: 0.9rem;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Special Elite', cursive;
             cursor: pointer;
-            transition: all 0.3s;
-            border: 1px solid rgba(255, 77, 148, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            z-index: 2;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
         
-        .clue-item.active {
-            background-color: rgba(255, 77, 148, 0.2);
-            border-color: #ff4d94;
+        .evidence-marker:hover {
+            transform: scale(1.2);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
         }
         
-        .clue-item:hover {
-            background-color: rgba(255, 77, 148, 0.1);
+        .evidence-marker[data-evidence="1"] {
+            top: 70%;
+            left: 25%;
         }
         
-        .suspect-list {
+        .evidence-marker[data-evidence="2"] {
+            top: 45%;
+            left: 60%;
+        }
+        
+        .evidence-marker[data-evidence="3"] {
+            top: 30%;
+            left: 40%;
+        }
+        
+        .evidence-marker[data-evidence="4"] {
+            top: 60%;
+            left: 75%;
+        }
+        
+        .evidence-marker[data-evidence="5"] {
+            top: 20%;
+            left: 15%;
+        }
+        
+        .evidence-panel {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-family: 'Cutive Mono', monospace;
+            border-left: 3px solid var(--folder-red);
+            display: none;
+        }
+        
+        .evidence-panel.visible {
+            display: block;
+        }
+        
+        .evidence-panel h3 {
+            font-family: 'Special Elite', cursive;
+            color: var(--folder-red);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .suspect-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 5px;
+            position: relative;
+        }
+        
+        .suspect-section::before {
+            content: 'SUSPECTS';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background-color: var(--folder-red);
+            color: white;
+            padding: 2px 15px;
+            font-size: 0.8rem;
+            font-family: 'Special Elite', cursive;
+            border-radius: 3px;
+        }
+        
+        .suspects-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
         }
         
         .suspect-card {
-            background-color: #1a1a1a;
-            border-radius: 8px;
+            background-color: white;
             padding: 15px;
-            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             cursor: pointer;
-            transition: all 0.3s;
-            border: 1px solid rgba(255, 77, 148, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--folder-tab);
         }
         
         .suspect-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.2);
-        }
-        
-        .suspect-card.selected {
-            border-color: #ff4d94;
-            background-color: rgba(255, 77, 148, 0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
         .suspect-img {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            margin: 0 auto 10px;
-            overflow: hidden;
-            border: 2px solid #333;
-        }
-        
-        .suspect-img img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: 120px;
+            background-color: #ccc;
+            margin-bottom: 10px;
+            border-radius: 3px;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid var(--folder-tab);
         }
         
         .suspect-name {
-            font-weight: bold;
+            font-family: 'Special Elite', cursive;
+            color: var(--folder-red);
             margin-bottom: 5px;
+            font-size: 1.1rem;
         }
         
         .suspect-role {
             font-size: 0.85rem;
-            color: #aaa;
+            font-style: italic;
             margin-bottom: 10px;
+            color: var(--faded-ink);
         }
         
-        .game-progress {
-            margin-top: 20px;
+        .accusation-section {
+            margin-top: 30px;
             text-align: center;
         }
         
-        .progress-bar {
-            height: 8px;
-            background-color: #1a1a1a;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background-color: #ff4d94;
-            width: 20%; /* Starting progress */
-        }
-        
-        .hint-btn {
+        .accuse-btn {
             display: inline-block;
-            padding: 8px 15px;
-            background-color: transparent;
-            color: #ff4d94;
-            border: 1px solid #ff4d94;
+            padding: 10px 20px;
+            background-color: var(--folder-red);
+            color: white;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
+            font-family: 'Special Elite', cursive;
             margin-top: 20px;
         }
         
-        .hint-btn:hover {
-            background-color: rgba(255, 77, 148, 0.1);
+        .accuse-btn:hover {
+            background-color: var(--stamp-red);
+            transform: translateY(-3px);
         }
         
-        .notebook {
-            background-color: #0a0a0a;
-            border-radius: 8px;
+        .solve-status {
+            background-color: rgba(255, 255, 255, 0.6);
+            padding: 15px 20px;
+            border-radius: 5px;
+            font-family: 'Special Elite', cursive;
+            margin-top: 20px;
+            text-align: center;
+            min-height: 60px;
+            border-left: 3px solid var(--folder-red);
+        }
+        
+        .other-games {
+            max-width: 900px;
+            margin: 30px auto;
+        }
+        
+        .game-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .game-link-card {
+            background-color: var(--manila-folder);
+            border-radius: 5px;
             padding: 20px;
-            margin-top: 30px;
-            border: 1px solid #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: var(--ink-color);
+            display: block;
+            border: 1px solid var(--folder-tab);
         }
         
-        .notebook-title {
-            font-size: 1.2rem;
-            color: #ff4d94;
+        .game-link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .game-link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .game-link-title {
+            font-family: 'Special Elite', cursive;
+            color: var(--folder-red);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .game-link-desc {
+            font-family: 'Cutive Mono', monospace;
+            font-size: 0.9rem;
             margin-bottom: 15px;
-            display: flex;
-            align-items: center;
+            position: relative;
+            z-index: 1;
         }
         
-        .notebook-title i {
-            margin-right: 10px;
+        .handwritten-note {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-family: 'Homemade Apple', cursive;
+            font-size: 0.8rem;
+            color: var(--stamp-red);
+            transform: rotate(-5deg);
+            opacity: 0.8;
         }
         
-        .notebook-content {
-            font-family: 'Courier New', monospace;
-            color: #ddd;
-            line-height: 1.5;
-        }
-        
-        /* Hidden until needed */
-        .game-scene[data-scene="2"], 
-        .game-scene[data-scene="3"], 
-        .game-scene[data-scene="4"] {
-            display: none;
+        @media (max-width: 768px) {
+            .suspects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .evidence-marker {
+                width: 25px;
+                height: 25px;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
-<body>
+<body class="vintage-background">
+    <div class="paper-texture"></div>
+    
+    <!-- File Stamp Decoration -->
+    <div class="file-stamp">
+        <span>TOP SECRET</span>
+    </div>
+    
+    <!-- Paper Clip Decoration -->
+    <div class="paper-clip"></div>
+    
+    <!-- Case Number -->
+    <div class="case-number">
+        <span>CASE #MH-2025-02</span>
+    </div>
+
     <!-- Header with Navigation -->
     <header>
-        <div class="container">
-            <nav>
-                <div class="logo">Mystery Hub</div>
-                <ul class="nav-links">
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="#" class="active">Games</a></li>
-                    <li><a href="../blog/blog.html">Blogs</a></li>
-                    <li><a href="../movies/movies.html">Movies</a></li>
-                    <li><a href="../login.html">Login</a></li>
-                </ul>
-            </nav>
-        </div>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="../index.html">
+                    <h1>Mystery<span>Hub</span></h1>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="game1.html">Field Operations</a></li>
+                <li><a href="../blog/blog.html">Case Files</a></li>
+                <li><a href="../movies/movies.html">Surveillance Footage</a></li>
+                <li><a href="../Pages/login.html" id="login-btn" class="file-btn">Agent Login</a></li>
+            </ul>
+            <!-- Digital Clock -->
+            <div id="digital-clock" class="digital-clock">
+                <span class="time">00:00:00</span>
+                <span class="date">01/01/2025</span>
+            </div>
+        </nav>
     </header>
 
-    <!-- Game Content -->
     <section class="main-content">
         <div class="container">
             <div class="game-container">
+                <div class="evidence-tag">EXHIBIT B</div>
+                <div class="case-status">ACTIVE</div>
+                <div class="paper-clip"></div>
+                
                 <h1 class="game-title">Murder at Midnight</h1>
                 <p class="game-description">
-                    A wealthy businessman has been found dead in his study during his own dinner party at his secluded mansion. 
-                    As a renowned detective, you must interview the suspects, gather clues, and solve the mystery before the killer strikes again.
+                    <strong>MISSION BRIEFING:</strong> A prominent businessman, Richard Sterling, was found dead in his 
+                    mansion during a dinner party at exactly midnight. Five guests were present at the time of the murder. 
+                    Examine the crime scene carefully, collect evidence, and identify the killer. Time is of the essence, 
+                    detective.
                 </p>
                 
-                <div class="game-clues">
-                    <div class="clue-item" data-clue="1">Invitation</div>
-                    <div class="clue-item" data-clue="2">Guest List</div>
+                <div class="crime-scene">
+                    <div class="crime-scene-overlay"></div>
+                    <div class="evidence-marker" data-evidence="1">1</div>
+                    <div class="evidence-marker" data-evidence="2">2</div>
+                    <div class="evidence-marker" data-evidence="3">3</div>
+                    <div class="evidence-marker" data-evidence="4">4</div>
+                    <div class="evidence-marker" data-evidence="5">5</div>
                 </div>
                 
-                <!-- Scene 1 -->
-                <div class="game-scene" data-scene="1">
-                    <div class="game-scene-content">
-                        <h3 class="game-scene-title">The Grand Entrance</h3>
-                        <div class="game-dialogue">
-                            <p>
-                                <strong>Detective:</strong> "I arrived at Blackwood Manor just after midnight. The mansion looms ahead, 
-                                rain pouring down as thunder crashes in the distance. The butler, seemingly unsurprised by my arrival, 
-                                leads me to the study where Mr. Blackwood's body was discovered."
-                            </p>
-                            <p>
-                                <strong>Butler:</strong> "The police are on their way, but they won't arrive until morning due to the storm 
-                                washing out the bridge. Everyone who was at the dinner party is still here, gathered in the drawing room."
-                            </p>
-                        </div>
-                        <div class="game-options">
-                            <div class="game-option" data-next="2">
-                                <p>Examine the body and crime scene first</p>
-                            </div>
-                            <div class="game-option" data-next="3">
-                                <p>Interview the guests immediately</p>
-                            </div>
-                            <div class="game-option" data-next="4">
-                                <p>Ask the butler for more information</p>
-                            </div>
-                            <div class="game-option" data-next="5">
-                                <p>Check the security of the mansion</p>
-                            </div>
-                        </div>
-                    </div>
+                <div id="evidencePanel1" class="evidence-panel">
+                    <h3>Evidence #1: Bloodstained Knife</h3>
+                    <p>The murder weapon appears to be a kitchen knife from the victim's own collection. Fingerprints were wiped clean, suggesting premeditation. The pattern of blood spatter indicates a right-handed attacker.</p>
                 </div>
                 
-                <!-- Scene 2 (Hidden initially) -->
-                <div class="game-scene" data-scene="2">
-                    <div class="game-scene-content">
-                        <h3 class="game-scene-title">The Study</h3>
-                        <div class="game-dialogue">
-                            <p>
-                                Mr. Blackwood's body lies slumped over his desk. You notice a spilled glass of whiskey, 
-                                a letter opener with traces of blood, and an open safe behind a painting. The time of death 
-                                appears to be around 11:30 PM, during the dinner party. There are no signs of a struggle.
-                            </p>
-                        </div>
-                        <div class="game-options">
-                            <div class="game-option" data-next="6">
-                                <p>Examine the whiskey glass more closely</p>
-                            </div>
-                            <div class="game-option" data-next="7">
-                                <p>Investigate the open safe</p>
-                            </div>
-                            <div class="game-option" data-next="3">
-                                <p>Now go interview the guests</p>
-                            </div>
-                            <div class="game-option" data-next="1">
-                                <p>Return to the entrance and reconsider your approach</p>
-                            </div>
-                        </div>
-                    </div>
+                <div id="evidencePanel2" class="evidence-panel">
+                    <h3>Evidence #2: Victim's Phone</h3>
+                    <p>The victim's phone shows a text message sent at 11:45 PM: "We need to talk about the documents. Meet me in the study at midnight." The sender's number is unlisted.</p>
                 </div>
                 
-                <div class="notebook">
-                    <div class="notebook-title">
-                        <i class="fas fa-book"></i> Detective's Notes
-                    </div>
-                    <div class="notebook-content">
-                        <p>Location: Blackwood Manor</p>
-                        <p>Victim: Richard Blackwood, 58, businessman</p>
-                        <p>Time of death: Approx. 11:30 PM</p>
-                        <p>Suspects: All dinner guests + household staff</p>
-                        <p>Key clues: ???</p>
+                <div id="evidencePanel3" class="evidence-panel">
+                    <h3>Evidence #3: Wine Glass</h3>
+                    <p>A wine glass with traces of lipstick was found on the desk in the study. Lab analysis confirms it matches the shade worn by only one of the female guests.</p>
+                </div>
+                
+                <div id="evidencePanel4" class="evidence-panel">
+                    <h3>Evidence #4: Crumpled Note</h3>
+                    <p>A crumpled note found in the fireplace, partially burned. The visible text reads: "...will expose your fraud if you don't pay by tomorrow. Your partner..."</p>
+                </div>
+                
+                <div id="evidencePanel5" class="evidence-panel">
+                    <h3>Evidence #5: Broken Watch</h3>
+                    <p>The victim's watch is broken, stopped at exactly 12:07 AM. This likely indicates the precise time of death.</p>
+                </div>
+                
+                <div class="suspect-section">
+                    <div class="suspects-grid">
+                        <div class="suspect-card" data-suspect="1">
+                            <div class="suspect-img" style="background-image: url('../assets/images/suspect1.jpg');"></div>
+                            <h3 class="suspect-name">Elizabeth Sterling</h3>
+                            <p class="suspect-role">Victim's Wife</p>
+                            <p>Stands to inherit $10 million. Claims she was in the garden at the time of the murder.</p>
+                        </div>
+                        
+                        <div class="suspect-card" data-suspect="2">
+                            <div class="suspect-img" style="background-image: url('../assets/images/suspect2.jpg');"></div>
+                            <h3 class="suspect-name">James Peterson</h3>
+                            <p class="suspect-role">Business Partner</p>
+                            <p>Recently had an argument with the victim over company finances. Left-handed.</p>
+                        </div>
+                        
+                        <div class="suspect-card" data-suspect="3">
+                            <div class="suspect-img" style="background-image: url('../assets/images/suspect3.jpg');"></div>
+                            <h3 class="suspect-name">Victoria Hayes</h3>
+                            <p class="suspect-role">Personal Assistant</p>
+                            <p>Wears distinctive red lipstick. Says she was making phone calls during the time of murder.</p>
+                        </div>
+                        
+                        <div class="suspect-card" data-suspect="4">
+                            <div class="suspect-img" style="background-image: url('../assets/images/suspect4.jpg');"></div>
+                            <h3 class="suspect-name">Michael Davenport</h3>
+                            <p class="suspect-role">Chief Financial Officer</p>
+                            <p>Recently discovered discrepancies in the company accounts. Right-handed.</p>
+                        </div>
+                        
+                        <div class="suspect-card" data-suspect="5">
+                            <div class="suspect-img" style="background-image: url('../assets/images/suspect5.jpg');"></div>
+                            <h3 class="suspect-name">Catherine Winters</h3>
+                            <p class="suspect-role">Family Friend</p>
+                            <p>Had a secret affair with the victim. Claims to have been in the library at midnight.</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="game-progress">
-                    <p>Progress: <span id="progress-text">20%</span></p>
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
+                <div class="accusation-section">
+                    <div class="solve-status" id="solveStatus">
+                        Examine all evidence and choose a suspect carefully before making your accusation.
                     </div>
-                    <button class="hint-btn" id="hint-btn">Get a Hint</button>
+                    <button class="accuse-btn" id="accuseBtn">File Official Accusation</button>
                 </div>
             </div>
         </div>
@@ -386,152 +554,179 @@
     <!-- Game Links -->
     <section class="other-games">
         <div class="container">
-            <h2 class="section-title">Other Mystery Games</h2>
-            <div class="feature-container">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-gem"></i>
-                    </div>
-                    <h3>The Vanishing Artifact</h3>
-                    <p>Solve the mystery of a stolen priceless artifact from the National Museum.</p>
-                    <a href="game1.html" class="cta-btn">Play Now</a>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-key"></i>
-                    </div>
-                    <h3>Escape the Crypt</h3>
-                    <p>You're trapped in an ancient crypt filled with puzzles. Can you escape before time runs out?</p>
-                    <a href="game3.html" class="cta-btn">Play Now</a>
-                </div>
+            <div class="game-links">
+                <a href="game1.html" class="game-link-card">
+                    <h3 class="game-link-title">The Kayla Case Files</h3>
+                    <p class="game-link-desc">A young woman murdered in her apartment with the killer leaving cryptic clues. Can you solve the hangman puzzle to identify the suspect?</p>
+                    <span class="handwritten-note">Case #MH-2025-01</span>
+                </a>
+                
+                <a href="game3.html" class="game-link-card">
+                    <h3 class="game-link-title">The Missing Manuscript</h3>
+                    <p class="game-link-desc">A valuable historical manuscript has been stolen from a secure museum. Follow the trail of cryptic clues to recover it.</p>
+                    <span class="handwritten-note">Case #MH-2025-03</span>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="vintage-footer">
         <div class="container">
-            <ul class="footer-links">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Games</a></li>
-                <li><a href="../blog/blog.html">Stories</a></li>
-                <li><a href="../movies/movies.html">Movies</a></li>
-            </ul>
-            <p class="copyright">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+            <div class="footer-content">
+                <ul class="footer-links">
+                    <li><a href="../index.html">Headquarters</a></li>
+                    <li><a href="game1.html">Field Operations</a></li>
+                    <li><a href="../blog/blog.html">Case Files</a></li>
+                    <li><a href="../movies/movies.html">Surveillance Footage</a></li>
+                    <li><a href="../Pages/login.html">Agent Login</a></li>
+                </ul>
+                
+                <p class="copyright handwritten-note">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+            </div>
         </div>
     </footer>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Game state
-            let currentScene = 1;
-            let cluesFound = [];
-            let progress = 20;
+            // Variables
+            const evidenceMarkers = document.querySelectorAll('.evidence-marker');
+            const evidencePanels = document.querySelectorAll('.evidence-panel');
+            const suspectCards = document.querySelectorAll('.suspect-card');
+            const accuseBtn = document.getElementById('accuseBtn');
+            const solveStatus = document.getElementById('solveStatus');
             
-            // Get elements
-            const gameOptions = document.querySelectorAll('.game-option');
-            const gameScenes = document.querySelectorAll('.game-scene');
-            const progressFill = document.querySelector('.progress-fill');
-            const progressText = document.getElementById('progress-text');
-            const hintBtn = document.getElementById('hint-btn');
-            const clueItems = document.querySelectorAll('.clue-item');
+            let selectedSuspect = null;
+            let viewedEvidence = [false, false, false, false, false];
+            let gameOver = false;
             
-            // Handle option clicks
-            gameOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    const nextScene = this.getAttribute('data-next');
+            // Evidence markers click handler
+            evidenceMarkers.forEach(marker => {
+                marker.addEventListener('click', function() {
+                    if (gameOver) return;
                     
-                    // Hide current scene
-                    document.querySelector(`.game-scene[data-scene="${currentScene}"]`).style.display = 'none';
+                    const evidenceId = this.getAttribute('data-evidence');
                     
-                    // Show next scene
-                    const nextSceneElement = document.querySelector(`.game-scene[data-scene="${nextScene}"]`);
+                    // Hide all panels
+                    evidencePanels.forEach(panel => {
+                        panel.classList.remove('visible');
+                    });
                     
-                    // If scene exists, show it
-                    if (nextSceneElement) {
-                        nextSceneElement.style.display = 'flex';
-                        currentScene = nextScene;
-                        
-                        // Add clues based on scene
-                        if (nextScene === '2' && !cluesFound.includes('bloodstain')) {
-                            addClue('Bloodstain');
-                            cluesFound.push('bloodstain');
-                        } else if (nextScene === '6' && !cluesFound.includes('poison')) {
-                            addClue('Poison Residue');
-                            cluesFound.push('poison');
-                        }
-                        
-                        // Update progress
-                        progress += 15;
-                        if (progress > 100) progress = 100;
-                        
-                        progressFill.style.width = `${progress}%`;
-                        progressText.textContent = `${progress}%`;
-                    } else {
-                        // If scene doesn't exist yet (for demo purposes)
-                        alert('This part of the game is still under development. Please try another option.');
-                        document.querySelector(`.game-scene[data-scene="${currentScene}"]`).style.display = 'flex';
-                    }
+                    // Show selected panel
+                    document.getElementById(`evidencePanel${evidenceId}`).classList.add('visible');
+                    
+                    // Mark evidence as viewed
+                    viewedEvidence[evidenceId - 1] = true;
+                    
+                    // Update marker appearance
+                    this.style.backgroundColor = '#5a7302';
+                    
+                    // Check if all evidence is viewed
+                    checkAllEvidenceViewed();
                 });
             });
             
-            // Handle clue clicks
-            clueItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const clueId = this.getAttribute('data-clue');
-                    let clueInfo = '';
+            // Suspect cards click handler
+            suspectCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    if (gameOver) return;
                     
-                    switch(clueId) {
-                        case '1':
-                            clueInfo = 'Invitation: A formal dinner party invitation from Mr. Blackwood, dated one week ago.';
-                            break;
-                        case '2':
-                            clueInfo = 'Guest List: Six guests were invited - Mrs. Victoria Blackwood (wife), Dr. James Morgan (family doctor), Ms. Eleanor Reed (business partner), Mr. Thomas Webb (lawyer), Ms. Sophia Chen (assistant), and Mr. Robert Pierce (old friend).';
-                            break;
-                        default:
-                            clueInfo = 'Examining this clue...';
-                    }
+                    // Remove selection from all cards
+                    suspectCards.forEach(c => {
+                        c.style.border = '1px solid var(--folder-tab)';
+                        c.style.backgroundColor = 'white';
+                    });
                     
-                    alert(clueInfo);
-                    this.classList.add('active');
+                    // Select this card
+                    this.style.border = '2px solid var(--folder-red)';
+                    this.style.backgroundColor = 'rgba(160, 44, 44, 0.05)';
+                    
+                    selectedSuspect = this.getAttribute('data-suspect');
+                    
+                    solveStatus.textContent = 'You\'ve selected ' + this.querySelector('.suspect-name').textContent + ' as your primary suspect.';
                 });
             });
             
-            // Function to add new clue item
-            function addClue(clueName) {
-                const cluesContainer = document.querySelector('.game-clues');
-                const newClue = document.createElement('div');
-                newClue.className = 'clue-item';
-                newClue.textContent = clueName;
-                newClue.setAttribute('data-clue', cluesFound.length + 3); // +3 because we start with 2 clues
-                
-                newClue.addEventListener('click', function() {
-                    let clueInfo = `${clueName}: You discovered this while investigating.`;
-                    alert(clueInfo);
-                    this.classList.add('active');
-                });
-                
-                cluesContainer.appendChild(newClue);
-            }
-            
-            // Handle hint button
-            hintBtn.addEventListener('click', function() {
-                let hint = '';
-                
-                switch(currentScene) {
-                    case '1':
-                        hint = 'Examining the crime scene first will give you important clues about what happened.';
-                        break;
-                    case '2':
-                        hint = 'Look at the whiskey glass closely - there might be evidence of foul play.';
-                        break;
-                    default:
-                        hint = 'Look for inconsistencies in what people tell you, and gather as many clues as possible.';
+            // Accuse button click handler
+            accuseBtn.addEventListener('click', function() {
+                if (gameOver) {
+                    // Reset game
+                    resetGame();
+                    return;
                 }
                 
-                alert(`Hint: ${hint}`);
+                if (!selectedSuspect) {
+                    solveStatus.textContent = 'You must select a suspect before making an accusation.';
+                    solveStatus.style.color = 'var(--stamp-red)';
+                    return;
+                }
+                
+                // Check if all evidence was viewed
+                const allEvidenceViewed = viewedEvidence.every(viewed => viewed);
+                
+                if (!allEvidenceViewed) {
+                    solveStatus.textContent = 'You should examine all evidence before making an accusation. Investigation incomplete.';
+                    solveStatus.style.color = 'var(--stamp-red)';
+                    return;
+                }
+                
+                gameOver = true;
+                
+                // Correct suspect is #3 (Victoria Hayes)
+                if (selectedSuspect === '3') {
+                    solveStatus.textContent = 'Correct! Victoria Hayes is the killer. Her lipstick matched the glass, she had access to the kitchen knives, and her alibi didn\'t check out. Case closed!';
+                    solveStatus.style.color = 'green';
+                    
+                    // Change case status
+                    document.querySelector('.case-status').textContent = 'SOLVED';
+                    document.querySelector('.case-status').style.backgroundColor = '#2a623d';
+                } else {
+                    solveStatus.textContent = 'Incorrect accusation! The real killer was Victoria Hayes. Her lipstick matched the glass in the study, and she had no solid alibi. Case failed.';
+                    solveStatus.style.color = 'var(--stamp-red)';
+                }
+                
+                // Change button text to restart
+                accuseBtn.textContent = 'New Investigation';
             });
+            
+            // Helper functions
+            function checkAllEvidenceViewed() {
+                const allViewed = viewedEvidence.every(viewed => viewed);
+                
+                if (allViewed) {
+                    solveStatus.textContent = 'You have examined all evidence. Select a suspect and make your accusation.';
+                    solveStatus.style.color = 'green';
+                }
+            }
+            
+            function resetGame() {
+                // Reset variables
+                selectedSuspect = null;
+                viewedEvidence = [false, false, false, false, false];
+                gameOver = false;
+                
+                // Reset UI
+                evidencePanels.forEach(panel => {
+                    panel.classList.remove('visible');
+                });
+                
+                evidenceMarkers.forEach(marker => {
+                    marker.style.backgroundColor = 'var(--folder-red)';
+                });
+                
+                suspectCards.forEach(card => {
+                    card.style.border = '1px solid var(--folder-tab)';
+                    card.style.backgroundColor = 'white';
+                });
+                
+                solveStatus.textContent = 'Examine all evidence and choose a suspect carefully before making your accusation.';
+                solveStatus.style.color = 'var(--ink-color)';
+                
+                document.querySelector('.case-status').textContent = 'ACTIVE';
+                document.querySelector('.case-status').style.backgroundColor = 'var(--stamp-red)';
+                
+                accuseBtn.textContent = 'File Official Accusation';
+            }
         });
     </script>
 </body>
