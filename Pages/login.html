@@ -3,121 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Mystery Hub</title>
+    <title>Classified Access - Mystery Hub</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script>
+        window.MYSTERY_HUB_CONFIG = {
+            navbarClock: true
+        };
+    </script>
+    <script src="../clock/clock.js"></script>
     <style>
-        .login-container {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 30px;
-            background-color: #131313;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.2);
-            border: 1px solid rgba(255, 77, 148, 0.1);
+        body {
+            background-image: url('https://www.transparenttextures.com/patterns/old-paper.png'), 
+                              url('https://www.transparenttextures.com/patterns/cardboard.png');
+            background-color: var(--aged-paper);
+        }
+        
+        .login-form-container {
+            max-width: 500px;
+            margin: 80px auto;
+            position: relative;
+            border: 1px solid var(--faded-ink);
+            background-color: var(--manila-folder);
+            padding: 3rem 2rem 2rem;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+            color: var(--dark-ink);
+        }
+        
+        .login-form-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        
+        .case-number {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-family: var(--typewriter-font);
+            font-size: 0.8rem;
+            color: var(--folder-red);
+        }
+        
+        .stamp {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            transform: rotate(-15deg);
+            color: var(--stamp-red);
+            border: 2px solid var(--stamp-red);
+            padding: 5px 12px;
+            font-family: var(--typewriter-font);
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+        
+        .file-tab {
+            position: absolute;
+            top: 0;
+            right: 50px;
+            width: 100px;
+            height: 30px;
+            background-color: var(--file-tab);
+            border: 1px solid var(--faded-ink);
+            border-bottom: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--typewriter-font);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        
+        .paper-clip {
+            position: absolute;
+            top: -10px;
+            left: 30px;
+            width: 30px;
+            height: 60px;
+            border: 3px solid #a8a8a8;
+            border-radius: 15px 15px 0 0;
+            border-bottom: none;
+            transform: rotate(-10deg);
+            pointer-events: none;
+            z-index: 5;
         }
         
         .login-title {
             text-align: center;
-            margin-bottom: 30px;
-            color: #ff4d94;
+            margin-bottom: 1.5rem;
+            font-family: var(--typewriter-font);
+            color: var(--folder-red);
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--folder-red);
+            padding-bottom: 0.5rem;
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
+            position: relative;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-family: var(--typewriter-font);
+            color: var(--dark-ink);
         }
         
         .form-group input {
             width: 100%;
-            padding: 10px 15px;
-            border: 1px solid #333;
-            border-radius: 5px;
-            background-color: #1a1a1a;
-            color: #f5f5f5;
-            transition: border-color 0.3s;
+            padding: 0.75rem;
+            border: 1px solid var(--faded-ink);
+            background-color: rgba(255, 255, 255, 0.5);
+            font-family: var(--handwritten-font);
+            color: var(--dark-ink);
+            transition: all 0.3s ease;
         }
         
         .form-group input:focus {
-            border-color: #ff4d94;
             outline: none;
+            border-color: var(--folder-red);
+            box-shadow: 0 0 0 2px rgba(160, 44, 44, 0.1);
         }
         
-        .login-btn {
+        .auth-btn {
             width: 100%;
-            padding: 12px;
-            background-color: #ff4d94;
-            color: white;
+            padding: 0.75rem;
+            background-color: var(--folder-red);
+            color: var(--aged-paper);
             border: none;
-            border-radius: 5px;
+            font-family: var(--typewriter-font);
             cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--folder-red);
+            margin-top: 1rem;
         }
         
-        .login-btn:hover {
-            background-color: #ff1a75;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4);
+        .auth-btn:hover {
+            background-color: transparent;
+            color: var(--folder-red);
         }
         
         .register-link {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 1.5rem;
+            font-family: var(--handwritten-font);
+            font-size: 0.9rem;
         }
         
         .register-link a {
-            color: #ff4d94;
+            color: var(--folder-red);
             text-decoration: none;
+            font-weight: bold;
         }
         
         .register-link a:hover {
             text-decoration: underline;
+        }
+        
+        .fingerprint {
+            position: absolute;
+            bottom: 30px;
+            right: 20px;
+            width: 80px;
+            height: 120px;
+            opacity: 0.8;
+            /* rotate it slightly */
+            transform: rotate(15deg);
+        }
+        
+        .typed-label {
+            font-family: var(--typewriter-font);
+            color: var(--dark-ink);
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .form-note {
+            font-size: 0.8rem;
+            font-style: italic;
+            color: var(--stamp-red);
+            margin-top: 0.5rem;
+        }
+        
+        /* Red thread effect at the top */
+        .thread-holes {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            z-index: 1;
+        }
+        
+        .hole {
+            width: 8px;
+            height: 8px;
+            background-color: var(--aged-paper);
+            border-radius: 50%;
+            border: 1px solid var(--faded-ink);
         }
     </style>
 </head>
 <body>
     <!-- Header with Navigation -->
     <header>
-        <div class="container">
-            <nav>
-                <div class="logo">Mystery Hub</div>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="games/game1.html">Games</a></li>
-                    <li><a href="blog/blog.html">Blogs</a></li>
-                    <li><a href="movies/movies.html">Movies</a></li>
-                    <li><a href="login.html" class="active">Login</a></li>
-                </ul>
-            </nav>
-        </div>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="../index.html">
+                    <h1>Mystery<span>Hub</span></h1>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home Base</a></li>
+                <li><a href="../games/game1.html">Field Operations</a></li>
+                <li><a href="../blog/blog.html">Case Files</a></li>
+                <li><a href="../movies/movies.html">Surveillance Footage</a></li>
+                <li><a href="login.html" class="active">Login</a></li>
+            </ul>
+           
+        </nav>
     </header>
 
     <!-- Login Section -->
     <section class="main-content">
         <div class="container">
-            <div class="login-container">
-                <h2 class="login-title">Login to Mystery Hub</h2>
-                <form action="backend/login.php" method="POST">
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" name="username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" required>
-                    </div>
-                    <button type="submit" class="login-btn">Login</button>
-                </form>
-                <div class="register-link">
-                    <p>Don't have an account? <a href="register.html">Register here</a></p>
+            <div class="login-form-container">
+                <div class="case-number">CASE FILE #MH-2025-4269</div>
+                <div class="file-tab">Confidential</div>
+                <div class="paper-clip"></div>
+                <div class="stamp">Classified</div>
+                <div class="thread-holes">
+                    <div class="hole"></div>
+                    <div class="hole"></div>
+                    <div class="hole"></div>
+                    <div class="hole"></div>
                 </div>
+                
+                <h2 class="login-title">AGENT AUTHENTICATION</h2>
+                
+                <form action="dashboard.html" method="POST" class="case-file-form">
+                    <div class="form-group">
+                        <label class="typed-label" for="username">
+                            <i class="fas fa-user"></i> FIELD AGENT CODE:
+                        </label>
+                        <input type="text" id="username" name="username" required autocomplete="off">
+                        <div class="form-note">* Required for access to classified materials</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="typed-label" for="password">
+                            <i class="fas fa-lock"></i> SECURITY CLEARANCE:
+                        </label>
+                        <input type="password" id="password" name="password" required>
+                        <div class="form-note">* All access attempts are recorded</div>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn">
+                        <i class="fas fa-fingerprint"></i> Verify Identity
+                    </button>
+                </form>
+                
+                <div class="register-link">
+                    <p>New field operative? <a href="register.html">Request clearance</a></p>
+                </div>
+                
+                <img src="../assets/images/fingerprint.png" alt="Fingerprint" class="fingerprint">
             </div>
         </div>
     </section>
@@ -125,14 +289,24 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <ul class="footer-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="games/game1.html">Games</a></li>
-                <li><a href="blog/blog.html">Stories</a></li>
-                <li><a href="movies/movies.html">Movies</a></li>
-            </ul>
-            <p class="copyright">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Home Base</a></li>
+                        <li><a href="../games/game1.html">Field Operations</a></li>
+                        <li><a href="../blog/blog.html">Case Files</a></li>
+                        <li><a href="../movies/movies.html">Surveillance Footage</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal Notice</h3>
+                    <p>All case files contained herein are property of Mystery Hub Investigations. Unauthorized access will be prosecuted.</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Mystery Hub | Bintu Jalloh & Michelle Lawson</p>
+            </div>
         </div>
     </footer>
 </body>

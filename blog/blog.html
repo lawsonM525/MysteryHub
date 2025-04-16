@@ -6,7 +6,14 @@
     <title>True Crime & Cold Case Blog - Mystery Hub</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Homemade+Apple&family=Cutive+Mono&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --folder-red: #ff4d94;
+            --stamp-red: #ff1a75;
+            --aged-paper: #f5f5f5;
+        }
+        
         .blog-container {
             max-width: 1200px;
             margin: 50px auto;
@@ -15,32 +22,42 @@
         .blog-header {
             text-align: center;
             margin-bottom: 50px;
+            position: relative;
         }
         
         .blog-title {
+            font-family: 'Special Elite', cursive;
             font-size: 2.5rem;
-            color: #ff4d94;
+            color: var(--folder-red);
             margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
         
         .blog-description {
+            font-family: 'Cutive Mono', monospace;
             max-width: 700px;
             margin: 0 auto 30px;
+            color: #333;
         }
         
         .blog-search {
             max-width: 500px;
             margin: 0 auto;
             display: flex;
+            border: 1px solid #876;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
         }
         
         .blog-search input {
             flex: 1;
             padding: 12px 15px;
             border: none;
-            border-radius: 5px 0 0 5px;
-            background-color: #1a1a1a;
-            color: #f5f5f5;
+            background-color: var(--aged-paper);
+            color: #333;
+            font-family: 'Cutive Mono', monospace;
         }
         
         .blog-search input:focus {
@@ -48,17 +65,17 @@
         }
         
         .blog-search button {
-            background-color: #ff4d94;
-            color: white;
+            background-color: var(--folder-red);
+            color: var(--aged-paper);
             border: none;
             padding: 0 20px;
-            border-radius: 0 5px 5px 0;
             cursor: pointer;
             transition: background-color 0.3s;
+            font-family: 'Special Elite', cursive;
         }
         
         .blog-search button:hover {
-            background-color: #ff1a75;
+            background-color: var(--stamp-red);
         }
         
         .blog-categories {
@@ -71,16 +88,20 @@
         
         .category-tag {
             padding: 8px 15px;
-            background-color: #1a1a1a;
-            border-radius: 20px;
+            background-color: var(--aged-paper);
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
-            border: 1px solid rgba(255, 77, 148, 0.1);
+            border: 1px solid #876;
+            font-family: 'Special Elite', cursive;
+            color: #333;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         
         .category-tag:hover, .category-tag.active {
-            background-color: rgba(255, 77, 148, 0.1);
-            border-color: #ff4d94;
+            background-color: rgba(160, 44, 44, 0.1);
+            border-color: var(--folder-red);
+            transform: translateY(-2px);
         }
         
         .blog-grid {
@@ -90,23 +111,37 @@
         }
         
         .blog-card {
-            background-color: #131313;
-            border-radius: 10px;
+            background-color: var(--aged-paper);
+            border-radius: 5px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s;
-            border: 1px solid rgba(255, 77, 148, 0.1);
+            border: 1px solid #876;
+            position: relative;
         }
         
         .blog-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(255, 77, 148, 0.2);
-            border: 1px solid rgba(255, 77, 148, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 20px;
+            width: 30px;
+            height: 30px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M80,20c0-11-9-20-20-20S40,9,40,20v70c0,5.5,4.5,10,10,10s10-4.5,10-10V30c0-2.8-2.2-5-5-5s-5,2.2-5,5v50h-10V30c0-8.3,6.7-15,15-15s15,6.7,15,15v60c0,11-9,20-20,20s-20-9-20-20V20C30,9,39,0,50,0s20,9,20,20v70h-10V20z" fill="%23888"/></svg>');
+            transform: rotate(-10deg);
+            opacity: 0.7;
+            z-index: 10;
         }
         
         .blog-card-image {
             height: 200px;
             overflow: hidden;
+            border-bottom: 1px solid #876;
         }
         
         .blog-card-image img {
@@ -114,6 +149,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s;
+            filter: sepia(30%);
         }
         
         .blog-card:hover .blog-card-image img {
@@ -127,21 +163,25 @@
         .blog-card-category {
             display: inline-block;
             padding: 5px 10px;
-            background-color: rgba(255, 77, 148, 0.1);
-            border-radius: 15px;
+            background-color: rgba(160, 44, 44, 0.1);
+            border-radius: 5px;
             font-size: 0.8rem;
             margin-bottom: 10px;
-            color: #ff4d94;
+            color: var(--folder-red);
+            font-family: 'Special Elite', cursive;
+            border: 1px dashed var(--folder-red);
         }
         
         .blog-card-title {
+            font-family: 'Special Elite', cursive;
             font-size: 1.3rem;
             margin-bottom: 10px;
-            color: #fff;
+            color: #333;
         }
         
         .blog-card-excerpt {
-            color: #aaa;
+            font-family: 'Cutive Mono', monospace;
+            color: #555;
             margin-bottom: 15px;
             line-height: 1.5;
             font-size: 0.9rem;
@@ -153,53 +193,57 @@
             color: #777;
             font-size: 0.85rem;
             margin-top: 15px;
+            font-family: 'Cutive Mono', monospace;
         }
         
         .read-more {
             display: inline-block;
             padding: 8px 15px;
             background-color: transparent;
-            border: 1px solid #ff4d94;
-            color: #ff4d94;
+            border: 1px solid var(--folder-red);
+            color: var(--folder-red);
             border-radius: 5px;
             font-size: 0.9rem;
             transition: all 0.3s;
             text-decoration: none;
+            font-family: 'Special Elite', cursive;
         }
         
         .read-more:hover {
-            background-color: rgba(255, 77, 148, 0.1);
+            background-color: rgba(160, 44, 44, 0.1);
             transform: translateY(-3px);
         }
         
         .featured-post {
             grid-column: span 3;
             display: flex;
-            background-color: #131313;
-            border-radius: 10px;
+            background-color: var(--aged-paper);
+            border-radius: 5px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             margin-bottom: 30px;
             position: relative;
-            border: 1px solid rgba(255, 77, 148, 0.2);
+            border: 1px solid #876;
         }
         
         .featured-post::before {
-            content: 'Featured';
+            content: 'Priority Case';
             position: absolute;
             top: 20px;
             left: -35px;
-            background-color: #ff4d94;
-            color: white;
+            background-color: var(--stamp-red);
+            color: var(--aged-paper);
             padding: 5px 40px;
             font-size: 0.8rem;
             transform: rotate(-45deg);
             z-index: 1;
+            font-family: 'Special Elite', cursive;
+            letter-spacing: 1px;
         }
         
         .featured-post-image {
             flex: 1;
-            max-width: 50%;
+            max-width: 40%;
             overflow: hidden;
         }
         
@@ -207,10 +251,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            filter: sepia(30%);
         }
         
         .featured-post-content {
-            flex: 1;
+            flex: 1.5;
             padding: 30px;
             display: flex;
             flex-direction: column;
@@ -220,29 +265,43 @@
         .featured-post-category {
             display: inline-block;
             padding: 5px 10px;
-            background-color: rgba(255, 77, 148, 0.1);
-            border-radius: 15px;
-            font-size: 0.8rem;
+            background-color: rgba(160, 44, 44, 0.1);
+            border-radius: 5px;
+            font-size: 0.9rem;
             margin-bottom: 15px;
-            color: #ff4d94;
+            color: var(--folder-red);
+            font-family: 'Special Elite', cursive;
+            border: 1px dashed var(--folder-red);
         }
         
         .featured-post-title {
-            font-size: 1.8rem;
+            font-family: 'Special Elite', cursive;
+            font-size: 2rem;
             margin-bottom: 15px;
-            color: #fff;
+            color: #333;
         }
         
         .featured-post-excerpt {
-            color: #aaa;
+            font-family: 'Cutive Mono', monospace;
+            color: #555;
             margin-bottom: 20px;
             line-height: 1.6;
+        }
+        
+        .featured-post-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            font-family: 'Cutive Mono', monospace;
         }
         
         .pagination {
             display: flex;
             justify-content: center;
             margin-top: 50px;
+            gap: 10px;
         }
         
         .pagination-item {
@@ -251,135 +310,139 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #1a1a1a;
-            margin: 0 5px;
+            background-color: var(--aged-paper);
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
-            border: 1px solid rgba(255, 77, 148, 0.1);
+            border: 1px solid #876;
+            font-family: 'Special Elite', cursive;
+            color: #333;
         }
         
         .pagination-item:hover, .pagination-item.active {
-            background-color: rgba(255, 77, 148, 0.1);
-            border-color: #ff4d94;
+            background-color: rgba(160, 44, 44, 0.1);
+            border-color: var(--folder-red);
         }
         
-        .pagination-item.active {
-            color: #ff4d94;
-            font-weight: bold;
+        .file-label {
+            position: absolute;
+            top: -15px;
+            right: 15px;
+            background-color: var(--folder-red);
+            color: var(--aged-paper);
+            padding: 5px 15px;
+            font-family: 'Special Elite', cursive;
+            transform: rotate(5deg);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            font-size: 0.9rem;
         }
         
-        .add-post-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: #ff4d94;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.3);
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 100;
+        .case-date {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-family: 'Special Elite', cursive;
+            color: var(--folder-red);
+            opacity: 0.7;
+            font-size: 0.8rem;
+        }
+        
+        .upload-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--folder-red);
+            color: var(--aged-paper);
+            border-radius: 5px;
             text-decoration: none;
+            font-family: 'Special Elite', cursive;
+            margin-top: 20px;
+            transition: all 0.3s;
         }
         
-        .add-post-btn:hover {
-            transform: translateY(-5px) rotate(90deg);
-            box-shadow: 0 8px 25px rgba(255, 77, 148, 0.4);
-        }
-        
-        @media (max-width: 992px) {
-            .blog-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .featured-post {
-                grid-column: span 2;
-                flex-direction: column;
-            }
-            
-            .featured-post-image {
-                max-width: 100%;
-                height: 250px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .blog-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .featured-post {
-                grid-column: span 1;
-            }
+        .upload-btn:hover {
+            background-color: var(--stamp-red);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
     </style>
 </head>
-<body>
+<body class="vintage-background">
+    <div class="paper-texture"></div>
+    
+    <!-- File Stamp Decoration -->
+    <div class="file-stamp">
+        <span>CONFIDENTIAL FILES</span>
+    </div>
+    
+    <!-- Case Number -->
+    <div class="case-number">
+        <span>ARCHIVE #TC-1940</span>
+    </div>
+
     <!-- Header with Navigation -->
     <header>
         <div class="container">
-            <nav>
-                <div class="logo">Mystery Hub</div>
+            <nav class="vintage-navbar">
+                <div class="logo typewriter-text">Mystery Hub</div>
                 <ul class="nav-links">
                     <li><a href="../index.html">Home</a></li>
                     <li><a href="../games/game1.html">Games</a></li>
                     <li><a href="#" class="active">Blogs</a></li>
                     <li><a href="../movies/movies.html">Movies</a></li>
-                    <li><a href="../login.html">Login</a></li>
+                    <li><a href="../Pages/login.html" class="file-btn">Login</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Blog Content -->
+    <!-- Main Content -->
     <section class="main-content">
         <div class="container">
             <div class="blog-container">
                 <div class="blog-header">
-                    <h1 class="blog-title">True Crime & Cold Case Stories</h1>
+                    <div class="file-label">ARCHIVE</div>
+                    <h1 class="blog-title">True Crime & Cold Case Files</h1>
                     <p class="blog-description">
                         Explore fascinating true crime stories, cold cases, and unsolved mysteries from around the world. 
-                        Dive into detailed investigations, theories, and the intriguing world of the unexplained.
+                        Join our community of detectives sharing their research and theories on some of history's most 
+                        perplexing criminal cases.
                     </p>
                     
                     <div class="blog-search">
-                        <input type="text" placeholder="Search stories...">
-                        <button><i class="fas fa-search"></i></button>
+                        <input type="text" placeholder="Search case files...">
+                        <button type="submit"><i class="fas fa-search"></i> Search</button>
                     </div>
+                    
+                    <a href="upload.html" class="upload-btn"><i class="fas fa-plus"></i> Contribute Case File</a>
                 </div>
                 
                 <div class="blog-categories">
-                    <div class="category-tag active">All</div>
-                    <div class="category-tag">True Crime</div>
-                    <div class="category-tag">Cold Cases</div>
-                    <div class="category-tag">Unsolved Mysteries</div>
+                    <div class="category-tag active">All Cases</div>
+                    <div class="category-tag">Unsolved Murders</div>
+                    <div class="category-tag">Missing Persons</div>
                     <div class="category-tag">Serial Killers</div>
-                    <div class="category-tag">Disappearances</div>
+                    <div class="category-tag">Historical Cases</div>
                     <div class="category-tag">Conspiracies</div>
                 </div>
                 
                 <!-- Featured Post -->
                 <div class="featured-post">
                     <div class="featured-post-image">
-                        <img src="../assets/images/blog-featured.jpg" alt="The Zodiac Killer">
+                        <img src="../assets/images/blog-featured.jpg" alt="Zodiac Killer">
                     </div>
                     <div class="featured-post-content">
-                        <span class="featured-post-category">Serial Killers</span>
-                        <h2 class="featured-post-title">The Zodiac Killer: America's Most Infamous Unsolved Case</h2>
+                        <span class="featured-post-category">Unsolved Case</span>
+                        <h2 class="featured-post-title">The Zodiac Killer: Decoding the Ciphers</h2>
                         <p class="featured-post-excerpt">
-                            In the late 1960s, a mysterious figure terrorized Northern California, murdering at least five people 
-                            and taunting police with cryptic letters and ciphers. Despite one of the most intensive manhunts in 
-                            history, the Zodiac Killer was never caught. More than 50 years later, the case continues to fascinate 
-                            and perplex investigators and amateur sleuths alike.
+                            Fifty years after the Zodiac's killing spree terrorized Northern California, many of his cryptic messages remain unsolved. 
+                            New evidence and advanced technology have brought us closer than ever to uncovering the identity of one of America's most infamous serial killers.
                         </p>
-                        <a href="post.html?id=1" class="read-more">Read Full Story</a>
+                        <a href="post.html" class="read-more">View Full Case File</a>
+                        <div class="featured-post-meta">
+                            <span><i class="fas fa-user"></i> Agent J. Sullivan</span>
+                            <span><i class="fas fa-calendar"></i> June 18, 2025</span>
+                            <span><i class="fas fa-comments"></i> 42 Theories</span>
+                        </div>
                     </div>
                 </div>
                 
@@ -390,17 +453,18 @@
                             <img src="../assets/images/blog1.jpg" alt="Black Dahlia">
                         </div>
                         <div class="blog-card-content">
-                            <span class="blog-card-category">Cold Cases</span>
+                            <span class="blog-card-category">Cold Case</span>
                             <h3 class="blog-card-title">The Black Dahlia Murder</h3>
                             <p class="blog-card-excerpt">
-                                The brutal murder of Elizabeth Short in 1947 remains one of Los Angeles' most notorious unsolved cases.
+                                The brutal murder of Elizabeth Short in 1947 remains one of Los Angeles' most notorious unsolved cases. The investigation continues to this day.
                             </p>
-                            <a href="post.html?id=2" class="read-more">Read More</a>
+                            <a href="post.html" class="read-more">Read File</a>
                             <div class="blog-card-meta">
-                                <span><i class="far fa-clock"></i> Apr 12, 2025</span>
-                                <span><i class="far fa-comment"></i> 24 Comments</span>
+                                <span><i class="fas fa-user"></i> Agent M. Williams</span>
+                                <span><i class="fas fa-calendar"></i> May 12, 2025</span>
                             </div>
                         </div>
+                        <div class="case-date">CASE: 1947</div>
                     </div>
                     
                     <div class="blog-card">
@@ -408,53 +472,56 @@
                             <img src="../assets/images/blog2.jpg" alt="D.B. Cooper">
                         </div>
                         <div class="blog-card-content">
-                            <span class="blog-card-category">Unsolved Mysteries</span>
-                            <h3 class="blog-card-title">D.B. Cooper: The Skyjacking that Stumped the FBI</h3>
+                            <span class="blog-card-category">Unsolved Heist</span>
+                            <h3 class="blog-card-title">The D.B. Cooper Skyjacking</h3>
                             <p class="blog-card-excerpt">
-                                In 1971, a man hijacked a Boeing 727, extorted $200,000, and parachuted into the night, never to be seen again.
+                                In 1971, a man known as D.B. Cooper hijacked a Boeing 727, received a $200,000 ransom, and parachuted into the night, never to be seen again.
                             </p>
-                            <a href="post.html?id=3" class="read-more">Read More</a>
+                            <a href="post.html" class="read-more">Read File</a>
                             <div class="blog-card-meta">
-                                <span><i class="far fa-clock"></i> Apr 10, 2025</span>
-                                <span><i class="far fa-comment"></i> 18 Comments</span>
+                                <span><i class="fas fa-user"></i> Agent K. Johnson</span>
+                                <span><i class="fas fa-calendar"></i> April 28, 2025</span>
                             </div>
                         </div>
+                        <div class="case-date">CASE: 1971</div>
                     </div>
                     
                     <div class="blog-card">
                         <div class="blog-card-image">
-                            <img src="../assets/images/blog3.jpg" alt="Somerton Man">
+                            <img src="../assets/images/blog3.jpg" alt="JonBenet Ramsey">
                         </div>
                         <div class="blog-card-content">
-                            <span class="blog-card-category">Cold Cases</span>
-                            <h3 class="blog-card-title">The Somerton Man: Australia's Enduring Mystery</h3>
+                            <span class="blog-card-category">Controversial Case</span>
+                            <h3 class="blog-card-title">The JonBenét Ramsey Mystery</h3>
                             <p class="blog-card-excerpt">
-                                In 1948, an unidentified man was found dead on Somerton Beach with a mysterious code in his pocket.
+                                The 1996 murder of six-year-old JonBenét Ramsey in her Boulder, Colorado home captivated the nation and remains unsolved.
                             </p>
-                            <a href="post.html?id=4" class="read-more">Read More</a>
+                            <a href="post.html" class="read-more">Read File</a>
                             <div class="blog-card-meta">
-                                <span><i class="far fa-clock"></i> Apr 5, 2025</span>
-                                <span><i class="far fa-comment"></i> 12 Comments</span>
+                                <span><i class="fas fa-user"></i> Agent A. Martinez</span>
+                                <span><i class="fas fa-calendar"></i> April 15, 2025</span>
                             </div>
                         </div>
+                        <div class="case-date">CASE: 1996</div>
                     </div>
                     
                     <div class="blog-card">
                         <div class="blog-card-image">
-                            <img src="../assets/images/blog4.jpg" alt="JonBenet Ramsey">
+                            <img src="../assets/images/blog4.jpg" alt="Jack the Ripper">
                         </div>
                         <div class="blog-card-content">
-                            <span class="blog-card-category">True Crime</span>
-                            <h3 class="blog-card-title">The JonBenét Ramsey Case</h3>
+                            <span class="blog-card-category">Historical Case</span>
+                            <h3 class="blog-card-title">Jack the Ripper: Whitechapel Murders</h3>
                             <p class="blog-card-excerpt">
-                                The 1996 murder of a six-year-old beauty queen in her own home captivated the nation and remains unsolved.
+                                The identity of London's infamous serial killer who terrorized Whitechapel in 1888 remains one of history's greatest crime mysteries.
                             </p>
-                            <a href="post.html?id=5" class="read-more">Read More</a>
+                            <a href="post.html" class="read-more">Read File</a>
                             <div class="blog-card-meta">
-                                <span><i class="far fa-clock"></i> Apr 2, 2025</span>
-                                <span><i class="far fa-comment"></i> 31 Comments</span>
+                                <span><i class="fas fa-user"></i> Agent E. Thompson</span>
+                                <span><i class="fas fa-calendar"></i> March 22, 2025</span>
                             </div>
                         </div>
+                        <div class="case-date">CASE: 1888</div>
                     </div>
                     
                     <div class="blog-card">
@@ -462,35 +529,37 @@
                             <img src="../assets/images/blog5.jpg" alt="Dyatlov Pass">
                         </div>
                         <div class="blog-card-content">
-                            <span class="blog-card-category">Unsolved Mysteries</span>
+                            <span class="blog-card-category">Mysterious Incident</span>
                             <h3 class="blog-card-title">The Dyatlov Pass Incident</h3>
                             <p class="blog-card-excerpt">
-                                In 1959, nine Russian hikers died mysteriously in the Ural Mountains under bizarre circumstances.
+                                Nine experienced hikers died mysteriously in the Ural Mountains of Russia in 1959, with bizarre and unexplained circumstances surrounding their deaths.
                             </p>
-                            <a href="post.html?id=6" class="read-more">Read More</a>
+                            <a href="post.html" class="read-more">Read File</a>
                             <div class="blog-card-meta">
-                                <span><i class="far fa-clock"></i> Mar 28, 2025</span>
-                                <span><i class="far fa-comment"></i> 27 Comments</span>
+                                <span><i class="fas fa-user"></i> Agent P. Ivanov</span>
+                                <span><i class="fas fa-calendar"></i> March 10, 2025</span>
                             </div>
                         </div>
+                        <div class="case-date">CASE: 1959</div>
                     </div>
                     
                     <div class="blog-card">
                         <div class="blog-card-image">
-                            <img src="../assets/images/blog6.jpg" alt="Jack the Ripper">
+                            <img src="../assets/images/blog6.jpg" alt="Bermuda Triangle">
                         </div>
                         <div class="blog-card-content">
-                            <span class="blog-card-category">Serial Killers</span>
-                            <h3 class="blog-card-title">Jack the Ripper: The Whitechapel Murders</h3>
+                            <span class="blog-card-category">Phenomena</span>
+                            <h3 class="blog-card-title">Mysteries of the Bermuda Triangle</h3>
                             <p class="blog-card-excerpt">
-                                The identity of London's infamous 19th-century serial killer remains one of criminology's greatest mysteries.
+                                Investigating the unexplained disappearances of ships and aircraft in this notorious region of the Atlantic Ocean.
                             </p>
-                            <a href="post.html?id=7" class="read-more">Read More</a>
+                            <a href="post.html" class="read-more">Read File</a>
                             <div class="blog-card-meta">
-                                <span><i class="far fa-clock"></i> Mar 25, 2025</span>
-                                <span><i class="far fa-comment"></i> 43 Comments</span>
+                                <span><i class="fas fa-user"></i> Agent R. Garcia</span>
+                                <span><i class="fas fa-calendar"></i> February 28, 2025</span>
                             </div>
                         </div>
+                        <div class="case-date">CASE: Multiple</div>
                     </div>
                 </div>
                 
@@ -500,82 +569,29 @@
                     <div class="pagination-item active">1</div>
                     <div class="pagination-item">2</div>
                     <div class="pagination-item">3</div>
-                    <div class="pagination-item">...</div>
-                    <div class="pagination-item">8</div>
+                    <div class="pagination-item">4</div>
+                    <div class="pagination-item">5</div>
                     <div class="pagination-item"><i class="fas fa-chevron-right"></i></div>
                 </div>
-                
-                <!-- Add Post Button (for logged in users) -->
-                <a href="upload.html" class="add-post-btn">
-                    <i class="fas fa-plus"></i>
-                </a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="vintage-footer">
         <div class="container">
-            <ul class="footer-links">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="../games/game1.html">Games</a></li>
-                <li><a href="#">Stories</a></li>
-                <li><a href="../movies/movies.html">Movies</a></li>
-            </ul>
-            <p class="copyright">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+            <div class="footer-content">
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="../games/game1.html">Games</a></li>
+                    <li><a href="../blog/blog.html">Stories</a></li>
+                    <li><a href="../movies/movies.html">Movies</a></li>
+                </ul>
+                
+                <p class="copyright handwritten-note">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+            </div>
         </div>
     </footer>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Filter functionality
-            const categoryTags = document.querySelectorAll('.category-tag');
-            
-            categoryTags.forEach(tag => {
-                tag.addEventListener('click', function() {
-                    // Remove active class from all tags
-                    categoryTags.forEach(t => t.classList.remove('active'));
-                    
-                    // Add active class to clicked tag
-                    this.classList.add('active');
-                    
-                    // In a real app, this would filter posts by category
-                    // For demo, just show alert
-                    if (this.textContent !== 'All') {
-                        alert(`Filtering by: ${this.textContent}`);
-                    }
-                });
-            });
-            
-            // Search functionality
-            const searchButton = document.querySelector('.blog-search button');
-            const searchInput = document.querySelector('.blog-search input');
-            
-            searchButton.addEventListener('click', function() {
-                const searchTerm = searchInput.value.trim();
-                if (searchTerm) {
-                    alert(`Searching for: ${searchTerm}`);
-                }
-            });
-            
-            // Pagination functionality
-            const paginationItems = document.querySelectorAll('.pagination-item');
-            
-            paginationItems.forEach(item => {
-                if (!item.textContent.includes('...')) {
-                    item.addEventListener('click', function() {
-                        paginationItems.forEach(i => i.classList.remove('active'));
-                        this.classList.add('active');
-                        
-                        // In a real app, this would load the corresponding page
-                        if (!this.textContent.includes('chevron')) {
-                            alert(`Loading page ${this.textContent}`);
-                        }
-                    });
-                }
-            });
-        });
-    </script>
 </body>
 </html>

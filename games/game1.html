@@ -6,6 +6,7 @@
     <title>The Vanishing Artifact - Mystery Hub</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Homemade+Apple&family=Cutive+Mono&display=swap" rel="stylesheet">
     <script>
         window.MYSTERY_HUB_CONFIG = {
             navbarClock: true
@@ -16,10 +17,10 @@
         .game-container {
             max-width: 900px;
             margin: 50px auto;
-            background-color: #131313;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.2);
-            border: 1px solid rgba(255, 77, 148, 0.1);
+            background-color: var(--aged-paper);
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--folder-red);
             padding: 30px;
             position: relative;
             overflow: hidden;
@@ -32,30 +33,35 @@
             right: -20px;
             width: 100px;
             height: 100px;
-            background-color: rgba(255, 77, 148, 0.1);
+            background-color: rgba(160, 44, 44, 0.1);
             border-radius: 50%;
             z-index: 0;
         }
         
         .game-title {
+            font-family: 'Special Elite', cursive;
             text-align: center;
-            color: #ff4d94;
+            color: var(--folder-red);
             margin-bottom: 20px;
             font-size: 2.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
         
         .game-description {
+            font-family: 'Cutive Mono', monospace;
             margin-bottom: 30px;
             text-align: center;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            color: #333;
         }
         
         .game-scene {
             position: relative;
             min-height: 400px;
-            background-color: #0a0a0a;
+            background-color: var(--aged-paper-dark);
             border-radius: 8px;
             padding: 30px;
             margin-bottom: 30px;
@@ -65,20 +71,25 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
+            border: 1px solid #876;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2) inset;
         }
         
         .game-scene-title {
-            color: #ff4d94;
+            font-family: 'Special Elite', cursive;
+            color: var(--folder-red);
             margin-bottom: 15px;
             font-size: 1.5rem;
         }
         
         .game-dialogue {
-            background-color: rgba(10, 10, 10, 0.8);
+            background-color: rgba(232, 224, 207, 0.9);
             padding: 20px;
             border-radius: 8px;
-            border-left: 4px solid #ff4d94;
+            border-left: 4px solid var(--folder-red);
             margin-bottom: 20px;
+            font-family: 'Cutive Mono', monospace;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
         .game-options {
@@ -88,18 +99,20 @@
         }
         
         .game-option {
-            background-color: #1a1a1a;
+            background-color: var(--aged-paper);
             padding: 15px;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s;
-            border: 1px solid rgba(255, 77, 148, 0.1);
+            border: 1px solid #876;
+            font-family: 'Cutive Mono', monospace;
+            color: #333;
         }
         
         .game-option:hover {
-            background-color: rgba(255, 77, 148, 0.1);
+            background-color: rgba(160, 44, 44, 0.1);
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         .game-inventory {
@@ -112,7 +125,7 @@
         .inventory-item {
             width: 50px;
             height: 50px;
-            background-color: #1a1a1a;
+            background-color: var(--aged-paper);
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -120,34 +133,37 @@
             font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s;
-            border: 1px solid rgba(255, 77, 148, 0.2);
+            border: 1px solid #876;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
         }
         
         .inventory-item:hover {
-            background-color: rgba(255, 77, 148, 0.1);
+            background-color: rgba(160, 44, 44, 0.1);
             transform: translateY(-3px);
         }
         
         .inventory-item.empty {
-            color: #555;
+            color: #876;
         }
         
         .game-progress {
             margin-top: 20px;
             text-align: center;
+            font-family: 'Special Elite', cursive;
         }
         
         .progress-bar {
             height: 8px;
-            background-color: #1a1a1a;
+            background-color: var(--aged-paper-dark);
             border-radius: 4px;
             overflow: hidden;
             margin-top: 10px;
+            border: 1px solid #876;
         }
         
         .progress-fill {
             height: 100%;
-            background-color: #ff4d94;
+            background-color: var(--folder-red);
             width: 25%; /* Starting progress */
         }
         
@@ -155,16 +171,17 @@
             display: inline-block;
             padding: 8px 15px;
             background-color: transparent;
-            color: #ff4d94;
-            border: 1px solid #ff4d94;
+            color: var(--folder-red);
+            border: 1px solid var(--folder-red);
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
             margin-top: 20px;
+            font-family: 'Special Elite', cursive;
         }
         
         .hint-btn:hover {
-            background-color: rgba(255, 77, 148, 0.1);
+            background-color: rgba(160, 44, 44, 0.1);
         }
         
         /* Hidden until needed */
@@ -173,20 +190,67 @@
         .game-scene[data-scene="4"] {
             display: none;
         }
+        
+        /* Case file decorations */
+        .evidence-tag {
+            position: absolute;
+            top: -15px;
+            right: 30px;
+            background-color: var(--folder-red);
+            color: var(--aged-paper);
+            padding: 5px 15px;
+            font-family: 'Special Elite', cursive;
+            transform: rotate(5deg);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .case-status {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background-color: var(--stamp-red);
+            color: var(--aged-paper);
+            padding: 8px 40px;
+            transform: rotate(45deg);
+            font-family: 'Special Elite', cursive;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .paper-clip {
+            width: 30px;
+            height: 80px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M80,20c0-11-9-20-20-20S40,9,40,20v70c0,5.5,4.5,10,10,10s10-4.5,10-10V30c0-2.8-2.2-5-5-5s-5,2.2-5,5v50h-10V30c0-8.3,6.7-15,15-15s15,6.7,15,15v60c0,11-9,20-20,20s-20-9-20-20V20C30,9,39,0,50,0s20,9,20,20v70h-10V20z" fill="%23888"/></svg>');
+            position: absolute;
+            top: -5px;
+            left: 30px;
+            z-index: 10;
+            opacity: 0.7;
+        }
     </style>
 </head>
-<body>
+<body class="vintage-background">
+    <div class="paper-texture"></div>
+    
+    <!-- File Stamp Decoration -->
+    <div class="file-stamp">
+        <span>ACTIVE INVESTIGATION</span>
+    </div>
+
     <!-- Header with Navigation -->
     <header>
         <div class="container">
-            <nav>
-                <div class="logo">Mystery Hub</div>
+            <nav class="vintage-navbar">
+                <div class="logo typewriter-text">Mystery Hub</div>
                 <ul class="nav-links">
                     <li><a href="../index.html">Home</a></li>
                     <li><a href="#" class="active">Games</a></li>
                     <li><a href="../blog/blog.html">Blogs</a></li>
                     <li><a href="../movies/movies.html">Movies</a></li>
-                    <li><a href="../login.html">Login</a></li>
+                    <li><a href="../Pages/login.html" class="file-btn">Login</a></li>
                 </ul>
             </nav>
         </div>
@@ -196,10 +260,16 @@
     <section class="main-content">
         <div class="container">
             <div class="game-container">
+                <div class="evidence-tag">EXHIBIT A</div>
+                <div class="case-status">UNSOLVED</div>
+                <div class="paper-clip"></div>
+                
                 <h1 class="game-title">The Vanishing Artifact</h1>
                 <p class="game-description">
                     A priceless artifact has vanished from the National Museum. As a renowned detective, 
-                    you've been called to investigate the mysterious disappearance and track down the thief.
+                    you've been called to the scene to investigate the mysterious disappearance.
+                    Your reputation for solving impossible cases precedes you. Can you recover the stolen artifact
+                    before it's lost forever?
                 </p>
                 
                 <div class="game-inventory">
@@ -209,64 +279,66 @@
                     <div class="inventory-item empty" data-item="none"><i class="fas fa-question"></i></div>
                 </div>
                 
-                <!-- Scene 1 -->
                 <div class="game-scene" data-scene="1">
-                    <h3 class="game-scene-title">The Museum Entrance</h3>
+                    <div class="game-scene-title">The Museum - Main Hall</div>
                     <div class="game-dialogue">
-                        <p>
-                            <strong>Museum Director:</strong> "Thank you for coming, Detective. The Midnight Star, 
-                            our most valuable diamond, was stolen last night. Our security cameras were disabled, 
-                            and there's no sign of forced entry. Where would you like to begin your investigation?"
-                        </p>
+                        "Detective, we're grateful you could come on such short notice," the museum curator says,
+                        wringing his hands nervously. "The Emerald Scarab disappeared sometime between closing last night
+                        and opening this morning. No alarms were triggered, and all security footage shows nothing unusual."
                     </div>
                     <div class="game-options">
-                        <div class="game-option" data-next="2">
-                            <p>Examine the display case where the artifact was kept</p>
-                        </div>
-                        <div class="game-option" data-next="3">
-                            <p>Check the security office and camera footage</p>
-                        </div>
-                        <div class="game-option" data-next="4">
-                            <p>Interview the museum staff</p>
-                        </div>
-                        <div class="game-option" data-next="5">
-                            <p>Look for evidence outside the museum</p>
-                        </div>
+                        <div class="game-option" data-next="2" data-action="examine">Examine the empty display case</div>
+                        <div class="game-option" data-next="3" data-action="interview">Interview the security guard</div>
+                        <div class="game-option" data-next="4" data-action="camera">Check the security camera footage</div>
+                        <div class="game-option" data-next="5" data-action="perimeter">Inspect the museum perimeter</div>
                     </div>
                 </div>
                 
-                <!-- Scene 2 (Hidden initially) -->
                 <div class="game-scene" data-scene="2">
-                    <h3 class="game-scene-title">The Empty Display Case</h3>
+                    <div class="game-scene-title">The Empty Display Case</div>
                     <div class="game-dialogue">
-                        <p>
-                            You examine the display case carefully. The glass hasn't been broken, suggesting the thief 
-                            had access to the security system. You notice a very fine powder residue on the edge of the display.
-                            There are also small fingerprints that don't match the cleaning staff's records.
-                        </p>
+                        You approach the glass case where the Emerald Scarab was displayed. The glass is intact with no
+                        signs of forced entry. You notice a small amount of fine powder around the lock mechanism. Upon closer
+                        inspection, you find what appears to be a partial fingerprint on the underside of the case.
                     </div>
                     <div class="game-options">
-                        <div class="game-option" data-next="6">
-                            <p>Collect the powder residue as evidence</p>
-                        </div>
-                        <div class="game-option" data-next="3">
-                            <p>Now check the security office</p>
-                        </div>
-                        <div class="game-option" data-next="4">
-                            <p>Talk to the staff about who had access</p>
-                        </div>
-                        <div class="game-option" data-next="1">
-                            <p>Return to the entrance and rethink your approach</p>
-                        </div>
+                        <div class="game-option" data-item="fingerprint" data-action="collect">Collect the fingerprint sample</div>
+                        <div class="game-option" data-next="1" data-action="return">Return to the main hall</div>
+                    </div>
+                </div>
+                
+                <div class="game-scene" data-scene="3">
+                    <div class="game-scene-title">Security Guard's Station</div>
+                    <div class="game-dialogue">
+                        The night guard, James, appears nervous as you question him. "I made all my rounds as scheduled, I swear!
+                        Nothing seemed out of place. Although..." he pauses, "there was a new janitor last night. Never seen him before.
+                        Kept to himself, but I didn't think much of it at the time."
+                    </div>
+                    <div class="game-options">
+                        <div class="game-option" data-item="janitor-info" data-action="note">Make a note about the new janitor</div>
+                        <div class="game-option" data-next="1" data-action="return">Return to the main hall</div>
+                    </div>
+                </div>
+                
+                <div class="game-scene" data-scene="4">
+                    <div class="game-scene-title">Security Office</div>
+                    <div class="game-dialogue">
+                        The security footage seems normal at first glance. As you scrutinize the overnight recordings,
+                        you notice a brief 30-second glitch in the camera covering the Emerald Scarab's display case.
+                        The timestamp shows 2:17 AM, precisely when the guard would have been making rounds in another wing.
+                    </div>
+                    <div class="game-options">
+                        <div class="game-option" data-item="camera-glitch" data-action="copy">Copy the suspicious footage</div>
+                        <div class="game-option" data-next="1" data-action="return">Return to the main hall</div>
                     </div>
                 </div>
                 
                 <div class="game-progress">
-                    <p>Progress: <span id="progress-text">25%</span></p>
+                    <p>Case Progress: 25%</p>
                     <div class="progress-bar">
                         <div class="progress-fill"></div>
                     </div>
-                    <button class="hint-btn" id="hint-btn">Get a Hint</button>
+                    <button class="hint-btn">Request Case File</button>
                 </div>
             </div>
         </div>
@@ -275,114 +347,155 @@
     <!-- Game Links -->
     <section class="other-games">
         <div class="container">
-            <h2 class="section-title">Other Mystery Games</h2>
+            <h2 class="section-title typewriter-text">Other Investigations</h2>
             <div class="feature-container">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-search"></i>
+                <div class="feature-card case-file">
+                    <div class="file-tab">
+                        <span>02</span>
                     </div>
-                    <h3>Murder at Midnight</h3>
-                    <p>Solve a mysterious murder case in a secluded mansion during a stormy night.</p>
-                    <a href="game2.html" class="cta-btn">Play Now</a>
+                    <h3 class="typewriter-text">Missing Person: The Playwright</h3>
+                    <p>A famous playwright has disappeared during the premiere of his latest work. Investigate the theater and uncover the truth behind his vanishing.</p>
+                    <a href="game2.html" class="cta-btn vintage-btn">Open Case</a>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-key"></i>
+                
+                <div class="feature-card case-file">
+                    <div class="file-tab">
+                        <span>03</span>
                     </div>
-                    <h3>Escape the Crypt</h3>
-                    <p>You're trapped in an ancient crypt filled with puzzles. Can you escape before time runs out?</p>
-                    <a href="game3.html" class="cta-btn">Play Now</a>
+                    <h3 class="typewriter-text">Murder on Crimson Lane</h3>
+                    <p>A prominent businessman has been found murdered in his mansion. Your detective skills are needed to solve this classic whodunit.</p>
+                    <a href="game3.html" class="cta-btn vintage-btn">Open Case</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="vintage-footer">
         <div class="container">
-            <ul class="footer-links">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Games</a></li>
-                <li><a href="../blog/blog.html">Stories</a></li>
-                <li><a href="../movies/movies.html">Movies</a></li>
-            </ul>
-            <p class="copyright">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+            <div class="footer-content">
+                <ul class="footer-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="../games/game1.html">Games</a></li>
+                    <li><a href="../blog/blog.html">Stories</a></li>
+                    <li><a href="../movies/movies.html">Movies</a></li>
+                </ul>
+                
+                <p class="copyright handwritten-note">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+            </div>
         </div>
     </footer>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Game state
             let currentScene = 1;
             let inventory = ['none', 'none', 'none', 'none'];
+            
+            // DOM elements
+            const gameScenes = document.querySelectorAll('.game-scene');
+            const gameOptions = document.querySelectorAll('.game-option');
+            const inventoryItems = document.querySelectorAll('.inventory-item');
+            const progressFill = document.querySelector('.progress-fill');
+            const progressText = document.querySelector('.game-progress p');
+            const hintBtn = document.querySelector('.hint-btn');
+            
+            // Progress tracking
             let progress = 25;
             
-            // Get elements
-            const gameOptions = document.querySelectorAll('.game-option');
-            const gameScenes = document.querySelectorAll('.game-scene');
-            const progressFill = document.querySelector('.progress-fill');
-            const progressText = document.getElementById('progress-text');
-            const hintBtn = document.getElementById('hint-btn');
+            // Initialize the first scene
+            showScene(currentScene);
             
-            // Handle option clicks
+            // Event listeners for game options
             gameOptions.forEach(option => {
                 option.addEventListener('click', function() {
                     const nextScene = this.getAttribute('data-next');
+                    const action = this.getAttribute('data-action');
+                    const itemToCollect = this.getAttribute('data-item');
                     
-                    // Hide current scene
-                    document.querySelector(`.game-scene[data-scene="${currentScene}"]`).style.display = 'none';
+                    if (itemToCollect && !inventory.includes(itemToCollect)) {
+                        // Add item to inventory
+                        const emptySlot = inventory.indexOf('none');
+                        if (emptySlot !== -1) {
+                            inventory[emptySlot] = itemToCollect;
+                            updateInventory();
+                            progress += 15;
+                            updateProgress();
+                        }
+                    }
                     
-                    // Show next scene
-                    const nextSceneElement = document.querySelector(`.game-scene[data-scene="${nextScene}"]`);
-                    
-                    // If scene exists, show it
-                    if (nextSceneElement) {
-                        nextSceneElement.style.display = 'flex';
-                        currentScene = nextScene;
-                        
-                        // Update progress
-                        progress += 15;
-                        if (progress > 100) progress = 100;
-                        
-                        progressFill.style.width = `${progress}%`;
-                        progressText.textContent = `${progress}%`;
-                    } else {
-                        // If scene doesn't exist yet (for demo purposes)
-                        alert('This part of the game is still under development. Please try another option.');
-                        document.querySelector(`.game-scene[data-scene="${currentScene}"]`).style.display = 'flex';
+                    if (nextScene) {
+                        showScene(nextScene);
                     }
                 });
             });
             
-            // Handle hint button
-            hintBtn.addEventListener('click', function() {
-                let hint = '';
-                
-                switch(currentScene) {
-                    case '1':
-                        hint = 'The display case might have clues about how the thief gained access.';
-                        break;
-                    case '2':
-                        hint = 'The powder residue could be a key piece of evidence.';
-                        break;
-                    default:
-                        hint = 'Look carefully at all the options and think about what a detective would do first.';
-                }
-                
-                alert(`Hint: ${hint}`);
-            });
-            
-            // Handle inventory clicks (for future implementation)
-            const inventoryItems = document.querySelectorAll('.inventory-item');
-            inventoryItems.forEach(item => {
+            // Event listeners for inventory items
+            inventoryItems.forEach((item, index) => {
                 item.addEventListener('click', function() {
-                    const itemType = this.getAttribute('data-item');
+                    const itemType = inventory[index];
                     if (itemType !== 'none') {
-                        alert(`Item: ${itemType}`);
+                        alert(`Examining: ${itemType}`);
                     }
                 });
             });
+            
+            // Hint button
+            hintBtn.addEventListener('click', function() {
+                alert("Hint: Pay close attention to the timing of events. The security footage glitch occurred when the guard was away from that section.");
+            });
+            
+            // Helper functions
+            function showScene(sceneNumber) {
+                gameScenes.forEach(scene => {
+                    if (scene.getAttribute('data-scene') === sceneNumber) {
+                        scene.style.display = 'flex';
+                    } else {
+                        scene.style.display = 'none';
+                    }
+                });
+                currentScene = sceneNumber;
+            }
+            
+            function updateInventory() {
+                inventoryItems.forEach((item, index) => {
+                    const itemType = inventory[index];
+                    if (itemType !== 'none') {
+                        item.innerHTML = getIconForItem(itemType);
+                        item.classList.remove('empty');
+                        item.setAttribute('data-item', itemType);
+                    } else {
+                        item.innerHTML = '<i class="fas fa-question"></i>';
+                        item.classList.add('empty');
+                        item.setAttribute('data-item', 'none');
+                    }
+                });
+            }
+            
+            function getIconForItem(itemType) {
+                const icons = {
+                    'fingerprint': '<i class="fas fa-fingerprint"></i>',
+                    'janitor-info': '<i class="fas fa-clipboard"></i>',
+                    'camera-glitch': '<i class="fas fa-video"></i>',
+                    'key-card': '<i class="fas fa-key"></i>',
+                    'note': '<i class="fas fa-sticky-note"></i>'
+                };
+                return icons[itemType] || '<i class="fas fa-question"></i>';
+            }
+            
+            function updateProgress() {
+                if (progress > 100) progress = 100;
+                progressFill.style.width = `${progress}%`;
+                progressText.textContent = `Case Progress: ${progress}%`;
+                
+                // Update case status
+                const caseStatus = document.querySelector('.case-status');
+                if (progress >= 100) {
+                    caseStatus.textContent = "SOLVED";
+                    caseStatus.style.backgroundColor = "#2a623d";
+                }
+            }
         });
     </script>
 </body>

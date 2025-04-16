@@ -3,403 +3,658 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile - Mystery Hub</title>
+    <title>Agent Dossier - Mystery Hub</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script>
+        window.MYSTERY_HUB_CONFIG = {
+            navbarClock: true
+        };
+    </script>
+    <script src="../clock/clock.js"></script>
     <style>
+        body {
+            background-image: url('https://www.transparenttextures.com/patterns/old-paper.png'), 
+                              url('https://www.transparenttextures.com/patterns/cardboard.png');
+            background-color: var(--aged-paper);
+        }
+        
         .profile-container {
             max-width: 1000px;
-            margin: 50px auto;
+            margin: 2rem auto;
         }
         
-        .profile-header {
-            background-color: #131313;
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.2);
-            border: 1px solid rgba(255, 77, 148, 0.1);
+        /* Agent Dossier Header */
+        .agent-dossier {
+            background-color: var(--manila-folder);
+            border: 1px solid var(--faded-ink);
+            padding: 2rem;
+            position: relative;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
         }
         
-        .profile-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
+        .agent-dossier::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        
+        .agent-photo-container {
+            position: relative;
+            margin-right: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .agent-photo {
+            width: 150px;
+            height: 180px;
+            border: 1px solid var(--faded-ink);
+            background-color: rgba(255, 255, 255, 0.3);
+            position: relative;
             overflow: hidden;
-            border: 3px solid #ff4d94;
-            margin-right: 30px;
         }
         
-        .profile-avatar img {
+        .agent-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
         
-        .profile-info {
+        .agent-photo::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/film-grain.png');
+            opacity: 0.2;
+            pointer-events: none;
+        }
+        
+        .photo-paperclip {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 3px solid #a8a8a8;
+            border-radius: 15px 15px 0 0;
+            border-bottom: none;
+            z-index: 10;
+        }
+        
+        .agent-info {
+            flex: 1;
+            position: relative;
+        }
+        
+        .agent-code-name {
+            font-family: var(--typewriter-font);
+            font-size: 1.8rem;
+            color: var(--folder-red);
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid var(--folder-red);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        .agent-codename {
+            font-family: var(--handwritten-font);
+            font-size: 1.2rem;
+            color: var(--dark-ink);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .agent-details {
+            margin-bottom: 1.5rem;
+        }
+        
+        .agent-detail {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+        
+        .detail-label {
+            font-family: var(--typewriter-font);
+            color: var(--dark-ink);
+            width: 120px;
+            font-size: 0.9rem;
+        }
+        
+        .detail-value {
+            font-family: var(--handwritten-font);
+            color: var(--dark-ink);
             flex: 1;
         }
         
-        .profile-name {
-            font-size: 2rem;
-            color: #ff4d94;
-            margin-bottom: 10px;
-        }
-        
-        .profile-username {
-            color: #aaa;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-        
-        .profile-stats {
+        .agent-stats {
             display: flex;
-            gap: 20px;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
         
-        .profile-stat {
-            background-color: rgba(255, 77, 148, 0.1);
-            padding: 8px 15px;
-            border-radius: 20px;
+        .agent-stat {
+            padding: 0.5rem 1rem;
+            background-color: rgba(160, 44, 44, 0.1);
+            font-family: var(--typewriter-font);
+            font-size: 0.8rem;
+            color: var(--folder-red);
+            display: flex;
+            align-items: center;
+        }
+        
+        .agent-stat i {
+            margin-right: 0.5rem;
         }
         
         .edit-profile-btn {
-            padding: 10px 20px;
-            background-color: #ff4d94;
-            color: white;
+            padding: 0.7rem 1.2rem;
+            background-color: var(--folder-red);
+            color: var(--aged-paper);
             border: none;
-            border-radius: 5px;
+            font-family: var(--typewriter-font);
             cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 15px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--folder-red);
+            margin-top: 1rem;
+            font-size: 0.9rem;
         }
         
         .edit-profile-btn:hover {
-            background-color: #ff1a75;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4);
+            background-color: transparent;
+            color: var(--folder-red);
         }
         
-        .profile-tabs {
+        .clearance-stamp {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            transform: rotate(-15deg);
+            color: var(--stamp-red);
+            border: 2px solid var(--stamp-red);
+            padding: 5px 12px;
+            font-family: var(--typewriter-font);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+        
+        .file-number {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-family: var(--typewriter-font);
+            font-size: 0.8rem;
+            color: var(--folder-red);
+        }
+        
+        /* Tabs Styling */
+        .dossier-tabs {
             display: flex;
-            background-color: #131313;
-            border-radius: 10px 10px 0 0;
+            background-color: var(--manila-folder);
+            position: relative;
             overflow: hidden;
         }
         
-        .profile-tab {
+        .dossier-tabs::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        
+        .dossier-tab {
             flex: 1;
-            padding: 15px;
+            padding: 1rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
+            font-family: var(--typewriter-font);
+            color: var(--dark-ink);
             border-bottom: 3px solid transparent;
+            position: relative;
+            z-index: 1;
         }
         
-        .profile-tab.active {
-            background-color: #1a1a1a;
-            border-bottom: 3px solid #ff4d94;
-            color: #ff4d94;
+        .dossier-tab.active {
+            background-color: rgba(160, 44, 44, 0.1);
+            border-bottom: 3px solid var(--folder-red);
+            color: var(--folder-red);
         }
         
-        .profile-tab:hover:not(.active) {
-            background-color: #1a1a1a;
+        .dossier-tab:hover:not(.active) {
+            background-color: rgba(160, 44, 44, 0.05);
         }
         
-        .profile-content {
-            background-color: #131313;
-            border-radius: 0 0 10px 10px;
-            padding: 30px;
+        /* Tab Content */
+        .dossier-content {
+            background-color: var(--manila-folder);
+            padding: 2rem;
+            position: relative;
             min-height: 400px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.1);
+        }
+        
+        .dossier-content::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
+            opacity: 0.4;
+            pointer-events: none;
         }
         
         .tab-content {
             display: none;
+            position: relative;
+            z-index: 1;
         }
         
         .tab-content.active {
             display: block;
         }
         
-        .saved-items {
+        /* Case Files Grid */
+        .case-files-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
         }
         
-        .saved-item {
-            background-color: #1a1a1a;
-            border-radius: 8px;
+        .case-file-item {
+            background-color: rgba(255, 255, 255, 0.4);
+            border: 1px solid var(--faded-ink);
+            position: relative;
+            transition: all 0.3s;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
         }
         
-        .saved-item:hover {
+        .case-file-item:hover {
             transform: translateY(-5px);
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.15);
         }
         
-        .saved-item-img {
-            height: 150px;
+        .case-file-img {
+            height: 160px;
             overflow: hidden;
+            position: relative;
         }
         
-        .saved-item-img img {
+        .case-file-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            filter: grayscale(30%);
+            transition: all 0.3s;
         }
         
-        .saved-item-content {
-            padding: 15px;
+        .case-file-item:hover .case-file-img img {
+            filter: grayscale(0%);
         }
         
-        .saved-item-title {
-            font-weight: 500;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
+        .case-file-img::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/film-grain.png');
+            opacity: 0.3;
         }
         
-        .saved-item-category {
+        .case-file-content {
+            padding: 1rem;
+        }
+        
+        .case-file-category {
             display: inline-block;
-            padding: 3px 10px;
-            background-color: rgba(255, 77, 148, 0.1);
-            border-radius: 15px;
-            font-size: 0.8rem;
-            color: #ff4d94;
-            margin-bottom: 10px;
+            padding: 3px 8px;
+            background-color: var(--evidence-tape);
+            font-family: var(--typewriter-font);
+            font-size: 0.7rem;
+            color: var(--dark-ink);
+            margin-bottom: 0.5rem;
         }
         
+        .case-file-title {
+            font-family: var(--typewriter-font);
+            font-size: 1.1rem;
+            color: var(--folder-red);
+            margin-bottom: 0.5rem;
+        }
+        
+        .case-file-meta {
+            font-family: var(--handwritten-font);
+            font-size: 0.8rem;
+            color: var(--faded-ink);
+        }
+        
+        /* Form Styling */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 0.5rem;
+            font-family: var(--typewriter-font);
+            color: var(--dark-ink);
         }
         
-        .form-group input, .form-group textarea {
+        .form-control {
             width: 100%;
-            padding: 10px 15px;
-            border: 1px solid #333;
-            border-radius: 5px;
-            background-color: #1a1a1a;
-            color: #f5f5f5;
-            transition: border-color 0.3s;
+            padding: 0.75rem;
+            border: 1px solid var(--faded-ink);
+            background-color: rgba(255, 255, 255, 0.5);
+            font-family: var(--handwritten-font);
+            color: var(--dark-ink);
+            transition: all 0.3s ease;
         }
         
-        .form-group input:focus, .form-group textarea:focus {
-            border-color: #ff4d94;
+        .form-control:focus {
             outline: none;
+            border-color: var(--folder-red);
+            box-shadow: 0 0 0 2px rgba(160, 44, 44, 0.1);
         }
         
-        .save-changes-btn {
-            padding: 10px 20px;
-            background-color: #ff4d94;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
+        .dossier-section-title {
+            font-family: var(--typewriter-font);
+            color: var(--folder-red);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--folder-red);
+            padding-bottom: 0.5rem;
+            display: inline-block;
         }
         
-        .save-changes-btn:hover {
-            background-color: #ff1a75;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4);
+        /* Star Rating */
+        .star-rating {
+            color: goldenrod;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+        
+        /* Footer Styling */
+        .fingerprint-bg {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            width: 120px;
+            height: 120px;
+            background-image: url('https://www.transparenttextures.com/patterns/fingerprint.png');
+            opacity: 0.05;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
     <!-- Header with Navigation -->
     <header>
-        <div class="container">
-            <nav>
-                <div class="logo">Mystery Hub</div>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="games/game1.html">Games</a></li>
-                    <li><a href="blog/blog.html">Blogs</a></li>
-                    <li><a href="movies/movies.html">Movies</a></li>
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li class="profile-pic">
-                        <img src="https://i.pravatar.cc/150?img=12" alt="User Profile">
-                    </li>
-                </ul>
-            </nav>
-        </div>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="../index.html">
+                    <h1>Mystery<span>Hub</span></h1>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home Base</a></li>
+                <li><a href="../games/game1.html">Field Operations</a></li>
+                <li><a href="../blog/blog.html">Case Files</a></li>
+                <li><a href="../movies/movies.html">Evidence Archive</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li class="profile-pic">
+                    <img src="https://i.pravatar.cc/150?img=12" alt="User Profile">
+                </li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
     </header>
 
     <!-- Profile Content -->
     <section class="main-content">
         <div class="container">
             <div class="profile-container">
-                <div class="profile-header">
-                    <div class="profile-avatar">
-                        <img src="https://i.pravatar.cc/150?img=12" alt="User Avatar">
+                <!-- Agent Dossier Header -->
+                <div class="agent-dossier">
+                    <div class="file-number">AGENT FILE #MH-2025-1142</div>
+                    <div class="clearance-stamp">Level 3 Clearance</div>
+                    
+                    <div class="agent-photo-container">
+                        <div class="photo-paperclip"></div>
+                        <div class="agent-photo">
+                            <img src="https://i.pravatar.cc/150?img=12" alt="Agent Photo">
+                        </div>
                     </div>
-                    <div class="profile-info">
-                        <h2 class="profile-name">Jane Doe</h2>
-                        <p class="profile-username">@mysterylover</p>
-                        <div class="profile-stats">
-                            <div class="profile-stat">
-                                <i class="fas fa-gamepad"></i> 5 Games Played
+                    
+                    <div class="agent-info">
+                        <h2 class="agent-code-name">Agent Jane D.</h2>
+                        <div class="agent-codename">Codename: "Mystery Seeker"</div>
+                        
+                        <div class="agent-details">
+                            <div class="agent-detail">
+                                <div class="detail-label">Status:</div>
+                                <div class="detail-value">Active Field Agent</div>
                             </div>
-                            <div class="profile-stat">
-                                <i class="fas fa-book-open"></i> 8 Stories Saved
+                            <div class="agent-detail">
+                                <div class="detail-label">Division:</div>
+                                <div class="detail-value">Investigation & Analysis</div>
                             </div>
-                            <div class="profile-stat">
-                                <i class="fas fa-film"></i> 12 Movies Rated
+                            <div class="agent-detail">
+                                <div class="detail-label">Joined:</div>
+                                <div class="detail-value">January 15, 2025</div>
+                            </div>
+                            <div class="agent-detail">
+                                <div class="detail-label">Expertise:</div>
+                                <div class="detail-value">Cold Cases, Cryptography, Evidence Collection</div>
                             </div>
                         </div>
-                        <button class="edit-profile-btn" id="edit-profile-btn">Edit Profile</button>
+                        
+                        <div class="agent-stats">
+                            <div class="agent-stat">
+                                <i class="fas fa-gamepad"></i> 5 Field Operations
+                            </div>
+                            <div class="agent-stat">
+                                <i class="fas fa-book-open"></i> 8 Case Files
+                            </div>
+                            <div class="agent-stat">
+                                <i class="fas fa-film"></i> 12 Evidence Logs
+                            </div>
+                        </div>
+                        
+                        <button class="edit-profile-btn" id="edit-profile-btn">
+                            <i class="fas fa-pen"></i> Update Agent File
+                        </button>
                     </div>
                 </div>
                 
-                <div class="profile-tabs">
-                    <div class="profile-tab active" data-tab="saved-games">Saved Games</div>
-                    <div class="profile-tab" data-tab="saved-stories">Saved Stories</div>
-                    <div class="profile-tab" data-tab="saved-movies">Rated Movies</div>
-                    <div class="profile-tab" data-tab="settings">Account Settings</div>
+                <!-- Profile Tabs -->
+                <div class="dossier-tabs">
+                    <div class="dossier-tab active" data-tab="field-ops">Field Operations</div>
+                    <div class="dossier-tab" data-tab="case-files">Case Files</div>
+                    <div class="dossier-tab" data-tab="evidence-logs">Evidence Logs</div>
+                    <div class="dossier-tab" data-tab="agent-settings">Agent Settings</div>
                 </div>
                 
-                <div class="profile-content">
-                    <!-- Saved Games Tab -->
-                    <div class="tab-content active" id="saved-games">
-                        <div class="saved-items">
-                            <div class="saved-item">
-                                <div class="saved-item-img">
-                                    <img src="assets/images/game1.jpg" alt="Mystery Game">
+                <div class="dossier-content">
+                    <!-- Field Operations Tab -->
+                    <div class="tab-content active" id="field-ops">
+                        <h3 class="dossier-section-title">ACTIVE FIELD OPERATIONS</h3>
+                        <div class="case-files-grid">
+                            <div class="case-file-item">
+                                <div class="case-file-img">
+                                    <img src="https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?q=80&w=1000" alt="Mystery Game">
                                 </div>
-                                <div class="saved-item-content">
-                                    <span class="saved-item-category">Game</span>
-                                    <h3 class="saved-item-title">The Vanishing Artifact</h3>
-                                    <p>Progress: 75% Complete</p>
+                                <div class="case-file-content">
+                                    <span class="case-file-category">Field Operation</span>
+                                    <h3 class="case-file-title">The Vanishing Artifact</h3>
+                                    <p class="case-file-meta">Progress: 75% Complete</p>
                                 </div>
                             </div>
                             
-                            <div class="saved-item">
-                                <div class="saved-item-img">
-                                    <img src="assets/images/game2.jpg" alt="Mystery Game">
+                            <div class="case-file-item">
+                                <div class="case-file-img">
+                                    <img src="https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=1000" alt="Mystery Game">
                                 </div>
-                                <div class="saved-item-content">
-                                    <span class="saved-item-category">Game</span>
-                                    <h3 class="saved-item-title">Murder at Midnight</h3>
-                                    <p>Progress: 100% Complete</p>
+                                <div class="case-file-content">
+                                    <span class="case-file-category">Field Operation</span>
+                                    <h3 class="case-file-title">Murder at Midnight</h3>
+                                    <p class="case-file-meta">Progress: 100% Complete</p>
+                                </div>
+                            </div>
+                            
+                            <div class="case-file-item">
+                                <div class="case-file-img">
+                                    <img src="https://images.unsplash.com/photo-1635614017406-7c192d1f8b76?q=80&w=1000" alt="Mystery Game">
+                                </div>
+                                <div class="case-file-content">
+                                    <span class="case-file-category">Field Operation</span>
+                                    <h3 class="case-file-title">Escape the Crypt</h3>
+                                    <p class="case-file-meta">Status: Not Started</p>
                                 </div>
                             </div>
                         </div>
+                        <div class="fingerprint-bg"></div>
                     </div>
                     
-                    <!-- Saved Stories Tab -->
-                    <div class="tab-content" id="saved-stories">
-                        <div class="saved-items">
-                            <div class="saved-item">
-                                <div class="saved-item-img">
-                                    <img src="assets/images/blog1.jpg" alt="Blog Post">
+                    <!-- Case Files Tab -->
+                    <div class="tab-content" id="case-files">
+                        <h3 class="dossier-section-title">ARCHIVED CASE FILES</h3>
+                        <div class="case-files-grid">
+                            <div class="case-file-item">
+                                <div class="case-file-img">
+                                    <img src="https://images.unsplash.com/photo-1487821619655-4943a3202619?q=80&w=1000" alt="Case File">
                                 </div>
-                                <div class="saved-item-content">
-                                    <span class="saved-item-category">True Crime</span>
-                                    <h3 class="saved-item-title">The Zodiac Killer</h3>
-                                    <p>Saved: Apr 12, 2025</p>
-                                </div>
-                            </div>
-                            
-                            <div class="saved-item">
-                                <div class="saved-item-img">
-                                    <img src="assets/images/blog2.jpg" alt="Blog Post">
-                                </div>
-                                <div class="saved-item-content">
-                                    <span class="saved-item-category">Cold Case</span>
-                                    <h3 class="saved-item-title">The Black Dahlia</h3>
-                                    <p>Saved: Apr 10, 2025</p>
+                                <div class="case-file-content">
+                                    <span class="case-file-category">True Crime</span>
+                                    <h3 class="case-file-title">The Zodiac Killer</h3>
+                                    <p class="case-file-meta">Archived: April 12, 2025</p>
                                 </div>
                             </div>
                             
-                            <div class="saved-item">
-                                <div class="saved-item-img">
-                                    <img src="assets/images/blog3.jpg" alt="Blog Post">
+                            <div class="case-file-item">
+                                <div class="case-file-img">
+                                    <img src="https://images.unsplash.com/photo-1600028814234-74d89d77ea21?q=80&w=1000" alt="Case File">
                                 </div>
-                                <div class="saved-item-content">
-                                    <span class="saved-item-category">Unsolved</span>
-                                    <h3 class="saved-item-title">The Somerton Man</h3>
-                                    <p>Saved: Apr 5, 2025</p>
+                                <div class="case-file-content">
+                                    <span class="case-file-category">Cold Case</span>
+                                    <h3 class="case-file-title">The Black Dahlia</h3>
+                                    <p class="case-file-meta">Archived: April 10, 2025</p>
+                                </div>
+                            </div>
+                            
+                            <div class="case-file-item">
+                                <div class="case-file-img">
+                                    <img src="https://images.unsplash.com/photo-1580137189272-c9379f8864fd?q=80&w=1000" alt="Case File">
+                                </div>
+                                <div class="case-file-content">
+                                    <span class="case-file-category">Unsolved</span>
+                                    <h3 class="case-file-title">The Somerton Man</h3>
+                                    <p class="case-file-meta">Archived: April 5, 2025</p>
                                 </div>
                             </div>
                         </div>
+                        <div class="fingerprint-bg"></div>
                     </div>
                     
-                    <!-- Rated Movies Tab -->
-                    <div class="tab-content" id="saved-movies">
-                        <div class="saved-items">
-                            <div class="saved-item">
-                                <div class="saved-item-img">
-                                    <img src="assets/images/movie1.jpg" alt="Movie">
+                    <!-- Evidence Logs Tab -->
+                    <div class="tab-content" id="evidence-logs">
+                        <h3 class="dossier-section-title">EVIDENCE CATALOG</h3>
+                        <div class="case-files-grid">
+                            <div class="case-file-item">
+                                <div class="case-file-img">
+                                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1000" alt="Evidence Log">
                                 </div>
-                                <div class="saved-item-content">
-                                    <span class="saved-item-category">Movie</span>
-                                    <h3 class="saved-item-title">Knives Out</h3>
-                                    <p>Your Rating: ⭐⭐⭐⭐⭐</p>
-                                </div>
-                            </div>
-                            
-                            <div class="saved-item">
-                                <div class="saved-item-img">
-                                    <img src="assets/images/movie2.jpg" alt="Movie">
-                                </div>
-                                <div class="saved-item-content">
-                                    <span class="saved-item-category">Movie</span>
-                                    <h3 class="saved-item-title">Shutter Island</h3>
-                                    <p>Your Rating: ⭐⭐⭐⭐</p>
+                                <div class="case-file-content">
+                                    <span class="case-file-category">Film Evidence</span>
+                                    <h3 class="case-file-title">Knives Out</h3>
+                                    <p class="case-file-meta">Analysis Rating: <span class="star-rating">★★★★★</span></p>
                                 </div>
                             </div>
                             
-                            <div class="saved-item">
-                                <div class="saved-item-img">
-                                    <img src="assets/images/movie3.jpg" alt="Movie">
+                            <div class="case-file-item">
+                                <div class="case-file-img">
+                                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1000" alt="Evidence Log">
                                 </div>
-                                <div class="saved-item-content">
-                                    <span class="saved-item-category">Movie</span>
-                                    <h3 class="saved-item-title">Gone Girl</h3>
-                                    <p>Your Rating: ⭐⭐⭐⭐⭐</p>
+                                <div class="case-file-content">
+                                    <span class="case-file-category">Film Evidence</span>
+                                    <h3 class="case-file-title">Shutter Island</h3>
+                                    <p class="case-file-meta">Analysis Rating: <span class="star-rating">★★★★☆</span></p>
+                                </div>
+                            </div>
+                            
+                            <div class="case-file-item">
+                                <div class="case-file-img">
+                                    <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=1000" alt="Evidence Log">
+                                </div>
+                                <div class="case-file-content">
+                                    <span class="case-file-category">Film Evidence</span>
+                                    <h3 class="case-file-title">Gone Girl</h3>
+                                    <p class="case-file-meta">Analysis Rating: <span class="star-rating">★★★★★</span></p>
                                 </div>
                             </div>
                         </div>
+                        <div class="fingerprint-bg"></div>
                     </div>
                     
-                    <!-- Account Settings Tab -->
-                    <div class="tab-content" id="settings">
+                    <!-- Agent Settings Tab -->
+                    <div class="tab-content" id="agent-settings">
+                        <h3 class="dossier-section-title">AGENT FILE MAINTENANCE</h3>
                         <form id="profile-settings-form">
                             <div class="form-group">
-                                <label for="display-name">Display Name</label>
-                                <input type="text" id="display-name" name="display-name" value="Jane Doe">
+                                <label for="display-name">Agent Name</label>
+                                <input type="text" id="display-name" name="display-name" value="Jane Doe" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" id="username" name="username" value="mysterylover">
+                                <label for="username">Codename</label>
+                                <input type="text" id="username" name="username" value="mysterylover" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" value="jane.doe@example.com">
+                                <label for="email">Secure Contact</label>
+                                <input type="email" id="email" name="email" value="jane.doe@example.com" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="bio">Bio</label>
-                                <textarea id="bio" name="bio" rows="4">Mystery enthusiast and amateur detective. I love solving puzzles and reading true crime stories.</textarea>
+                                <label for="bio">Field Notes</label>
+                                <textarea id="bio" name="bio" rows="4" class="form-control">Mystery enthusiast and amateur detective. I love solving puzzles and reading true crime stories.</textarea>
                             </div>
                             <div class="form-group">
-                                <label for="new-password">New Password (leave blank to keep current)</label>
-                                <input type="password" id="new-password" name="new-password">
+                                <label for="new-password">New Security Key (leave blank to keep current)</label>
+                                <input type="password" id="new-password" name="new-password" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="confirm-password">Confirm New Password</label>
-                                <input type="password" id="confirm-password" name="confirm-password">
+                                <label for="confirm-password">Verify Security Key</label>
+                                <input type="password" id="confirm-password" name="confirm-password" class="form-control">
                             </div>
-                            <button type="submit" class="save-changes-btn">Save Changes</button>
+                            <button type="submit" class="edit-profile-btn">
+                                <i class="fas fa-save"></i> Submit Updates
+                            </button>
                         </form>
+                        <div class="fingerprint-bg"></div>
                     </div>
                 </div>
             </div>
@@ -409,21 +664,31 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <ul class="footer-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="games/game1.html">Games</a></li>
-                <li><a href="blog/blog.html">Stories</a></li>
-                <li><a href="movies/movies.html">Movies</a></li>
-            </ul>
-            <p class="copyright">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Home Base</a></li>
+                        <li><a href="../games/game1.html">Field Operations</a></li>
+                        <li><a href="../blog/blog.html">Case Files</a></li>
+                        <li><a href="../movies/movies.html">Evidence Archive</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal Notice</h3>
+                    <p>All case files contained herein are property of Mystery Hub Investigations. Unauthorized access will be prosecuted.</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Mystery Hub | Bintu Jalloh & Michelle Lawson</p>
+            </div>
         </div>
     </footer>
     
     <script>
         // Tab switching functionality
         document.addEventListener('DOMContentLoaded', function() {
-            const tabs = document.querySelectorAll('.profile-tab');
+            const tabs = document.querySelectorAll('.dossier-tab');
             const tabContents = document.querySelectorAll('.tab-content');
             
             tabs.forEach(tab => {
@@ -446,7 +711,7 @@
                 profileForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     // In a real app, this would send data to the backend
-                    alert('Profile updated successfully!');
+                    alert('Agent file updated successfully! New clearance level pending approval.');
                 });
             }
         });

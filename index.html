@@ -6,6 +6,7 @@
     <title>Mystery Hub - Your Portal to the World of Mysteries</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Homemade+Apple&family=Cutive+Mono&display=swap" rel="stylesheet">
     <script>
         window.MYSTERY_HUB_CONFIG = {
             navbarClock: true
@@ -13,84 +14,98 @@
     </script>
     <script src="clock/clock.js"></script>
 </head>
-<body>
+<body class="vintage-background">
+     
     <!-- Header with Navigation -->
     <header>
-        <div class="container">
-            <nav>
-                <div class="logo">Mystery Hub</div>
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="../index.html">
+                        <h1>Mystery<span>Hub</span></h1>
+                    </a>
+                </div>
                 <ul class="nav-links">
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="games/game1.html">Games</a></li>
-                    <li><a href="blog/blog.html">Blogs</a></li>
-                    <li><a href="movies/movies.html">Movies</a></li>
-                    <li><a href="Pages/login.html" id="login-btn">Login</a></li>
-                    <li class="profile-pic">
-                        <img src="https://i.pravatar.cc/150?img=12" alt="User Profile">
-                    </li>
+                    <li><a href="../index.html">Home Base</a></li>
+                    <li><a href="../games/game1.html">Field Operations</a></li>
+                    <li><a href="../blog/blog.html">Case Files</a></li>
+                    <li><a href="../movies/movies.html">Surveillance Footage</a></li>
+                    <li><a href="Pages/login.html" class="active">Login</a></li>
                 </ul>
+               
             </nav>
-        </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <h1>Welcome to Mystery Hub</h1>
-        <p>Your ultimate destination for mystery games, true crime stories, and movie recommendations. Join our community of mystery enthusiasts and embark on thrilling adventures.</p>
-        <a href="#" class="cta-btn">Get Started</a>
+    <section class="hero vintage-hero">
+        <div class="hero-content folder-tab">
+            <h1 class="typewriter-text">Welcome to Mystery Hub</h1>
+            <div class="confidential-stamp"></div>
+            <p class="handwritten-note">Your ultimate destination for mystery games, true crime stories, and movie recommendations. Join our community of mystery enthusiasts and embark on thrilling adventures.</p>
+            <a href="Pages/register.html" class="cta-btn vintage-btn">Become an Agent</a>
+        </div>
     </section>
 
     <!-- Features Section -->
     <section class="features">
         <div class="container">
-            <h2 class="section-title">Discover the Mystery</h2>
+            <h2 class="section-title typewriter-text">Classified Files</h2>
             <div class="feature-container">
                 <!-- Mystery Games Feature -->
-                <div class="feature-card">
+                <div class="feature-card case-file">
+                    <div class="file-tab">
+                        <span>01</span>
+                    </div>
                     <div class="feature-icon">
                         <i class="fas fa-gamepad"></i>
                     </div>
-                    <h3>Mystery Games</h3>
+                    <h3 class="typewriter-text">Mystery Games</h3>
                     <p>Solve puzzles, crack codes, and unravel mysteries in our collection of interactive mystery games.</p>
-                    <a href="#" class="cta-btn">Play Now</a>
+                    <a href="#" class="cta-btn vintage-btn">Investigate</a>
                 </div>
                 
                 <!-- Mystery Blogs Feature -->
-                <div class="feature-card">
+                <div class="feature-card case-file">
+                    <div class="file-tab">
+                        <span>02</span>
+                    </div>
                     <div class="feature-icon">
                         <i class="fas fa-book-open"></i>
                     </div>
-                    <h3>True Crime Stories</h3>
+                    <h3 class="typewriter-text">True Crime Stories</h3>
                     <p>Read fascinating true crime stories and mysteries from around the world, shared by our community.</p>
-                    <a href="#" class="cta-btn">Read More</a>
+                    <a href="#" class="cta-btn vintage-btn">Read Files</a>
                 </div>
                 
                 <!-- Mystery Movies Feature -->
-                <div class="feature-card">
+                <div class="feature-card case-file">
+                    <div class="file-tab">
+                        <span>03</span>
+                    </div>
                     <div class="feature-icon">
                         <i class="fas fa-film"></i>
                     </div>
-                    <h3>Movie Recommendations</h3>
+                    <h3 class="typewriter-text">Movie Recommendations</h3>
                     <p>Discover the best mystery and thriller movies recommended by fellow mystery enthusiasts.</p>
-                    <a href="#" class="cta-btn">View List</a>
+                    <a href="#" class="cta-btn vintage-btn">View Evidence</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="vintage-footer">
         <div class="container">
-            <ul class="footer-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Games</a></li>
-                <li><a href="#">Stories</a></li>
-                <li><a href="#">Movies</a></li>
-               
-            </ul>
-            
-            <p class="copyright">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+            <div class="footer-content">
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Games</a></li>
+                    <li><a href="#">Stories</a></li>
+                    <li><a href="#">Movies</a></li>
+                </ul>
+                
+                <p class="copyright handwritten-note">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
+            </div>
         </div>
     </footer>
 </body>

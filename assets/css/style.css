@@ -1,87 +1,208 @@
-/* Mystery Hub - Main Stylesheet */
+/* Mystery Hub CSS - Vintage Case File Theme */
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime&family=Crimson+Text:wght@400;700&display=swap');
 
-/* Global Styles */
+:root {
+    /* Color Palette */
+    --aged-paper: #e8e0cf;
+    --folder-red: #a02c2c;
+    --stamp-red: #9e2a2b;
+    --dark-ink: #1e1e1e;
+    --faded-ink: #4a4a4a;
+    --manila-folder: #e3d2a7;
+    --evidence-tape: #f2dc5d;
+    --file-tab: #d4c8a2;
+    --old-photo: #b2a89a;
+    --typewriter-black: #0f0f0f;
+    /* Typography */
+    --typewriter-font: 'Special Elite', courier, monospace;
+    --handwritten-font: 'Courier Prime', monospace;
+    --body-font: 'Crimson Text', serif;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: #0a0a0a;
-    color: #f5f5f5;
+    font-family: var(--body-font);
+    background-color: var(--aged-paper);
+    color: var(--dark-ink);
     line-height: 1.6;
+    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+    position: relative;
+}
+
+/* Add a vintage paper texture overlay */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: -1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--typewriter-font);
+    color: var(--folder-red);
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.75rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--folder-red);
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: var(--stamp-red);
+    text-decoration: underline;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 15px;
 }
 
-/* Header Styles */
-header {
-    background-color: #131313;
-    padding: 20px 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+/* Button Styling */
+.btn {
+    display: inline-block;
+    background-color: var(--folder-red);
+    color: var(--aged-paper);
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 0;
+    font-family: var(--typewriter-font);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--folder-red);
 }
 
-.logo {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #ff4d94;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+.btn::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/paper.png');
+    opacity: 0.1;
+    pointer-events: none;
 }
 
-nav {
+.btn:hover {
+    background-color: transparent;
+    color: var(--folder-red);
+    text-decoration: none;
+}
+
+/* Navbar Styling */
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 1rem 2rem;
+    position: relative;
+    background-color: var(--manila-folder);
+    border-bottom: 3px solid var(--folder-red);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.navbar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.logo {
+    position: relative;
+    z-index: 1;
+}
+
+.logo h1 {
+    font-family: var(--typewriter-font);
+    margin: 0;
+}
+
+.logo span {
+    color: var(--dark-ink);
 }
 
 .nav-links {
-    list-style: none;
     display: flex;
+    list-style: none;
+    position: relative;
+    z-index: 1;
 }
 
 .nav-links li {
-    margin-left: 25px;
+    margin-left: 2rem;
+    position: relative;
 }
 
 .nav-links a {
-    color: #f5f5f5;
+    font-family: var(--typewriter-font);
+    color: var(--dark-ink);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
+.nav-links a.active,
 .nav-links a:hover {
-    color: #ff4d94;
+    color: var(--folder-red);
+    text-decoration: none;
 }
 
-/* Profile Picture Styles */
-.profile-pic {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid #ff4d94;
-    margin-left: 25px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.profile-pic:hover {
-    transform: scale(1.1);
+.nav-links a.active::after,
+.nav-links a:hover::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--folder-red);
+    position: absolute;
+    bottom: -5px;
+    left: 0;
 }
 
 .profile-pic img {
-    width: 100%;
-    height: 100%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--folder-red);
     object-fit: cover;
 }
 
@@ -93,10 +214,25 @@ nav {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://i.pinimg.com/736x/78/df/f0/78dff0e531c2673da11e896ead639023.jpg');
     background-size: cover;
+    background-color: var(--manila-folder);
     background-position: center;
     position: relative;
+    padding: 2rem;
+    color: var(--dark-ink);
+    font-family: var(--typewriter-font);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/film-grain.png');
+    opacity: 0.3;
+    pointer-events: none;
 }
 
 .hero::after {
@@ -106,198 +242,476 @@ nav {
     left: 0;
     right: 0;
     height: 50px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path fill="%230a0a0a" d="M0,0 C280,100 720,100 1440,0 L1440,100 L0,100 Z"></path></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path fill="%23e3d2a7" d="M0,0 C280,100 720,100 1440,0 L1440,100 L0,100 Z"></path></svg>');
     background-size: cover;
 }
 
-.hero h1 {
-    font-size: 3.5rem;
-    margin-bottom: 20px;
-    color: #ffffff;
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--aged-paper);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    letter-spacing: 2px;
+    max-width: 800px;
 }
 
 .hero p {
     font-size: 1.2rem;
-    max-width: 800px;
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
+    max-width: 600px;
 }
 
-.cta-btn {
-    display: inline-block;
-    padding: 12px 30px;
-    background-color: #ff4d94;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
+/* Case File Card Styling */
+.case-file {
+    background-color: var(--manila-folder);
+    border: 1px solid var(--faded-ink);
+    border-radius: 0;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
 }
 
-.cta-btn:hover {
-    background-color: #ff1a75;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(255, 77, 148, 0.4);
+.case-file::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.case-file:hover {
+    transform: translateY(-5px);
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+}
+
+.case-file h3 {
+    border-bottom: 2px solid var(--folder-red);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.case-file p {
+    font-family: var(--body-font);
+    margin-bottom: 1rem;
+    color: var(--faded-ink);
 }
 
 /* Features Section */
 .features {
-    padding: 80px 0;
+    padding: 4rem 0;
+    background-color: var(--aged-paper);
     position: relative;
 }
 
-.features::before {
-    content: '';
-    position: absolute;
-    top: -30px;
-    right: 50px;
-    width: 60px;
-    height: 60px;
-    background-color: #ff4d94;
-    opacity: 0.2;
-    border-radius: 50%;
-    z-index: -1;
-}
-
-.features::after {
-    content: '';
-    position: absolute;
-    bottom: 30px;
-    left: 70px;
-    width: 40px;
-    height: 40px;
-    background-color: #ff4d94;
-    opacity: 0.15;
-    border-radius: 50%;
-    z-index: -1;
-}
-
-.section-title {
+.features h2 {
     text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 60px;
-    color: #ff4d94;
-}
-
-.feature-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.feature-card {
-    flex-basis: calc(33.33% - 30px);
-    background-color: #131313;
-    border-radius: 10px;
-    padding: 30px;
-    margin-bottom: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255, 77, 148, 0.1);
-}
-
-.feature-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 25px rgba(255, 77, 148, 0.2);
-    border: 1px solid rgba(255, 77, 148, 0.3);
-}
-
-.feature-card h3 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    color: #ff4d94;
-}
-
-.feature-card p {
-    margin-bottom: 20px;
-}
-
-.feature-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    color: #ff4d94;
-}
-
-/* Footer */
-footer {
-    background-color: #131313;
-    padding: 40px 0;
-    text-align: center;
+    margin-bottom: 3rem;
     position: relative;
 }
 
-footer::before {
-    content: '';
+.features h2::after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 3px;
+    background-color: var(--folder-red);
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.features-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Evidence Tag */
+.evidence-tag {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    background-color: var(--evidence-tape);
+    color: var(--dark-ink);
+    padding: 5px 15px;
+    font-family: var(--typewriter-font);
+    font-size: 0.9rem;
+    transform: rotate(2deg);
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.evidence-tag::before {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    height: 20px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none"><path fill="%230a0a0a" d="M0,100 C280,0 720,0 1440,100 L1440,0 L0,0 Z"></path></svg>');
-    background-size: cover;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Stamp Effect */
+.stamp {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-family: var(--typewriter-font);
+    color: var(--stamp-red);
+    font-size: 1rem;
+    transform: rotate(-15deg);
+    border: 2px solid var(--stamp-red);
+    padding: 5px 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    opacity: 0.8;
+}
+
+/* Footer Styling */
+footer {
+    background-color: var(--manila-folder);
+    color: var(--dark-ink);
+    padding: 2rem 0;
+    position: relative;
+    border-top: 3px solid var(--folder-red);
+}
+
+footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.footer-section h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
 }
 
 .footer-links {
     list-style: none;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
 }
 
 .footer-links li {
-    margin: 0 15px;
-}
-
-.footer-links a {
-    color: #f5f5f5;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-    color: #ff4d94;
-}
-
-.social-links {
-    margin-bottom: 20px;
-}
-
-.social-links a {
-    display: inline-block;
-    margin: 0 10px;
-    color: #f5f5f5;
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
-}
-
-.social-links a:hover {
-    color: #ff4d94;
+    margin-bottom: 0.5rem;
 }
 
 .copyright {
-    color: #aaa;
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--faded-ink);
     font-size: 0.9rem;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .feature-card {
-        flex-basis: calc(50% - 20px);
+/* Form Styling */
+.form-container {
+    background-color: var(--manila-folder);
+    padding: 2rem;
+    border: 1px solid var(--faded-ink);
+    position: relative;
+    margin: 2rem auto;
+    max-width: 600px;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.1);
+}
+
+.form-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: var(--typewriter-font);
+    color: var(--dark-ink);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--faded-ink);
+    background-color: rgba(255, 255, 255, 0.5);
+    font-family: var(--handwritten-font);
+    color: var(--dark-ink);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--folder-red);
+    box-shadow: 0 0 0 2px rgba(160, 44, 44, 0.1);
+}
+
+/* File Tab */
+.file-tab {
+    position: absolute;
+    top: 0;
+    right: 50px;
+    width: 100px;
+    height: 30px;
+    background-color: var(--file-tab);
+    border: 1px solid var(--faded-ink);
+    border-bottom: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--typewriter-font);
+    font-size: 0.9rem;
+    color: var(--dark-ink);
+    text-transform: uppercase;
+}
+
+/* Case Number */
+.case-number {
+    font-family: var(--typewriter-font);
+    color: var(--folder-red);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 0.9rem;
+}
+
+/* Paper Clip Effect */
+.paper-clip {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    width: 30px;
+    height: 60px;
+    border: 3px solid #a8a8a8;
+    border-radius: 15px 15px 0 0;
+    border-bottom: none;
+    transform: rotate(-10deg);
+    pointer-events: none;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 1rem;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    .hero h2 {
+        font-size: 2.5rem;
     }
 }
 
-@media (max-width: 576px) {
-    .hero h1 {
-        font-size: 2.5rem;
+@media (max-width: 768px) {
+    .hero h2 {
+        font-size: 2rem;
     }
     
-    .feature-card {
-        flex-basis: 100%;
+    .features-container {
+        grid-template-columns: 1fr;
     }
     
-    .nav-links li {
-        margin-left: 15px;
+    .footer-content {
+        grid-template-columns: 1fr;
     }
+}
+
+/* Dashboard Section */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    min-height: calc(100vh - 150px);
+}
+
+.sidebar {
+    background-color: var(--manila-folder);
+    padding: 1rem;
+    border-right: 1px solid var(--faded-ink);
+    position: relative;
+}
+
+.sidebar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.sidebar-menu {
+    list-style: none;
+}
+
+.sidebar-menu li {
+    margin-bottom: 1rem;
+}
+
+.sidebar-menu a {
+    font-family: var(--typewriter-font);
+    color: var(--dark-ink);
+    display: block;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-menu a.active,
+.sidebar-menu a:hover {
+    color: var(--folder-red);
+    border-left-color: var(--folder-red);
+    background-color: rgba(160, 44, 44, 0.05);
+}
+
+.dashboard-content {
+    padding: 2rem;
+}
+
+/* Admin Dashboard */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background-color: var(--manila-folder);
+    padding: 1.5rem;
+    border: 1px solid var(--faded-ink);
+    position: relative;
+    text-align: center;
+}
+
+.stat-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+    font-size: 2rem;
+    font-family: var(--typewriter-font);
+    color: var(--folder-red);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+}
+
+.data-table th,
+.data-table td {
+    padding: 0.75rem;
+    border: 1px solid var(--faded-ink);
+}
+
+.data-table th {
+    background-color: var(--file-tab);
+    font-family: var(--typewriter-font);
+    text-align: left;
+}
+
+.data-table tbody tr:nth-child(even) {
+    background-color: rgba(227, 210, 167, 0.3);
+}
+
+.data-table tbody tr:hover {
+    background-color: rgba(227, 210, 167, 0.5);
+}
+
+/* Crime Scene Tape */
+.crime-scene-tape {
+    background-color: var(--evidence-tape);
+    color: var(--dark-ink);
+    text-transform: uppercase;
+    font-family: var(--typewriter-font);
+    padding: 5px 0;
+    text-align: center;
+    transform: rotate(-2deg);
+    position: relative;
+    margin: 2rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.crime-scene-tape p {
+    margin: 0;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+/* Mystery Clock Styling */
+.mystery-clock {
+    font-family: var(--typewriter-font) !important;
+    color: var(--folder-red) !important;
+    text-align: center;
+}
+
+.clock-container {
+    background-color: var(--manila-folder) !important;
+    border-radius: 0 !important;
+    padding: 10px 15px;
+    display: inline-block;
+    border: 1px solid var(--faded-ink) !important;
+    position: relative;
+}
+
+.clock-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.time-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.date-display {
+    font-size: 0.9rem;
+    color: var(--dark-ink);
 }
