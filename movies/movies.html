@@ -611,33 +611,17 @@
             
             .movie-poster {
                 height: 300px;
+                border-right: none;
+                border-bottom: 1px solid #876;
             }
             
-            .slideshow-container {
-                height: auto;
-            }
-            
-            .movies-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .movies-grid {
+            .top-movies-grid {
                 grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .movie-info {
-                padding: 20px;
-            }
-            
-            .movie-title {
-                font-size: 1.8rem;
             }
         }
         
         @media (max-width: 576px) {
-            .movies-grid {
+            .top-movies-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -705,94 +689,66 @@
     
     <!-- File Stamp Decoration -->
     <div class="file-stamp">
-        <span>SCREENING ROOM</span>
+        <span>TOP SECRET</span>
     </div>
+    
+    <!-- Paper Clip Decoration -->
+    <div class="paper-clip"></div>
     
     <!-- Case Number -->
     <div class="case-number">
-        <span>FILE #MV-1938</span>
+        <span>CASE #MH-1945</span>
     </div>
 
     <!-- Header with Navigation -->
     <header>
-        <div class="container">
-            <nav class="vintage-navbar">
-                <div class="logo typewriter-text">Mystery Hub</div>
-                <ul class="nav-links">
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="../games/game1.html">Games</a></li>
-                    <li><a href="../blog/blog.html">Stories</a></li>
-                    <li><a href="#" class="active">Movies</a></li>
-                    <li><a href="../Pages/login.html" class="file-btn">Login</a></li>
-                </ul>
-            </nav>
-        </div>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="../index.html">
+                    <h1>Mystery<span>Hub</span></h1>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../games/game1.html">Field Operations</a></li>
+                <li><a href="../blog/blog.html">Case Files</a></li>
+                <li><a href="movies.html" class="active">Surveillance Footage</a></li>
+                <li><a href="../Pages/login.html" id="login-btn" class="file-btn">Agent Login</a></li>
+            </ul>
+            <!-- Digital Clock -->
+            <div id="digital-clock" class="digital-clock">
+                <span class="time">00:00:00</span>
+                <span class="date">01/01/2025</span>
+            </div>
+        </nav>
     </header>
 
-    <!-- Movies Content -->
+    <!-- Main Content Section -->
     <section class="main-content">
         <div class="container">
             <div class="movies-container">
                 <div class="movies-header">
                     <div class="file-label">EVIDENCE ARCHIVE</div>
-                    <h1 class="movies-title">Mystery Film Investigations</h1>
+                    <div class="confidential-stamp">CLASSIFIED</div>
+                    <h1 class="movies-title">Surveillance Footage Analysis</h1>
                     <p class="movies-description">
-                        Explore our collection of mystery and thriller films meticulously cataloged by our detective community. 
-                        Each film has been analyzed for its investigative techniques, plot twists, and atmospheric elements.
+                        Explore our collection of carefully analyzed surveillance footage from the field. These cinematic recordings provide valuable insights into investigative techniques, psychological profiling, and criminal analysis. All materials have been verified by senior agents.
                     </p>
-                    
-                    <a href="add.html" class="movie-btn watch-btn"><i class="fas fa-plus"></i> Submit Case Study</a>
                 </div>
                 
-                <!-- Featured Movies Slideshow -->
                 <div class="slideshow-container">
+                    <div class="paperclip"></div>
+                    <div class="evidence-tag">EVIDENCE #1</div>
                     <!-- Slide 1 -->
                     <div class="slideshow-slide active" data-index="0">
                         <div class="movie-poster">
                             <img src="../assets/images/movie1.jpg" alt="Knives Out">
                         </div>
                         <div class="movie-info">
-                            <span class="movie-category">Murder Mystery</span>
-                            <h2 class="movie-title">Knives Out</h2>
-                            <p class="movie-year">2019</p>
-                            
-                            <div class="movie-rating">
-                                <div class="stars">
-                                    <i class="fas fa-star star filled"></i>
-                                    <i class="fas fa-star star filled"></i>
-                                    <i class="fas fa-star star filled"></i>
-                                    <i class="fas fa-star star filled"></i>
-                                    <i class="fas fa-star star half-filled"></i>
-                                </div>
-                                <span class="rating-count">4.7 (243 agent reviews)</span>
-                            </div>
-                            
-                            <p class="movie-plot">
-                                When renowned crime novelist Harlan Thrombey is found dead at his estate, detective Benoit Blanc is enlisted to investigate. 
-                                The eccentric detective must navigate a web of family dysfunction, lies, and greed to uncover the truth behind Harlan's untimely death.
-                            </p>
-                            
-                            <p class="movie-director"><strong>Case Director:</strong> <span>Rian Johnson</span></p>
-                            <p class="movie-cast"><strong>Primary Witnesses:</strong> <span>Daniel Craig, Ana de Armas, Chris Evans, Jamie Lee Curtis</span></p>
-                            
-                            <div class="movie-actions">
-                                <a href="#" class="movie-btn watch-btn"><i class="fas fa-play"></i> Watch Investigation</a>
-                                <a href="#" class="movie-btn save-btn"><i class="fas fa-bookmark"></i> File for Later</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Slide 2 -->
-                    <div class="slideshow-slide" data-index="1">
-                        <div class="movie-poster">
-                            <img src="../assets/images/movie2.jpg" alt="Shutter Island">
-                        </div>
-                        <div class="movie-info">
-                            <span class="movie-category">Psychological Thriller</span>
-                            <h2 class="movie-title">Shutter Island</h2>
-                            <p class="movie-year">2010</p>
-                            
+                            <div class="classification-stamp">Level 4 Clearance</div>
+                            <span class="movie-category">Investigative Procedure</span>
+                            <h2 class="movie-title">Knives Out (2019)</h2>
+                            <div class="movie-year">Released: November 27, 2019</div>
                             <div class="movie-rating">
                                 <div class="stars">
                                     <i class="fas fa-star star filled"></i>
@@ -801,20 +757,56 @@
                                     <i class="fas fa-star star filled"></i>
                                     <i class="fas fa-star star"></i>
                                 </div>
-                                <span class="rating-count">4.3 (198 agent reviews)</span>
+                                <span class="rating-count">Agent Approval: 97%</span>
                             </div>
-                            
                             <p class="movie-plot">
-                                U.S. Marshal Teddy Daniels and his partner arrive at a psychiatric facility on Shutter Island to investigate the disappearance of a patient. 
-                                As they delve deeper, Teddy's investigation unravels into a labyrinth of mind-bending twists, forcing him to confront his own buried secrets.
+                                A masterclass in detective methodology. When renowned crime novelist Harlan Thrombey is found dead at his estate, Detective Benoit Blanc is mysteriously enlisted to investigate. Blanc must navigate through a web of red herrings and self-serving lies to determine the culprit.
                             </p>
-                            
-                            <p class="movie-director"><strong>Case Director:</strong> <span>Martin Scorsese</span></p>
-                            <p class="movie-cast"><strong>Primary Witnesses:</strong> <span>Leonardo DiCaprio, Mark Ruffalo, Ben Kingsley</span></p>
-                            
+                            <div class="movie-director">
+                                <strong>Director:</strong> <span>Rian Johnson</span>
+                            </div>
+                            <div class="movie-cast">
+                                <strong>Key Witnesses:</strong> <span>Daniel Craig, Chris Evans, Ana de Armas, Jamie Lee Curtis</span>
+                            </div>
                             <div class="movie-actions">
-                                <a href="#" class="movie-btn watch-btn"><i class="fas fa-play"></i> Watch Investigation</a>
-                                <a href="#" class="movie-btn save-btn"><i class="fas fa-bookmark"></i> File for Later</a>
+                                <a href="#" class="movie-btn watch-btn"><i class="fas fa-play"></i> View Footage</a>
+                                <a href="#" class="movie-btn save-btn"><i class="fas fa-folder"></i> Add to Dossier</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2 -->
+                    <div class="slideshow-slide" data-index="1">
+                        <div class="movie-poster">
+                            <img src="../assets/images/movie2.jpg" alt="Murder on the Orient Express">
+                        </div>
+                        <div class="movie-info">
+                            <div class="classification-stamp">Level 3 Clearance</div>
+                            <span class="movie-category">Historical Case Study</span>
+                            <h2 class="movie-title">Murder on the Orient Express (2017)</h2>
+                            <div class="movie-year">Released: November 10, 2017</div>
+                            <div class="movie-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                </div>
+                                <span class="rating-count">Agent Approval: 85%</span>
+                            </div>
+                            <p class="movie-plot">
+                                An essential study in interrogation techniques. When a murder occurs on the train on which detective Hercule Poirot is traveling, he is called upon to investigate. The case presents unique challenges as the victim had numerous enemies, all traveling together.
+                            </p>
+                            <div class="movie-director">
+                                <strong>Director:</strong> <span>Kenneth Branagh</span>
+                            </div>
+                            <div class="movie-cast">
+                                <strong>Key Witnesses:</strong> <span>Kenneth Branagh, Penélope Cruz, Willem Dafoe, Judi Dench</span>
+                            </div>
+                            <div class="movie-actions">
+                                <a href="#" class="movie-btn watch-btn"><i class="fas fa-play"></i> View Footage</a>
+                                <a href="#" class="movie-btn save-btn"><i class="fas fa-folder"></i> Add to Dossier</a>
                             </div>
                         </div>
                     </div>
@@ -825,125 +817,121 @@
                             <img src="../assets/images/movie3.jpg" alt="Gone Girl">
                         </div>
                         <div class="movie-info">
-                            <span class="movie-category">Missing Person Case</span>
-                            <h2 class="movie-title">Gone Girl</h2>
-                            <p class="movie-year">2014</p>
-                            
+                            <div class="classification-stamp">Level 5 Clearance</div>
+                            <span class="movie-category">Psychological Analysis</span>
+                            <h2 class="movie-title">Gone Girl (2014)</h2>
+                            <div class="movie-year">Released: October 3, 2014</div>
                             <div class="movie-rating">
                                 <div class="stars">
                                     <i class="fas fa-star star filled"></i>
                                     <i class="fas fa-star star filled"></i>
                                     <i class="fas fa-star star filled"></i>
                                     <i class="fas fa-star star filled"></i>
-                                    <i class="fas fa-star star half-filled"></i>
+                                    <i class="fas fa-star star filled"></i>
                                 </div>
-                                <span class="rating-count">4.6 (221 agent reviews)</span>
+                                <span class="rating-count">Agent Approval: 92%</span>
                             </div>
-                            
                             <p class="movie-plot">
-                                On the occasion of his fifth wedding anniversary, Nick Dunne reports that his wife, Amy, has gone missing. Under pressure from police and a growing media frenzy, 
-                                Nick's portrait of a blissful union begins to crumble as his lies, deceits and bizarre behavior cast suspicion on him as his wife's killer.
+                                A rare glimpse into the psychology of deception. When Nick Dunne reports that his wife Amy has gone missing, media attention and public scrutiny threaten to unravel his perfect image. What follows is a masterclass in manipulation, lies, and public perception.
                             </p>
-                            
-                            <p class="movie-director"><strong>Case Director:</strong> <span>David Fincher</span></p>
-                            <p class="movie-cast"><strong>Primary Witnesses:</strong> <span>Ben Affleck, Rosamund Pike, Neil Patrick Harris</span></p>
-                            
+                            <div class="movie-director">
+                                <strong>Director:</strong> <span>David Fincher</span>
+                            </div>
+                            <div class="movie-cast">
+                                <strong>Key Witnesses:</strong> <span>Ben Affleck, Rosamund Pike, Neil Patrick Harris</span>
+                            </div>
                             <div class="movie-actions">
-                                <a href="#" class="movie-btn watch-btn"><i class="fas fa-play"></i> Watch Investigation</a>
-                                <a href="#" class="movie-btn save-btn"><i class="fas fa-bookmark"></i> File for Later</a>
+                                <a href="#" class="movie-btn watch-btn"><i class="fas fa-play"></i> View Footage</a>
+                                <a href="#" class="movie-btn save-btn"><i class="fas fa-folder"></i> Add to Dossier</a>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Slideshow Controls -->
-                    <div class="slideshow-arrows">
-                        <div class="arrow prev-arrow">
-                            <i class="fas fa-chevron-left"></i>
-                        </div>
-                        <div class="arrow next-arrow">
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
+                    <div class="slideshow-dots">
+                        <div class="slideshow-dot active" data-index="0"></div>
+                        <div class="slideshow-dot" data-index="1"></div>
+                        <div class="slideshow-dot" data-index="2"></div>
                     </div>
                     
-                    <div class="slideshow-dots">
-                        <div class="dot active" data-index="0"></div>
-                        <div class="dot" data-index="1"></div>
-                        <div class="dot" data-index="2"></div>
+                    <div class="slideshow-controls">
+                        <div class="slideshow-arrow prev-arrow"><i class="fas fa-arrow-left"></i></div>
+                        <div class="slideshow-arrow next-arrow"><i class="fas fa-arrow-right"></i></div>
                     </div>
                 </div>
                 
                 <!-- Top Rated Movies -->
                 <div class="top-movies-section">
-                    <h2 class="section-title typewriter-text">Top-Rated Case Studies</h2>
-                    <div class="movie-cards">
-                        <div class="movie-card">
-                            <div class="movie-card-image">
-                                <img src="../assets/images/movie4.jpg" alt="Se7en" class="movie-card-poster">
+                    <h2 class="section-title typewriter-text">Recommended Field Recordings</h2>
+                    <div class="top-movies-grid">
+                        <div class="top-movie-card">
+                            <div class="case-number">FILE #S-001</div>
+                            <div class="top-movie-image">
+                                <img src="../assets/images/movie4.jpg" alt="Se7en">
                             </div>
-                            <div class="movie-card-content">
-                                <span class="movie-card-category">Serial Killer Investigation</span>
-                                <h3 class="movie-card-title">Se7en</h3>
-                                <p class="movie-card-year">1995</p>
-                                <div class="movie-card-rating">
-                                    <i class="fas fa-star"></i>
-                                    <span>4.8</span>
-                                </div>
-                                <div class="movie-card-actions">
-                                    <a href="#" class="movie-btn save-btn"><i class="fas fa-bookmark"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="movie-card">
-                            <div class="movie-card-image">
-                                <img src="../assets/images/movie5.jpg" alt="The Usual Suspects" class="movie-card-poster">
-                            </div>
-                            <div class="movie-card-content">
-                                <span class="movie-card-category">Crime Investigation</span>
-                                <h3 class="movie-card-title">The Usual Suspects</h3>
-                                <p class="movie-card-year">1995</p>
-                                <div class="movie-card-rating">
-                                    <i class="fas fa-star"></i>
-                                    <span>4.7</span>
-                                </div>
-                                <div class="movie-card-actions">
-                                    <a href="#" class="movie-btn save-btn"><i class="fas fa-bookmark"></i></a>
+                            <div class="top-movie-content">
+                                <h3 class="top-movie-title">Se7en (1995)</h3>
+                                <div class="top-movie-year">Cold Case File</div>
+                                <div class="top-movie-rating">
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="movie-card">
-                            <div class="movie-card-image">
-                                <img src="../assets/images/movie6.jpg" alt="Zodiac" class="movie-card-poster">
+                        <div class="top-movie-card">
+                            <div class="case-number">FILE #P-039</div>
+                            <div class="top-movie-image">
+                                <img src="../assets/images/movie5.jpg" alt="Prisoners">
                             </div>
-                            <div class="movie-card-content">
-                                <span class="movie-card-category">True Crime</span>
-                                <h3 class="movie-card-title">Zodiac</h3>
-                                <p class="movie-card-year">2007</p>
-                                <div class="movie-card-rating">
-                                    <i class="fas fa-star"></i>
-                                    <span>4.6</span>
-                                </div>
-                                <div class="movie-card-actions">
-                                    <a href="#" class="movie-btn save-btn"><i class="fas fa-bookmark"></i></a>
+                            <div class="top-movie-content">
+                                <h3 class="top-movie-title">Prisoners (2013)</h3>
+                                <div class="top-movie-year">Missing Persons</div>
+                                <div class="top-movie-rating">
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star"></i>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="movie-card">
-                            <div class="movie-card-image">
-                                <img src="../assets/images/movie7.jpg" alt="Memento" class="movie-card-poster">
+                        <div class="top-movie-card">
+                            <div class="case-number">FILE #M-124</div>
+                            <div class="top-movie-image">
+                                <img src="../assets/images/movie6.jpg" alt="Memento">
                             </div>
-                            <div class="movie-card-content">
-                                <span class="movie-card-category">Psychological Mystery</span>
-                                <h3 class="movie-card-title">Memento</h3>
-                                <p class="movie-card-year">2000</p>
-                                <div class="movie-card-rating">
-                                    <i class="fas fa-star"></i>
-                                    <span>4.5</span>
+                            <div class="top-movie-content">
+                                <h3 class="top-movie-title">Memento (2000)</h3>
+                                <div class="top-movie-year">Memory Analysis</div>
+                                <div class="top-movie-rating">
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
                                 </div>
-                                <div class="movie-card-actions">
-                                    <a href="#" class="movie-btn save-btn"><i class="fas fa-bookmark"></i></a>
+                            </div>
+                        </div>
+                        
+                        <div class="top-movie-card">
+                            <div class="case-number">FILE #Z-076</div>
+                            <div class="top-movie-image">
+                                <img src="../assets/images/movie7.jpg" alt="Zodiac">
+                            </div>
+                            <div class="top-movie-content">
+                                <h3 class="top-movie-title">Zodiac (2007)</h3>
+                                <div class="top-movie-year">Serial Killer</div>
+                                <div class="top-movie-rating">
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star filled"></i>
+                                    <i class="fas fa-star star"></i>
                                 </div>
                             </div>
                         </div>
@@ -958,11 +946,11 @@
         <div class="container">
             <div class="footer-content">
                 <ul class="footer-links">
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="../games/game1.html">Games</a></li>
-                    <li><a href="../blog/blog.html">Stories</a></li>
-                    <li><a href="../movies/movies.html">Movies</a></li>
+                    <li><a href="../index.html">Headquarters</a></li>
+                    <li><a href="../games/game1.html">Field Operations</a></li>
+                    <li><a href="../blog/blog.html">Case Files</a></li>
+                    <li><a href="movies.html">Surveillance Footage</a></li>
+                    <li><a href="../Pages/login.html">Agent Login</a></li>
                 </ul>
                 
                 <p class="copyright handwritten-note">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
@@ -971,85 +959,75 @@
     </footer>
     
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Slideshow functionality
-            const slides = document.querySelectorAll('.slideshow-slide');
-            const dots = document.querySelectorAll('.dot');
-            const nextArrow = document.querySelector('.next-arrow');
-            const prevArrow = document.querySelector('.prev-arrow');
-            let currentIndex = 0;
+        // Slideshow functionality
+        const slides = document.querySelectorAll('.slideshow-slide');
+        const dots = document.querySelectorAll('.slideshow-dot');
+        const prevArrow = document.querySelector('.prev-arrow');
+        const nextArrow = document.querySelector('.next-arrow');
+        let currentSlide = 0;
+        
+        function showSlide(index) {
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
             
-            function showSlide(index) {
-                // Hide all slides
-                slides.forEach(slide => {
-                    slide.classList.remove('active');
-                });
-                
-                // Deactivate all dots
-                dots.forEach(dot => {
-                    dot.classList.remove('active');
-                });
-                
-                // Show selected slide
-                slides[index].classList.add('active');
-                dots[index].classList.add('active');
-                currentIndex = index;
-            }
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
             
-            function nextSlide() {
-                currentIndex = (currentIndex + 1) % slides.length;
-                showSlide(currentIndex);
-            }
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+        
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+        
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
             
-            function prevSlide() {
-                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-                showSlide(currentIndex);
-            }
-            
-            // Event listeners for arrows
-            prevArrow.addEventListener('click', prevSlide);
-            nextArrow.addEventListener('click', nextSlide);
-            
-            // Event listeners for dots
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    showSlide(index);
-                });
+        // Event listeners for arrows
+        prevArrow.addEventListener('click', prevSlide);
+        nextArrow.addEventListener('click', nextSlide);
+        
+        // Event listeners for dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
             });
-            
-            // Auto slideshow
-            let slideInterval = setInterval(nextSlide, 5000);
-            
-            // Pause slideshow on hover
-            const slideshowContainer = document.querySelector('.slideshow-container');
-            slideshowContainer.addEventListener('mouseenter', () => {
-                clearInterval(slideInterval);
-            });
-            
-            slideshowContainer.addEventListener('mouseleave', () => {
-                slideInterval = setInterval(nextSlide, 5000);
-            });
-            
-            // Star rating functionality
-            const stars = document.querySelectorAll('.star');
-            stars.forEach((star, index) => {
-                star.addEventListener('click', () => {
-                    // Get all stars in this rating (siblings)
-                    const parentStars = star.parentElement.querySelectorAll('.star');
+        });
+        
+        // Auto slideshow
+        let slideInterval = setInterval(nextSlide, 5000);
+        
+        // Pause slideshow on hover
+        const slideshowContainer = document.querySelector('.slideshow-container');
+        slideshowContainer.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+        
+        slideshowContainer.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(nextSlide, 5000);
+        });
+        
+        // Initialize ratings
+        const stars = document.querySelectorAll('.star');
+        stars.forEach(star => {
+            star.addEventListener('mouseenter', function() {
+                // Only apply to top level stars (not in slideshow)
+                if (!this.closest('.slideshow-slide')) {
+                    const parent = this.parentElement;
+                    const allStars = parent.querySelectorAll('.star');
+                    const index = Array.from(allStars).indexOf(this);
                     
-                    // Reset all stars
-                    parentStars.forEach(s => {
-                        s.classList.remove('filled');
+                    allStars.forEach((s, i) => {
+                        if (i <= index) {
+                            s.classList.add('filled');
+                        } else {
+                            s.classList.remove('filled');
+                        }
                     });
-                    
-                    // Fill clicked star and all stars before it
-                    for (let i = 0; i <= index; i++) {
-                        parentStars[i].classList.add('filled');
-                    }
-                    
-                    // In a real app, this would send the rating to a server
-                    alert(`You rated this movie ${index + 1} out of 5 stars!`);
-                });
+                }
             });
         });
     </script>
