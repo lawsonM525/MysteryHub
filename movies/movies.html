@@ -123,7 +123,6 @@
         /* Slideshow Styles */
         .slideshow-container {
             position: relative;
-            height: 600px;
             background-color: var(--aged-paper);
             border-radius: 5px;
             overflow: hidden;
@@ -131,6 +130,8 @@
             margin-bottom: 50px;
             border: 1px solid #876;
             position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
         }
         
         .slideshow-container::before {
@@ -160,26 +161,10 @@
             border: 1px dashed #fff;
         }
         
-        .classification-stamp {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-family: 'Special Elite', cursive;
-            color: var(--stamp-red);
-            border: 2px solid var(--stamp-red);
-            padding: 5px 10px;
-            transform: rotate(15deg);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.8;
-            z-index: 10;
-        }
-        
         .paperclip {
             position: absolute;
             top: -10px;
-            left: 50px;
+            left: 30px;
             width: 30px;
             height: 60px;
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 200"><path d="M80,20c0-11-9-20-20-20S40,9,40,20v140c0,11,9,20,20,20s20-9,20-20V40c0-5.5-4.5-10-10-10s-10,4.5-10,10v100c0,5.5,4.5,10,10,10s10-4.5,10-10V40" fill="%23888"/></svg>');
@@ -194,10 +179,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            display: flex;
             opacity: 0;
             transition: opacity 0.8s ease;
             z-index: 1;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
         }
         
         .slideshow-slide.active {
@@ -205,224 +193,34 @@
             z-index: 2;
         }
         
-        .movie-poster {
-            flex: 1;
-            height: 100%;
-            overflow: hidden;
-            background-color: var(--aged-paper-dark);
-            border-right: 1px solid #876;
-            position: relative;
-        }
-        
-        .movie-poster::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        .movie-info-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);
+            padding: 20px;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 50%);
-            z-index: 1;
+            color: white;
+            text-align: center;
         }
         
-        .movie-poster img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-            filter: sepia(30%);
-        }
-        
-        .slideshow-slide:hover .movie-poster img {
-            transform: scale(1.05);
-        }
-        
-        .movie-info {
-            flex: 1;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .movie-info::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/old-paper.png');
-            z-index: -1;
-            opacity: 0.5;
-        }
-        
-        .movie-category {
-            display: inline-block;
-            padding: 5px 15px;
-            background-color: rgba(160, 44, 44, 0.1);
-            border-radius: 3px;
-            font-size: 0.8rem;
-            margin-bottom: 20px;
-            color: var(--folder-red);
+        .movie-title-overlay {
             font-family: 'Special Elite', cursive;
-            border: 1px dashed var(--folder-red);
-            letter-spacing: 1px;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
         }
         
-        .movie-title {
-            font-family: 'Special Elite', cursive;
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-            color: var(--ink-color);
-            line-height: 1.2;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .movie-title::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background-color: var(--folder-tab);
-            opacity: 0.5;
-        }
-        
-        .movie-year {
+        .movie-year-overlay {
             font-family: 'Cutive Mono', monospace;
-            font-size: 1.2rem;
-            color: #555;
-            margin-bottom: 20px;
-            font-style: italic;
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 10px;
         }
         
-        .movie-rating {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            border-top: 1px dashed #ccc;
-            border-bottom: 1px dashed #ccc;
-            padding: 15px 0;
-        }
-        
-        .stars {
-            display: flex;
-            margin-right: 10px;
-        }
-        
-        .star {
-            color: #876;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: color 0.3s;
-            margin-right: 2px;
-        }
-        
-        .star.filled {
-            color: var(--folder-red);
-        }
-        
-        .star:hover {
-            color: var(--folder-red);
-        }
-        
-        .rating-count {
+        .slide-caption-overlay {
             font-family: 'Cutive Mono', monospace;
-            color: #555;
             font-size: 0.9rem;
-            margin-left: 10px;
-        }
-        
-        .movie-plot {
-            font-family: 'Cutive Mono', monospace;
-            margin-bottom: 30px;
-            line-height: 1.7;
-            color: var(--ink-color);
-            padding: 0 10px;
-            position: relative;
-        }
-        
-        .movie-plot::before {
-            content: '"';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            font-size: 2.5rem;
-            color: var(--folder-red);
-            opacity: 0.3;
-            font-family: 'Special Elite', cursive;
-        }
-        
-        .movie-plot::after {
-            content: '"';
-            position: absolute;
-            bottom: -30px;
-            right: -10px;
-            font-size: 2.5rem;
-            color: var(--folder-red);
-            opacity: 0.3;
-            font-family: 'Special Elite', cursive;
-        }
-        
-        .movie-director,
-        .movie-cast {
-            font-family: 'Cutive Mono', monospace;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-            color: var(--ink-color);
-            border-left: 3px solid var(--folder-red);
-            padding-left: 15px;
-        }
-        
-        .movie-director span,
-        .movie-cast span {
-            color: #555;
-            font-weight: bold;
-        }
-        
-        .movie-actions {
-            margin-top: 20px;
-            display: flex;
-            gap: 15px;
-        }
-        
-        .movie-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 3px;
-            font-size: 0.9rem;
-            font-family: 'Special Elite', cursive;
-            text-decoration: none;
-            transition: all 0.3s;
-            cursor: pointer;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        .watch-btn {
-            background-color: var(--folder-red);
-            color: #fff;
-            border: none;
-        }
-        
-        .watch-btn:hover {
-            background-color: var(--stamp-red);
-            transform: translateY(-3px);
-        }
-        
-        .save-btn {
-            background-color: transparent;
-            color: var(--folder-red);
-            border: 1px solid var(--folder-red);
-        }
-        
-        .save-btn:hover {
-            background-color: rgba(160, 44, 44, 0.1);
-            transform: translateY(-3px);
+            max-width: 80%;
+            margin: 0 auto;
+            opacity: 0.9;
         }
         
         .slideshow-controls {
@@ -438,7 +236,7 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background-color: var(--aged-paper);
+            background-color: rgba(232, 224, 207, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -468,7 +266,7 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background-color: var(--aged-paper);
+            background-color: rgba(232, 224, 207, 0.7);
             border: 1px solid #876;
             cursor: pointer;
             transition: all 0.3s;
@@ -609,12 +407,6 @@
                 flex-direction: column;
             }
             
-            .movie-poster {
-                height: 300px;
-                border-right: none;
-                border-bottom: 1px solid #876;
-            }
-            
             .top-movies-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -740,110 +532,29 @@
                     <div class="paperclip"></div>
                     <div class="evidence-tag">EVIDENCE #1</div>
                     <!-- Slide 1 -->
-                    <div class="slideshow-slide active" data-index="0">
-                        <div class="movie-poster">
-                            <img src="../assets/images/movie1.jpg" alt="Knives Out">
-                        </div>
-                        <div class="movie-info">
-                            <div class="classification-stamp">Level 4 Clearance</div>
-                            <span class="movie-category">Investigative Procedure</span>
-                            <h2 class="movie-title">Knives Out (2019)</h2>
-                            <div class="movie-year">Released: November 27, 2019</div>
-                            <div class="movie-rating">
-                                <div class="stars">
-                                    <i class="fas fa-star star filled"></i>
-                                    <i class="fas fa-star star filled"></i>
-                                    <i class="fas fa-star star filled"></i>
-                                    <i class="fas fa-star star filled"></i>
-                                    <i class="fas fa-star star"></i>
-                                </div>
-                                <span class="rating-count">Agent Approval: 97%</span>
-                            </div>
-                            <p class="movie-plot">
-                                A masterclass in detective methodology. When renowned crime novelist Harlan Thrombey is found dead at his estate, Detective Benoit Blanc is mysteriously enlisted to investigate. Blanc must navigate through a web of red herrings and self-serving lies to determine the culprit.
-                            </p>
-                            <div class="movie-director">
-                                <strong>Director:</strong> <span>Rian Johnson</span>
-                            </div>
-                            <div class="movie-cast">
-                                <strong>Key Witnesses:</strong> <span>Daniel Craig, Chris Evans, Ana de Armas, Jamie Lee Curtis</span>
-                            </div>
-                            <div class="movie-actions">
-                                <a href="#" class="movie-btn watch-btn"><i class="fas fa-play"></i> View Footage</a>
-                                <a href="#" class="movie-btn save-btn"><i class="fas fa-folder"></i> Add to Dossier</a>
-                            </div>
+                    <div class="slideshow-slide active" data-index="0" style="background-image: url('../assets/images/movie1.jpg')">
+                        <div class="movie-info-overlay">
+                            <div class="movie-title-overlay">Knives Out (2019)</div>
+                            <div class="movie-year-overlay">Released: November 27, 2019</div>
+                            <div class="slide-caption-overlay">A masterclass in detective methodology. When renowned crime novelist Harlan Thrombey is found dead at his estate, Detective Benoit Blanc is mysteriously enlisted to investigate.</div>
                         </div>
                     </div>
                     
                     <!-- Slide 2 -->
-                    <div class="slideshow-slide" data-index="1">
-                        <div class="movie-poster">
-                            <img src="../assets/images/movie2.jpg" alt="Murder on the Orient Express">
-                        </div>
-                        <div class="movie-info">
-                            <div class="classification-stamp">Level 3 Clearance</div>
-                            <span class="movie-category">Historical Case Study</span>
-                            <h2 class="movie-title">Murder on the Orient Express (2017)</h2>
-                            <div class="movie-year">Released: November 10, 2017</div>
-                            <div class="movie-rating">
-                                <div class="stars">
-                                    <i class="fas fa-star star filled"></i>
-                                    <i class="fas fa-star star filled"></i>
-                                    <i class="fas fa-star star filled"></i>
-                                    <i class="fas fa-star star"></i>
-                                    <i class="fas fa-star star"></i>
-                                </div>
-                                <span class="rating-count">Agent Approval: 85%</span>
-                            </div>
-                            <p class="movie-plot">
-                                An essential study in interrogation techniques. When a murder occurs on the train on which detective Hercule Poirot is traveling, he is called upon to investigate. The case presents unique challenges as the victim had numerous enemies, all traveling together.
-                            </p>
-                            <div class="movie-director">
-                                <strong>Director:</strong> <span>Kenneth Branagh</span>
-                            </div>
-                            <div class="movie-cast">
-                                <strong>Key Witnesses:</strong> <span>Kenneth Branagh, Penélope Cruz, Willem Dafoe, Judi Dench</span>
-                            </div>
-                            <div class="movie-actions">
-                                <a href="#" class="movie-btn watch-btn"><i class="fas fa-play"></i> View Footage</a>
-                                <a href="#" class="movie-btn save-btn"><i class="fas fa-folder"></i> Add to Dossier</a>
-                            </div>
+                    <div class="slideshow-slide" data-index="1" style="background-image: url('../assets/images/movie2.jpg')">
+                        <div class="movie-info-overlay">
+                            <div class="movie-title-overlay">Murder on the Orient Express (2017)</div>
+                            <div class="movie-year-overlay">Released: November 10, 2017</div>
+                            <div class="slide-caption-overlay">An essential study in interrogation techniques. When a murder occurs on the train on which detective Hercule Poirot is traveling, he is called upon to investigate.</div>
                         </div>
                     </div>
                     
                     <!-- Slide 3 -->
-                    <div class="slideshow-slide" data-index="2">
-                        <div class="movie-poster">
-                            <img src="../assets/images/movie3.jpg" alt="Gone Girl">
-                        </div>
-                        <div class="movie-info">
-                            <div class="classification-stamp">Level 5 Clearance</div>
-                            <span class="movie-category">Psychological Analysis</span>
-                            <h2 class="movie-title">Gone Girl (2014)</h2>
-                            <div class="movie-year">Released: October 3, 2014</div>
-                            <div class="movie-rating">
-                                <div class="stars">
-                                    <i class="fas fa-star star filled"></i>
-                                    <i class="fas fa-star star filled"></i>
-                                    <i class="fas fa-star star filled"></i>
-                                    <i class="fas fa-star star filled"></i>
-                                    <i class="fas fa-star star filled"></i>
-                                </div>
-                                <span class="rating-count">Agent Approval: 92%</span>
-                            </div>
-                            <p class="movie-plot">
-                                A rare glimpse into the psychology of deception. When Nick Dunne reports that his wife Amy has gone missing, media attention and public scrutiny threaten to unravel his perfect image. What follows is a masterclass in manipulation, lies, and public perception.
-                            </p>
-                            <div class="movie-director">
-                                <strong>Director:</strong> <span>David Fincher</span>
-                            </div>
-                            <div class="movie-cast">
-                                <strong>Key Witnesses:</strong> <span>Ben Affleck, Rosamund Pike, Neil Patrick Harris</span>
-                            </div>
-                            <div class="movie-actions">
-                                <a href="#" class="movie-btn watch-btn"><i class="fas fa-play"></i> View Footage</a>
-                                <a href="#" class="movie-btn save-btn"><i class="fas fa-folder"></i> Add to Dossier</a>
-                            </div>
+                    <div class="slideshow-slide" data-index="2" style="background-image: url('../assets/images/movie3.jpg')">
+                        <div class="movie-info-overlay">
+                            <div class="movie-title-overlay">Gone Girl (2014)</div>
+                            <div class="movie-year-overlay">Released: October 3, 2014</div>
+                            <div class="slide-caption-overlay">A rare glimpse into the psychology of deception. When Nick Dunne reports that his wife Amy has gone missing, media attention and public scrutiny threaten to unravel his perfect image.</div>
                         </div>
                     </div>
                     
