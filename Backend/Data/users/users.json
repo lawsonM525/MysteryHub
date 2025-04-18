@@ -1,1 +1,15 @@
-[]
+[
+    {
+        "id": "mh_68022620279ac1.75169646",
+        "username": "michelle1",
+        "password": "$2y$10$.4Wg87XtcWM024WwlBmhGub8Z.r0wBuE3eo7SEj\/84zwL8uWTipF.",
+        "email": "mlawsy525@gmail.com",
+        "firstname": "Michelle",
+        "lastname": "Lawson",
+        "expertise": "cryptography",
+        "is_admin": false,
+        "created_at": "2025-04-18 10:14:56",
+        "updated_at": "2025-04-18 10:15:07",
+        "last_login": "2025-04-18 10:15:07"
+    }
+]

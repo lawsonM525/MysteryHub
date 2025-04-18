@@ -1,4 +1,4 @@
-// This file accepts POST data from the register form (like name, email, password).
+// This file will accept POST data from the register form (like name, email, password).
 // Validate to make sure the email isn't already registered and Sanitize the data 
 // Save the new user into the users.json file
 <?php
@@ -11,13 +11,15 @@
 // Start session
 session_start();
 
-// Data directory paths
-define('DATA_DIR', dirname(dirname(__DIR__)) . '/Backend/Data');
+// Define direct file paths - this is more reliable than constructing them
+define('DATA_DIR', '/Applications/MAMP/htdocs/MysteryHubProject/Backend/Data');
 define('USERS_DIR', DATA_DIR . '/users');
+define('USERS_FILE', USERS_DIR . '/users.json');
 
 // Debug information
 error_log("DATA_DIR path: " . DATA_DIR);
 error_log("USERS_DIR path: " . USERS_DIR);
+error_log("USERS_FILE path: " . USERS_FILE);
 
 // Ensure data directories exist
 if (!file_exists(DATA_DIR)) {
@@ -30,11 +32,8 @@ if (!file_exists(USERS_DIR)) {
 }
 
 // Initialize users.json if it doesn't exist
-$usersFile = USERS_DIR . '/users.json';
-error_log("Users file path: " . $usersFile);
-
-if (!file_exists($usersFile)) {
-    if (file_put_contents($usersFile, json_encode([])) === false) {
+if (!file_exists(USERS_FILE)) {
+    if (file_put_contents(USERS_FILE, json_encode([])) === false) {
         error_log("Failed to create users.json");
     } else {
         error_log("Created users.json");
@@ -157,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // If no errors, proceed with registration
     if (empty($errors)) {
         // Load existing users
-        $users = loadJsonData($usersFile);
+        $users = loadJsonData(USERS_FILE);
         error_log("Loaded users: " . count($users));
         
         // Check if username or email already exists
@@ -195,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $users[] = $newUser;
             
             // Save updated users array
-            if (saveJsonData($usersFile, $users)) {
+            if (saveJsonData(USERS_FILE, $users)) {
                 error_log("User saved successfully");
                 // Create user profile file
                 $userProfile = [
