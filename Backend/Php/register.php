@@ -1,7 +1,10 @@
-// This file will accept POST data from the register form (like name, email, password).
-// Validate to make sure the email isn't already registered and Sanitize the data 
-// Save the new user into the users.json file
+]
 <?php
+
+/** This file will accept POST data from the register form (like name, email, password).
+*Validate to make sure the email isn't already registered and Sanitize the data 
+*Save the new user into the users.json file
+*/
 
 /**
  * Mystery Hub User Registration
@@ -11,8 +14,8 @@
 // Start session
 session_start();
 
-// Define direct file paths - this is more reliable than constructing them
-define('DATA_DIR', '/Applications/MAMP/htdocs/MysteryHubProject/Backend/Data');
+// Instead of absolute paths, use relative paths from the script's location
+define('DATA_DIR', dirname(__DIR__) . '/Data');
 define('USERS_DIR', DATA_DIR . '/users');
 define('USERS_FILE', USERS_DIR . '/users.json');
 
@@ -219,7 +222,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 setFlashMessage('success', 'Registration successful! You can now log in.');
                 
                 // Redirect to login page
-                redirect('/MysteryHubProject/Pages/login.html');
+                header("Location: ../../Pages/login.html");
                 exit; // Ensure script stops here
             } else {
                 $errors[] = "Failed to save user data. Please try again.";
@@ -244,12 +247,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'expertise' => $expertise
         ];
         
-        redirect('/MysteryHubProject/Pages/register.html');
+        header("Location: ../../Pages/register.html");
         exit; // Ensure script stops here
     }
 } else {
     // If not a POST request, redirect to registration form
     error_log("Not a POST request, redirecting to registration form");
-    redirect('/MysteryHubProject/Pages/register.html');
+    header("Location: ../../Pages/register.html");
     exit; // Ensure script stops here
 }
