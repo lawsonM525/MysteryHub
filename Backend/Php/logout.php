@@ -4,11 +4,8 @@
  * Handles user logout and session destruction
  */
 
-// Include configuration
-require_once '../config.php';
-
 // Start session
-startSession();
+session_start();
 
 // Destroy session
 $_SESSION = array();
@@ -25,6 +22,7 @@ if (ini_get("session.use_cookies")) {
 // Destroy the session
 session_destroy();
 
-// Redirect to home page with message
-setFlashMessage('info', 'You have been successfully logged out.');
-redirect('/MysteryHubProject/index.html');
+// Redirect to home page
+header("Location: /MysteryHubProject/index.html");
+exit;
+?>

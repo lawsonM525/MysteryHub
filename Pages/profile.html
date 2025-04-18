@@ -705,16 +705,268 @@
                 });
             });
             
+            // Load user profile data from backend
+            fetchProfileData();
+            
             // Form submission handling
             const profileForm = document.getElementById('profile-settings-form');
             if (profileForm) {
                 profileForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    // In a real app, this would send data to the backend
-                    alert('Agent file updated successfully! New clearance level pending approval.');
+                    updateProfile(this);
                 });
             }
         });
+        
+        // Fetch user profile data from the backend API
+        function fetchProfileData() {
+            // Display loading state
+            displayFlashMessage('info', 'Loading agent data...', false);
+            
+            fetch('../Backend/Php/get_profile_data.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.success) {
+                        // If not logged in, redirect to login page
+                        if (data.redirect) {
+                            window.location.href = data.redirect;
+                            return;
+                        }
+                        displayFlashMessage('error', data.message || 'Failed to load profile data.');
+                        return;
+                    }
+                    
+                    // Update profile data in the UI
+                    updateProfileUI(data);
+                    
+                    // Display any flash messages
+                    if (data.flash_messages) {
+                        for (const type in data.flash_messages) {
+                            for (const message of data.flash_messages[type]) {
+                                displayFlashMessage(type, message);
+                            }
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching profile data:', error);
+                    displayFlashMessage('error', 'Failed to connect to the server. Please try again later.');
+                });
+        }
+        
+        // Update the UI with profile data
+        function updateProfileUI(data) {
+            // User name and codename
+            document.querySelector('.agent-code-name').textContent = data.display.displayName;
+            document.querySelector('.agent-codename').textContent = 'Codename: "' + data.user.username + '"';
+            
+            // Agent details
+            document.querySelectorAll('.agent-detail').forEach(detail => {
+                const label = detail.querySelector('.detail-label');
+                if (label) {
+                    const value = detail.querySelector('.detail-value');
+                    if (label.textContent === 'Joined:') {
+                        value.textContent = data.display.joinDate;
+                    } else if (label.textContent === 'Division:') {
+                        value.textContent = data.user.expertise || 'Investigation & Analysis';
+                    } else if (label.textContent === 'Status:') {
+                        value.textContent = 'Active Field Agent';
+                    }
+                }
+            });
+            
+            // Stats
+            const statsElements = document.querySelectorAll('.agent-stat');
+            statsElements.forEach(stat => {
+                const icon = stat.querySelector('i');
+                if (icon) {
+                    if (icon.classList.contains('fa-gamepad')) {
+                        stat.innerHTML = `<i class="fas fa-gamepad"></i> ${data.stats.completedGames} Field Operations`;
+                    } else if (icon.classList.contains('fa-book-open')) {
+                        stat.innerHTML = `<i class="fas fa-book-open"></i> ${data.stats.favoriteBlogs} Case Files`;
+                    } else if (icon.classList.contains('fa-film')) {
+                        stat.innerHTML = `<i class="fas fa-film"></i> ${data.stats.favoriteMovies} Evidence Logs`;
+                    }
+                }
+            });
+            
+            // Profile form
+            const profileForm = document.getElementById('profile-settings-form');
+            if (profileForm) {
+                const firstnameInput = profileForm.querySelector('#display-name');
+                if (firstnameInput) {
+                    firstnameInput.value = data.user.firstname + ' ' + data.user.lastname;
+                }
+                
+                const usernameInput = profileForm.querySelector('#username');
+                if (usernameInput) {
+                    usernameInput.value = data.user.username;
+                }
+                
+                const emailInput = profileForm.querySelector('#email');
+                if (emailInput) {
+                    emailInput.value = data.user.email;
+                }
+                
+                const bioInput = profileForm.querySelector('#bio');
+                if (bioInput) {
+                    bioInput.value = data.user.bio || '';
+                }
+            }
+        }
+        
+        // Update profile via API
+        function updateProfile(form) {
+            const formData = new FormData(form);
+            
+            // Display loading state
+            displayFlashMessage('info', 'Updating profile...', false);
+            
+            fetch('../Backend/Php/update_profile.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    displayFlashMessage('success', data.message || 'Profile updated successfully!');
+                    // Reload profile data to show updated information
+                    fetchProfileData();
+                } else {
+                    displayFlashMessage('error', data.message || 'Failed to update profile.');
+                    
+                    // Display individual validation errors
+                    if (data.errors && Array.isArray(data.errors)) {
+                        data.errors.forEach(error => {
+                            displayFlashMessage('error', error);
+                        });
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error updating profile:', error);
+                displayFlashMessage('error', 'Failed to connect to the server. Please try again later.');
+            });
+        }
+        
+        // Display flash messages
+        function displayFlashMessage(type, message, autoHide = true) {
+            // Create container if it doesn't exist
+            let flashContainer = document.querySelector('.flash-messages');
+            if (!flashContainer) {
+                flashContainer = document.createElement('div');
+                flashContainer.className = 'flash-messages';
+                document.body.insertBefore(flashContainer, document.body.firstChild);
+                
+                // Add styles if not already present
+                if (!document.getElementById('flash-message-styles')) {
+                    const style = document.createElement('style');
+                    style.id = 'flash-message-styles';
+                    style.textContent = `
+                        .flash-messages {
+                            position: fixed;
+                            top: 20px;
+                            right: 20px;
+                            max-width: 350px;
+                            z-index: 9999;
+                            font-family: var(--typewriter-font, 'Special Elite', courier, monospace);
+                        }
+                        .flash-message {
+                            margin-bottom: 10px;
+                            padding: 12px 15px;
+                            border-radius: 4px;
+                            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                            position: relative;
+                            animation: slidein 0.3s ease-in-out;
+                            transition: opacity 0.3s ease;
+                        }
+                        .flash-success {
+                            background-color: #d4edda;
+                            border-left: 4px solid #28a745;
+                            color: #155724;
+                        }
+                        .flash-error {
+                            background-color: #f8d7da;
+                            border-left: 4px solid #dc3545;
+                            color: #721c24;
+                        }
+                        .flash-info {
+                            background-color: #d1ecf1;
+                            border-left: 4px solid #17a2b8;
+                            color: #0c5460;
+                        }
+                        .flash-close {
+                            position: absolute;
+                            top: 8px;
+                            right: 8px;
+                            cursor: pointer;
+                            opacity: 0.7;
+                            transition: opacity 0.2s;
+                        }
+                        .flash-close:hover {
+                            opacity: 1;
+                        }
+                        @keyframes slidein {
+                            from {
+                                transform: translateX(30px);
+                                opacity: 0;
+                            }
+                            to {
+                                transform: translateX(0);
+                                opacity: 1;
+                            }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+            }
+            
+            // Create message element
+            const messageElement = document.createElement('div');
+            messageElement.className = `flash-message flash-${type}`;
+            
+            // Add icon based on message type
+            let icon = '';
+            switch (type) {
+                case 'success':
+                    icon = '<i class="fas fa-check-circle"></i>';
+                    break;
+                case 'error':
+                    icon = '<i class="fas fa-exclamation-circle"></i>';
+                    break;
+                case 'info':
+                    icon = '<i class="fas fa-info-circle"></i>';
+                    break;
+            }
+            
+            messageElement.innerHTML = `${icon} ${message}<span class="flash-close"><i class="fas fa-times"></i></span>`;
+            flashContainer.appendChild(messageElement);
+            
+            // Add close button functionality
+            const closeButton = messageElement.querySelector('.flash-close');
+            closeButton.addEventListener('click', function() {
+                messageElement.style.opacity = '0';
+                setTimeout(() => {
+                    messageElement.remove();
+                }, 300);
+            });
+            
+            // Auto-hide after 5 seconds
+            if (autoHide) {
+                setTimeout(function() {
+                    if (messageElement.parentElement) {
+                        messageElement.style.opacity = '0';
+                        setTimeout(() => {
+                            if (messageElement.parentElement) {
+                                messageElement.remove();
+                            }
+                        }, 300);
+                    }
+                }, 5000);
+            }
+            
+            return messageElement;
+        }
     </script>
 </body>
 </html>
