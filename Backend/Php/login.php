@@ -100,20 +100,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             setFlashMessage('success', 'Login successful! Welcome, ' . $_SESSION['firstname'] . '!');
             
             // Redirect to dashboard/profile
-            redirect('/MysteryHubProject/Pages/profile.html');
+            header("Location: ../../Pages/profile.html");
+            exit;
         } else {
             // Failed login
             setFlashMessage('error', 'Invalid username or password');
-            redirect('/MysteryHubProject/Pages/login.html');
+            header("Location: ../../Pages/login.html");
+            exit;
         }
     } else {
         // Validation errors
         foreach ($errors as $error) {
             setFlashMessage('error', $error);
         }
-        redirect('/MysteryHubProject/Pages/login.html');
+        header("Location: ../../Pages/login.html");
+        exit;
     }
 } else {
     // If not a POST request, redirect to login form
-    redirect('/MysteryHubProject/Pages/login.html');
+    header("Location: ../../Pages/login.html");
+    exit;
 }
