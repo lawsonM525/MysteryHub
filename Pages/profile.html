@@ -409,6 +409,198 @@
             opacity: 0.05;
             pointer-events: none;
         }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: var(--manila-folder);
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid var(--faded-ink);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            transform: translateY(-100px);
+            transition: transform 0.3s ease;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.1);
+        }
+
+        .modal-content::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
+            opacity: 0.4;
+            pointer-events: none;
+            border-radius: 8px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--faded-ink);
+            position: relative;
+            z-index: 1;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: var(--folder-red);
+            font-size: 1.5rem;
+            font-family: var(--typewriter-font);
+        }
+
+        .close-modal {
+            color: var(--faded-ink);
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover {
+            color: var(--folder-red);
+        }
+
+        .modal-body {
+            padding: 20px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark-ink);
+            font-weight: 500;
+            font-family: var(--typewriter-font);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--faded-ink);
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.5);
+            color: var(--dark-ink);
+            font-size: 1rem;
+            font-family: var(--handwritten-font);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--folder-red);
+            box-shadow: 0 0 0 2px rgba(160, 44, 44, 0.1);
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--faded-ink);
+            position: relative;
+            z-index: 1;
+        }
+
+        .submit-btn,
+        .cancel-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-family: var(--typewriter-font);
+        }
+
+        .submit-btn {
+            background-color: var(--folder-red);
+            color: var(--aged-paper);
+            border: 1px solid var(--folder-red);
+        }
+
+        .submit-btn:hover {
+            background-color: transparent;
+            color: var(--folder-red);
+        }
+
+        .cancel-btn {
+            background-color: transparent;
+            color: var(--dark-ink);
+            border: 1px solid var(--faded-ink);
+        }
+
+        .cancel-btn:hover {
+            background-color: rgba(160, 44, 44, 0.1);
+            border-color: var(--folder-red);
+            color: var(--folder-red);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .profile-picture-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        #profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 3px solid #007bff;
+        }
+
+        #profile-picture-upload {
+            width: 100%;
+            max-width: 300px;
+        }
     </style>
 </head>
 <body>
@@ -448,7 +640,7 @@
                     <div class="agent-photo-container">
                         <div class="photo-paperclip"></div>
                         <div class="agent-photo">
-                            <img src="https://i.pravatar.cc/150?img=12" alt="Agent Photo">
+                            <img id="profile-picture-display" src="../profile_pics/default-profile.jpg" alt="Profile Picture">
                         </div>
                     </div>
                     
@@ -469,6 +661,10 @@
                                 <div class="detail-label">Joined:</div>
                                 <div class="detail-value">January 15, 2025</div>
                             </div>
+                            <div class="agent-detail">
+                                <div class="detail-label">Bio:</div>
+                                <div class="detail-value" id="agent-bio">No field notes available.</div>
+                            </div>
                       
                         </div>
                         
@@ -487,6 +683,65 @@
                         <button class="edit-profile-btn" id="edit-profile-btn">
                             <i class="fas fa-pen"></i> Update Agent File
                         </button>
+                        <div id="editProfileModal" class="modal">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2><i class="fas fa-user-edit"></i> Update Agent File</h2>
+                                    <span class="close-modal">&times;</span>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="profile-form" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label for="profile-picture-upload">Profile Picture</label>
+                                            <div class="profile-picture-container">
+                                                <img id="profile-picture" src="../profile_pics/default-profile.jpg" alt="Agent Photo">
+                                                <input type="file" id="profile-picture-upload" name="profile_picture" accept="image/*" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="firstname">First Name</label>
+                                            <input type="text" id="firstname" name="firstname" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lastname">Last Name</label>
+                                            <input type="text" id="lastname" name="lastname" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" id="email" name="email" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="username">Username</label>
+                                            <input type="text" id="username" name="username" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="expertise">Field Expertise</label>
+                                            <select id="expertise" name="expertise" class="form-control" required>
+                                                <option value="">Select expertise</option>
+                                                <option value="detective">Field Detective</option>
+                                                <option value="forensics">Forensic Analysis</option>
+                                                <option value="profiler">Criminal Profiling</option>
+                                                <option value="cryptography">Cryptography</option>
+                                                <option value="surveillance">Surveillance Operations</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="bio">Field Notes</label>
+                                            <textarea id="bio" name="bio" rows="4" class="form-control" required></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="submit-btn" id="submit-btn">
+                                                <i class="fas fa-save"></i> Save Changes
+                                            </button>
+                                            <button type="button" class="cancel-btn" id="cancel-edit-btn">
+                                                <i class="fas fa-times"></i> Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 
@@ -706,12 +961,60 @@
             fetchProfileData();
             
             // Form submission handling
-            const profileForm = document.getElementById('profile-settings-form');
+            const profileForm = document.getElementById('profile-form');
             if (profileForm) {
                 profileForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    updateProfile(this);
+                    
+                    // Create FormData object to handle file upload
+                    const formData = new FormData(this);
+                    
+                    // Add user ID to form data
+                    const userId = localStorage.getItem('userId');
+                    if (userId) {
+                        formData.append('user_id', userId);
+                    }
+                    
+                    // Send the form data to the server
+                    fetch('../Backend/Php/update_profile.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Show success message
+                            showMessage('Profile updated successfully!', 'success');
+                            
+                            // Update the profile picture if it was changed
+                            if (data.profile_picture) {
+                                document.getElementById('profile-picture').src = data.profile_picture;
+                            }
+                            
+                            // Close the modal
+                            const modal = document.getElementById('profile-modal');
+                            if (modal) {
+                                modal.style.display = 'none';
+                            }
+                            
+                            // Refresh the profile data
+                            loadProfileData();
+                        } else {
+                            // Show error message
+                            showMessage(data.message || 'Failed to update profile. Please try again.', 'error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error updating profile:', error);
+                        showMessage('An error occurred while updating your profile. Please try again.', 'error');
+                    });
                 });
+            }
+            
+            // Get user ID from localStorage or session
+            const userId = localStorage.getItem('userId');
+            if (userId) {
+                loadProfilePictureFromJson(userId);
             }
         });
         
@@ -752,98 +1055,18 @@
         }
         
         // Update the UI with profile data
-        function updateProfileUI(data) {
-            // User name and codename
-            document.querySelector('.agent-code-name').textContent = data.display.displayName;
-            document.querySelector('.agent-codename').textContent = 'Codename: "' + data.user.username + '"';
+        function updateProfileUI(userData) {
+            document.getElementById('firstname').value = userData.firstname || '';
+            document.getElementById('lastname').value = userData.lastname || '';
+            document.getElementById('email').value = userData.email || '';
+            document.getElementById('username').value = userData.username || '';
+            document.getElementById('expertise').value = userData.expertise || '';
+            document.getElementById('bio').value = userData.bio || '';
             
-            // Agent details
-            document.querySelectorAll('.agent-detail').forEach(detail => {
-                const label = detail.querySelector('.detail-label');
-                if (label) {
-                    const value = detail.querySelector('.detail-value');
-                    if (label.textContent === 'Joined:') {
-                        value.textContent = data.display.joinDate;
-                    } else if (label.textContent === 'Division:') {
-                        value.textContent = data.user.expertise || 'Investigation & Analysis';
-                    } else if (label.textContent === 'Status:') {
-                        value.textContent = 'Active Field Agent';
-                    }
-                }
-            });
-            
-            // Stats
-            const statsElements = document.querySelectorAll('.agent-stat');
-            statsElements.forEach(stat => {
-                const icon = stat.querySelector('i');
-                if (icon) {
-                    if (icon.classList.contains('fa-gamepad')) {
-                        stat.innerHTML = `<i class="fas fa-gamepad"></i> ${data.stats.completedGames} Field Operations`;
-                    } else if (icon.classList.contains('fa-book-open')) {
-                        stat.innerHTML = `<i class="fas fa-book-open"></i> ${data.stats.favoriteBlogs} Case Files`;
-                    } else if (icon.classList.contains('fa-film')) {
-                        stat.innerHTML = `<i class="fas fa-film"></i> ${data.stats.favoriteMovies} Evidence Logs`;
-                    }
-                }
-            });
-            
-            // Profile form
-            const profileForm = document.getElementById('profile-settings-form');
-            if (profileForm) {
-                const firstnameInput = profileForm.querySelector('#display-name');
-                if (firstnameInput) {
-                    firstnameInput.value = data.user.firstname + ' ' + data.user.lastname;
-                }
-                
-                const usernameInput = profileForm.querySelector('#username');
-                if (usernameInput) {
-                    usernameInput.value = data.user.username;
-                }
-                
-                const emailInput = profileForm.querySelector('#email');
-                if (emailInput) {
-                    emailInput.value = data.user.email;
-                }
-                
-                const bioInput = profileForm.querySelector('#bio');
-                if (bioInput) {
-                    bioInput.value = data.user.bio || '';
-                }
+            // Update profile picture
+            if (userData.profile_picture) {
+                document.getElementById('profile-picture').src = userData.profile_picture;
             }
-        }
-        
-        // Update profile via API
-        function updateProfile(form) {
-            const formData = new FormData(form);
-            
-            // Display loading state
-            displayFlashMessage('info', 'Updating profile...', false);
-            
-            fetch('../Backend/Php/update_profile.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    displayFlashMessage('success', data.message || 'Profile updated successfully!');
-                    // Reload profile data to show updated information
-                    fetchProfileData();
-                } else {
-                    displayFlashMessage('error', data.message || 'Failed to update profile.');
-                    
-                    // Display individual validation errors
-                    if (data.errors && Array.isArray(data.errors)) {
-                        data.errors.forEach(error => {
-                            displayFlashMessage('error', error);
-                        });
-                    }
-                }
-            })
-            .catch(error => {
-                console.error('Error updating profile:', error);
-                displayFlashMessage('error', 'Failed to connect to the server. Please try again later.');
-            });
         }
         
         // Display flash messages
@@ -963,6 +1186,124 @@
             }
             
             return messageElement;
+        }
+
+        // This is the functionality for the edit profile modal
+        const modal = document.getElementById('editProfileModal');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const cancelBtn = document.getElementById('cancel-edit-btn');
+        const editProfileBtn = document.getElementById('edit-profile-btn');
+        const submitBtn = document.getElementById('submit-btn');
+
+        editProfileBtn.addEventListener('click', () => {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            console.log('edit profile button clicked');
+            // Add fade-in and slide-in animations
+            modal.style.opacity = '0';
+            modal.style.transform = 'translateY(-100px)';
+            setTimeout(() => {
+                modal.style.opacity = '1';
+                modal.style.transform = 'translateY(0)';
+            }, 100);
+
+            // fill the button with the current profile data
+            fetch('../Backend/Php/get_profile_data.php')
+                .then(response => response.json())
+                .then(data => {
+                    if( data.user) {
+                        document.getElementById('firstname').value = data.user.firstname;
+                        document.getElementById('lastname').value = data.user.lastname;
+                        document.getElementById('email').value = data.user.email;
+                        document.getElementById('username').value = data.user.username;
+                        document.getElementById('expertise').value = data.user.expertise;
+                        document.getElementById('bio').value = data.user.bio || '';
+                    }
+                })
+                .catch(error => console.error("Error fetching profile data:", error));
+        });
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        closeModalBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+
+        window.addEventListener('click', (e) => {
+            if(event.key === 'Escape' &&  modal.style.display === 'block') {
+                closeModal();
+            }
+        });
+
+        submitBtn.addEventListener('click', () => {
+            console.log('submit button clicked');
+            const formData = new FormData(modal.querySelector('form'));
+            const updatedData = Object.fromEntries(formData);
+
+            console.log(updatedData);
+
+            // Update the profile data in the backend
+            fetch('../Backend/Php/update_profile.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    displayFlashMessage('success', data.message || 'Profile updated successfully!');
+                    closeModal();
+                    
+                    // Reload the profile picture after successful update
+                    const userId = localStorage.getItem('userId');
+                    if (userId) {
+                        console.log('Reloading profile picture after update');
+                        loadProfilePictureFromJson(userId);
+                    }
+                } else {
+                    displayFlashMessage('error', data.message || 'Failed to update profile.');
+                }
+            })
+        }) 
+
+        // Function to load profile picture from JSON data
+        function loadProfilePictureFromJson(userId) {
+            // Get the profile picture display element
+            const profilePictureDisplay = document.getElementById('profile-picture-display');
+            
+            // Check if the element exists
+            if (!profilePictureDisplay) {
+                console.error('Profile picture display element not found');
+                return;
+            }
+            
+            // Display loading state
+            profilePictureDisplay.src = '../profile_pics/default-profile.jpg';
+            
+            // Fetch user data from JSON file
+            fetch('../Backend/Data/users/users.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch user data');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Find the user with the matching ID
+                    const user = data.find(user => user.id === userId);
+                    
+                    if (user && user.profile_picture) {
+                        // Update the profile picture
+                        profilePictureDisplay.src = user.profile_picture;
+                        console.log('Profile picture updated:', user.profile_picture);
+                    } else {
+                        console.log('No profile picture found for user:', userId);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading profile picture:', error);
+                    // Keep the default image if there's an error
+                });
         }
     </script>
 </body>

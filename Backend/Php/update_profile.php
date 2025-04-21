@@ -4,6 +4,9 @@
  * Handles updating user profile information
  */
 
+// Include database connection
+
+
 // Start session
 session_start();
 
@@ -32,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // Data directory paths
 define('DATA_DIR', dirname(dirname(__DIR__)) . '/Backend/Data');
 define('USERS_DIR', DATA_DIR . '/users');
+define('PROFILE_PICS_DIR', dirname(dirname(__DIR__)) . '/Backend/profile_pics');
 
 // Helper functions
 function loadJsonData($file) {
@@ -59,10 +63,61 @@ $userId = $_SESSION['user_id'];
 $firstname = sanitizeInput($_POST['firstname'] ?? '');
 $lastname = sanitizeInput($_POST['lastname'] ?? '');
 $email = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
+$username = sanitizeInput($_POST['username'] ?? '');
+$expertise = sanitizeInput($_POST['expertise'] ?? '');
 $bio = sanitizeInput($_POST['bio'] ?? '');
-$currentPassword = $_POST['current_password'] ?? '';
-$newPassword = $_POST['new_password'] ?? '';
-$confirmPassword = $_POST['confirm_password'] ?? '';
+
+// Handle profile picture upload if provided
+$profilePicturePath = null;
+if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
+    $file = $_FILES['profile_picture'];
+    $file_name = $file['name'];
+    $file_tmp = $file['tmp_name'];
+    $file_size = $file['size'];
+    $file_error = $file['error'];
+    
+    // Get file extension
+    $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+    
+    // Allowed file types
+    $allowed = ['jpg', 'jpeg', 'png', 'gif'];
+    
+    // Check if file type is allowed
+    if (in_array($file_ext, $allowed)) {
+        // Check for errors
+        if ($file_error === 0) {
+            // Check file size (max 5MB)
+            if ($file_size < 5000000) {
+                // Create unique file name
+                $file_name_new = uniqid('profile_', true) . '.' . $file_ext;
+                
+                // Set upload directory
+                $upload_dir = '../../profile_pics/';
+                
+                // Create directory if it doesn't exist
+                if (!file_exists($upload_dir)) {
+                    mkdir($upload_dir, 0777, true);
+                }
+                
+                // Set file destination
+                $file_destination = $upload_dir . $file_name_new;
+                
+                // Move uploaded file
+                if (move_uploaded_file($file_tmp, $file_destination)) {
+                    $profilePicturePath = 'uploads/profile_pictures/' . $file_name_new;
+                } else {
+                    $errors[] = "Failed to upload profile picture. Please try again.";
+                }
+            } else {
+                $errors[] = "File size too large. Maximum size is 5MB";
+            }
+        } else {
+            $errors[] = "Error uploading file";
+        }
+    } else {
+        $errors[] = "File type not allowed. Allowed types: jpg, jpeg, png, gif";
+    }
+}
 
 // Form validation
 $errors = [];
@@ -77,6 +132,14 @@ if (empty($lastname)) {
 
 if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors[] = "Valid email is required";
+}
+
+if (empty($username)) {
+    $errors[] = "Username is required";
+}
+
+if (empty($expertise)) {
+    $errors[] = "Field expertise is required";
 }
 
 // Load users data
@@ -109,23 +172,12 @@ foreach ($users as $user) {
     }
 }
 
-// Password change (optional)
-$passwordChanged = false;
-if (!empty($newPassword) || !empty($confirmPassword)) {
-    // Current password required for changes
-    if (empty($currentPassword) || !password_verify($currentPassword, $userData['password'])) {
-        $errors[] = "Current security key (password) is incorrect";
+// Check if username already exists (excluding current user)
+foreach ($users as $user) {
+    if ($user['username'] === $username && $user['id'] !== $userId) {
+        $errors[] = "Username already in use by another agent";
+        break;
     }
-    
-    if (strlen($newPassword) < 6) {
-        $errors[] = "New security key must be at least 6 characters";
-    }
-    
-    if ($newPassword !== $confirmPassword) {
-        $errors[] = "New security key and confirmation do not match";
-    }
-    
-    $passwordChanged = true;
 }
 
 // If no errors, update profile
@@ -134,12 +186,14 @@ if (empty($errors)) {
     $users[$userIndex]['firstname'] = $firstname;
     $users[$userIndex]['lastname'] = $lastname;
     $users[$userIndex]['email'] = $email;
+    $users[$userIndex]['username'] = $username;
+    $users[$userIndex]['expertise'] = $expertise;
     $users[$userIndex]['bio'] = $bio;
     $users[$userIndex]['updated_at'] = date('Y-m-d H:i:s');
     
-    // Update password if changed
-    if ($passwordChanged && !empty($newPassword)) {
-        $users[$userIndex]['password'] = password_hash($newPassword, PASSWORD_DEFAULT);
+    // Update profile picture if a new one was uploaded
+    if ($profilePicturePath) {
+        $users[$userIndex]['profile_picture'] = $profilePicturePath;
     }
     
     // Save updated user data
@@ -147,6 +201,7 @@ if (empty($errors)) {
         // Update session data
         $_SESSION['firstname'] = $firstname;
         $_SESSION['lastname'] = $lastname;
+        $_SESSION['username'] = $username;
         
         echo json_encode([
             'success' => true,
@@ -155,7 +210,10 @@ if (empty($errors)) {
                 'firstname' => $firstname,
                 'lastname' => $lastname,
                 'email' => $email,
-                'bio' => $bio
+                'username' => $username,
+                'expertise' => $expertise,
+                'bio' => $bio,
+                'profile_picture' => $users[$userIndex]['profile_picture']
             ]
         ]);
     } else {
@@ -171,4 +229,5 @@ if (empty($errors)) {
         'errors' => $errors
     ]);
 }
+
 ?>
