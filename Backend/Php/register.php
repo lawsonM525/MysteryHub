@@ -1,5 +1,5 @@
-]
 <?php
+error_log(print_r($_FILES, true));
 
 /** This file will accept POST data from the register form (like name, email, password).
 *Validate to make sure the email isn't already registered and Sanitize the data 
@@ -33,6 +33,45 @@ if (!file_exists(USERS_DIR)) {
     mkdir(USERS_DIR, 0755, true);
     error_log("Created USERS_DIR: " . USERS_DIR);
 }
+
+// Define profile pictures directory using relative path
+$profilePicturesDir = "../../profile_pics";
+
+if (!file_exists($profilePicturesDir)) {
+    mkdir($profilePicturesDir, 0755, true);
+    error_log("Created profile_pictures directory: " . $profilePicturesDir);
+}
+
+//handling profile picture
+$profilePicturePath = $profilePicturesDir . "/default-profile.jpg";
+
+// Check if default image exists, if not create a placeholder
+if (!file_exists($profilePicturePath)) {
+    // Create a simple placeholder image
+    $image = imagecreatetruecolor(150, 150);
+    $bgColor = imagecolorallocate($image, 200, 200, 200);
+    imagefill($image, 0, 0, $bgColor);
+    imagejpeg($image, $profilePicturePath);
+    imagedestroy($image);
+    error_log("Created default profile picture: " . $profilePicturePath);
+}
+error_log("Getting the profile picture");
+
+if(isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK){
+    $uploadDir = $profilePicturesDir . "/";
+    $ext = pathinfo($_FILES['profile_picture']['name'], PATHINFO_EXTENSION);
+    $filename = uniqid() . '.' . $ext;
+    $destination = $uploadDir . $filename;
+
+    if(move_uploaded_file($_FILES['profile_picture']['tmp_name'], $destination)){
+        $profilePicturePath = $destination;
+        error_log("Successfully uploaded profile picture: " . $profilePicturePath);
+    } else {
+        error_log("Failed to move uploaded file");
+        setFlashMessage('error', 'Failed to upload profile picture. Please try again.');
+    }
+}
+
 
 // Initialize users.json if it doesn't exist
 if (!file_exists(USERS_FILE)) {
@@ -187,6 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'lastname' => $lastname,
                 'expertise' => $expertise,
                 'is_admin' => false, // Default to regular user
+                'profile_picture' => $profilePicturePath,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ];
