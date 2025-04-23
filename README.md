@@ -28,4 +28,3 @@ Michelle - Movies and Game 2 functionality (prison break)
 Bintu - Admin page (see all users, be able to delete users)
 Michelle - User profile should have favorited movies, favorited articles, played games (but its really just two games so not much we can do there)
 
-add how to to
