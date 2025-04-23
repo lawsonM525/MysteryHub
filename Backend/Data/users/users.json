@@ -9,10 +9,10 @@
         "expertise": "cryptography",
         "is_admin": false,
         "created_at": "2025-04-18 10:14:56",
-        "updated_at": "2025-04-23 02:23:43",
-        "last_login": "2025-04-23 02:22:52",
+        "updated_at": "2025-04-23 03:26:48",
+        "last_login": "2025-04-23 03:20:13",
         "bio": "i am happy to be alive.. are you? are you still alive?",
-        "profile_picture": "profile_pics\/profile_68084f2fca5c90.11525414.jpeg"
+        "profile_picture": "profile_pics\/profile_68085df89ae1d0.29261142.png"
     },
     {
         "id": "mh_68027e76531714.02285803",
@@ -188,8 +188,20 @@
         "is_admin": false,
         "profile_picture": "profile_pics\/profile_680853d478e693.35727743.jpg",
         "created_at": "2025-04-21 22:35:10",
-        "updated_at": "2025-04-23 02:43:32",
-        "last_login": "2025-04-23 02:40:58",
-        "bio": "Hi My name is Amelia and I love solving murders."
+        "updated_at": "2025-04-21 22:38:03",
+        "last_login": "2025-04-21 22:38:03"
+    },
+    {
+        "id": "mh_68085aa42b3e95.55256616",
+        "username": "m_lawz_12",
+        "password": "$2y$10$FjiZcaMuy4C3zw82XvkYkelfAWnEQ2Dv1lDdwdBN6kHQs0kM\/dKkW",
+        "email": "mlawzan@hope.com",
+        "firstname": "Mia",
+        "lastname": "Lawzan",
+        "expertise": "forensics",
+        "is_admin": false,
+        "profile_picture": "..\/..\/profile_pics\/68085aa4296e5.jpeg",
+        "created_at": "2025-04-23 03:12:36",
+        "updated_at": "2025-04-23 03:12:36"
     }
 ]

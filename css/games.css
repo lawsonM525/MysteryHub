@@ -1,0 +1,403 @@
+:root {
+    --folder-red: #a02c2c;
+    --stamp-red: #9e2a2b;
+    --aged-paper: #e8e0cf;
+    --aged-paper-dark: #d8d0bf;
+    --ink-color: #333;
+    --typewriter-color: #222;
+    --folder-tab: #876;
+    --faded-ink: #555;
+    --manila-folder: #e6ddc6;
+}
+
+body {
+    background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
+    background-color: var(--aged-paper);
+    color: var(--ink-color);
+    font-family: 'Cutive Mono', monospace;
+}
+
+.game-container {
+    max-width: 900px;
+    margin: 50px auto;
+    background-color: var(--manila-folder);
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--folder-tab);
+    padding: 40px 30px 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
+    opacity: 0.4;
+    z-index: 0;
+}
+
+.game-title {
+    font-family: 'Special Elite', cursive;
+    text-align: center;
+    color: var(--folder-red);
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.game-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--folder-red);
+    opacity: 0.5;
+}
+
+.game-description {
+    font-family: 'Cutive Mono', monospace;
+    margin-bottom: 30px;
+    text-align: center;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--ink-color);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    padding: 15px;
+    border-left: 3px solid var(--folder-red);
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Hangman specific styles */
+.hangman-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.hangman-left {
+    flex: 1;
+    min-width: 300px;
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.hangman-left::before {
+    content: 'CRIME SCENE';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background-color: var(--folder-red);
+    color: white;
+    padding: 2px 15px;
+    font-size: 0.8rem;
+    font-family: 'Special Elite', cursive;
+    border-radius: 3px;
+}
+
+.hangman-right {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+#canvas {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin-bottom: 20px;
+    border: 1px solid var(--folder-tab);
+}
+
+.word-display {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0;
+    gap: 10px;
+}
+
+.letter-box {
+    width: 30px;
+    height: 40px;
+    border-bottom: 3px solid var(--folder-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-family: 'Special Elite', cursive;
+    text-transform: uppercase;
+    color: var(--folder-red);
+}
+
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.keyboard-btn {
+    background-color: var(--manila-folder);
+    border: 1px solid var(--folder-tab);
+    border-radius: 3px;
+    padding: 8px 0;
+    font-family: 'Special Elite', cursive;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.keyboard-btn:hover {
+    background-color: rgba(160, 44, 44, 0.1);
+    transform: translateY(-2px);
+}
+
+.keyboard-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #ddd;
+    transform: none;
+}
+
+.game-status {
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 15px 20px;
+    border-radius: 5px;
+    font-family: 'Special Elite', cursive;
+    margin-top: 20px;
+    text-align: center;
+    min-height: 60px;
+    border-left: 3px solid var(--folder-red);
+}
+
+.clue-section {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 5px;
+    position: relative;
+}
+
+.clue-section::before {
+    content: 'CASE EVIDENCE';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background-color: var(--folder-red);
+    color: white;
+    padding: 2px 15px;
+    font-size: 0.8rem;
+    font-family: 'Special Elite', cursive;
+    border-radius: 3px;
+}
+
+.clue-box {
+    background-color: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+    padding-left: 40px;
+    display: none;
+}
+
+.clue-box.visible {
+    display: block;
+}
+
+.clue-box::before {
+    content: attr(data-clue-number);
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25px;
+    height: 25px;
+    background-color: var(--folder-red);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Special Elite', cursive;
+}
+
+.hint-btn {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: transparent;
+    color: var(--folder-red);
+    border: 1px solid var(--folder-red);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 20px;
+    font-family: 'Special Elite', cursive;
+}
+
+.hint-btn:hover {
+    background-color: rgba(160, 44, 44, 0.1);
+    transform: translateY(-3px);
+}
+
+.new-game-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--folder-red);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 20px;
+    font-family: 'Special Elite', cursive;
+    text-align: center;
+}
+
+.new-game-btn:hover {
+    background-color: var(--stamp-red);
+    transform: translateY(-3px);
+}
+
+/* Case file decorations */
+.evidence-tag {
+    position: absolute;
+    top: -15px;
+    right: 30px;
+    background-color: var(--folder-red);
+    color: white;
+    padding: 5px 15px;
+    font-family: 'Special Elite', cursive;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+.case-status {
+    position: absolute;
+    top: 20px;
+    right: -40px;
+    background-color: var(--stamp-red);
+    color: white;
+    padding: 5px 30px;
+    transform: rotate(45deg);
+    font-family: 'Special Elite', cursive;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    z-index: 5;
+}
+
+.paper-clip {
+    position: absolute;
+    top: -10px;
+    left: 50px;
+    width: 30px;
+    height: 60px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 200"><path d="M80,20c0-11-9-20-20-20S40,9,40,20v140c0,11,9,20,20,20s20-9,20-20V40c0-5.5-4.5-10-10-10s-10,4.5-10,10v100c0,5.5,4.5,10,10,10s10-4.5,10-10V40" fill="%23888"/></svg>');
+    transform: rotate(-10deg);
+    opacity: 0.7;
+    z-index: 11;
+}
+
+.other-games {
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+.game-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.game-link-card {
+    background-color: var(--manila-folder);
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--ink-color);
+    display: block;
+    border: 1px solid var(--folder-tab);
+}
+
+.game-link-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.game-link-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.game-link-title {
+    font-family: 'Special Elite', cursive;
+    color: var(--folder-red);
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    position: relative;
+    z-index: 1;
+}
+
+.game-link-desc {
+    font-family: 'Cutive Mono', monospace;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.handwritten-note {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-family: 'Homemade Apple', cursive;
+    font-size: 0.8rem;
+    color: var(--stamp-red);
+    transform: rotate(-5deg);
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .hangman-wrapper {
+        flex-direction: column;
+    }
+    
+    .keyboard {
+        grid-template-columns: repeat(9, 1fr);
+    }
+}
