@@ -9,10 +9,10 @@
         "expertise": "cryptography",
         "is_admin": false,
         "created_at": "2025-04-18 10:14:56",
-        "updated_at": "2025-04-23 03:26:48",
-        "last_login": "2025-04-23 03:20:13",
-        "bio": "i am happy to be alive.. are you? are you still alive?",
-        "profile_picture": "profile_pics\/profile_68085df89ae1d0.29261142.png"
+        "updated_at": "2025-04-23 19:33:55",
+        "last_login": "2025-04-23 19:33:42",
+        "bio": "i am happy to be alive.. are you? are you sure youre alive???",
+        "profile_picture": "profile_pics\/profile_680940a355f736.27582336.jpeg"
     },
     {
         "id": "mh_68027e76531714.02285803",
@@ -203,5 +203,63 @@
         "profile_picture": "..\/..\/profile_pics\/68085aa4296e5.jpeg",
         "created_at": "2025-04-23 03:12:36",
         "updated_at": "2025-04-23 03:12:36"
+    },
+    {
+        "id": "mh_680926125efe52.81254309",
+        "username": "as_tor",
+        "password": "$2y$10$P\/jJvYos8T1v1CSTCfR20.uJLTv98xg8kfftFGGenVI.tbjeQAZpS",
+        "email": "asholz@gmail.com",
+        "firstname": "amy",
+        "lastname": "sholz",
+        "expertise": "forensics",
+        "is_admin": false,
+        "profile_picture": "profile_pics\/profile_68092629417a53.25647420.jpeg",
+        "created_at": "2025-04-23 17:40:34",
+        "updated_at": "2025-04-23 17:40:57",
+        "last_login": "2025-04-23 17:40:42",
+        "bio": ""
+    },
+    {
+        "id": "mh_680927f21aa2d5.67472054",
+        "username": "kba",
+        "password": "$2y$10$YmIcefw6ohzQJsT6D3IrKOe9\/ud0wFGlfoV0AtRq2njLj9kclmpYy",
+        "email": "kbaah@gmail.com",
+        "firstname": "Kweku",
+        "lastname": "Baah",
+        "expertise": "surveillance",
+        "is_admin": false,
+        "profile_picture": "profile_pics\/profile_6809296063c732.40674811.png",
+        "created_at": "2025-04-23 17:48:34",
+        "updated_at": "2025-04-23 17:54:40",
+        "last_login": "2025-04-23 17:48:40",
+        "bio": ""
+    },
+    {
+        "id": "mh_6809299c470e70.89557875",
+        "username": "bb_hack",
+        "password": "$2y$10$GQ3Dd1Tmx5RLbvao5YMt3eP8.Kg20HXglLSBLF5xTDOrIIcUf54GW",
+        "email": "bb@gmail.com",
+        "firstname": "bikini",
+        "lastname": "bottom",
+        "expertise": "forensics",
+        "is_admin": false,
+        "profile_picture": "profile_pics\/profile_680929bd13d116.86671462.png",
+        "created_at": "2025-04-23 17:55:40",
+        "updated_at": "2025-04-23 17:56:13",
+        "last_login": "2025-04-23 17:55:54",
+        "bio": "i am bikini bottom!"
+    },
+    {
+        "id": "mh_68092aea201347.50743384",
+        "username": "bin22",
+        "password": "$2y$10$rwfdKU4lywmFNUjFh\/w5\/.FQ5pq4ZDLWP4nI.N4HhqFQWmpZlnQVm",
+        "email": "bjalloh@gmail.com",
+        "firstname": "bin2",
+        "lastname": "jalloh",
+        "expertise": "profiler",
+        "is_admin": false,
+        "profile_picture": "..\/..\/profile_pics\/default-profile.jpg",
+        "created_at": "2025-04-23 18:01:14",
+        "updated_at": "2025-04-23 18:01:14"
     }
 ]
