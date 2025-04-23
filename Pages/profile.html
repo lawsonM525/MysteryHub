@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agent Dossier - Mystery Hub</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <script>
         window.MYSTERY_HUB_CONFIG = {
@@ -46,13 +47,13 @@
             <div class="profile-container">
                 <!-- Agent Dossier Header -->
                 <div class="agent-dossier">
-                    <div class="file-number">AGENT FILE #MH-2025-1142</div>
-                    <div class="clearance-stamp">Level 3 Clearance</div>
+                    <div class="file-number" id="agent-file-number">AGENT FILE #MH-2025-1142</div>
+                    <div class="clearance-stamp" id="clearance-level">Level 3 Clearance</div>
                     
                     <div class="agent-photo-container">
                         <div class="photo-paperclip"></div>
                         <div class="agent-photo">
-                            <img id="profile-picture-display" src="../profile_pics/default-profile.jpg" alt="Profile Picture">
+                            <img id="profile-picture-display" src="../img/default-profile.png" alt="Agent Profile Picture">
                         </div>
                     </div>
                     
@@ -467,17 +468,91 @@
         }
         
         // Update the UI with profile data
-        function updateProfileUI(userData) {
-            document.getElementById('firstname').value = userData.firstname || '';
-            document.getElementById('lastname').value = userData.lastname || '';
-            document.getElementById('email').value = userData.email || '';
-            document.getElementById('username').value = userData.username || '';
-            document.getElementById('expertise').value = userData.expertise || '';
-            document.getElementById('bio').value = userData.bio || '';
+        function updateProfileUI(data) {
+            // User name and codename
+            document.querySelector('.agent-code-name').textContent = `Agent ${data.user.firstname.charAt(0)}. ${data.user.lastname.charAt(0)}.`;
+            document.querySelector('.agent-codename').textContent = `Codename: "${data.user.username}"`;
             
-            // Update profile picture
-            if (userData.profile_picture) {
-                document.getElementById('profile-picture').src = userData.profile_picture;
+            // File number and clearance
+            const fileId = data.user.id.substring(3, 7); // Extract part of unique ID for file number
+            document.getElementById('agent-file-number').textContent = `AGENT FILE #MH-${new Date().getFullYear()}-${fileId}`;
+            
+            // Set clearance level based on join date (just for visual effect)
+            const joinDate = new Date(data.user.created_at);
+            const now = new Date();
+            const monthsActive = (now.getFullYear() - joinDate.getFullYear()) * 12 + now.getMonth() - joinDate.getMonth();
+            let clearanceLevel = 1;
+            if (monthsActive > 3) clearanceLevel = 2;
+            if (monthsActive > 6) clearanceLevel = 3;
+            document.getElementById('clearance-level').textContent = `LEVEL ${clearanceLevel} CLEARANCE`;
+            
+            // Agent photo - if user has a profile picture, use it, otherwise default
+            const profilePic = document.getElementById('profile-picture-display');
+            if (data.user.profile_pic) {
+                profilePic.src = data.user.profile_pic;
+            } else {
+                profilePic.src = '../img/default-profile.png';
+            }
+            
+            // Agent details
+            document.querySelectorAll('.agent-detail').forEach(detail => {
+                const label = detail.querySelector('.detail-label');
+                if (label) {
+                    const value = detail.querySelector('.detail-value');
+                    if (label.textContent === 'Joined:') {
+                        value.textContent = data.display.joinDate;
+                    } else if (label.textContent === 'Division:') {
+                        value.textContent = data.user.expertise || 'Investigation & Analysis';
+                    } else if (label.textContent === 'Status:') {
+                        value.textContent = 'Active Field Agent';
+                    } else if (label.textContent === 'Bio:') {
+                        value.textContent = data.user.bio || 'No field notes available.';
+                    }
+                }
+            });
+            
+            // Stats
+            const statsElements = document.querySelectorAll('.agent-stat');
+            statsElements.forEach(stat => {
+                const icon = stat.querySelector('i');
+                if (icon) {
+                    if (icon.classList.contains('fa-gamepad')) {
+                        stat.innerHTML = `<i class="fas fa-gamepad"></i> ${data.stats.completedGames} Field Operations`;
+                    } else if (icon.classList.contains('fa-book-open')) {
+                        stat.innerHTML = `<i class="fas fa-book-open"></i> ${data.stats.favoriteBlogs} Case Files`;
+                    } else if (icon.classList.contains('fa-film')) {
+                        stat.innerHTML = `<i class="fas fa-film"></i> ${data.stats.favoriteMovies} Evidence Logs`;
+                    }
+                }
+            });
+            
+            // Profile form
+            const profileForm = document.getElementById('profile-settings-form');
+            if (profileForm) {
+                const firstnameInput = profileForm.querySelector('#firstname');
+                if (firstnameInput) {
+                    firstnameInput.value = data.user.firstname;
+                }
+                
+                const lastnameInput = profileForm.querySelector('#lastname');
+                if (lastnameInput) {
+                    lastnameInput.value = data.user.lastname;
+                }
+                
+                const usernameInput = profileForm.querySelector('#username');
+                if (usernameInput) {
+                    usernameInput.value = data.user.username;
+                }
+                
+                const emailInput = profileForm.querySelector('#email');
+                if (emailInput) {
+                    emailInput.value = data.user.email;
+                }
+                
+                const bioInput = profileForm.querySelector('#bio');
+                if (bioInput) {
+                    bioInput.value = data.user.bio || '';
+                }
             }
         }
         
