@@ -36,12 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 define('DATA_DIR', dirname(dirname(__DIR__)) . '/Backend/Data');
 define('USERS_DIR', DATA_DIR . '/users');
 define('PROFILE_PICS_DIR', dirname(dirname(__DIR__)) . '/profile_pics');
-
-// Ensure profile pics directory exists
-if (!file_exists(PROFILE_PICS_DIR)) {
-    mkdir(PROFILE_PICS_DIR, 0755, true);
-    error_log("Created profile pics directory: " . PROFILE_PICS_DIR);
-}
+ 
 
 // Helper functions
 function loadJsonData($file) {

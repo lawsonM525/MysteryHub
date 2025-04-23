@@ -17,3 +17,5 @@ Bintu & Michelle - Registration (6 hours)
 Bintu - Updating and Editing User (7 hours)
 Michelle - Game 1 : Hangman (6 hours)
 Bintu & Documentation - Bintu & Michelle (2 hours)
+
+Sources: https://www.w3schools.com/php/php_sessions.asp 
