@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Console - Mystery Hub</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script>
+        window.MYSTERY_HUB_CONFIG = {
+            navbarClock: true
+        };
+    </script>
+    <script src="../clock/clock.js"></script>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="../index.html">
+                    <h1>Mystery<span>Hub</span></h1>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home Base</a></li>
+                <li><a href="../games/game1.html">Field Operations</a></li>
+                <li><a href="../blog/blog.html">Case Files</a></li>
+                <li><a href="../movies/movies.html">Evidence Archive</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li class="active"><a href="admin.html">Admin Console</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Admin Content -->
+    <section class="main-content">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h1><i class="fas fa-shield-alt"></i> Administration Console</h1>
+                <div class="clearance-stamp">LEVEL 10 CLEARANCE</div>
+            </div>
+            
+            <div class="admin-panel">
+                <div class="admin-sidebar">
+                    <div class="admin-menu">
+                        <div class="menu-item active" data-tab="users">
+                            <i class="fas fa-users"></i> Agents
+                        </div>
+                        <div class="menu-item" data-tab="games">
+                            <i class="fas fa-gamepad"></i> Field Operations
+                        </div>
+                        <div class="menu-item" data-tab="blogs">
+                            <i class="fas fa-book-open"></i> Case Files
+                        </div>
+                        <div class="menu-item" data-tab="movies">
+                            <i class="fas fa-film"></i> Evidence Logs
+                        </div>
+                        <div class="menu-item" data-tab="settings">
+                            <i class="fas fa-cog"></i> System Settings
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="admin-content">
+                    <!-- Users Tab -->
+                    <div class="tab-content active" id="users">
+                        <div class="section-header">
+                            <h2>Agent Files</h2>
+                            <button id="add-user-btn" class="action-btn">
+                                <i class="fas fa-user-plus"></i> Add New Agent
+                            </button>
+                        </div>
+                        
+                        <div class="search-filter">
+                            <div class="search-box">
+                                <input type="text" id="user-search" placeholder="Search agents...">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="filter-box">
+                                <select id="user-filter">
+                                    <option value="all">All Agents</option>
+                                    <option value="active">Active Agents</option>
+                                    <option value="admin">Admin Agents</option>
+                                    <option value="detective">Field Detectives</option>
+                                    <option value="forensics">Forensic Analysts</option>
+                                    <option value="cryptography">Cryptographers</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="user-table-container">
+                            <table class="user-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Photo</th>
+                                        <th>Name</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Expertise</th>
+                                        <th>Join Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="user-table-body">
+                                    <!-- User data will be loaded here dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Other tabs would go here -->
+                    <div class="tab-content" id="games">
+                        <h2>Field Operations Management</h2>
+                        <p>Coming soon: Manage mystery games and content.</p>
+                    </div>
+                    
+                    <div class="tab-content" id="blogs">
+                        <h2>Case Files Management</h2>
+                        <p>Coming soon: Manage blog posts and true crime stories.</p>
+                    </div>
+                    
+                    <div class="tab-content" id="movies">
+                        <h2>Evidence Logs Management</h2>
+                        <p>Coming soon: Manage movie recommendations.</p>
+                    </div>
+                    
+                    <div class="tab-content" id="settings">
+                        <h2>System Settings</h2>
+                        <p>Coming soon: Configure system settings.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- User Modal Forms -->
+    <div id="add-user-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-plus"></i> Add New Agent</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="add-user-form">
+                    <div class="form-group">
+                        <label for="firstname">First Name</label>
+                        <input type="text" id="firstname" name="firstname" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Last Name</label>
+                        <input type="text" id="lastname" name="lastname" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password">Confirm Password</label>
+                        <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expertise">Field Expertise</label>
+                        <select id="expertise" name="expertise" class="form-control" required>
+                            <option value="">Select expertise</option>
+                            <option value="detective">Field Detective</option>
+                            <option value="forensics">Forensic Analysis</option>
+                            <option value="profiler">Criminal Profiling</option>
+                            <option value="cryptography">Cryptography</option>
+                            <option value="surveillance">Surveillance Operations</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="is_admin">Admin Privileges</label>
+                        <select id="is_admin" name="is_admin" class="form-control">
+                            <option value="0">Regular Agent</option>
+                            <option value="1">Admin Agent</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-save"></i> Add Agent
+                        </button>
+                        <button type="button" class="cancel-btn" id="cancel-add-btn">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div id="edit-user-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-edit"></i> Edit Agent</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="edit-user-form">
+                    <input type="hidden" id="edit-user-id" name="user_id">
+                    <div class="form-group">
+                        <label for="edit-firstname">First Name</label>
+                        <input type="text" id="edit-firstname" name="firstname" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-lastname">Last Name</label>
+                        <input type="text" id="edit-lastname" name="lastname" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-username">Username</label>
+                        <input type="text" id="edit-username" name="username" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-email">Email</label>
+                        <input type="email" id="edit-email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-password">Password (leave blank to keep current)</label>
+                        <input type="password" id="edit-password" name="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-expertise">Field Expertise</label>
+                        <select id="edit-expertise" name="expertise" class="form-control" required>
+                            <option value="">Select expertise</option>
+                            <option value="detective">Field Detective</option>
+                            <option value="forensics">Forensic Analysis</option>
+                            <option value="profiler">Criminal Profiling</option>
+                            <option value="cryptography">Cryptography</option>
+                            <option value="surveillance">Surveillance Operations</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-is-admin">Admin Privileges</label>
+                        <select id="edit-is-admin" name="is_admin" class="form-control">
+                            <option value="0">Regular Agent</option>
+                            <option value="1">Admin Agent</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-save"></i> Update Agent
+                        </button>
+                        <button type="button" class="cancel-btn" id="cancel-edit-btn">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div id="delete-user-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-exclamation-triangle"></i> Confirm Deletion</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this agent from the system?</p>
+                <p class="warning-text">This action cannot be undone. All associated data will be permanently removed.</p>
+                <input type="hidden" id="delete-user-id">
+                <div class="form-actions">
+                    <button type="button" class="danger-btn" id="confirm-delete-btn">
+                        <i class="fas fa-trash"></i> Delete Agent
+                    </button>
+                    <button type="button" class="cancel-btn" id="cancel-delete-btn">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Flash Message Container -->
+    <div class="flash-messages"></div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Mystery Hub</h3>
+                    <p>Your gateway to interactive mysteries, true crime stories, and detective films.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Home Base</a></li>
+                        <li><a href="../games/game1.html">Field Operations</a></li>
+                        <li><a href="../blog/blog.html">Case Files</a></li>
+                        <li><a href="../movies/movies.html">Evidence Archive</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>Mystery Hub | Bintu Jalloh & Michelle Lawson</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Variables for elements
+            const menuItems = document.querySelectorAll('.menu-item');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const addUserBtn = document.getElementById('add-user-btn');
+            const addUserModal = document.getElementById('add-user-modal');
+            const editUserModal = document.getElementById('edit-user-modal');
+            const deleteUserModal = document.getElementById('delete-user-modal');
+            const closeModals = document.querySelectorAll('.close-modal');
+            const cancelAddBtn = document.getElementById('cancel-add-btn');
+            const cancelEditBtn = document.getElementById('cancel-edit-btn');
+            const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
+            const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+            const addUserForm = document.getElementById('add-user-form');
+            const editUserForm = document.getElementById('edit-user-form');
+            const userTableBody = document.getElementById('user-table-body');
+            const userSearch = document.getElementById('user-search');
+            const userFilter = document.getElementById('user-filter');
+            
+            // Tab switching
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and contents
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to current tab and content
+                    this.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Modal functions
+            function openModal(modal) {
+                modal.style.display = 'block';
+            }
+            
+            function closeModal(modal) {
+                modal.style.display = 'none';
+            }
+            
+            // Open modals
+            addUserBtn.addEventListener('click', function() {
+                openModal(addUserModal);
+            });
+            
+            // Close modals with X button
+            closeModals.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const modal = this.closest('.modal');
+                    closeModal(modal);
+                });
+            });
+            
+            // Close modals with cancel buttons
+            cancelAddBtn.addEventListener('click', function() {
+                closeModal(addUserModal);
+            });
+            
+            cancelEditBtn.addEventListener('click', function() {
+                closeModal(editUserModal);
+            });
+            
+            cancelDeleteBtn.addEventListener('click', function() {
+                closeModal(deleteUserModal);
+            });
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    closeModal(e.target);
+                }
+            });
+            
+            // Load users data
+            function loadUsers() {
+                fetch('../Backend/Php/admin_get_users.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            displayUsers(data.users);
+                        } else {
+                            displayFlashMessage('error', data.message || 'Failed to load users');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading users:', error);
+                        displayFlashMessage('error', 'Failed to connect to the server');
+                    });
+            }
+            
+            // Display users in the table
+            function displayUsers(users) {
+                userTableBody.innerHTML = '';
+                
+                if (users.length === 0) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = '<td colspan="9" class="no-data">No agents found</td>';
+                    userTableBody.appendChild(row);
+                    return;
+                }
+                
+                users.forEach(user => {
+                    const row = document.createElement('tr');
+                    
+                    // Format join date
+                    const joinDate = new Date(user.created_at);
+                    const formattedDate = joinDate.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+                    
+                    // Set status class
+                    const statusClass = user.is_admin ? 'status-admin' : 'status-active';
+                    const statusText = user.is_admin ? 'Admin' : 'Active';
+                    
+                    // Create row
+                    row.innerHTML = `
+                        <td>MH-${user.id.substring(3, 7)}</td>
+                        <td>
+                            <div class="user-photo">
+                                <img src="../${user.profile_picture || 'img/default-profile.png'}" alt="${user.firstname} ${user.lastname}">
+                            </div>
+                        </td>
+                        <td>${user.firstname} ${user.lastname}</td>
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+                        <td>${user.expertise || 'N/A'}</td>
+                        <td>${formattedDate}</td>
+                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="edit-btn" data-id="${user.id}">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="delete-btn" data-id="${user.id}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    
+                    userTableBody.appendChild(row);
+                });
+                
+                // Add event listeners to edit and delete buttons
+                document.querySelectorAll('.edit-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const userId = this.getAttribute('data-id');
+                        loadUserForEdit(userId);
+                    });
+                });
+                
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const userId = this.getAttribute('data-id');
+                        document.getElementById('delete-user-id').value = userId;
+                        openModal(deleteUserModal);
+                    });
+                });
+            }
+            
+            // Load user data for editing
+            function loadUserForEdit(userId) {
+                fetch(`../Backend/Php/admin_get_user.php?id=${userId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            const user = data.user;
+                            document.getElementById('edit-user-id').value = user.id;
+                            document.getElementById('edit-firstname').value = user.firstname;
+                            document.getElementById('edit-lastname').value = user.lastname;
+                            document.getElementById('edit-username').value = user.username;
+                            document.getElementById('edit-email').value = user.email;
+                            document.getElementById('edit-expertise').value = user.expertise || '';
+                            document.getElementById('edit-is-admin').value = user.is_admin ? '1' : '0';
+                            
+                            openModal(editUserModal);
+                        } else {
+                            displayFlashMessage('error', data.message || 'Failed to load user data');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading user data:', error);
+                        displayFlashMessage('error', 'Failed to connect to the server');
+                    });
+            }
+            
+            // Form submissions
+            addUserForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                
+                fetch('../Backend/Php/admin_add_user.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        displayFlashMessage('success', data.message || 'Agent added successfully');
+                        closeModal(addUserModal);
+                        addUserForm.reset();
+                        loadUsers(); // Reload user list
+                    } else {
+                        displayFlashMessage('error', data.message || 'Failed to add agent');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error adding user:', error);
+                    displayFlashMessage('error', 'Failed to connect to the server');
+                });
+            });
+            
+            editUserForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                
+                fetch('../Backend/Php/admin_update_user.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        displayFlashMessage('success', data.message || 'Agent updated successfully');
+                        closeModal(editUserModal);
+                        loadUsers(); // Reload user list
+                    } else {
+                        displayFlashMessage('error', data.message || 'Failed to update agent');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating user:', error);
+                    displayFlashMessage('error', 'Failed to connect to the server');
+                });
+            });
+            
+            // Delete user
+            confirmDeleteBtn.addEventListener('click', function() {
+                const userId = document.getElementById('delete-user-id').value;
+                
+                fetch('../Backend/Php/admin_delete_user.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ user_id: userId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        displayFlashMessage('success', data.message || 'Agent deleted successfully');
+                        closeModal(deleteUserModal);
+                        loadUsers(); // Reload user list
+                    } else {
+                        displayFlashMessage('error', data.message || 'Failed to delete agent');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error deleting user:', error);
+                    displayFlashMessage('error', 'Failed to connect to the server');
+                });
+            });
+            
+            // Search and filtering
+            userSearch.addEventListener('input', function() {
+                filterUsers();
+            });
+            
+            userFilter.addEventListener('change', function() {
+                filterUsers();
+            });
+            
+            function filterUsers() {
+                const searchTerm = userSearch.value.toLowerCase();
+                const filterType = userFilter.value;
+                
+                const rows = userTableBody.querySelectorAll('tr');
+                
+                rows.forEach(row => {
+                    if (row.querySelector('.no-data')) {
+                        return;
+                    }
+                    
+                    const name = row.cells[2].textContent.toLowerCase();
+                    const username = row.cells[3].textContent.toLowerCase();
+                    const email = row.cells[4].textContent.toLowerCase();
+                    const expertise = row.cells[5].textContent.toLowerCase();
+                    const status = row.cells[7].textContent.toLowerCase();
+                    
+                    let matchesSearch = name.includes(searchTerm) || 
+                                       username.includes(searchTerm) || 
+                                       email.includes(searchTerm);
+                    
+                    let matchesFilter = filterType === 'all' || 
+                                       (filterType === 'active' && status === 'active') ||
+                                       (filterType === 'admin' && status === 'admin') ||
+                                       (filterType === expertise);
+                    
+                    row.style.display = (matchesSearch && matchesFilter) ? '' : 'none';
+                });
+            }
+            
+            // Flash messages
+            function displayFlashMessage(type, message, autoHide = true) {
+                const flashContainer = document.querySelector('.flash-messages');
+                
+                const messageElement = document.createElement('div');
+                messageElement.className = `flash-message flash-${type}`;
+                
+                let icon = '';
+                switch (type) {
+                    case 'success':
+                        icon = '<i class="fas fa-check-circle"></i>';
+                        break;
+                    case 'error':
+                        icon = '<i class="fas fa-exclamation-circle"></i>';
+                        break;
+                    case 'info':
+                        icon = '<i class="fas fa-info-circle"></i>';
+                        break;
+                }
+                
+                messageElement.innerHTML = `${icon} ${message}<span class="flash-close"><i class="fas fa-times"></i></span>`;
+                flashContainer.appendChild(messageElement);
+                
+                const closeButton = messageElement.querySelector('.flash-close');
+                closeButton.addEventListener('click', function() {
+                    messageElement.style.opacity = '0';
+                    setTimeout(() => {
+                        messageElement.remove();
+                    }, 300);
+                });
+                
+                if (autoHide) {
+                    setTimeout(function() {
+                        messageElement.style.opacity = '0';
+                        setTimeout(() => {
+                            messageElement.remove();
+                        }, 300);
+                    }, 5000);
+                }
+                
+                return messageElement;
+            }
+            
+            // Load users on page load
+            loadUsers();
+        });
+    </script>
+</body>
+</html>

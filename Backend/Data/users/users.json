@@ -1,7 +1,7 @@
 [
     {
         "id": "mh_68022620279ac1.75169646",
-        "username": "michelle1",
+        "username": "michelle123",
         "password": "$2y$10$.4Wg87XtcWM024WwlBmhGub8Z.r0wBuE3eo7SEj\/84zwL8uWTipF.",
         "email": "mlawsy525@gmail.com",
         "firstname": "Michelle",
@@ -9,10 +9,10 @@
         "expertise": "cryptography",
         "is_admin": false,
         "created_at": "2025-04-18 10:14:56",
-        "updated_at": "2025-04-23 02:01:20",
-        "last_login": "2025-04-23 01:52:12",
+        "updated_at": "2025-04-23 02:23:43",
+        "last_login": "2025-04-23 02:22:52",
         "bio": "i am happy to be alive.. are you? are you still alive?",
-        "profile_picture": "profile_pics\/profile_680849f0b05a75.38310402.jpeg"
+        "profile_picture": "profile_pics\/profile_68084f2fca5c90.11525414.jpeg"
     },
     {
         "id": "mh_68027e76531714.02285803",
