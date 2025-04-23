@@ -13,8 +13,6 @@
         };
     </script>
     <script src="../clock/clock.js"></script>
-    <style> 
-    </style>
 </head>
 <body>
     <!-- Header with Navigation -->
@@ -30,10 +28,7 @@
                 <li><a href="../games/game1.html">Field Operations</a></li>
                 <li><a href="../blog/blog.html">Case Files</a></li>
                 <li><a href="../movies/movies.html">Evidence Archive</a></li>
-    
-             
             </ul>
-            
         </nav>
     </header>
 
@@ -227,6 +222,8 @@
             // Load user profile data from backend
             fetchProfileData();
             
+
+
             // Modal functionality
             const modal = document.getElementById('editProfileModal');
             const editBtn = document.getElementById('edit-profile-btn');
@@ -418,7 +415,7 @@
             }
         }
         
-        // Update profile via API
+        // Update the profile when the user clicks the save changes button via API
         function updateProfile(form) {
             const formData = new FormData(form);
             

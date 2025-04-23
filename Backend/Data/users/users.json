@@ -186,9 +186,10 @@
         "lastname": "Nguyen",
         "expertise": "forensics",
         "is_admin": false,
-        "profile_picture": "..\/..\/profile_pics\/6806c81e2dedb.jpg",
+        "profile_picture": "profile_pics\/profile_680853d478e693.35727743.jpg",
         "created_at": "2025-04-21 22:35:10",
-        "updated_at": "2025-04-21 22:38:03",
-        "last_login": "2025-04-21 22:38:03"
+        "updated_at": "2025-04-23 02:43:32",
+        "last_login": "2025-04-23 02:40:58",
+        "bio": "Hi My name is Amelia and I love solving murders."
     }
 ]
