@@ -394,160 +394,138 @@ body {
     opacity: 0.05;
     pointer-events: none;
 }
+
 /* Modal Styles */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    z-index: 1000;
+    overflow: auto;
 }
 
 .modal-content {
+    position: relative;
     background-color: var(--manila-folder);
     margin: 5% auto;
-    padding: 20px;
+    max-width: 500px;
+    max-height: 80vh;
     border: 1px solid var(--faded-ink);
-    border-radius: 8px;
-    width: 90%;
-    max-width: 600px;
-    position: relative;
-    transform: translateY(-100px);
-    transition: transform 0.3s ease;
-    box-shadow: 3px 3px 8px rgba(0,0,0,0.1);
-}
-
-.modal-content::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
-    opacity: 0.4;
-    pointer-events: none;
-    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
 }
 
 .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--faded-ink);
+    padding: 15px;
+    background-color: var(--folder-red);
+    color: white;
     position: relative;
-    z-index: 1;
+    font-family: var(--typewriter-font);
 }
 
 .modal-header h2 {
     margin: 0;
-    color: var(--folder-red);
-    font-size: 1.5rem;
-    font-family: var(--typewriter-font);
+    font-size: 1.2rem;
+    letter-spacing: 1px;
 }
 
 .close-modal {
-    color: var(--faded-ink);
-    font-size: 28px;
-    font-weight: bold;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: white;
+    font-size: 1.5rem;
     cursor: pointer;
-    transition: color 0.2s;
-}
-
-.close-modal:hover {
-    color: var(--folder-red);
 }
 
 .modal-body {
-    padding: 20px 0;
-    position: relative;
-    z-index: 1;
+    padding: 15px;
+    max-height: calc(80vh - 120px);
+    overflow-y: auto;
 }
 
+.modal-footer {
+    padding: 10px 15px;
+    background-color: rgba(0,0,0,0.05);
+    border-top: 1px solid var(--faded-ink);
+    text-align: right;
+}
+
+/* Form Styling */
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
-    color: var(--dark-ink);
-    font-weight: 500;
+    margin-bottom: 5px;
     font-family: var(--typewriter-font);
+    color: var(--folder-red);
+    font-size: 0.9rem;
 }
 
-.form-group input,
-.form-group select {
+.form-control {
     width: 100%;
-    padding: 10px;
+    padding: 8px 10px;
     border: 1px solid var(--faded-ink);
-    border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.5);
-    color: var(--dark-ink);
-    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.7);
     font-family: var(--handwritten-font);
-}
-
-.form-group input:focus,
-.form-group select:focus {
-    outline: none;
-    border-color: var(--folder-red);
-    box-shadow: 0 0 0 2px rgba(160, 44, 44, 0.1);
-}
-
-.modal-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid var(--faded-ink);
-    position: relative;
-    z-index: 1;
-}
-
-.submit-btn,
-.cancel-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
     font-size: 1rem;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.profile-picture-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.profile-picture-container img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid var(--faded-ink);
+    background-color: white;
+    border-radius: 50%;
+}
+
+.submit-btn, .cancel-btn {
+    padding: 8px 15px;
     font-family: var(--typewriter-font);
+    font-size: 0.8rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
 }
 
 .submit-btn {
     background-color: var(--folder-red);
-    color: var(--aged-paper);
-    border: 1px solid var(--folder-red);
+    color: white;
+    margin-right: 5px;
 }
 
 .submit-btn:hover {
-    background-color: transparent;
-    color: var(--folder-red);
+    background-color: darkred;
 }
 
 .cancel-btn {
-    background-color: transparent;
-    color: var(--dark-ink);
-    border: 1px solid var(--faded-ink);
+    background-color: #ccc;
+    color: #333;
 }
 
 .cancel-btn:hover {
-    background-color: rgba(160, 44, 44, 0.1);
-    border-color: var(--folder-red);
-    color: var(--folder-red);
+    background-color: #999;
 }
 
 @keyframes fadeIn {
@@ -564,25 +542,4 @@ body {
         transform: translateY(0);
         opacity: 1;
     }
-}
-
-.profile-picture-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-#profile-picture {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-    border: 3px solid #007bff;
-}
-
-#profile-picture-upload {
-    width: 100%;
-    max-width: 300px;
 }

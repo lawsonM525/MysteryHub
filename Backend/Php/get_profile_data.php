@@ -45,9 +45,8 @@ $users = loadJsonData($usersFile);
 $userData = null;
 foreach ($users as $user) {
     if ($user['id'] === $userId) {
-        // Remove sensitive data like password
-        unset($user['password']);
         $userData = $user;
+        unset($userData['password']);
         break;
     }
 }

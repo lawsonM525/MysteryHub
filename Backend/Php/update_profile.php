@@ -35,7 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // Data directory paths
 define('DATA_DIR', dirname(dirname(__DIR__)) . '/Backend/Data');
 define('USERS_DIR', DATA_DIR . '/users');
-define('PROFILE_PICS_DIR', dirname(dirname(__DIR__)) . '/Backend/profile_pics');
+define('PROFILE_PICS_DIR', dirname(dirname(__DIR__)) . '/profile_pics');
+
+// Ensure profile pics directory exists
+if (!file_exists(PROFILE_PICS_DIR)) {
+    mkdir(PROFILE_PICS_DIR, 0755, true);
+    error_log("Created profile pics directory: " . PROFILE_PICS_DIR);
+}
 
 // Helper functions
 function loadJsonData($file) {
@@ -92,7 +98,7 @@ if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] ===
                 $file_name_new = uniqid('profile_', true) . '.' . $file_ext;
                 
                 // Set upload directory
-                $upload_dir = '../../profile_pics/';
+                $upload_dir = PROFILE_PICS_DIR . '/';
                 
                 // Create directory if it doesn't exist
                 if (!file_exists($upload_dir)) {
@@ -104,7 +110,7 @@ if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] ===
                 
                 // Move uploaded file
                 if (move_uploaded_file($file_tmp, $file_destination)) {
-                    $profilePicturePath = 'uploads/profile_pictures/' . $file_name_new;
+                    $profilePicturePath = 'profile_pics/' . $file_name_new;
                 } else {
                     $errors[] = "Failed to upload profile picture. Please try again.";
                 }

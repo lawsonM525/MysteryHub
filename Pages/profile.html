@@ -103,11 +103,11 @@
                                     <span class="close-modal">&times;</span>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="profile-form" enctype="multipart/form-data">
+                                    <form id="profile-settings-form" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label for="profile-picture-upload">Profile Picture</label>
                                             <div class="profile-picture-container">
-                                                <img id="profile-picture" src="../profile_pics/default-profile.jpg" alt="Agent Photo">
+                                                <img id="profile-picture" src="../img/default-profile.png" alt="Agent Photo">
                                                 <input type="file" id="profile-picture-upload" name="profile_picture" accept="image/*" class="form-control">
                                             </div>
                                         </div>
@@ -140,7 +140,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="bio">Field Notes</label>
-                                            <textarea id="bio" name="bio" rows="4" class="form-control" required></textarea>
+                                            <textarea id="bio" name="bio" rows="4" class="form-control"></textarea>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="submit-btn" id="submit-btn">
@@ -163,164 +163,25 @@
                     <div class="dossier-tab active" data-tab="field-ops">Field Operations</div>
                     <div class="dossier-tab" data-tab="case-files">Case Files</div>
                     <div class="dossier-tab" data-tab="evidence-logs">Evidence Logs</div>
-                    <div class="dossier-tab" data-tab="agent-settings">Agent Settings</div>
                 </div>
                 
                 <div class="dossier-content">
                     <!-- Field Operations Tab -->
                     <div class="tab-content active" id="field-ops">
-                        <h3 class="dossier-section-title">ACTIVE FIELD OPERATIONS</h3>
-                        <div class="case-files-grid">
-                            <div class="case-file-item">
-                                <div class="case-file-img">
-                                    <img src="https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?q=80&w=1000" alt="Mystery Game">
-                                </div>
-                                <div class="case-file-content">
-                                    <span class="case-file-category">Field Operation</span>
-                                    <h3 class="case-file-title">The Vanishing Artifact</h3>
-                                    <p class="case-file-meta">Progress: 75% Complete</p>
-                                </div>
-                            </div>
-                            
-                            <div class="case-file-item">
-                                <div class="case-file-img">
-                                    <img src="https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=1000" alt="Mystery Game">
-                                </div>
-                                <div class="case-file-content">
-                                    <span class="case-file-category">Field Operation</span>
-                                    <h3 class="case-file-title">Murder at Midnight</h3>
-                                    <p class="case-file-meta">Progress: 100% Complete</p>
-                                </div>
-                            </div>
-                            
-                            <div class="case-file-item">
-                                <div class="case-file-img">
-                                    <img src="https://images.unsplash.com/photo-1635614017406-7c192d1f8b76?q=80&w=1000" alt="Mystery Game">
-                                </div>
-                                <div class="case-file-content">
-                                    <span class="case-file-category">Field Operation</span>
-                                    <h3 class="case-file-title">Escape the Crypt</h3>
-                                    <p class="case-file-meta">Status: Not Started</p>
-                                </div>
-                            </div>
+                        <h3 class="dossier-section-title">ACTIVE FIELD OPERATIONS</h3>  
                         </div>
-                        <div class="fingerprint-bg"></div>
-                    </div>
                     
                     <!-- Case Files Tab -->
                     <div class="tab-content" id="case-files">
                         <h3 class="dossier-section-title">ARCHIVED CASE FILES</h3>
-                        <div class="case-files-grid">
-                            <div class="case-file-item">
-                                <div class="case-file-img">
-                                    <img src="https://images.unsplash.com/photo-1487821619655-4943a3202619?q=80&w=1000" alt="Case File">
-                                </div>
-                                <div class="case-file-content">
-                                    <span class="case-file-category">True Crime</span>
-                                    <h3 class="case-file-title">The Zodiac Killer</h3>
-                                    <p class="case-file-meta">Archived: April 12, 2025</p>
-                                </div>
-                            </div>
-                            
-                            <div class="case-file-item">
-                                <div class="case-file-img">
-                                    <img src="https://images.unsplash.com/photo-1600028814234-74d89d77ea21?q=80&w=1000" alt="Case File">
-                                </div>
-                                <div class="case-file-content">
-                                    <span class="case-file-category">Cold Case</span>
-                                    <h3 class="case-file-title">The Black Dahlia</h3>
-                                    <p class="case-file-meta">Archived: April 10, 2025</p>
-                                </div>
-                            </div>
-                            
-                            <div class="case-file-item">
-                                <div class="case-file-img">
-                                    <img src="https://images.unsplash.com/photo-1580137189272-c9379f8864fd?q=80&w=1000" alt="Case File">
-                                </div>
-                                <div class="case-file-content">
-                                    <span class="case-file-category">Unsolved</span>
-                                    <h3 class="case-file-title">The Somerton Man</h3>
-                                    <p class="case-file-meta">Archived: April 5, 2025</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="fingerprint-bg"></div>
                     </div>
                     
                     <!-- Evidence Logs Tab -->
                     <div class="tab-content" id="evidence-logs">
                         <h3 class="dossier-section-title">EVIDENCE CATALOG</h3>
-                        <div class="case-files-grid">
-                            <div class="case-file-item">
-                                <div class="case-file-img">
-                                    <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1000" alt="Evidence Log">
-                                </div>
-                                <div class="case-file-content">
-                                    <span class="case-file-category">Film Evidence</span>
-                                    <h3 class="case-file-title">Knives Out</h3>
-                                    <p class="case-file-meta">Analysis Rating: <span class="star-rating">★★★★★</span></p>
-                                </div>
-                            </div>
-                            
-                            <div class="case-file-item">
-                                <div class="case-file-img">
-                                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1000" alt="Evidence Log">
-                                </div>
-                                <div class="case-file-content">
-                                    <span class="case-file-category">Film Evidence</span>
-                                    <h3 class="case-file-title">Shutter Island</h3>
-                                    <p class="case-file-meta">Analysis Rating: <span class="star-rating">★★★★☆</span></p>
-                                </div>
-                            </div>
-                            
-                            <div class="case-file-item">
-                                <div class="case-file-img">
-                                    <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=1000" alt="Evidence Log">
-                                </div>
-                                <div class="case-file-content">
-                                    <span class="case-file-category">Film Evidence</span>
-                                    <h3 class="case-file-title">Gone Girl</h3>
-                                    <p class="case-file-meta">Analysis Rating: <span class="star-rating">★★★★★</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="fingerprint-bg"></div>
                     </div>
                     
-                    <!-- Agent Settings Tab -->
-                    <div class="tab-content" id="agent-settings">
-                        <h3 class="dossier-section-title">AGENT FILE MAINTENANCE</h3>
-                        <form id="profile-settings-form">
-                            <div class="form-group">
-                                <label for="display-name">Agent Name</label>
-                                <input type="text" id="display-name" name="display-name" value="Jane Doe" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="username">Codename</label>
-                                <input type="text" id="username" name="username" value="mysterylover" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Secure Contact</label>
-                                <input type="email" id="email" name="email" value="jane.doe@example.com" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="bio">Field Notes</label>
-                                <textarea id="bio" name="bio" rows="4" class="form-control">Mystery enthusiast and amateur detective. I love solving puzzles and reading true crime stories.</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="new-password">New Security Key (leave blank to keep current)</label>
-                                <input type="password" id="new-password" name="new-password" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="confirm-password">Verify Security Key</label>
-                                <input type="password" id="confirm-password" name="confirm-password" class="form-control">
-                            </div>
-                            <button type="submit" class="edit-profile-btn">
-                                <i class="fas fa-save"></i> Submit Updates
-                            </button>
-                        </form>
-                        <div class="fingerprint-bg"></div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -339,23 +200,20 @@
                         <li><a href="../movies/movies.html">Evidence Archive</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Legal Notice</h3>
-                    <p>All case files contained herein are property of Mystery Hub Investigations. Unauthorized access will be prosecuted.</p>
-                </div>
+                
             </div>
             <div class="copyright">
-                <p>&copy; 2025 Mystery Hub | Bintu Jalloh & Michelle Lawson</p>
+                <p> Mystery Hub | Bintu Jalloh & Michelle Lawson</p>
             </div>
         </div>
     </footer>
     
     <script>
-        // Tab switching functionality
         document.addEventListener('DOMContentLoaded', function() {
             const tabs = document.querySelectorAll('.dossier-tab');
             const tabContents = document.querySelectorAll('.tab-content');
             
+            // Tab switching functionality
             tabs.forEach(tab => {
                 tab.addEventListener('click', function() {
                     const tabId = this.getAttribute('data-tab');
@@ -373,61 +231,58 @@
             // Load user profile data from backend
             fetchProfileData();
             
-            // Form submission handling
-            const profileForm = document.getElementById('profile-form');
+            // Modal functionality
+            const modal = document.getElementById('editProfileModal');
+            const editBtn = document.getElementById('edit-profile-btn');
+            const closeBtn = document.querySelector('.close-modal');
+            const cancelBtn = document.getElementById('cancel-edit-btn');
+            
+            // Open modal when edit button is clicked
+            editBtn.addEventListener('click', function() {
+                modal.style.display = 'block';
+                // Ensure the profile picture in modal is updated
+                const profilePic = document.getElementById('profile-picture-display');
+                const modalPic = document.getElementById('profile-picture');
+                modalPic.src = profilePic.src;
+            });
+            
+            // Close modal when X is clicked
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when Cancel button is clicked
+            cancelBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Preview uploaded profile picture
+            const profilePicUpload = document.getElementById('profile-picture-upload');
+            profilePicUpload.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('profile-picture').src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Handle profile form submission
+            const profileForm = document.getElementById('profile-settings-form');
             if (profileForm) {
                 profileForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    
-                    // Create FormData object to handle file upload
-                    const formData = new FormData(this);
-                    
-                    // Add user ID to form data
-                    const userId = localStorage.getItem('userId');
-                    if (userId) {
-                        formData.append('user_id', userId);
-                    }
-                    
-                    // Send the form data to the server
-                    fetch('../Backend/Php/update_profile.php', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            // Show success message
-                            showMessage('Profile updated successfully!', 'success');
-                            
-                            // Update the profile picture if it was changed
-                            if (data.profile_picture) {
-                                document.getElementById('profile-picture').src = data.profile_picture;
-                            }
-                            
-                            // Close the modal
-                            const modal = document.getElementById('profile-modal');
-                            if (modal) {
-                                modal.style.display = 'none';
-                            }
-                            
-                            // Refresh the profile data
-                            loadProfileData();
-                        } else {
-                            // Show error message
-                            showMessage(data.message || 'Failed to update profile. Please try again.', 'error');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error updating profile:', error);
-                        showMessage('An error occurred while updating your profile. Please try again.', 'error');
-                    });
+                    updateProfile(this);
                 });
-            }
-            
-            // Get user ID from localStorage or session
-            const userId = localStorage.getItem('userId');
-            if (userId) {
-                loadProfilePictureFromJson(userId);
             }
         });
         
@@ -488,8 +343,8 @@
             
             // Agent photo - if user has a profile picture, use it, otherwise default
             const profilePic = document.getElementById('profile-picture-display');
-            if (data.user.profile_pic) {
-                profilePic.src = data.user.profile_pic;
+            if (data.user.profile_picture) {
+                profilePic.src = '../' + data.user.profile_picture;
             } else {
                 profilePic.src = '../img/default-profile.png';
             }
@@ -526,7 +381,7 @@
                 }
             });
             
-            // Profile form
+            // Profile form - populate form fields with user data
             const profileForm = document.getElementById('profile-settings-form');
             if (profileForm) {
                 const firstnameInput = profileForm.querySelector('#firstname');
@@ -549,11 +404,60 @@
                     emailInput.value = data.user.email;
                 }
                 
+                const expertiseInput = profileForm.querySelector('#expertise');
+                if (expertiseInput) {
+                    expertiseInput.value = data.user.expertise || '';
+                }
+                
                 const bioInput = profileForm.querySelector('#bio');
                 if (bioInput) {
                     bioInput.value = data.user.bio || '';
                 }
+                
+                // Update profile picture in form
+                const profilePicture = document.getElementById('profile-picture');
+                if (profilePicture && data.user.profile_picture) {
+                    profilePicture.src = '../' + data.user.profile_picture;
+                }
             }
+        }
+        
+        // Update profile via API
+        function updateProfile(form) {
+            const formData = new FormData(form);
+            
+            // Display loading state
+            displayFlashMessage('info', 'Updating profile...', false);
+            
+            fetch('../Backend/Php/update_profile.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    displayFlashMessage('success', data.message || 'Profile updated successfully!');
+                    
+                    // Close the modal
+                    document.getElementById('editProfileModal').style.display = 'none';
+                    
+                    // Reload profile data to show updated information
+                    fetchProfileData();
+                } else {
+                    displayFlashMessage('error', data.message || 'Failed to update profile.');
+                    
+                    // Display individual validation errors
+                    if (data.errors && Array.isArray(data.errors)) {
+                        data.errors.forEach(error => {
+                            displayFlashMessage('error', error);
+                        });
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error updating profile:', error);
+                displayFlashMessage('error', 'Failed to connect to the server. Please try again later.');
+            });
         }
         
         // Display flash messages
@@ -586,6 +490,7 @@
                             position: relative;
                             animation: slidein 0.3s ease-in-out;
                             transition: opacity 0.3s ease;
+                            color: #1a1a1a;
                         }
                         .flash-success {
                             background-color: #d4edda;
@@ -673,124 +578,6 @@
             }
             
             return messageElement;
-        }
-
-        // This is the functionality for the edit profile modal
-        const modal = document.getElementById('editProfileModal');
-        const closeModalBtn = document.querySelector('.close-modal');
-        const cancelBtn = document.getElementById('cancel-edit-btn');
-        const editProfileBtn = document.getElementById('edit-profile-btn');
-        const submitBtn = document.getElementById('submit-btn');
-
-        editProfileBtn.addEventListener('click', () => {
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-            console.log('edit profile button clicked');
-            // Add fade-in and slide-in animations
-            modal.style.opacity = '0';
-            modal.style.transform = 'translateY(-100px)';
-            setTimeout(() => {
-                modal.style.opacity = '1';
-                modal.style.transform = 'translateY(0)';
-            }, 100);
-
-            // fill the button with the current profile data
-            fetch('../Backend/Php/get_profile_data.php')
-                .then(response => response.json())
-                .then(data => {
-                    if( data.user) {
-                        document.getElementById('firstname').value = data.user.firstname;
-                        document.getElementById('lastname').value = data.user.lastname;
-                        document.getElementById('email').value = data.user.email;
-                        document.getElementById('username').value = data.user.username;
-                        document.getElementById('expertise').value = data.user.expertise;
-                        document.getElementById('bio').value = data.user.bio || '';
-                    }
-                })
-                .catch(error => console.error("Error fetching profile data:", error));
-        });
-
-        function closeModal() {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-        closeModalBtn.addEventListener('click', closeModal);
-        cancelBtn.addEventListener('click', closeModal);
-
-        window.addEventListener('click', (e) => {
-            if(event.key === 'Escape' &&  modal.style.display === 'block') {
-                closeModal();
-            }
-        });
-
-        submitBtn.addEventListener('click', () => {
-            console.log('submit button clicked');
-            const formData = new FormData(modal.querySelector('form'));
-            const updatedData = Object.fromEntries(formData);
-
-            console.log(updatedData);
-
-            // Update the profile data in the backend
-            fetch('../Backend/Php/update_profile.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.success) {
-                    displayFlashMessage('success', data.message || 'Profile updated successfully!');
-                    closeModal();
-                    
-                    // Reload the profile picture after successful update
-                    const userId = localStorage.getItem('userId');
-                    if (userId) {
-                        console.log('Reloading profile picture after update');
-                        loadProfilePictureFromJson(userId);
-                    }
-                } else {
-                    displayFlashMessage('error', data.message || 'Failed to update profile.');
-                }
-            })
-        }) 
-
-        // Function to load profile picture from JSON data
-        function loadProfilePictureFromJson(userId) {
-            // Get the profile picture display element
-            const profilePictureDisplay = document.getElementById('profile-picture-display');
-            
-            // Check if the element exists
-            if (!profilePictureDisplay) {
-                console.error('Profile picture display element not found');
-                return;
-            }
-            
-            // Display loading state
-            profilePictureDisplay.src = '../profile_pics/default-profile.jpg';
-            
-            // Fetch user data from JSON file
-            fetch('../Backend/Data/users/users.json')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch user data');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Find the user with the matching ID
-                    const user = data.find(user => user.id === userId);
-                    
-                    if (user && user.profile_picture) {
-                        // Update the profile picture
-                        profilePictureDisplay.src = user.profile_picture;
-                        console.log('Profile picture updated:', user.profile_picture);
-                    } else {
-                        console.log('No profile picture found for user:', userId);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error loading profile picture:', error);
-                    // Keep the default image if there's an error
-                });
         }
     </script>
 </body>
