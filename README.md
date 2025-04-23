@@ -19,3 +19,4 @@ Michelle - Game 1 : Hangman (6 hours)
 Bintu & Documentation - Bintu & Michelle (2 hours)
 
 Sources: https://www.w3schools.com/php/php_sessions.asp 
+https://www.geeksforgeeks.org/build-a-hangman-game-using-javascript/?utm_source=auth&utm_medium=saved&utm_campaign=articles 
