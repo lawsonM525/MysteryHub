@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Case Files Archive - Mystery Hub</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
-    <link rel="stylesheet" href="../../css/blog.css">
+    <link rel="stylesheet" href="../../Css/blog.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Homemade+Apple&family=Cutive+Mono&display=swap" rel="stylesheet">
-    
 </head>
 <body class="vintage-background">
     <div class="paper-texture"></div>
-    
-     
     
    
 
@@ -63,84 +60,8 @@
                     <div class="category-tag">Paranormal</div>
                 </div>
                 
-                <div class="blog-grid">
-                    <!-- Case File 1 -->
-                    <div class="blog-card">
-                        <div class="case-number">CASE #MH-1947-01</div>
-                        <div class="paperclip"></div>
-                        <div class="blog-card-image">
-                            <img src="../assets/images/blog1.jpg" alt="Black Dahlia">
-                        </div>
-                        <div class="blog-card-content">
-                            <div class="blog-card-category">Unsolved Case</div>
-                            <h3 class="blog-card-title">The Black Dahlia Murder</h3>
-                            <p class="blog-card-excerpt">
-                                Elizabeth Short was found brutally murdered in January 1947, her body severed at the waist and drained of blood. Despite extensive investigation, the Black Dahlia case remains one of the most infamous unsolved murders in American history.
-                            </p>
-                            <div class="blog-card-meta">
-                                <div class="blog-card-date">
-                                    <i class="far fa-calendar-alt"></i> January 15, 1947
-                                </div>
-                                <div class="blog-card-author">
-                                    <i class="fas fa-user-secret"></i> Agent J. Ellroy
-                                </div>
-                            </div>
-                            <a href="post.html" class="read-more">VIEW FULL FILE</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Case File 2 -->
-                    <div class="blog-card">
-                        <div class="case-number">CASE #MH-1912-04</div>
-                        <div class="paperclip"></div>
-                        <div class="blog-card-image">
-                            <img src="../assets/images/blog2.jpg" alt="Zodiac Killer">
-                        </div>
-                        <div class="blog-card-content">
-                            <div class="blog-card-category">Serial Killer</div>
-                            <h3 class="blog-card-title">The Zodiac Killer</h3>
-                            <p class="blog-card-excerpt">
-                                Operating in Northern California from the late 1960s to the early 1970s, the Zodiac Killer taunted police with ciphers and letters. Despite promising leads, the killer's identity remains unknown to this day.
-                            </p>
-                            <div class="blog-card-meta">
-                                <div class="blog-card-date">
-                                    <i class="far fa-calendar-alt"></i> December 20, 1968
-                                </div>
-                                <div class="blog-card-author">
-                                    <i class="fas fa-user-secret"></i> Agent R. Graysmith
-                                </div>
-                            </div>
-                            <a href="post.html" class="read-more">VIEW FULL FILE</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Case File 3 -->
-                    <div class="blog-card">
-                        <div class="case-number">CASE #MH-1959-09</div>
-                        <div class="paperclip"></div>
-                        <div class="blog-card-image">
-                            <img src="../assets/images/blog3.jpg" alt="Dyatlov Pass">
-                        </div>
-                        <div class="blog-card-content">
-                            <div class="blog-card-category">Unexplained</div>
-                            <h3 class="blog-card-title">The Dyatlov Pass Incident</h3>
-                            <p class="blog-card-excerpt">
-                                In February 1959, nine Russian hikers died under mysterious circumstances in the northern Ural Mountains. Their tent was found cut open from the inside, and the bodies showed strange injuries including crushed ribs with no external wounds.
-                            </p>
-                            <div class="blog-card-meta">
-                                <div class="blog-card-date">
-                                    <i class="far fa-calendar-alt"></i> February 26, 1959
-                                </div>
-                                <div class="blog-card-author">
-                                    <i class="fas fa-user-secret"></i> Agent K. Ivanovsky
-                                </div>
-                            </div>
-                            <a href="post.html" class="read-more">VIEW FULL FILE</a>
-                            <div class="evidence-stamp">Evidence Pending</div>
-                        </div>
-                    </div>
-                    
-                    <!-- More case files can be added here -->
+                <div class="blog-grid" id="blog-grid">
+                    <!-- Posts will be dynamically loaded here -->
                 </div>
                 
                 <!-- Pagination -->
@@ -172,5 +93,114 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch posts from the backend
+            fetch('../../Backend/Php/get_stories.php')
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Fetched posts:", data);
+                    const blogGrid = document.getElementById('blog-grid');
+                    
+
+                    const baseImagePath = '../../Assets/uploads/';
+
+                    // Clear any existing content
+                    blogGrid.innerHTML = '';
+                    
+                    // Add each post to the grid
+                    data.forEach(post => {
+                        const postCard = `
+                            <div class="blog-card">
+                                <div class="case-number">CASE #MH-${post.id}</div>
+                                <div class="paperclip"></div>
+                                <div class="blog-card-image">
+                                    <img src="${baseImagePath + post.featuredImage}" alt="${post.title}">
+                                </div>
+                                <div class="blog-card-content">
+                                    <div class="blog-card-category">${post.category}</div>
+                                    <h3 class="blog-card-title">${post.title}</h3>
+                                    <p class="blog-card-excerpt">${post.excerpt}</p>
+                                    <div class="blog-card-meta">
+                                        <div class="blog-card-date">
+                                            <i class="far fa-calendar-alt"></i> ${new Date(post.createdAt).toLocaleDateString()}
+                                        </div>
+                                        <div class="blog-card-author">
+                                            <i class="fas fa-user-secret"></i> ${post.author}
+                                        </div>
+                                    </div>
+                                    <a href="post.html?id=${post.id}" class="read-more">VIEW FULL FILE</a>
+                                </div>
+                            </div>
+                        `;
+                        blogGrid.insertAdjacentHTML('beforeend', postCard);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching posts:', error);
+                    const blogGrid = document.getElementById('blog-grid');
+                    blogGrid.innerHTML = `
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p>Error loading case files. Please try again later.</p>
+                        </div>
+                    `;
+                });
+                
+            // Category filter functionality
+            const categoryTags = document.querySelectorAll('.category-tag');
+            categoryTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    // Remove active class from all tags
+                    categoryTags.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tag
+                    this.classList.add('active');
+                    
+                    const category = this.textContent.trim();
+                    filterPosts(category);
+                });
+            });
+            
+            function filterPosts(category) {
+                const blogCards = document.querySelectorAll('.blog-card');
+                blogCards.forEach(card => {
+                    const cardCategory = card.querySelector('.blog-card-category').textContent;
+                    if (category === 'All Files' || cardCategory === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Search functionality
+            const searchInput = document.querySelector('.blog-search input');
+            const searchButton = document.querySelector('.blog-search button');
+            
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const blogCards = document.querySelectorAll('.blog-card');
+                
+                blogCards.forEach(card => {
+                    const title = card.querySelector('.blog-card-title').textContent.toLowerCase();
+                    const excerpt = card.querySelector('.blog-card-excerpt').textContent.toLowerCase();
+                    const category = card.querySelector('.blog-card-category').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || excerpt.includes(searchTerm) || category.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+            
+            searchButton.addEventListener('click', performSearch);
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

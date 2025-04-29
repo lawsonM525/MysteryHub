@@ -3,11 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Zodiac Killer: America's Most Infamous Unsolved Case - Mystery Hub</title>
+    <title>Loading Case File - Mystery Hub</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../css/blogpost.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        .post-featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .post-category{
+            color: var(--folder-red);
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
 
+        .main-content {
+            margin-bottom: 4rem;
+        }
+
+        /* Author Avatar Styling */
+        .author-avatar-large {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+
+        .author-avatar-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .comments-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--folder-red);
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--folder-red);
+        }
+
+        .comment-form {
+            margin-bottom: 2rem;
+        }
+
+        .comment-input {
+            width: 100%;
+            min-height: 100px;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        .comment-input:focus {
+            outline: none;
+            border-color: var(--folder-red);
+            box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.1);
+        }
+
+        .comment-submit {
+            background-color: var(--aged-paper);
+            color: black;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .comment-submit:hover {
+            background-color: #f3f2df;
+        }
+
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .comment {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+            
+        }
+
+        .comment:hover {
+            transform: translateY(-2px);
+        }
+
+        .comment-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .comment-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .comment-header h4 {
+            margin: 0;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .comment-content {
+            margin-bottom: 1rem;
+        }
+
+        .comment-text {
+            color: #444;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .comment-date {
+            color: #666;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .comment-date i {
+            color: var(--folder-red);
+        }
+    </style>
 </head>
 <body>
     <!-- Header with Navigation -->
@@ -30,278 +178,13 @@
     <section class="main-content">
         <div class="container">
             <div class="post-container">
-                <div class="post-header">
-                    <span class="post-category">Serial Killers</span>
-                    <h1 class="post-title">The Zodiac Killer: America's Most Infamous Unsolved Case</h1>
-                    <div class="post-meta">
-                        <div class="post-author">
-                            <div class="author-avatar">
-                                <img src="../assets/images/author1.jpg" alt="Author">
-                            </div>
-                            <span>By Michelle Lawson</span>
-                        </div>
-                        <div class="post-date">
-                            <i class="far fa-calendar"></i> April 15, 2025
-                        </div>
-                        <div class="post-comments">
-                            <i class="far fa-comment"></i> 42 Comments
-                        </div>
-                    </div>
+                <div id="loading-spinner" class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading case file...</p>
                 </div>
                 
-                <div class="post-featured-image">
-                    <img src="../assets/images/blog-featured.jpg" alt="The Zodiac Killer">
-                </div>
-                
-                <div class="post-content">
-                    <p>
-                        In the late 1960s, a mysterious figure terrorized Northern California, murdering at least five people 
-                        and taunting police with cryptic letters and ciphers. Despite one of the most intensive manhunts in 
-                        history, the Zodiac Killer was never caught. More than 50 years later, the case continues to fascinate 
-                        and perplex investigators and amateur sleuths alike.
-                    </p>
-                    
-                    <h2>The Confirmed Victims</h2>
-                    
-                    <p>
-                        The Zodiac Killer's confirmed victims were young couples in secluded areas, plus a lone taxi driver. 
-                        The confirmed attacks include:
-                    </p>
-                    
-                    <ul>
-                        <li>
-                            <strong>December 20, 1968:</strong> David Faraday (17) and Betty Lou Jensen (16) were shot and killed 
-                            on Lake Herman Road in Vallejo.
-                        </li>
-                        <li>
-                            <strong>July 4, 1969:</strong> Michael Mageau (19) and Darlene Ferrin (22) were shot at Blue Rock Springs 
-                            Park in Vallejo. Ferrin died, but Mageau survived.
-                        </li>
-                        <li>
-                            <strong>September 27, 1969:</strong> Bryan Hartnell (20) and Cecelia Shepard (22) were stabbed at Lake 
-                            Berryessa in Napa County. Hartnell survived, but Shepard died.
-                        </li>
-                        <li>
-                            <strong>October 11, 1969:</strong> Taxi driver Paul Stine (29) was shot in the Presidio Heights 
-                            neighborhood of San Francisco.
-                        </li>
-                    </ul>
-                    
-                    <h2>The Letters and Ciphers</h2>
-                    
-                    <p>
-                        What made the Zodiac case particularly unusual was the killer's communication with the public. Between 1969 
-                        and 1974, he sent numerous letters to Bay Area newspapers, including the San Francisco Chronicle, the San 
-                        Francisco Examiner, and the Vallejo Times-Herald.
-                    </p>
-                    
-                    <p>
-                        Many of these letters included ciphers or coded messages. The first cipher was cracked in 1969 by a high 
-                        school teacher and his wife. It began with the chilling words: "I LIKE KILLING PEOPLE BECAUSE IT IS SO MUCH 
-                        FUN."
-                    </p>
-                    
-                    <blockquote>
-                        "I am not afraid of the gas chamber because it will send me to paradice [sic] all the sooner because I now 
-                        have enough slaves to work for me." - The Zodiac Killer
-                    </blockquote>
-                    
-                    <p>
-                        A second cipher, known as the "340 cipher" (named for its 340 characters), remained unsolved for 51 years until 
-                        it was finally cracked in December 2020 by a team of amateur code-breakers.
-                    </p>
-                    
-                    <h2>The Investigation</h2>
-                    
-                    <p>
-                        Despite one of the largest manhunts in U.S. history, the Zodiac Killer was never caught. Over the decades, 
-                        investigators have considered more than 2,500 suspects. Among the most notable were:
-                    </p>
-                    
-                    <ul>
-                        <li>
-                            <strong>Arthur Leigh Allen:</strong> A former elementary school teacher who was the prime suspect for many 
-                            years. He was identified by survivor Michael Mageau in a photo lineup in 1991, 20 years after the shooting. 
-                            Allen died in 1992 before he could be charged. DNA evidence later appeared to clear him.
-                        </li>
-                        <li>
-                            <strong>Rick Marshall:</strong> A film projectionist who became a suspect when investigators noted similarities 
-                            between his handwriting and the Zodiac letters.
-                        </li>
-                        <li>
-                            <strong>Lawrence Kane:</strong> A businessman who was identified by Kathleen Johns, a woman who claimed to have 
-                            been abducted by the Zodiac in 1970 (though this attack is not confirmed to be the work of the Zodiac).
-                        </li>
-                    </ul>
-                    
-                    <h2>The Legacy</h2>
-                    
-                    <p>
-                        The Zodiac case has had a profound impact on American popular culture, inspiring books, movies (including David 
-                        Fincher's 2007 film "Zodiac"), TV shows, and countless amateur investigations. The case remains officially open 
-                        in multiple jurisdictions.
-                    </p>
-                    
-                    <p>
-                        In recent years, advances in forensic technology have offered new hope. In 2018, investigators used genetic 
-                        genealogy to identify the Golden State Killer, another long-unidentified California serial killer. Similar 
-                        techniques might one day identify the Zodiac.
-                    </p>
-                    
-                    <p>
-                        Until then, the Zodiac remains one of America's most enduring criminal mysteries, a shadowy figure who killed 
-                        at least five people, claimed to have killed many more, and then vanished, leaving behind a legacy of fear, 
-                        fascination, and unanswered questions.
-                    </p>
-                </div>
-                
-                <div class="post-actions">
-                    <div class="post-actions-left">
-                        <button class="like-btn" id="like-btn">
-                            <i class="far fa-heart"></i> <span id="like-count">124</span> Likes
-                        </button>
-                        <button class="save-btn" id="save-btn">
-                            <i class="far fa-bookmark"></i> Save
-                        </button>
-                    </div>
-                    <div class="post-actions-right">
-                        <span>Share:</span>
-                        <a href="#" class="share-btn share-facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="share-btn share-twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="share-btn share-reddit"><i class="fab fa-reddit-alien"></i></a>
-                    </div>
-                </div>
-                
-                <div class="post-author-bio">
-                    <div class="author-avatar-large">
-                        <img src="../assets/images/author1.jpg" alt="Author">
-                    </div>
-                    <div class="author-info">
-                        <h3 class="author-name">Michelle Lawson</h3>
-                        <p class="author-bio">
-                            Michelle is a true crime enthusiast and researcher with a background in criminology. 
-                            She has spent over a decade studying unsolved cases and has contributed to several 
-                            books and documentaries on the subject. When not investigating cold cases, she enjoys 
-                            mystery novels and hiking with her dog.
-                        </p>
-                        <button class="follow-btn">Follow Author</button>
-                    </div>
-                </div>
-                
-                <div class="comments-section">
-                    <h2 class="section-title">Comments (42)</h2>
-                    
-                    <div class="comment-form">
-                        <textarea class="comment-input" placeholder="Share your thoughts..."></textarea>
-                        <button class="comment-submit">Post Comment</button>
-                    </div>
-                    
-                    <div class="comments-list">
-                        <div class="comment">
-                            <div class="comment-header">
-                                <div class="comment-avatar">
-                                    <img src="../assets/images/user1.jpg" alt="User">
-                                </div>
-                                <div class="comment-info">
-                                    <div class="comment-author">John Smith</div>
-                                    <div class="comment-date">April 15, 2025 at 10:24 AM</div>
-                                </div>
-                            </div>
-                            <div class="comment-content">
-                                <p>
-                                    Fascinating article! I've been interested in the Zodiac case for years. The fact that the 340 cipher was 
-                                    only cracked in 2020 shows just how complex this case is. I wonder if we'll ever know the truth?
-                                </p>
-                            </div>
-                            <div class="comment-actions">
-                                <span class="comment-action"><i class="far fa-heart"></i> Like (12)</span>
-                                <span class="comment-action"><i class="far fa-reply"></i> Reply</span>
-                            </div>
-                        </div>
-                        
-                        <div class="comment">
-                            <div class="comment-header">
-                                <div class="comment-avatar">
-                                    <img src="../assets/images/user2.jpg" alt="User">
-                                </div>
-                                <div class="comment-info">
-                                    <div class="comment-author">Sarah Johnson</div>
-                                    <div class="comment-date">April 15, 2025 at 1:45 PM</div>
-                                </div>
-                            </div>
-                            <div class="comment-content">
-                                <p>
-                                    I think DNA genealogy will eventually solve this case, just like it did with the Golden State Killer. 
-                                    It's just a matter of time before technology catches up with these cold cases.
-                                </p>
-                            </div>
-                            <div class="comment-actions">
-                                <span class="comment-action"><i class="far fa-heart"></i> Like (8)</span>
-                                <span class="comment-action"><i class="far fa-reply"></i> Reply</span>
-                            </div>
-                        </div>
-                        
-                        <div class="comment">
-                            <div class="comment-header">
-                                <div class="comment-avatar">
-                                    <img src="../assets/images/user3.jpg" alt="User">
-                                </div>
-                                <div class="comment-info">
-                                    <div class="comment-author">Robert Chen</div>
-                                    <div class="comment-date">April 16, 2025 at 9:12 AM</div>
-                                </div>
-                            </div>
-                            <div class="comment-content">
-                                <p>
-                                    Great write-up, Michelle! Have you looked into the theory that the Zodiac may have committed crimes in other 
-                                    states as well? Some researchers have suggested connections to unsolved cases in the Midwest.
-                                </p>
-                            </div>
-                            <div class="comment-actions">
-                                <span class="comment-action"><i class="far fa-heart"></i> Like (5)</span>
-                                <span class="comment-action"><i class="far fa-reply"></i> Reply</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="related-posts">
-                    <h2 class="section-title">Related Stories</h2>
-                    
-                    <div class="related-grid">
-                        <div class="related-card">
-                            <div class="related-image">
-                                <img src="../assets/images/blog1.jpg" alt="Black Dahlia">
-                            </div>
-                            <div class="related-content">
-                                <span class="related-category">Cold Cases</span>
-                                <h3 class="related-title">The Black Dahlia Murder</h3>
-                                <div class="related-date">April 12, 2025</div>
-                            </div>
-                        </div>
-                        
-                        <div class="related-card">
-                            <div class="related-image">
-                                <img src="../assets/images/blog6.jpg" alt="Jack the Ripper">
-                            </div>
-                            <div class="related-content">
-                                <span class="related-category">Serial Killers</span>
-                                <h3 class="related-title">Jack the Ripper: The Whitechapel Murders</h3>
-                                <div class="related-date">March 25, 2025</div>
-                            </div>
-                        </div>
-                        
-                        <div class="related-card">
-                            <div class="related-image">
-                                <img src="../assets/images/blog-related3.jpg" alt="BTK Killer">
-                            </div>
-                            <div class="related-content">
-                                <span class="related-category">Serial Killers</span>
-                                <h3 class="related-title">The BTK Killer: How He Was Finally Caught</h3>
-                                <div class="related-date">February 18, 2025</div>
-                            </div>
-                        </div>
-                    </div>
+                <div id="post-content" style="display: none;">
+                    <!-- Content will be dynamically loaded here -->
                 </div>
             </div>
         </div>
@@ -323,75 +206,190 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Like button functionality
-            const likeBtn = document.getElementById('like-btn');
-            const likeCount = document.getElementById('like-count');
-            let isLiked = false;
-            
-            likeBtn.addEventListener('click', function() {
-                if (!isLiked) {
-                    likeBtn.innerHTML = '<i class="fas fa-heart"></i> <span id="like-count">' + (parseInt(likeCount.textContent) + 1) + '</span> Likes';
-                    likeBtn.classList.add('liked');
-                    isLiked = true;
-                } else {
-                    likeBtn.innerHTML = '<i class="far fa-heart"></i> <span id="like-count">' + (parseInt(likeCount.textContent) - 1) + '</span> Likes';
-                    likeBtn.classList.remove('liked');
-                    isLiked = false;
-                }
-            });
-            
-            // Save button functionality
-            const saveBtn = document.getElementById('save-btn');
-            let isSaved = false;
-            
-            saveBtn.addEventListener('click', function() {
-                if (!isSaved) {
-                    saveBtn.innerHTML = '<i class="fas fa-bookmark"></i> Saved';
-                    isSaved = true;
-                    alert('Story saved to your profile!');
-                } else {
-                    saveBtn.innerHTML = '<i class="far fa-bookmark"></i> Save';
-                    isSaved = false;
-                    alert('Story removed from your saved items.');
-                }
-            });
-            
-            // Comment form
-            const commentForm = document.querySelector('.comment-form');
-            const commentInput = document.querySelector('.comment-input');
-            const commentSubmit = document.querySelector('.comment-submit');
-            
-            commentForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const commentText = commentInput.value.trim();
-                if (commentText) {
-                    alert('Comment submitted! In a real app, this would be saved to the database.');
-                    commentInput.value = '';
-                }
-            });
-            
-            commentSubmit.addEventListener('click', function() {
-                const commentText = commentInput.value.trim();
-                if (commentText) {
-                    alert('Comment submitted! In a real app, this would be saved to the database.');
-                    commentInput.value = '';
-                }
-            });
-            
-            // Comment actions
-            const commentActions = document.querySelectorAll('.comment-action');
-            
-            commentActions.forEach(action => {
-                action.addEventListener('click', function() {
-                    if (this.textContent.includes('Like')) {
-                        alert('You liked this comment!');
-                    } else if (this.textContent.includes('Reply')) {
-                        alert('Reply feature coming soon!');
-                    }
+            // Get post ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+            console.log('Post ID:', postId);
+            if (!postId) {
+                window.location.href = 'blog.html';
+                return;
+            }
+
+            // Fetch post data
+            fetch(`../../Backend/Php/get_stories.php?id=${postId}`)
+                .then(response => response.json())
+                .then(posts => {
+                    // Hide loading spinner
+                    const post = Array.isArray(posts) ? posts[0] : posts
+                    console.log('Post:', post);
+                    console.log('Post ID:', post.id);
+                    console.log('Author Avatar:', post.authorAvatar);
+                    document.getElementById('loading-spinner').style.display = 'none';
+                    
+
+                    const baseImagePath = '../../Assets/uploads/';
+                    
+                    // Show post content
+                    const postContent = document.getElementById('post-content');
+                    postContent.style.display = 'block';
+                    
+                    // Update page title
+                    document.title = `${post.title} - Mystery Hub`;
+                    console.log('Post author:', post.author);
+                    
+                    // Generate post HTML
+                    postContent.innerHTML = `
+                        <div class="post-header">
+                            <h1 class="post-title">${post.title}</h1>
+                            <span class="post-category"> Category: ${post.category}</span>
+                            <div class="post-meta">
+                                <div class="post-date">
+                                    <i class="far fa-calendar"></i> ${new Date(post.createdAt).toLocaleDateString()}
+                                </div>
+                                <div class="post-comments">
+                                    <i class="far fa-comment"></i> ${post.commentCount || 0} Comments
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-featured-image">
+                            <img src="${baseImagePath + post.featuredImage}" alt="${post.title}">
+                        </div>
+                        
+                        <div class="post-content">
+                            ${post.content}
+                        </div>
+                        
+                        <div class="post-actions">
+                            <div class="post-actions-left">
+                                <button class="like-btn" id="like-btn" data-post-id="${post.id}">
+                                    <i class="far fa-heart"></i> <span id="like-count">${post.likes || 0}</span> Likes
+                                </button>
+                                <button class="save-btn" id="save-btn" data-post-id="${post.id}">
+                                    <i class="far fa-bookmark"></i> Save
+                                </button>
+                            </div>
+                            <div class="post-actions-right">
+                                <span>Share:</span>
+                                <a href="#" class="share-btn share-facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="share-btn share-twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="share-btn share-reddit"><i class="fab fa-reddit-alien"></i></a>
+                            </div>
+                        </div>
+                        
+                        <div class="post-author-bio">
+                            <div class="author-avatar-large">
+                                <img src="${post.authorAvatar || '../../assets/images/default-avatar.jpg'}" alt="Author" onerror="this.onerror=null; this.src='../../assets/images/default-avatar.jpg';">
+                            </div>
+                            <div class="author-info">
+                                <h3 class="author-name">${post.author}</h3>
+                                <p class="author-bio">Mystery Hub Contributor</p>
+                            </div>
+                        </div>
+                        
+                        <div class="comments-section">
+                            <h2 class="section-title">Comments (${post.commentCount || 0})</h2>
+                            
+                            <div class="comment-form">
+                                <textarea class="comment-input" placeholder="Share your thoughts..."></textarea>
+                                <button class="comment-submit" id="comment-submit">Post Comment</button>
+                            </div>
+                            
+                            <div class="comments-list" id="comments-list">
+                                <!-- Comments will be loaded here -->
+                            </div>
+                        </div>
+                    `;
+                    const commentSubmitBtn = document.getElementById('comment-submit');
+                    const commentInput = document.querySelector('.comment-input');
+                    commentSubmitBtn.addEventListener('click', function() {
+                        console.log('Comment Submit Button Clicked');
+                        const commentText = commentInput.value.trim();
+                        console.log('Comment Text:', commentText);
+                        if (commentText) {
+                            fetch(`../../Backend/Php/add_comment.php`, {
+                                method: 'POST', 
+                                headers: {'Content-Type': 'application/json'},
+                                body: JSON.stringify({
+                                    postId: postId,
+                                    content: commentText,
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log('Data:', data);
+                                if (data.success) {
+                                    commentInput.value = '';
+                                    loadComments(postId);
+                                } else {
+                                    alert('Failed to add comment. Please try again.');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error adding comment:', error);
+                                alert('An error occurred while adding your comment. Please try again later.');
+                            })
+                        }
+                    });
+                    // like post
+                    document.getElementById('like-btn').addEventListener('click', function() {
+                        fetch('../../Backend/Php/like_post.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ postId: post.id })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // Update the number displayed
+                                const likeCountSpan = document.getElementById('like-count');
+                                likeCountSpan.textContent = parseInt(likeCountSpan.textContent) + 1;
+                            } else {
+                                alert('Failed to like the post. Please try again.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error liking post:', error);
+                        });
+                    });
+                    // load comments
+                    loadComments(postId);
+                })
+                .catch(error => {
+                    console.error('Error loading post:', error);
+                    document.getElementById('loading-spinner').innerHTML = `
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>Error loading case file. Please try again later.</p>
+                    `;
                 });
             });
-        });
+
+            // function to load comments
+            function loadComments(postId) {
+                fetch(`../../Backend/Php/get_comments.php?postId=${postId}`)
+                .then(response => response.json())
+                .then(comments => {
+                    const commentsList = document.getElementById('comments-list');
+                    commentsList.innerHTML = comments.map(comment => `
+                        <div class="comment">
+                            <div class="comment-header">
+                                <img src="${comment.userAvatar || '../../assets/images/default-avatar.jpg'}" alt="${comment.username}">
+                                <h4>${comment.username}</h4>
+                            </div>
+                            <div class="comment-content">
+                                <div class="comment-text">${comment.content}</div>
+                            </div>
+                            <div class="comment-date">
+                                <i class="far fa-clock"></i> ${new Date(comment.createdAt).toLocaleDateString()}
+                            </div>
+                        </div>  
+                    `).join('');
+                    })
+                    .catch(error => {
+                        console.error('Error loading comments:', error);
+                    })
+            }
+            
     </script>
 </body>
 </html>
