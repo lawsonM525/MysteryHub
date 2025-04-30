@@ -234,7 +234,24 @@
         "updatedAt": "2025-04-30 15:54:35",
         "userId": "admin",
         "status": "published",
-        "comments": [],
+        "comments": [
+            {
+                "id": "comment_68124bcc31e09",
+                "userId": "admin",
+                "username": "Anonymous",
+                "userAvatar": "..\/..\/assets\/images\/default-avatar.jpg",
+                "content": "oop..",
+                "createdAt": "2025-04-30 16:11:56"
+            },
+            {
+                "id": "comment_68124be96ab68",
+                "userId": "mh_68022620279ac1.75169646",
+                "username": "michelle123",
+                "userAvatar": "..\/..\/profile_pics\/profile_680940a355f736.27582336.jpeg",
+                "content": "top DAAWWGGGG",
+                "createdAt": "2025-04-30 16:12:25"
+            }
+        ],
         "likes": 3,
         "views": 0,
         "author": "Anonymous",
