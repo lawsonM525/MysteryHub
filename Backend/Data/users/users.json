@@ -9,22 +9,10 @@
         "expertise": "cryptography",
         "is_admin": false,
         "created_at": "2025-04-18 10:14:56",
-        "updated_at": "2025-04-30 16:12:11",
-        "last_login": "2025-04-30 16:12:11",
+        "updated_at": "2025-04-30 16:30:15",
+        "last_login": "2025-04-30 16:30:15",
         "bio": "i am happy to be alive.. are you? are you sure youre alive???",
         "profile_picture": "profile_pics\/profile_680940a355f736.27582336.jpeg"
-    },
-    {
-        "id": "mh_68027e76531714.02285803",
-        "username": "ginKorn5",
-        "password": "$2y$10$P\/0WbS9mAHg3qjH1FnWTnePGsHppJ.lnzeRFtuBNtA6RYY\/SZ09xm",
-        "email": "gingerKornn@gmail.com",
-        "firstname": "Ginger",
-        "lastname": "Korn",
-        "expertise": "cryptography",
-        "is_admin": false,
-        "created_at": "2025-04-18 16:31:50",
-        "updated_at": "2025-04-18 16:31:50"
     },
     {
         "id": "mh_68027f4291b962.52016272",

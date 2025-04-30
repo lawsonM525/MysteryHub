@@ -38,6 +38,7 @@ Michelle - User profile should have favorited movies, favorited articles, played
 Bintu - Blog & UploadFunctionality - 18 hours
 Michelle - Admin Functionality - 5 hours
 Michelle - Upgrading blog functionality (filtering and saving) - 3 hours
+Michelle - Dynamic Movie Slideshow - 2 hours
 
 More sources: https://www.youtube.com/watch?v=4CrWw4v_h6Y 
 

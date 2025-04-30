@@ -1,0 +1,32 @@
+[
+    {
+        "id": "001",
+        "title": "Knives Out (2019)",
+        "year": "2019",
+        "description": "A masterclass in detective methodology. When renowned crime novelist Harlan Thrombey is found dead at his estate, Detective Benoit Blanc is mysteriously enlisted to investigate.",
+        "image": "knivesout.jpg",
+        "trailer": "https://www.youtube.com/watch?v=qGqiHJTsRkQ&pp=0gcJCdgAo7VqN5tD",
+        "imdb": "https://www.imdb.com/title/tt8946378/",
+        "featured": 1
+    },
+    {
+        "id": "002",
+        "title": "Murder on the Orient Express (2017)",
+        "year": "2017",
+        "description": "An essential study in interrogation techniques. When a murder occurs on the train on which detective Hercule Poirot is traveling, he is called upon to investigate.",
+        "image": "orientexpress.jpg",
+        "trailer": "https://www.youtube.com/watch?v=e_jSjlFSEkg",
+        "imdb": "https://www.imdb.com/title/tt3402236/",
+        "featured": 1
+    },
+    {
+        "id": "003",
+        "title": "Gone Girl (2014)",
+        "year": "2014",
+        "description": "A rare glimpse into the psychology of deception. When Nick Dunne reports that his wife Amy has gone missing, media attention and public scrutiny threaten to unravel his perfect image.",
+        "image": "gonegirl.jpg",
+        "trailer": "https://www.youtube.com/watch?v=2-_-1nJf8Vg",
+        "imdb": "https://www.imdb.com/title/tt2267998/",
+        "featured": 1
+    }
+]
