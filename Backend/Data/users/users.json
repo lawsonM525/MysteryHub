@@ -9,8 +9,8 @@
         "expertise": "cryptography",
         "is_admin": false,
         "created_at": "2025-04-18 10:14:56",
-        "updated_at": "2025-04-30 17:14:11",
-        "last_login": "2025-04-30 17:14:11",
+        "updated_at": "2025-04-30 18:23:10",
+        "last_login": "2025-04-30 18:23:10",
         "bio": "i am happy to be alive.. are you? are you sure youre alive???",
         "profile_picture": "profile_pics\/profile_680940a355f736.27582336.jpeg"
     },
@@ -81,20 +81,6 @@
         "created_at": "2025-04-21 20:41:44",
         "updated_at": "2025-04-21 20:42:02",
         "last_login": "2025-04-21 20:42:02"
-    },
-    {
-        "id": "mh_6806b36ea81cd6.61487063",
-        "username": "shayes_91",
-        "password": "$2y$10$k2hYdc8L57X\/ExUWx\/Ciyu4fDy2d\/r7pfFMyIypmOZ4iNK6Ynqxay",
-        "email": "scarlett.hayes91@nomail.cc",
-        "firstname": "Scarlett",
-        "lastname": "Hayes",
-        "expertise": "cryptography",
-        "is_admin": false,
-        "profile_picture": "profile_pics\/default-profile.jpg",
-        "created_at": "2025-04-21 21:06:54",
-        "updated_at": "2025-04-21 21:07:22",
-        "last_login": "2025-04-21 21:07:22"
     },
     {
         "id": "mh_6806bda4dd7a07.78722540",

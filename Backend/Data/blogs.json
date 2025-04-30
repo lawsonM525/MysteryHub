@@ -1,24 +1,5 @@
 [
     {
-        "id": "680aa4d219535",
-        "title": "ab aaja",
-        "category": "unsolved-mysteries",
-        "readTime": "6",
-        "excerpt": "anbajj",
-        "content": "abahaha",
-        "tags": "[\"rha\",\"Unsolved Cases\",\"rhr\"]",
-        "sources": "bvabvbakj",
-        "featuredImage": "1745528018_creek.jpeg",
-        "createdAt": "2025-04-24 20:53:38",
-        "updatedAt": "2025-04-24 20:53:38",
-        "userId": "mh_6806c81e2f7972.38649556",
-        "status": "published",
-        "comments": [],
-        "likes": 0,
-        "views": 0,
-        "author": "mh_6806c81e2f7972.38649556"
-    },
-    {
         "id": "680aa5577b1a8",
         "title": "vana",
         "category": "unsolved-mysteries",
@@ -222,8 +203,17 @@
         "updatedAt": "2025-04-30 03:00:51",
         "userId": "mh_68022620279ac1.75169646",
         "status": "published",
-        "comments": [],
-        "likes": 0,
+        "comments": [
+            {
+                "id": "comment_681268c0d814c",
+                "userId": "mh_68022620279ac1.75169646",
+                "username": "michelle123",
+                "userAvatar": "..\/..\/profile_pics\/profile_680940a355f736.27582336.jpeg",
+                "content": "Wow!",
+                "createdAt": "2025-04-30 18:15:28"
+            }
+        ],
+        "likes": 1,
         "views": 0,
         "author": "michelle123",
         "authorAvatar": "..\/..\/profile_pics\/profile_680940a355f736.27582336.jpeg"
@@ -264,5 +254,25 @@
         "views": 0,
         "author": "Anonymous",
         "authorAvatar": "..\/..\/assets\/images\/default-avatar.jpg"
+    },
+    {
+        "id": "6812692bf24f8",
+        "title": "fbbq",
+        "category": "disappearances",
+        "readTime": "3",
+        "excerpt": "vbj",
+        "content": "vababhaa",
+        "tags": "[\"vvsvs\"]",
+        "sources": "vjbej",
+        "featuredImage": "story_6812692bf1ce69.54768435.png",
+        "createdAt": "2025-04-30 18:17:15",
+        "updatedAt": "2025-04-30 18:17:15",
+        "userId": "mh_68022620279ac1.75169646",
+        "status": "published",
+        "comments": [],
+        "likes": 0,
+        "views": 0,
+        "author": "michelle123",
+        "authorAvatar": "..\/..\/profile_pics\/profile_680940a355f736.27582336.jpeg"
     }
 ]
