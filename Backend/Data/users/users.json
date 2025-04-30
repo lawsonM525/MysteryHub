@@ -9,8 +9,8 @@
         "expertise": "cryptography",
         "is_admin": false,
         "created_at": "2025-04-18 10:14:56",
-        "updated_at": "2025-04-23 19:33:55",
-        "last_login": "2025-04-23 19:33:42",
+        "updated_at": "2025-04-30 03:00:41",
+        "last_login": "2025-04-30 03:00:41",
         "bio": "i am happy to be alive.. are you? are you sure youre alive???",
         "profile_picture": "profile_pics\/profile_680940a355f736.27582336.jpeg"
     },
@@ -61,7 +61,7 @@
         "lastname": "Sinclair",
         "expertise": "forensics",
         "is_admin": false,
-        "profile_picture": "\/Applications\/MAMP\/htdocs\/bjalloh910.github.io\/CSC209\/MysteryHub\/Backend\/Data\/users\/profile_pictures\/default.jpg",
+        "profile_picture": "profile_pics\/default.jpg",
         "created_at": "2025-04-21 20:33:27",
         "updated_at": "2025-04-21 20:33:43",
         "last_login": "2025-04-21 20:33:43"
@@ -75,7 +75,7 @@
         "lastname": "Foster",
         "expertise": "forensics",
         "is_admin": false,
-        "profile_picture": "\/Applications\/MAMP\/htdocs\/bjalloh910.github.io\/CSC209\/MysteryHub\/Backend\/profile_pics\/default-profile-.jpg",
+        "profile_picture": "profile_pics\/default-profile-.jpg",
         "created_at": "2025-04-21 20:38:15",
         "updated_at": "2025-04-21 20:38:30",
         "last_login": "2025-04-21 20:38:30"
@@ -89,7 +89,7 @@
         "lastname": "Chambers",
         "expertise": "detective",
         "is_admin": false,
-        "profile_picture": "..\/profile_pics\/default-profile-.jpg",
+        "profile_picture": "profile_pics\/default-profile-.jpg",
         "created_at": "2025-04-21 20:41:44",
         "updated_at": "2025-04-21 20:42:02",
         "last_login": "2025-04-21 20:42:02"
@@ -103,7 +103,7 @@
         "lastname": "Hayes",
         "expertise": "cryptography",
         "is_admin": false,
-        "profile_picture": "..\/profile_pics\/default-profile.jpg",
+        "profile_picture": "profile_pics\/default-profile.jpg",
         "created_at": "2025-04-21 21:06:54",
         "updated_at": "2025-04-21 21:07:22",
         "last_login": "2025-04-21 21:07:22"
@@ -117,7 +117,7 @@
         "lastname": "whwww w",
         "expertise": "cryptography",
         "is_admin": false,
-        "profile_picture": "..\/profile_pics\/default-profile.jpg",
+        "profile_picture": "profile_pics\/default-profile.jpg",
         "created_at": "2025-04-21 21:13:51",
         "updated_at": "2025-04-21 21:14:05",
         "last_login": "2025-04-21 21:14:05"
@@ -131,7 +131,7 @@
         "lastname": "Cross",
         "expertise": "cryptography",
         "is_admin": false,
-        "profile_picture": "..\/profile_pics\/default-profile.jpg",
+        "profile_picture": "profile_pics\/default-profile.jpg",
         "created_at": "2025-04-21 21:50:29",
         "updated_at": "2025-04-21 21:50:43",
         "last_login": "2025-04-21 21:50:43"
@@ -145,7 +145,7 @@
         "lastname": "Morton",
         "expertise": "surveillance",
         "is_admin": false,
-        "profile_picture": "..\/..\/profile_pics\/default-profile.jpg",
+        "profile_picture": "profile_pics\/default-profile.jpg",
         "created_at": "2025-04-21 22:05:14",
         "updated_at": "2025-04-21 22:09:23",
         "last_login": "2025-04-21 22:09:23"
@@ -159,9 +159,11 @@
         "lastname": "Palmer",
         "expertise": "detective",
         "is_admin": false,
-        "profile_picture": "..\/..\/profile_pics\/6806c2a2dd233.png",
+        "profile_picture": "profile_pics\/profile_680fb1aa183a20.27378666.jpg",
         "created_at": "2025-04-21 22:11:47",
-        "updated_at": "2025-04-21 22:11:47"
+        "updated_at": "2025-04-30 00:11:00",
+        "last_login": "2025-04-30 00:11:00",
+        "bio": "Hiya!!!"
     },
     {
         "id": "mh_6806c3293ac390.07806334",
@@ -172,7 +174,7 @@
         "lastname": "Wu",
         "expertise": "detective",
         "is_admin": false,
-        "profile_picture": "..\/..\/profile_pics\/6806c3293a3a7.png",
+        "profile_picture": "profile_pics\/6806c3293a3a7.png",
         "created_at": "2025-04-21 22:14:01",
         "updated_at": "2025-04-21 22:19:10",
         "last_login": "2025-04-21 22:19:10"
@@ -188,8 +190,9 @@
         "is_admin": false,
         "profile_picture": "profile_pics\/profile_680853d478e693.35727743.jpg",
         "created_at": "2025-04-21 22:35:10",
-        "updated_at": "2025-04-21 22:38:03",
-        "last_login": "2025-04-21 22:38:03"
+        "updated_at": "2025-04-30 00:09:51",
+        "last_login": "2025-04-30 00:09:51",
+        "bio": "I love solving mysteries"
     },
     {
         "id": "mh_68085aa42b3e95.55256616",
@@ -200,7 +203,7 @@
         "lastname": "Lawzan",
         "expertise": "forensics",
         "is_admin": false,
-        "profile_picture": "..\/..\/profile_pics\/68085aa4296e5.jpeg",
+        "profile_picture": "profile_pics\/68085aa4296e5.jpeg",
         "created_at": "2025-04-23 03:12:36",
         "updated_at": "2025-04-23 03:12:36"
     },
@@ -258,8 +261,22 @@
         "lastname": "jalloh",
         "expertise": "profiler",
         "is_admin": false,
-        "profile_picture": "..\/..\/profile_pics\/default-profile.jpg",
+        "profile_picture": "profile_pics\/default-profile.jpg",
         "created_at": "2025-04-23 18:01:14",
         "updated_at": "2025-04-23 18:01:14"
+    },
+    {
+        "id": "mh_68118adf9b3ff8.52982659",
+        "username": "kperr_123",
+        "password": "$2y$10$vif.MNsj8ODGzKbqs7SoMuiArH9AeJ5rH9aXhl8x8JksYyheqjrvK",
+        "email": "kperr@gmsail.com",
+        "firstname": "katy",
+        "lastname": "perry",
+        "expertise": "forensics",
+        "is_admin": false,
+        "profile_picture": "..\/..\/profile_pics\/68118adf95b79.jpeg",
+        "created_at": "2025-04-30 02:28:47",
+        "updated_at": "2025-04-30 02:30:04",
+        "last_login": "2025-04-30 02:30:04"
     }
 ]

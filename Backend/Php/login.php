@@ -119,5 +119,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     // If not a POST request, redirect to login form
     header("Location: ../../Pages/login.html");
-    exit;
 }
+

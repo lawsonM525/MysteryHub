@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Your Story - Mystery Hub</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
-    <link rel="stylesheet" href="../../css/blogupload.css">
+    <link rel="stylesheet" href="../../Css/blogupload.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body>
@@ -15,14 +15,11 @@
             <nav>
                 <div class="logo">Mystery Hub</div>
                 <ul class="nav-links">
-                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../../index.html">Home</a></li>
                     <li><a href="../games/game1.html">Games</a></li>
                     <li><a href="blog.html" class="active">Blogs</a></li>
                     <li><a href="../movies/movies.html">Movies</a></li>
                     <li><a href="../profile.html">Profile</a></li>
-                    <li class="profile-pic">
-                        <img src="https://i.pravatar.cc/150?img=12" alt="User Profile">
-                    </li>
                 </ul>
             </nav>
         </div>
@@ -32,13 +29,15 @@
     <section class="main-content">
         <div class="container">
             <div class="upload-container">
+                <div class="paperclip"></div>
+                <div class="confidential-stamp">CONFIDENTIAL</div>
                 <h1 class="upload-title">Share Your Mystery Story</h1>
                 <p class="upload-description">
                     Have a fascinating true crime story, unsolved mystery, or cold case to share? 
                     Use the form below to contribute to our community of mystery enthusiasts.
                 </p>
                 
-                <form id="upload-form" action="../backend/save_story.php" method="POST" enctype="multipart/form-data">
+                <form id="upload-form" action="../../Backend/Php/save_story.php" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="post-title">Story Title</label>
                         <input type="text" id="post-title" name="post-title" placeholder="Enter a captivating title..." required>
@@ -75,7 +74,7 @@
                             <i class="fas fa-cloud-upload-alt"></i>
                             <p class="image-upload-text">Drag and drop an image here, or <span>browse</span></p>
                             <p class="image-upload-text">Recommended size: 1200 x 800 pixels. Max size: 2MB</p>
-                            <input type="file" id="image-input" name="featured-image" accept="image/*" style="display: none;" required>
+                            <input type="file" id="image-input" name="featured-image" accept="image/*" style="display: none;">
                         </div>
                         <div class="image-preview" id="image-preview">
                             <img id="preview-img" src="#" alt="Preview">
@@ -110,7 +109,7 @@
                     
                     <div class="form-group">
                         <label>Sources & References (optional)</label>
-                        <textarea name="post-sources" placeholder="List your sources and references here..."></textarea>
+                        <textarea name="post-sources"  id="post-sources" placeholder="List your sources and references here..."></textarea>
                     </div>
                     
                     <div class="terms-checkbox">
@@ -250,20 +249,113 @@
             const uploadForm = document.getElementById('upload-form');
             
             uploadForm.addEventListener('submit', function(e) {
-                e.preventDefault();
+                e.preventDefault(); 
+
+                const title = document.getElementById('post-title').value;
+                const category = document.getElementById('post-category').value;
+                const readTime = document.getElementById('read-time').value;
+                const excerpt = document.getElementById('post-excerpt').value;
+                const content = document.getElementById('post-content').value;
+                const imageInput = document.getElementById('image-input');
+                const postSources = document.getElementById('post-sources'); 
+                const postTagsInput = document.getElementById('post-tags');  
+                const tags = postTagsInput.value; 
+
+                if (!title || !category || !readTime || !excerpt || !content) {
+                    alert('Please fill in all required fields.');
+                    return; 
+                }
                 
-                // In a real app, this would submit to the server
-                alert('Your story has been submitted! In a real app, this would save to the database.');
-                // Redirect to blog list
-                window.location.href = 'blog.html';
+                if (editId) {
+                    // ✏️ Editing an existing blog
+                    const formData = new FormData();
+                    formData.append('id', editId);
+                    formData.append('title', title);
+                    formData.append('category', category);
+                    formData.append('readTime', readTime);
+                    formData.append('excerpt', excerpt);
+                    formData.append('content', content);
+                    formData.append('tags', tags);
+                    formData.append('sources', postSources.value);
+
+                    if (imageInput.files.length > 0) {
+                        formData.append('image', imageInput.files[0]);
+                    }
+
+                    fetch(`../../Backend/Php/update_stories.php?id=${editId}`, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Story updated successfully!');
+                            window.location.href = 'blog.html';
+                        } else {
+                            alert('Failed to update story. Please try again.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error updating story:', error);
+                        alert('An error occurred while updating the story. Please try again later.');
+                    });
+                } else {
+                   
+                    uploadForm.submit(); 
+                }
             });
+
             
             // Save as draft
             const saveDraftBtn = document.getElementById('save-draft-btn');
             
             saveDraftBtn.addEventListener('click', function() {
+                // For draft functionality, we would need to modify the form action
+                // and add a status field to indicate it's a draft
                 alert('Story saved as draft! You can access it from your profile page.');
             });
+
+            // Edit a story functionality
+            const urlParams = new URLSearchParams(window.location.search);
+            const editId = urlParams.get('edit');
+            console.log('Editing story with ID:', editId);
+
+            if(editId) {
+                fetch(`../../Backend/Php/get_stories.php?id=${editId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const blog = Array.isArray(data) ? data[0] : data;
+
+                    console.log('Loaded blog:', blog);
+
+                    let existingTags = [];
+
+                    if (typeof blog.tags === 'string') {
+                        try {
+                            existingTags = JSON.parse(blog.tags); //convert the string into a javascript array 
+                        } catch (e) {
+                            console.error('Error parsing tags:', e);
+                        }
+                    }
+
+                    existingTags.forEach(tag => addTag(tag));
+                    updateHiddenInput();
+
+                    
+
+                    document.getElementById('post-title').value = blog.title;
+                    document.getElementById('post-category').value = blog.category;
+                    document.getElementById('read-time').value = blog.readTime;
+                    document.getElementById('post-excerpt').value = blog.excerpt;
+                    document.getElementById('post-content').value = blog.content;
+                    document.getElementById('post-sources').value = blog.sources;    
+                    
+                    console.log('Form fields prefilled!');
+                })
+                .catch(error => {
+                    console.error('Error loading story:', error);
+                });
+            }
         });
     </script>
 </body>

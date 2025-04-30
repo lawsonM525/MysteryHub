@@ -1,0 +1,30 @@
+2025-04-24 20:53:38 - Request received
+POST data: Array
+(
+    [post-title] => ab aaja
+    [post-category] => unsolved-mysteries
+    [read-time] => 6
+    [post-excerpt] => anbajj
+    [post-content] => abahaha
+    [post-tags] => ["rha","arr"]
+    [post-sources] => bvabvbakj
+    [terms-agreement] => on
+)
+
+FILES data: Array
+(
+    [featured-image] => Array
+        (
+            [name] => creek.jpeg
+            [full_path] => creek.jpeg
+            [type] => image/jpeg
+            [tmp_name] => /Applications/MAMP/tmp/php/php1Ui6o3
+            [error] => 0
+            [size] => 5213
+        )
+
+)
+
+Processed data: Title=ab aaja, Category=unsolved-mysteries
+Image uploaded successfully to /Applications/MAMP/htdocs/bjalloh910.github.io/CSC209/MysteryHub/Backend/Data/uploads/1745528018_creek.jpeg
+Blog post saved successfully to /Applications/MAMP/htdocs/bjalloh910.github.io/CSC209/MysteryHub/Backend/Data/blogs.json
