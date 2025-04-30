@@ -3,7 +3,7 @@
  * Based on tutorial: https://www.youtube.com/watch?v=-v36WcbDs9k
  * 
  * This script provides a real-time clock that can be displayed
- * in the navbar or any other part of the Mystery Hub website.
+ * in the navbar or any other part of the website.
  * 
  * Created by: Bintu Jalloh & Michelle Lawson
  */

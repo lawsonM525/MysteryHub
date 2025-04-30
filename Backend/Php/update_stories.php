@@ -2,6 +2,8 @@
 session_start();
 require_once __DIR__ . '/config.php';
 
+define('WEB_UPLOADS_PATH', '../../../assets/uploads/'); 
+
 header('Content-Type: application/json');
 
 $blogsFile = dirname(__DIR__) . '/Data/blogs.json';
@@ -43,7 +45,7 @@ foreach ($blogs as &$blog) {
 
         // Handle image if a new one uploaded
         if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-            $uploadsDir = dirname(__DIR__) . '/Assets/uploads/';
+            $uploadsDir = dirname(dirname(__DIR__)) . '/assets/uploads/';
             if (!file_exists($uploadsDir)) {
                 mkdir($uploadsDir, 0755, true);
             }

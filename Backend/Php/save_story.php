@@ -8,7 +8,7 @@ session_start();
 require_once __DIR__ . '/config.php';
 
 // Define directories
-define('WEB_UPLOADS_PATH', '../../Assets/uploads/');
+define('WEB_UPLOADS_PATH', '../../../assets/uploads/');
 
 $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'anonymous';
 $username = 'Anonymous';
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $file_name_new = uniqid('story_', true) . '.' . $file_ext;
                     
                     // Set upload directory
-                    $upload_dir = dirname(__DIR__) . '/Assets/uploads/';
+                    $upload_dir = dirname(dirname(__DIR__)) . '/assets/uploads/';
                     
                     // Create directory if it doesn't exist
                     if (!file_exists($upload_dir)) {

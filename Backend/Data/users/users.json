@@ -9,8 +9,8 @@
         "expertise": "cryptography",
         "is_admin": false,
         "created_at": "2025-04-18 10:14:56",
-        "updated_at": "2025-04-23 19:33:55",
-        "last_login": "2025-04-23 19:33:42",
+        "updated_at": "2025-04-30 03:00:41",
+        "last_login": "2025-04-30 03:00:41",
         "bio": "i am happy to be alive.. are you? are you sure youre alive???",
         "profile_picture": "profile_pics\/profile_680940a355f736.27582336.jpeg"
     },
@@ -161,8 +161,8 @@
         "is_admin": false,
         "profile_picture": "profile_pics\/profile_680fb1aa183a20.27378666.jpg",
         "created_at": "2025-04-21 22:11:47",
-        "updated_at": "2025-04-29 15:14:46",
-        "last_login": "2025-04-29 15:14:46",
+        "updated_at": "2025-04-30 00:11:00",
+        "last_login": "2025-04-30 00:11:00",
         "bio": "Hiya!!!"
     },
     {
@@ -190,8 +190,8 @@
         "is_admin": false,
         "profile_picture": "profile_pics\/profile_680853d478e693.35727743.jpg",
         "created_at": "2025-04-21 22:35:10",
-        "updated_at": "2025-04-28 22:39:27",
-        "last_login": "2025-04-28 22:39:27",
+        "updated_at": "2025-04-30 00:09:51",
+        "last_login": "2025-04-30 00:09:51",
         "bio": "I love solving mysteries"
     },
     {
@@ -264,5 +264,19 @@
         "profile_picture": "profile_pics\/default-profile.jpg",
         "created_at": "2025-04-23 18:01:14",
         "updated_at": "2025-04-23 18:01:14"
+    },
+    {
+        "id": "mh_68118adf9b3ff8.52982659",
+        "username": "kperr_123",
+        "password": "$2y$10$vif.MNsj8ODGzKbqs7SoMuiArH9AeJ5rH9aXhl8x8JksYyheqjrvK",
+        "email": "kperr@gmsail.com",
+        "firstname": "katy",
+        "lastname": "perry",
+        "expertise": "forensics",
+        "is_admin": false,
+        "profile_picture": "..\/..\/profile_pics\/68118adf95b79.jpeg",
+        "created_at": "2025-04-30 02:28:47",
+        "updated_at": "2025-04-30 02:30:04",
+        "last_login": "2025-04-30 02:30:04"
     }
 ]
