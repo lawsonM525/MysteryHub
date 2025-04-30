@@ -43,11 +43,7 @@
                         Access our collection of declassified case files, cold cases, and unsolved mysteries. 
                         Each file has been meticulously documented by our field agents and forensic specialists.
                         These records contain sensitive information - proceed with caution.
-                    </p>
-                    <div class="blog-search">
-                        <input type="text" placeholder="Search case files by keywords...">
-                        <button type="submit"><i class="fas fa-search"></i> SEARCH</button>
-                    </div>
+                    </p> 
                 </div>
                 
                 <div class="blog-categories">
@@ -154,10 +150,19 @@
             });
             
             function filterPosts(category) {
+                const categoryMap = {
+                    'Unsolved Cases': 'unsolved-mysteries',
+                    'Cold Cases': 'true-crime',
+                    'Serial Killers': 'serial-killers',
+                    'Historical Mysteries': 'historical-mysteries',
+                    'Conspiracy': 'conspiracies',
+                    'Paranormal': 'paranormal'
+                };
+                
                 const blogCards = document.querySelectorAll('.blog-card');
                 blogCards.forEach(card => {
                     const cardCategory = card.querySelector('.blog-card-category').textContent;
-                    if (category === 'All Files' || cardCategory === category) {
+                    if (category === 'All Files' || cardCategory === categoryMap[category]) {
                         card.style.display = 'block';
                     } else {
                         card.style.display = 'none';
