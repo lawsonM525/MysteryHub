@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             setFlashMessage('success', 'Admin login successful!');
             
             // Redirect to admin page
-            header("Location: ../../Pages/admin.html");
+            header("Location: admin.php");
             exit;
         }
         
