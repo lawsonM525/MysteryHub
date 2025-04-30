@@ -400,19 +400,22 @@
                 <!-- Profile Tabs -->
                 <div class="dossier-tabs">
                     <div class="dossier-tab active" data-tab="case-files">Uploaded Cases</div>
-                    <div class="dossier-tab" data-tab="field-ops">Field Operations</div>
+                    <div class="dossier-tab" data-tab="field-ops">Saved Cases</div>
                     <div class="dossier-tab" data-tab="evidence-logs">Evidence Logs</div>
                 </div>
                 
                 <div class="dossier-content">
                     <!-- Field Operations Tab -->
-                    <div class="tab-content active" id="field-ops">
-                        <h3 class="dossier-section-title">ACTIVE FIELD OPERATIONS</h3>  
+                    <div class="tab-content" id="field-ops">
+                        <h3 class="dossier-section-title">SAVED CASE FILES</h3>  
+                        <div class="saved-case-files-list">
+                            <!-- Saved case files will be loaded here -->
                         </div>
+                    </div>
                     
                     <!-- Case Files Tab -->
-                    <div class="tab-content" id="case-files">
-                        <h3 class="dossier-section-title">ARCHIVED CASE FILES</h3>
+                    <div class="tab-content active" id="case-files">
+                        <h3 class="dossier-section-title">SHARED CASE FILES</h3>
                         <div class="case-files-actions">
                             <a href="blog/upload.html" class="create-case-btn">
                                 <i class="fas fa-plus-circle"></i> Create New Case File
@@ -492,6 +495,13 @@
                     this.classList.add('active');
                     const tabId = this.getAttribute('data-tab');
                     document.getElementById(tabId).classList.add('active');
+                    
+                    // Load content based on active tab
+                    if (tabId === 'case-files') {
+                        loadUserCaseFiles();
+                    } else if (tabId === 'field-ops') {
+                        loadSavedBlogs();
+                    }
                 });
             });
             
@@ -602,8 +612,88 @@
                     });
             }
             
-            // Load case files when the Case Files tab is clicked
-            document.querySelector('.dossier-tab[data-tab="case-files"]').addEventListener('click', loadUserCaseFiles);
+            // Load user's saved blogs
+            function loadSavedBlogs() {
+                const savedCaseFilesList = document.querySelector('.saved-case-files-list');
+                
+                // Add loading indicator
+                savedCaseFilesList.innerHTML = `
+                    <div class="loading-indicator">
+                        <i class="fas fa-circle-notch fa-spin"></i> Loading saved files...
+                    </div>
+                `;
+                
+                // Fetch user's saved blogs from the backend
+                fetch('../Backend/Php/get_saved_blogs.php')
+                    .then(response => response.json())
+                    .then(result => {
+                        // Check if there are saved blogs
+                        if (!result.success || !result.data || result.data.length === 0) {
+                            savedCaseFilesList.innerHTML = `
+                                <div class="no-case-files">
+                                    <i class="fas fa-bookmark"></i>
+                                    <p>You haven't saved any case files yet.</p>
+                                    <p>Browse the <a href="blog/blog.html">Case Files</a> section and bookmark interesting cases.</p>
+                                </div>
+                            `;
+                            return;
+                        }
+                        
+                        const baseImagePath = '../Assets/uploads/';
+                        
+                        // Create HTML for each saved blog
+                        const savedBlogsHTML = result.data.map(file => `
+                            <div class="case-file-card">
+                                <div class="case-file-header">
+                                    <div class="case-file-title">${file.title}</div>
+                                    <div class="case-file-category">${file.category}</div>
+                                </div>
+                                <div class="case-file-preview">
+                                    <img src="${baseImagePath + file.featuredImage}">
+                                    <div>${file.title}</div>
+                                </div>
+                                <div class="case-file-meta">
+                                    <div class="case-file-date">
+                                        <i class="far fa-calendar-alt"></i> ${new Date(file.createdAt).toLocaleDateString()}
+                                    </div>
+                                    <div class="case-file-stats">
+                                        <span><i class="far fa-heart"></i> ${file.likes || 0}</span>
+                                        <span><i class="far fa-comment"></i> ${file.comments ? file.comments.length : 0}</span>
+                                    </div>
+                                </div>
+                                <div class="case-file-actions">
+                                    <a href="blog/post.html?id=${file.id}" class="view-case-btn">View Case</a>
+                                    <button class="unsave-case-btn" data-id="${file.id}"><i class="fas fa-bookmark"></i> Unsave</button>
+                                </div>
+                            </div>
+                        `).join('');
+                        
+                        savedCaseFilesList.innerHTML = savedBlogsHTML;
+                        
+                        // Add event listeners to unsave buttons
+                        document.querySelectorAll('.unsave-case-btn').forEach(btn => {
+                            btn.addEventListener('click', function() {
+                                const fileId = this.getAttribute('data-id');
+                                console.log("Removing saved case file with ID:", fileId);
+                                
+                                if(confirm("Remove this case file from your saved list?")) {
+                                    // Logic to remove the saved file would go here
+                                    // Not implementing the full removal functionality for now
+                                    alert("This feature will be available in a future update.");
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error loading saved blogs:', error);
+                        savedCaseFilesList.innerHTML = `
+                            <div class="error-message">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <p>Error loading saved case files. Please try again later.</p>
+                            </div>
+                        `;
+                    });
+            }
             
             // Load case files if the Case Files tab is active by default
             if (document.querySelector('.dossier-tab[data-tab="case-files"]').classList.contains('active')) {

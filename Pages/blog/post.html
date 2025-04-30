@@ -41,6 +41,30 @@
             height: 100%;
             object-fit: cover;
         }
+        
+        /* Save Button Styling */
+        .save-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .save-btn:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .save-btn.saved {
+            background-color: #ffe6e6;
+            color: var(--folder-red);
+        }
+        
+        .save-btn.saved i {
+            color: var(--folder-red);
+        }
 
         .comments-section {
             margin-top: 3rem;
@@ -168,7 +192,7 @@
                     <li><a href="../games/game1.html">Games</a></li>
                     <li><a href="blog.html" class="active">Blogs</a></li>
                     <li><a href="../movies/movies.html">Movies</a></li>
-                    <li><a href="../login.html">Login</a></li>
+                    <li><a href="../profile.html">Profile</a></li>
                 </ul>
             </nav>
         </div>
@@ -346,6 +370,43 @@
                             console.error('Error liking post:', error);
                         });
                     });
+                    
+                    // save post to bookmarks
+                    document.getElementById('save-btn').addEventListener('click', function() {
+                        const saveBtn = this;
+                        const savedIcon = '<i class="fas fa-bookmark"></i> Saved';
+                        const unsavedIcon = '<i class="far fa-bookmark"></i> Save';
+                        
+                        fetch('../../Backend/Php/save_post.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ postId: post.id })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // Update the button to show saved state
+                                saveBtn.innerHTML = savedIcon;
+                                saveBtn.classList.add('saved');
+                                
+                                // Show a brief confirmation message
+                                const message = data.alreadySaved ? 'Already in your bookmarks!' : 'Added to your bookmarks!';
+                                alert(message);
+                            } else {
+                                if (data.message === 'User not logged in') {
+                                    alert('Please log in to bookmark posts');
+                                    window.location.href = '../../Pages/login.html';
+                                } else {
+                                    alert('Failed to save the post. Please try again.');
+                                }
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error saving post:', error);
+                            alert('An error occurred. Please try again later.');
+                        });
+                    });
+                    
                     // load comments
                     loadComments(postId);
                 })
