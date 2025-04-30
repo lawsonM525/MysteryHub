@@ -58,6 +58,8 @@ body {
     box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
+    width: 100%;
+    max-width: 100%;
 }
 
 .admin-panel::before {
@@ -123,6 +125,8 @@ body {
     padding: 2rem;
     position: relative;
     z-index: 1;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .tab-content {
@@ -207,36 +211,128 @@ body {
 /* User Table */
 .user-table-container {
     overflow-x: auto;
-    background-color: rgba(255, 255, 255, 0.4);
-    border: 1px solid var(--faded-ink);
-    margin-bottom: 2rem;
-}
-
-.user-table {
+    max-width: 100%;
     width: 100%;
-    border-collapse: collapse;
+ }
+ 
+ .user-table {
+    width: 100%;
+    table-layout: auto;
+ }
+
+
+.user-table thead {
+    background-color: rgba(194, 178, 128, 0.3);
 }
 
-.user-table th, 
+.user-table th,
 .user-table td {
-    padding: 1rem;
+    padding: 0.75rem;
     text-align: left;
     border-bottom: 1px solid var(--faded-ink);
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
 }
 
-.user-table th {
-    font-family: var(--typewriter-font);
-    font-weight: bold;
-    color: var(--folder-red);
-    background-color: rgba(160, 44, 44, 0.05);
+.user-table th:nth-child(1) {
+    width: 10%;
+}
+
+.user-table th:nth-child(2),
+.user-table th:nth-child(3) {
+    width: 15%;
+}
+
+.user-table th:nth-child(4) {
+    width: 20%;
+}
+
+.user-table th:nth-child(5) {
+    width: 15%;
+}
+
+.user-table th:nth-child(6) {
+    width: 15%;
+}
+
+.user-table th:nth-child(7) {
+    width: 10%;
+}
+
+.user-table th:nth-child(8) {
+    width: 15%;
 }
 
 .user-table tr:hover {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(194, 178, 128, 0.1);
 }
 
-.user-table tr:last-child td {
-    border-bottom: none;
+/* Blog Table */
+.blog-table-container {
+    overflow-x: auto;
+    margin-bottom: 2rem;
+    border: 1px solid var(--faded-ink);
+    width: 100%;
+    max-width: 100%;
+}
+
+.blog-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgba(255, 255, 255, 0.7);
+    font-family: var(--typewriter-font);
+    table-layout: auto;
+    min-width: 800px;
+}
+
+.blog-table thead {
+    background-color: rgba(194, 178, 128, 0.3);
+}
+
+.blog-table th,
+.blog-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--faded-ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+.blog-table th:nth-child(1) {
+    width: 10%;
+}
+
+.blog-table th:nth-child(2),
+.blog-table th:nth-child(3) {
+    width: 15%;
+}
+
+.blog-table th:nth-child(4) {
+    width: 20%;
+}
+
+.blog-table th:nth-child(5) {
+    width: 15%;
+}
+
+.blog-table th:nth-child(6) {
+    width: 15%;
+}
+
+.blog-table th:nth-child(7) {
+    width: 10%;
+}
+
+.blog-table th:nth-child(8) {
+    width: 15%;
+}
+
+.blog-table tr:hover {
+    background-color: rgba(194, 178, 128, 0.1);
 }
 
 /* User Photo */
@@ -273,6 +369,160 @@ body {
     background-color: rgba(160, 44, 44, 0.2);
     color: var(--folder-red);
     border: 1px solid var(--folder-red);
+}
+
+/* Blog Images */
+.blog-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--faded-ink);
+    background-color: white;
+}
+
+.blog-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-active {
+    background-color: #dff0d8;
+    color: #3c763d;
+    border: 1px solid #3c763d;
+}
+
+.status-admin {
+    background-color: #d9edf7;
+    color: #31708f;
+    border: 1px solid #31708f;
+}
+
+.status-published {
+    background-color: #d9edf7;
+    color: #31708f;
+    border: 1px solid #31708f;
+}
+
+.status-draft {
+    background-color: #fcf8e3;
+    color: #8a6d3b;
+    border: 1px solid #8a6d3b;
+}
+
+.status-archived {
+    background-color: #f2dede;
+    color: #a94442;
+    border: 1px solid #a94442;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.view-btn,
+.edit-btn,
+.delete-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.view-btn {
+    background-color: #5bc0de;
+    color: white;
+}
+
+.edit-btn {
+    background-color: #5cb85c;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #d9534f;
+    color: white;
+}
+
+.view-btn:hover,
+.edit-btn:hover,
+.delete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading Indicators */
+.loading-indicator {
+    text-align: center;
+    padding: 2rem;
+    font-family: var(--typewriter-font);
+    color: var(--dark-ink);
+    font-style: italic;
+}
+
+.loading-indicator i {
+    margin-right: 0.5rem;
+    color: var(--folder-red);
+}
+
+/* No Data Messages */
+.no-data-message {
+    text-align: center;
+    padding: 3rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px dashed var(--faded-ink);
+    font-family: var(--typewriter-font);
+    color: var(--dark-ink);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.no-data-message i {
+    font-size: 3rem;
+    color: var(--faded-ink);
+}
+
+.no-data-message p {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+/* Danger Button */
+.danger-btn {
+    background-color: #d9534f;
+}
+
+.danger-btn:hover {
+    background-color: #c9302c;
+}
+
+/* Fix the blogs table container */
+.blogs-table-container {
+    overflow-x: auto;
+    margin-bottom: 2rem;
+    border: 1px solid var(--faded-ink);
+    width: 100%;
+    max-width: 100%;
 }
 
 /* Action Buttons */
@@ -355,6 +605,7 @@ body {
     background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
     opacity: 0.4;
     pointer-events: none;
+    z-index: 0;
 }
 
 @keyframes modalOpen {
@@ -593,5 +844,26 @@ body {
         top: 0;
         right: 0;
         align-self: flex-end;
+    }
+}
+
+@media (max-width: 1200px) {
+    .admin-panel {
+        grid-template-columns: 180px 1fr;
+    }
+    
+    .admin-content {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .admin-panel {
+        grid-template-columns: 150px 1fr;
+        gap: 1rem;
+    }
+    
+    .admin-content {
+        padding: 1rem;
     }
 }

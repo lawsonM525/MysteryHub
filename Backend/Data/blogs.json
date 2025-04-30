@@ -38,25 +38,6 @@
         "author": "mh_6806c81e2f7972.38649556"
     },
     {
-        "id": "680acfdfd0171",
-        "title": "The Vanishing of Mill Creek",
-        "category": "true-crime",
-        "readTime": "8",
-        "excerpt": "A gripping tale of a small-town disappearance that left more questions than answers. Uncover the chilling mystery of Mill Creek.",
-        "content": "On the evening of September 12th, 1997, sixteen-year-old Emily Carter was last seen walking home from a football game in the quiet town of Mill Creek. Known for its friendly faces and sleepy streets, Mill Creek was the kind of place where doors were rarely locked, and neighbors looked out for each other. But that night would mark the beginning of a haunting mystery that remains unsolved to this day.\\n\\nWitnesses recall seeing Emily leaving the stadium alone, her backpack slung over one shoulder, humming to herself as she headed down Maple Lane. Somewhere between the stadium and her front porch, she vanished without a trace.\\n\\nThe search began immediately. Friends, family, and volunteers combed through the woods and rivers surrounding Mill Creek, but no sign of Emily or her belongings was ever found. Flyers papered telephone poles and shop windows. Her parents appeared on local news stations, pleading for any information. Rumors swirled \u2014 was it a runaway case, or something much darker?\\n\\nOver the years, several tips led investigators to dead ends. A former classmate claimed to have seen Emily arguing with an unknown man earlier that evening, but the lead went cold. Another tip suggested she might have been spotted at a bus terminal three towns over, but security footage proved inconclusive.\\n\\nDetective Sarah Collins, who has led the case for over a decade, believes someone in Mill Creek knows more than they\u2019re saying. 'This town keeps secrets,' she said in a 2024 interview. 'I\u2019m not giving up on finding out what happened to Emily Carter.'\\n\\nToday, a weathered memorial bench sits near the stadium where Emily was last seen, etched with the words: 'Forever in our hearts.' Her case remains open \u2014 a chilling reminder that even the safest places can hide the darkest mysteries.",
-        "tags": "[\"mystery\",\"Disappearance\",\"Cold case\",\"Small town\"]",
-        "sources": "- https:\/\/example-news.com\/mill-creek-disappearance\r\n- Interview with Detective Sarah Collins, March 2024",
-        "featuredImage": "story_680acfdfcfb9a1.84251903.jpeg",
-        "createdAt": "2025-04-24 23:57:19",
-        "updatedAt": "2025-04-24 23:57:19",
-        "userId": "mh_6806c81e2f7972.38649556",
-        "status": "published",
-        "comments": [],
-        "likes": 0,
-        "views": 0,
-        "author": "mh_6806c81e2f7972.38649556"
-    },
-    {
         "id": "680ae37ed1a81",
         "title": "Whispers in the Library",
         "category": "unsolved-mysteries",
@@ -200,26 +181,6 @@
         "authorAvatar": "..\/..\/profile_pics\/profile_680fb1aa183a20.27378666.jpg"
     },
     {
-        "id": "68110202442b2",
-        "title": "babab",
-        "category": "disappearances",
-        "readTime": "6",
-        "excerpt": "abababab",
-        "content": "vbavbvaaj",
-        "tags": "[\"ababa\"]",
-        "sources": "avbaba\r\n",
-        "featuredImage": "story_6811020243cf67.67041100.png",
-        "createdAt": "2025-04-29 16:44:50",
-        "updatedAt": "2025-04-29 16:44:50",
-        "userId": "mh_6806c2a2decd47.24376293",
-        "status": "published",
-        "comments": [],
-        "likes": 0,
-        "views": 0,
-        "author": "zoep_26",
-        "authorAvatar": "..\/..\/profile_pics\/profile_680fb1aa183a20.27378666.jpg"
-    },
-    {
         "id": "68118ce8c0bc8",
         "title": "Knnives Out (IRL)",
         "category": "unsolved-mysteries",
@@ -258,5 +219,25 @@
         "views": 0,
         "author": "michelle123",
         "authorAvatar": "..\/..\/profile_pics\/profile_680940a355f736.27582336.jpeg"
+    },
+    {
+        "id": "681247bb8f14e",
+        "title": "THE TOP DOG",
+        "category": "serial-killers",
+        "readTime": "1",
+        "excerpt": "This is a story by aZ_123... about top dog skrilla",
+        "content": "Top dog Skrilla was a top dog. End of Story",
+        "tags": "[\"Killers\"]",
+        "sources": "",
+        "featuredImage": "story_681247bb8e80e7.26219538.jpeg",
+        "createdAt": "2025-04-30 15:54:35",
+        "updatedAt": "2025-04-30 15:54:35",
+        "userId": "admin",
+        "status": "published",
+        "comments": [],
+        "likes": 0,
+        "views": 0,
+        "author": "Anonymous",
+        "authorAvatar": "..\/..\/assets\/images\/default-avatar.jpg"
     }
 ]

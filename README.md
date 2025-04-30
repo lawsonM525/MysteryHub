@@ -35,6 +35,8 @@ Michelle - User profile should have favorited movies, favorited articles, played
 
 
 #### Week 3
-Bintu - Blog Functionality - 18 hours
+Bintu - Blog & UploadFunctionality - 18 hours
+Michelle - Admin Functionality - 5 hours
+Michelle - Movie Recommendations functionality - 3hours
 
 

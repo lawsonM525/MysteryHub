@@ -61,6 +61,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // If no validation errors, attempt login
     if (empty($errors)) {
+        // Check for admin credentials
+        if ($username === 'admin' && $password === 'admin') {
+            // Set admin session data
+            $_SESSION['user_id'] = 'admin';
+            $_SESSION['username'] = 'admin';
+            $_SESSION['firstname'] = 'Admin';
+            $_SESSION['lastname'] = 'User';
+            $_SESSION['is_admin'] = true;
+            $_SESSION['last_login'] = date('Y-m-d H:i:s');
+            
+            // Successful admin login
+            setFlashMessage('success', 'Admin login successful!');
+            
+            // Redirect to admin page
+            header("Location: ../../Pages/admin.html");
+            exit;
+        }
+        
         // Load user data
         $usersFile = USERS_DIR . '/users.json';
         $users = loadJsonData($usersFile);
@@ -120,4 +138,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // If not a POST request, redirect to login form
     header("Location: ../../Pages/login.html");
 }
-
