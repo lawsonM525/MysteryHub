@@ -34,8 +34,10 @@ if (!file_exists(USERS_DIR)) {
     error_log("Created USERS_DIR: " . USERS_DIR);
 }
 
-// Define profile pictures directory using relative path
+// Define profile pictures directory using relative path (for PHP to save files)
 $profilePicturesDir = "../../profile_pics";
+// Define the web-relative path (to be stored in JSON)
+$webProfilePicsPath = "profile_pics";
 
 if (!file_exists($profilePicturesDir)) {
     mkdir($profilePicturesDir, 0755, true);
@@ -43,7 +45,10 @@ if (!file_exists($profilePicturesDir)) {
 }
 
 //handling profile picture
+// Physical path for default profile
 $profilePicturePath = $profilePicturesDir . "/default-profile.jpg";
+// Web path that will be stored in JSON
+$webProfilePicturePath = $webProfilePicsPath . "/default-profile.jpg";
 
 // Check if default image exists, if not create a placeholder
 if (!file_exists($profilePicturePath)) {
@@ -64,14 +69,16 @@ if(isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === 
     $destination = $uploadDir . $filename;
 
     if(move_uploaded_file($_FILES['profile_picture']['tmp_name'], $destination)){
+        // Set both the physical path (not used further) and the web path for storage
         $profilePicturePath = $destination;
+        $webProfilePicturePath = $webProfilePicsPath . "/" . $filename;
         error_log("Successfully uploaded profile picture: " . $profilePicturePath);
+        error_log("Web path for profile picture: " . $webProfilePicturePath);
     } else {
         error_log("Failed to move uploaded file");
         setFlashMessage('error', 'Failed to upload profile picture. Please try again.');
     }
 }
-
 
 // Initialize users.json if it doesn't exist
 if (!file_exists(USERS_FILE)) {
@@ -226,7 +233,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'lastname' => $lastname,
                 'expertise' => $expertise,
                 'is_admin' => false, // Default to regular user
-                'profile_picture' => $profilePicturePath,
+                'profile_picture' => $webProfilePicturePath,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ];

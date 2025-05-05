@@ -248,9 +248,50 @@
         "lastname": "Collier",
         "expertise": "forensics",
         "is_admin": false,
-        "profile_picture": "..\/..\/profile_pics\/68182eca2eac9.jpeg",
+        "profile_picture": "profile_pics\/68182eca2eac9.jpeg",
         "created_at": "2025-05-05 03:21:46",
         "updated_at": "2025-05-05 03:21:55",
         "last_login": "2025-05-05 03:21:55"
+    },
+    {
+        "id": "mh_68183356eff862.88652003",
+        "username": "malia__1",
+        "password": "$2y$10$Zfhy6MQAdPKW3lSX2iRlQuugRu2s0AENBwwUUQUzomMdYNbaBv8Aa",
+        "email": "malia@mail.com",
+        "firstname": "Malia",
+        "lastname": "Jalloh",
+        "expertise": "forensics",
+        "is_admin": false,
+        "profile_picture": "profile_pics\/68183356ef339.jpg",
+        "created_at": "2025-05-05 03:41:11",
+        "updated_at": "2025-05-05 03:41:58",
+        "last_login": "2025-05-05 03:41:58"
+    },
+    {
+        "id": "mh_6818344e074f36.34519139",
+        "username": "jalia_1",
+        "password": "$2y$10$BZLAn0op6t4l\/J2xHX1YNueXHV0EsfA9xd5pbv2qWzTNIsQxUhgZq",
+        "email": "jjalloh@gmail.com",
+        "firstname": "Jalia",
+        "lastname": "Jalloh",
+        "expertise": "forensics",
+        "is_admin": false,
+        "profile_picture": "profile_pics\/default-profile.jpg",
+        "created_at": "2025-05-05 03:45:18",
+        "updated_at": "2025-05-05 03:45:18"
+    },
+    {
+        "id": "mh_681839d0b5b2d6.53321043",
+        "username": "klawson101",
+        "password": "$2y$10$oS\/pElpUjjXJR5nNDsayCuqmnBsMmWciT3uCiL9\/EOHu2A.rYDPUS",
+        "email": "klawson@gmail.com",
+        "firstname": "Katie",
+        "lastname": "Lawson",
+        "expertise": "forensics",
+        "is_admin": false,
+        "profile_picture": "profile_pics\/681839d0b530e.jpeg",
+        "created_at": "2025-05-05 04:08:48",
+        "updated_at": "2025-05-05 04:08:56",
+        "last_login": "2025-05-05 04:08:56"
     }
 ]
