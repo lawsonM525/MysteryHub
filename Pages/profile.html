@@ -250,6 +250,274 @@
         .delete-case-btn i {
             font-size: 1rem;
         }
+
+        .logout-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #b30000;
+            color: var(--aged-paper);
+            border: none;
+            padding: 8px 16px;
+            margin-left: 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Special Elite', cursive;
+        }
+
+        .logout-btn:hover {
+            background-color: #ff0000;
+            transform: scale(1.05);
+        }
+
+        .logout-btn i {
+            margin-right: 8px;
+        }
+
+        .case-files-actions {
+            margin: 20px 0;
+            text-align: right;
+        }
+        
+        .create-case-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--folder-red);
+            color:var(--aged-paper);
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid var(--aged-paper);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .create-case-btn i {
+            margin-right: 8px;
+            color: var(--aged-paper);
+        }
+
+        .create-case-btn i:hover {
+            color: var(--folder-red);
+        }
+        
+        .create-case-btn:hover {
+            background-color: var(--aged-paper);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            border-color: #444;
+        }
+        .delete-case-btn {
+            padding: 0.7rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            background-color: var(--folder-red);
+            color: var(--aged-paper);
+            border: 1px solid var(--folder-red);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .delete-case-btn:hover {
+            background-color: var(--aged-paper);
+            color: var(--folder-red);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .delete-case-btn i {
+            font-size: 1rem;
+        }
+
+        /* Login button styling */
+        .login-btn {
+            background-color: var(--secret-green) !important;
+            border: 1px solid var(--aged-paper);
+            transition: all 0.3s ease;
+        }
+        
+        .login-btn:hover {
+            background-color: var(--dark-green) !important;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 120, 0, 0.4);
+        }
+        
+        /* Authentication required message */
+        .auth-required-message {
+            background-color: rgba(30, 30, 30, 0.8);
+            border: 2px dashed var(--folder-red);
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            color: var(--aged-paper);
+            font-family: 'Special Elite', cursive;
+            border-radius: 4px;
+            font-size: 1.1em;
+        }
+        
+        /* Flash Messages Styling */
+        .flash-messages {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 350px;
+        }
+        
+        .flash-message {
+            padding: 15px;
+            border-radius: 5px;
+            color: white;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            animation: slide-in 0.3s ease-out;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Special Elite', cursive;
+        }
+        
+        .flash-message.info {
+            background-color: #2196F3;
+            border-left: 5px solid #0D47A1;
+        }
+        
+        .flash-message.success {
+            background-color: #4CAF50;
+            border-left: 5px solid #1B5E20;
+        }
+        
+        .flash-message.error {
+            background-color: #F44336;
+            border-left: 5px solid #B71C1C;
+        }
+        
+        .flash-message.warning {
+            background-color: #FF9800;
+            border-left: 5px solid #E65100;
+        }
+        
+        .flash-message i {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .flash-message .close-message {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        
+        .flash-message .close-message:hover {
+            opacity: 1;
+        }
+        
+        .flash-message.hiding {
+            animation: slide-out 0.3s ease-in forwards;
+        }
+        
+        @keyframes slide-in {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slide-out {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        
+        /* Not Logged In Page Styling */
+        .not-logged-in-container {
+            background-color: rgba(30, 30, 30, 0.9);
+            border: 3px solid var(--folder-red);
+            border-radius: 8px;
+            padding: 40px;
+            margin: 50px auto;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .not-logged-in-container::before {
+            content: "CLASSIFIED";
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background-color: var(--folder-red);
+            color: var(--aged-paper);
+            padding: 5px 40px;
+            font-family: 'Special Elite', cursive;
+            transform: rotate(45deg);
+            font-size: 14px;
+            letter-spacing: 2px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .not-logged-in-icon {
+            color: var(--folder-red);
+            margin-bottom: 20px;
+        }
+        
+        .not-logged-in-title {
+            font-family: 'Special Elite', cursive;
+            color: var(--aged-paper);
+            font-size: 28px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .not-logged-in-message {
+            color: var(--aged-paper);
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        #login-redirect-btn {
+            background-color: var(--secret-green);
+            color: var(--aged-paper);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Special Elite', cursive;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        #login-redirect-btn:hover {
+            background-color: var(--dark-green);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        #login-redirect-btn i {
+            margin-right: 10px;
+        }
     </style>
     <script>
         window.MYSTERY_HUB_CONFIG = {
@@ -257,6 +525,103 @@
         };
     </script>
     <script src="../clock/clock.js"></script>
+    <script>
+        function logoutAgent() {
+            console.log('logoutAgent function called');
+            // Display a loading message
+            displayFlashMessage('info', 'Logging out...', false);
+            
+            // Call the logout endpoint
+            fetch('../Backend/Php/logout.php')
+                .then(response => {
+                    console.log('Logout response received:', response);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Logout data:', data);
+                    if (data.success) {
+                        // Store a message in sessionStorage for the login page to display
+                        sessionStorage.setItem('loginMessage', 'You are not logged in yet. Please log in.');
+                        
+                        // Redirect to the login page after a short delay
+                        setTimeout(() => {
+                            window.location.href = '../Pages/login.html';
+                        }, 1000);
+                    } else {
+                        displayFlashMessage('error', data.message || 'Failed to logout');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error during logout:', error);
+                    displayFlashMessage('error', 'Network error during logout. Please try again.');
+                });
+        }
+        
+        function displayFlashMessage(type, message, autoHide = true) {
+            const messagesContainer = document.querySelector('.flash-messages') || createMessagesContainer();
+            
+            // Create message element
+            const messageElement = document.createElement('div');
+            messageElement.className = `flash-message ${type}`;
+            
+            // Add icon based on message type
+            let icon = 'info-circle';
+            if (type === 'success') icon = 'check-circle';
+            if (type === 'error') icon = 'exclamation-triangle';
+            if (type === 'warning') icon = 'exclamation-circle';
+            
+            messageElement.innerHTML = `
+                <i class="fas fa-${icon}"></i>
+                <span>${message}</span>
+                <button class="close-message"><i class="fas fa-times"></i></button>
+            `;
+            
+            // Add to container
+            messagesContainer.appendChild(messageElement);
+            
+            // Add close button functionality
+            const closeBtn = messageElement.querySelector('.close-message');
+            closeBtn.addEventListener('click', function() {
+                messageElement.classList.add('hiding');
+                setTimeout(() => {
+                    messageElement.remove();
+                    
+                    // If this was the last message, remove the container
+                    if (messagesContainer.querySelectorAll('.flash-message').length === 0) {
+                        messagesContainer.remove();
+                    }
+                }, 300);
+            });
+            
+            // Auto-hide after 5 seconds if enabled
+            if (autoHide) {
+                setTimeout(() => {
+                    if (messageElement.parentNode) {
+                        messageElement.classList.add('hiding');
+                        setTimeout(() => {
+                            if (messageElement.parentNode) {
+                                messageElement.remove();
+                                
+                                // If this was the last message, remove the container
+                                if (messagesContainer.querySelectorAll('.flash-message').length === 0) {
+                                    messagesContainer.remove();
+                                }
+                            }
+                        }, 300);
+                    }
+                }, 5000);
+            }
+            
+            return messageElement;
+        }
+        
+        function createMessagesContainer() {
+            const container = document.createElement('div');
+            container.className = 'flash-messages';
+            document.body.appendChild(container);
+            return container;
+        }
+    </script>
     <script src="../Backend/JS/profile.js"></script>
     
 </head>
@@ -297,8 +662,8 @@
                     </div>
                     
                     <div class="agent-info">
-                        <h2 class="agent-code-name">Agent Jane D.</h2>
-                        <div class="agent-codename">Codename: "Mystery Seeker"</div>
+                        <h2 class="agent-code-name">Agent Unknown</h2>
+                        <div class="agent-codename">Codename: "Unknown"</div>
                         
                         <div class="agent-details">
                             <div class="agent-detail">
@@ -334,6 +699,9 @@
                         
                         <button class="edit-profile-btn" id="edit-profile-btn">
                             <i class="fas fa-pen"></i> Update Agent File
+                        </button>
+                        <button class="logout-btn" id="logout-btn" onclick="logoutAgent()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
                         </button>
                         <div id="editProfileModal" class="modal">
                             <div class="modal-content">

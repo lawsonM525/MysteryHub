@@ -9,8 +9,8 @@
         "expertise": "cryptography",
         "is_admin": false,
         "created_at": "2025-04-18 10:14:56",
-        "updated_at": "2025-04-30 18:23:10",
-        "last_login": "2025-04-30 18:23:10",
+        "updated_at": "2025-05-05 03:20:45",
+        "last_login": "2025-05-05 03:20:45",
         "bio": "i am happy to be alive.. are you? are you sure youre alive???",
         "profile_picture": "profile_pics\/profile_680940a355f736.27582336.jpeg"
     },
@@ -238,5 +238,19 @@
         "created_at": "2025-04-30 02:28:47",
         "updated_at": "2025-04-30 02:30:04",
         "last_login": "2025-04-30 02:30:04"
+    },
+    {
+        "id": "mh_68182eca323165.17905372",
+        "username": "jcol123",
+        "password": "$2y$10$FqXqzXwXEoNa.lnEdWDua.c2p7Dl.b1Xx6ocZHtUo5KJKZp63lfSy",
+        "email": "jcolier@gmail.com",
+        "firstname": "Jacob",
+        "lastname": "Collier",
+        "expertise": "forensics",
+        "is_admin": false,
+        "profile_picture": "..\/..\/profile_pics\/68182eca2eac9.jpeg",
+        "created_at": "2025-05-05 03:21:46",
+        "updated_at": "2025-05-05 03:21:55",
+        "last_login": "2025-05-05 03:21:55"
     }
 ]

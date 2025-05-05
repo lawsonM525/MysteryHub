@@ -26,14 +26,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeBtn = document.querySelector('.close-modal');
     const cancelBtn = document.getElementById('cancel-edit-btn');
     
+    // Logout functionality
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', logoutAgent);
+    }
+    
     // Open modal when edit button is clicked
-    editBtn.addEventListener('click', function() {
-        modal.style.display = 'block';
-        // Ensure the profile picture in modal is updated
-        const profilePic = document.getElementById('profile-picture-display');
-        const modalPic = document.getElementById('profile-picture');
-        modalPic.src = profilePic.src;
-    });
+    editBtn.addEventListener('click', openEditModal);
     
     // Close modal when X is clicked
     closeBtn.addEventListener('click', function() {
@@ -84,9 +84,9 @@ function fetchProfileData() {
         .then(response => response.json())
         .then(data => {
             if (!data.success) {
-                // If not logged in, redirect to login page
-                if (data.redirect) {
-                    window.location.href = data.redirect;
+                // If not logged in, display not logged in page
+                if (data.logged_in === false) {
+                    displayNotLoggedInPage();
                     return;
                 }
                 displayFlashMessage('error', data.message || 'Failed to load profile data.');
@@ -109,6 +109,41 @@ function fetchProfileData() {
             console.error('Error fetching profile data:', error);
             displayFlashMessage('error', 'Failed to connect to the server. Please try again later.');
         });
+}
+
+// Display a simple page for users who are not logged in
+function displayNotLoggedInPage() {
+    // Clear the main profile content
+    const profileContainer = document.querySelector('.profile-container');
+    if (profileContainer) {
+        // Create the not logged in message
+        profileContainer.innerHTML = `
+            <div class="not-logged-in-container">
+                <div class="not-logged-in-icon">
+                    <i class="fas fa-user-lock fa-5x"></i>
+                </div>
+                <h2 class="not-logged-in-title">Agent Authentication Required</h2>
+                <p class="not-logged-in-message">
+                    You are not currently logged in. To view your agent profile and access classified materials, 
+                    please authenticate your identity.
+                </p>
+                <button class="login-btn" id="login-redirect-btn">
+                    <i class="fas fa-sign-in-alt"></i> Agent Login
+                </button>
+            </div>
+        `;
+        
+        // Add event listener to the login button
+        const loginBtn = document.getElementById('login-redirect-btn');
+        if (loginBtn) {
+            loginBtn.addEventListener('click', function() {
+                window.location.href = '../Pages/login.html';
+            });
+        }
+    }
+    
+    // Show a flash message
+    displayFlashMessage('info', 'Authentication required to access your agent profile.', true);
 }
 
 // Update the UI with profile data
@@ -367,4 +402,128 @@ function displayFlashMessage(type, message, autoHide = true) {
     }
     
     return messageElement;
+}
+
+// Display UI for unknown/unauthenticated agent
+function displayUnknownAgentUI() {
+    // Update agent name and code name
+    document.querySelector('.agent-code-name').textContent = 'Agent Unknown';
+    document.querySelector('.agent-codename').textContent = 'Codename: "Unidentified"';
+    
+    // Update file number and clearance level
+    document.getElementById('agent-file-number').textContent = 'AGENT FILE #MH-UNCLASSIFIED';
+    document.getElementById('clearance-level').textContent = 'ACCESS DENIED';
+    
+    // Set default profile picture
+    const profilePic = document.getElementById('profile-picture-display');
+    profilePic.src = '../Assets/images/default-avatar.jpg';
+    
+    // Update agent details
+    document.querySelectorAll('.agent-detail').forEach(detail => {
+        const label = detail.querySelector('.detail-label');
+        if (label) {
+            const value = detail.querySelector('.detail-value');
+            if (label.textContent === 'Joined:') {
+                value.textContent = 'N/A';
+            } else if (label.textContent === 'Division:') {
+                value.textContent = 'Unauthorized';
+            } else if (label.textContent === 'Status:') {
+                value.textContent = 'Unverified';
+            } else if (label.textContent === 'Bio:') {
+                value.textContent = 'Access to agent information requires authentication.';
+            }
+        }
+    });
+    
+    // Update stats
+    const statsElements = document.querySelectorAll('.agent-stat');
+    statsElements.forEach(stat => {
+        const icon = stat.querySelector('i');
+        if (icon) {
+            if (icon.classList.contains('fa-gamepad')) {
+                stat.innerHTML = `<i class="fas fa-gamepad"></i> 0 Field Operations`;
+            } else if (icon.classList.contains('fa-book-open')) {
+                stat.innerHTML = `<i class="fas fa-book-open"></i> 0 Case Files`;
+            } else if (icon.classList.contains('fa-film')) {
+                stat.innerHTML = `<i class="fas fa-film"></i> 0 Evidence Logs`;
+            }
+        }
+    });
+    
+    // Replace Update Agent File button with a Login button
+    const editBtn = document.getElementById('edit-profile-btn');
+    if (editBtn) {
+        editBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Agent Login';
+        editBtn.classList.add('login-btn');
+        editBtn.removeEventListener('click', openEditModal);
+        editBtn.addEventListener('click', function() {
+            window.location.href = '../Pages/login.html';
+        });
+    }
+    
+    // Hide logout button
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.style.display = 'none';
+    }
+    
+    // Disable tab contents or show appropriate messages
+    document.querySelectorAll('.tab-content').forEach(content => {
+        const title = content.querySelector('.dossier-section-title');
+        if (title) {
+            title.textContent += ' (LOGIN REQUIRED)';
+        }
+        
+        // Clear any existing content
+        const contentLists = content.querySelectorAll('.case-files-list, .saved-case-files-list');
+        contentLists.forEach(list => {
+            list.innerHTML = '<div class="auth-required-message">Authentication required to access this content.</div>';
+        });
+        
+        // Hide action buttons
+        const actionButtons = content.querySelectorAll('.create-case-btn');
+        actionButtons.forEach(btn => {
+            btn.style.display = 'none';
+        });
+    });
+}
+
+// Function to handle logout (called directly from the onclick attribute)
+function logoutAgent() {
+    console.log('logoutAgent function called');
+    // Display a loading message
+    displayFlashMessage('info', 'Logging out...', false);
+    
+    // Call the logout endpoint
+    fetch('../Backend/Php/logout.php')
+        .then(response => {
+            console.log('Logout response received:', response);
+            return response.json();
+        })
+        .then(data => {
+            console.log('Logout data:', data);
+            if (data.success) {
+                displayFlashMessage('success', 'Successfully logged out');
+                // Reload the profile page instead of redirecting to index.html
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                displayFlashMessage('error', data.message || 'Failed to logout');
+            }
+        })
+        .catch(error => {
+            console.error('Error during logout:', error);
+            displayFlashMessage('error', 'Network error during logout. Please try again.');
+        });
+}
+
+// Store original edit button click handler
+function openEditModal() {
+    const modal = document.getElementById('editProfileModal');
+    modal.style.display = 'block';
+    // Ensure the profile picture in modal is updated
+    const profilePic = document.getElementById('profile-picture-display');
+    const modalPic = document.getElementById('profile-picture');
+    modalPic.src = profilePic.src;
 }

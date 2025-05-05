@@ -15,7 +15,7 @@ if (!isset($_SESSION['user_id'])) {
     echo json_encode([
         'success' => false,
         'message' => 'User not logged in',
-        'redirect' => '/MysteryHubProject/Pages/login.html'
+        'logged_in' => false
     ]);
     exit;
 }

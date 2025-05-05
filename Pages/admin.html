@@ -7,6 +7,93 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        /* Admin controls container */
+        .admin-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        /* Logout button styling */
+        .logout-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #b30000;
+            color: var(--aged-paper);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Special Elite', cursive;
+        }
+
+        .logout-btn:hover {
+            background-color: #ff0000;
+            transform: scale(1.05);
+        }
+
+        .logout-btn i {
+            margin-right: 8px;
+        }
+        
+        /* Flash messages styling */
+        .flash-messages {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 350px;
+        }
+        
+        .flash-message {
+            padding: 15px;
+            border-radius: 5px;
+            color: white;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            animation: slide-in 0.3s ease-out;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Special Elite', cursive;
+        }
+        
+        .flash-message.info {
+            background-color: #2196F3;
+            border-left: 5px solid #0D47A1;
+        }
+        
+        .flash-message.success {
+            background-color: #4CAF50;
+            border-left: 5px solid #1B5E20;
+        }
+        
+        .flash-message.error {
+            background-color: #F44336;
+            border-left: 5px solid #B71C1C;
+        }
+        
+        .flash-message.warning {
+            background-color: #FF9800;
+            border-left: 5px solid #E65100;
+        }
+        
+        @keyframes slide-in {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slide-out {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+    </style>
     <script>
         window.MYSTERY_HUB_CONFIG = {
             navbarClock: true
@@ -37,7 +124,12 @@
         <div class="admin-container">
             <div class="admin-header">
                 <h1><i class="fas fa-shield-alt"></i> Administration Console</h1>
-                <div class="clearance-stamp">LEVEL 10 CLEARANCE</div>
+                <div class="admin-controls">
+                    <div class="clearance-stamp">LEVEL 10 CLEARANCE</div>
+                    <button id="admin-logout-btn" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
             </div>
             
             <div class="admin-panel">
@@ -714,6 +806,31 @@
             cancelDeleteBlogBtn.addEventListener('click', function() {
                 closeModal(deleteBlogModal);
                 blogToDelete = null;
+            });
+            
+            // Handle logout button
+            document.getElementById('admin-logout-btn').addEventListener('click', function() {
+                // Display a loading message
+                displayFlashMessage('info', 'Logging out...', false);
+                
+                // Call the logout endpoint
+                fetch('../Backend/Php/logout.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            displayFlashMessage('success', 'Successfully logged out');
+                            // Redirect to the login page after a short delay
+                            setTimeout(() => {
+                                window.location.href = '../Pages/login.html';
+                            }, 1000);
+                        } else {
+                            displayFlashMessage('error', data.message || 'Failed to logout');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error during logout:', error);
+                        displayFlashMessage('error', 'Network error during logout. Please try again.');
+                    });
             });
             
             // Load blogs on page load

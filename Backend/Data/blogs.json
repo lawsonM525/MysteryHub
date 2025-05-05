@@ -40,6 +40,14 @@
                 "userAvatar": "..\/..\/profile_pics\/profile_680853d478e693.35727743.jpg",
                 "content": "THIS IS CRAZYYY",
                 "createdAt": "2025-04-30 00:10:26"
+            },
+            {
+                "id": "comment_68180f0393f3c",
+                "userId": "mh_68022620279ac1.75169646",
+                "username": "michelle123",
+                "userAvatar": "..\/..\/profile_pics\/profile_680940a355f736.27582336.jpeg",
+                "content": "WOAH!!",
+                "createdAt": "2025-05-05 01:06:11"
             }
         ],
         "likes": 0,
@@ -254,25 +262,5 @@
         "views": 0,
         "author": "Anonymous",
         "authorAvatar": "..\/..\/assets\/images\/default-avatar.jpg"
-    },
-    {
-        "id": "6812692bf24f8",
-        "title": "fbbq",
-        "category": "disappearances",
-        "readTime": "3",
-        "excerpt": "vbj",
-        "content": "vababhaa",
-        "tags": "[\"vvsvs\"]",
-        "sources": "vjbej",
-        "featuredImage": "story_6812692bf1ce69.54768435.png",
-        "createdAt": "2025-04-30 18:17:15",
-        "updatedAt": "2025-04-30 18:17:15",
-        "userId": "mh_68022620279ac1.75169646",
-        "status": "published",
-        "comments": [],
-        "likes": 0,
-        "views": 0,
-        "author": "michelle123",
-        "authorAvatar": "..\/..\/profile_pics\/profile_680940a355f736.27582336.jpeg"
     }
 ]

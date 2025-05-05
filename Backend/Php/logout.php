@@ -7,6 +7,9 @@
 // Start session
 session_start();
 
+// Prepare response array
+$response = array('success' => true, 'message' => 'Successfully logged out');
+
 // Destroy session
 $_SESSION = array();
 
@@ -22,7 +25,7 @@ if (ini_get("session.use_cookies")) {
 // Destroy the session
 session_destroy();
 
-// Redirect to home page
-header("Location: /MysteryHubProject/index.html");
+// Return JSON response instead of redirecting
+header('Content-Type: application/json');
+echo json_encode($response);
 exit;
-?>
