@@ -141,3 +141,79 @@ function displayFlashMessage(type, message) {
     
     return messageElement;
 }
+
+// Check for login message in sessionStorage when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    const loginMessage = sessionStorage.getItem('loginMessage');
+    if (loginMessage) {
+        // Display the message
+        displayFlashMessage('info', loginMessage);
+        // Remove it from sessionStorage to not show it again on refresh
+        sessionStorage.removeItem('loginMessage');
+    }
+});
+
+// Function to display flash messages
+function displayFlashMessage(type, message, autoHide = true) {
+    // Create or get messages container
+    let messagesContainer = document.querySelector('.flash-messages');
+    if (!messagesContainer) {
+        messagesContainer = document.createElement('div');
+        messagesContainer.className = 'flash-messages';
+        document.body.appendChild(messagesContainer);
+    }
+    
+    // Create message element
+    const messageElement = document.createElement('div');
+    messageElement.className = `flash-message ${type}`;
+    
+    // Add icon based on message type
+    let icon = 'info-circle';
+    if (type === 'success') icon = 'check-circle';
+    if (type === 'error') icon = 'exclamation-triangle';
+    if (type === 'warning') icon = 'exclamation-circle';
+    
+    messageElement.innerHTML = `
+        <i class="fas fa-${icon}"></i>
+        <span>${message}</span>
+        <button class="close-message"><i class="fas fa-times"></i></button>
+    `;
+    
+    // Add to container
+    messagesContainer.appendChild(messageElement);
+    
+    // Add close button functionality
+    const closeBtn = messageElement.querySelector('.close-message');
+    closeBtn.addEventListener('click', function() {
+        messageElement.classList.add('hiding');
+        setTimeout(() => {
+            messageElement.remove();
+            
+            // If this was the last message, remove the container
+            if (messagesContainer.querySelectorAll('.flash-message').length === 0) {
+                messagesContainer.remove();
+            }
+        }, 300);
+    });
+    
+    // Auto-hide after 5 seconds if enabled
+    if (autoHide) {
+        setTimeout(() => {
+            if (messageElement.parentNode) {
+                messageElement.classList.add('hiding');
+                setTimeout(() => {
+                    if (messageElement.parentNode) {
+                        messageElement.remove();
+                        
+                        // If this was the last message, remove the container
+                        if (messagesContainer.querySelectorAll('.flash-message').length === 0) {
+                            messagesContainer.remove();
+                        }
+                    }
+                }, 300);
+            }
+        }, 5000);
+    }
+    
+    return messageElement;
+}

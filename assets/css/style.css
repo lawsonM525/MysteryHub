@@ -715,3 +715,19 @@ footer::before {
     font-size: 0.9rem;
     color: var(--dark-ink);
 }
+
+/* List Styling for Documentation */
+.doc-section ul {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.doc-section ul ul {
+    padding-left: 30px;
+    list-style-type: circle;
+}
+
+.doc-section ul ul ul {
+    padding-left: 40px;
+    list-style-type: square;
+}

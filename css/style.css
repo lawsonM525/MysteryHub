@@ -220,6 +220,22 @@ nav {
     color: #ff4d94;
 }
 
+/* List Styling for Documentation */
+.doc-section ul {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.doc-section ul ul {
+    padding-left: 30px;
+    list-style-type: circle;
+}
+
+.doc-section ul ul ul {
+    padding-left: 40px;
+    list-style-type: square;
+}
+
 /* Footer */
 footer {
     background-color: #131313;

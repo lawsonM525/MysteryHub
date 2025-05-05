@@ -55,7 +55,7 @@ The application implements a role-based access control system, where regular use
 - Site Design Planning and Brainstorming 
 - Initial frontend Development [html pages and css]
 - Login functionality with session management
-- Game 1: Hangman with custom JavaScript implementation
+- Game 1: Hangman with graphics and JavaScript implementation
 - Movies slideshow functionality with dynamic content loading
 - Fixed bugs in blog update functionality for improved reliability
 - Added functionality that allows a user to see their favorited articles displayed in their profile
@@ -126,17 +126,17 @@ Focusing only on the html and css would not suffice.
 
 [✅] **Must store data for each user (could be files the user uploaded, comments the user has made, personal information about the user, etc) and each user must be able to manage/edit their data in some way.**
 - Users can update their profile dynamically including personal information, biography, and profile pictures
-- User-generated content like comments, liked posts, and saved articles are all tracked and manageable
+- User-generated content like comments, liked posts, and saved articles are all stored in json files and manageable/editable
 - All data is persistently stored in JSON files with proper data structure and relationships
 
 [✅] **Must be dynamic: pages must change via interactivity with the user or when changes happen on the server.**
-- The site features numerous interactive elements that update content without page reloads
-- JavaScript-powered dynamic content loading and modification
-- Real-time feedback for user actions like liking, commenting, and saving content
+- The site features numerous interactive elements that update content once it is changed, eg Updating user profile / adding a new blog post / liking a blog post / commenting on a blog post / saving a blog post / deleting a blog post / deleting a user
+- We use JS for the dynamic content loading and modification
+- Real-time display changes for user actions like liking, commenting, and saving content
 
 [✅] **Must have parts that are constructed dynamically without hardwired limitations.**
-- Blog posts, user profiles, and game elements are all dynamically generated based on data
-- Content displays adjust based on available data rather than fixed layouts
+- Blog posts, user profiles (the section that shows saved and created cases/posts), and the hangman game are all dynamically generated  
+- Content displays, especially in the Case Files page, adjust based on available data rather than fixed layouts
 - Adaptive interfaces that respond to user actions and content changes
 
 [✅] **Must include a feature (e.g from W3schools) or optional topic in Web programming that you researched on your own, understood it and integrated it.**

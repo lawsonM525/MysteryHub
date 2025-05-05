@@ -808,31 +808,6 @@
                 blogToDelete = null;
             });
             
-            // Handle logout button
-            document.getElementById('admin-logout-btn').addEventListener('click', function() {
-                // Display a loading message
-                displayFlashMessage('info', 'Logging out...', false);
-                
-                // Call the logout endpoint
-                fetch('../Backend/Php/logout.php')
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            displayFlashMessage('success', 'Successfully logged out');
-                            // Redirect to the login page after a short delay
-                            setTimeout(() => {
-                                window.location.href = '../Pages/login.html';
-                            }, 1000);
-                        } else {
-                            displayFlashMessage('error', data.message || 'Failed to logout');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error during logout:', error);
-                        displayFlashMessage('error', 'Network error during logout. Please try again.');
-                    });
-            });
-            
             // Load blogs on page load
             loadBlogs();
             
