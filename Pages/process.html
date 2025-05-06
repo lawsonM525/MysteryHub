@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MysteryHub Project Documentation</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../Assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Homemade+Apple&family=Cutive+Mono&display=swap" rel="stylesheet">
 </head>
@@ -26,220 +26,166 @@
         <p>MysteryHub is a web application that contains interactive games, real-life cold case blogs, and suggestions for mystery films to give mystery fans a space to explore the worl of mystery!!!</p>
       </section>
 
-      <section class="doc-section">
-        <h2>🕵️ Project Overview</h2>
+      <button class="accordion">🕵️ Project Overview</button>
+      <div class="panel">
         <p>This project was built using <strong>JavaScript, HTML, CSS</strong> for the frontend and <strong>PHP</strong> for the backend. Instead of a traditional database, we used <strong>JSON files</strong> to manage and store data in the application.</p>
         <p>The decision to use JSON files rather than a traditional database was made to focus on core web development concepts without the added complexity of database management systems. This approach allowed us to concentrate on creating a good user experience while still having reliable data storage.</p>
-      </section>
+      </div>
 
-      <section class="doc-section">
-        <h2>🎯 Features</h2>
-        <ul>
-          <li><strong>Mini Mystery Games</strong>: Interactive detective games where players can solve mysteries through clues and deduction.</li>
-          <li><strong>True Crime & Cold Case Blog</strong>: Users can read, comment on, save, and upload real mystery stories.</li>
-          <li><strong>Mystery Movie Recommendations</strong>: A slideshow-style feature where users can browse movie recommendations.</li>
-          <li><strong>User Interactions</strong>:
-            <ul>
-              <li>Save/favorite blog stories for later reading</li>
-              <li>Comment and like under blog posts to engage with other mystery enthusiasts</li>
-              <li>Tooltip that gives user information on how to play the game</li>
-              <li>Play hangman with virtual hints and clues for an immersive mystery experience</li>
-            </ul>
-          </li>
-          <li><strong>User Authentication System</strong>:
-            <ul>
-              <li>Secure registration and login functionality</li>
-              <li>Profile management with customizable details</li>
-              <li>Profile picture upload and management</li>
-              <li>Secure logout functionality with session management</li>
-            </ul>
-          </li>
-          <li><strong>Admin Controls</strong>:
-            <ul>
-              <li>Special admin panel for content and user management</li>
-              <li>User oversight capabilities</li>
-              <li>Content moderation tools</li>
-            </ul>
-          </li>
-        </ul>
-      </section>
+      <button class="accordion">🎯 Features</button>
+      <div class="panel">
+        <p><strong>Mini Mystery Games</strong>: Interactive detective games where players can solve mysteries through clues and deduction.</p>
+        <p><strong>True Crime & Cold Case Blog</strong>: Users can read, comment on, save, and upload real mystery stories.</p>
+        <p><strong>Mystery Movie Recommendations</strong>: A slideshow-style feature where users can browse movie recommendations.</p>
+        <p><strong>User Interactions</strong>:
+          <br>- Save/favorite blog stories for later reading
+          <br>- Comment and like under blog posts to engage with other mystery enthusiasts
+          <br>- Tooltip that gives user information on how to play the game
+          <br>- Play hangman with virtual hints and clues for an immersive mystery experience
+        </p>
+        <p><strong>User Authentication System</strong>:
+          <br>- Secure registration and login functionality
+          <br>- Profile management with customizable details
+          <br>- Profile picture upload and management
+          <br>- Secure logout functionality with session management
+        </p>
+        <p><strong>Admin Controls</strong>:
+          <br>- Special admin panel for content and user management
+          <br>- User oversight capabilities
+          <br>- Content moderation tools
+        </p>
+      </div>
 
-      <section class="doc-section">
-        <h2>🔍 How the Project Works</h2>
+      <button class="accordion">🔍 How the Project Works</button>
+      <div class="panel">
         <p>Users can register and log in to access the site. Once logged in, they can play mystery games, read and interact with blog posts, and explore movie recommendations. All user actions, like posting a story, liking, commenting, or updating their profile, are handled through forms and buttons that use JavaScript on the frontend and PHP on the backend.</p>
         <p>Data is stored in JSON files, with separate files for:</p>
-        <ul>
-          <li>User accounts and profile information</li>
-          <li>Blog posts and comments</li>
-          <li>User preferences and saved content</li>
-        </ul>
+        <p>- User accounts and profile information<br>
+           - Blog posts and comments<br>
+           - User preferences and saved content</p>
         <p>Admins have access to a special page where they can manage users and blog content, ensuring the platform remains appropriate and engaging.</p>
         <p>The application implements a role-based access control system, where regular users have standard privileges while administrators have expanded capabilities for content and user management.</p>
-      </section>
+      </div>
 
-      <section class="doc-section">
-        <h2>🧠 Team Contributions</h2>
+      <button class="accordion">🧠 Team Contributions</button>
+      <div class="panel">
         <h3>Bintu Jalloh</h3>
-        <ul>
-          <li>Site Design Planning and Brainstorming</li>
-          <li>Initial backend development [Php setup, register and login functionality, initial json data setup]</li>
-          <li>Implemented the Blog feature where users can write, update, save, like, and comment on blog posts.</li>
-          <li>Built the Register and Profile features, allowing users to sign up, upload a profile picture, write a bio, and update their information.</li>
-          <li>Set up backend PHP scripts to handle user authentication, form validation, add comments, create/update blog posts.</li>
-          <li>Implemented proper file path handling for uploaded images and content</li>
-          <li>Project Documentation</li>
-        </ul>
+        <p>- Site Design Planning and Brainstorming<br>
+           - Initial backend development [Php setup, register and login functionality, initial json data setup]<br>
+           - Implemented the Blog feature where users can write, update, save, like, and comment on blog posts.<br>
+           - Built the Register and Profile features, allowing users to sign up, upload a profile picture, write a bio, and update their information.<br>
+           - Set up backend PHP scripts to handle user authentication, form validation, add comments, create/update blog posts.<br>
+           - Implemented proper file path handling for uploaded images and content<br>
+           - Project Documentation</p>
 
         <h3>Michelle Lawson</h3>
-        <ul>
-          <li>Site Design Planning and Brainstorming</li>
-          <li>Initial frontend Development [html pages and css]</li>
-          <li>Login functionality with session management</li>
-          <li>Game 1: Hangman with graphics and JavaScript implementation</li>
-          <li>Movies slideshow functionality with dynamic content loading</li>
-          <li>Fixed bugs in blog update functionality for improved reliability</li>
-          <li>Added functionality that allows a user to see their favorited articles displayed in their profile</li>
-          <li>Designed and implemented the vintage detective aesthetic throughout the site</li>
-          <li>Project Documentation revision + B.T.S. webpage</li>
-        </ul>
-      </section>
+        <p>- Site Design Planning and Brainstorming<br>
+           - Initial frontend Development [html pages and css]<br>
+           - Login functionality with session management<br>
+           - Game 1: Hangman with graphics and JavaScript implementation<br>
+           - Movies slideshow functionality with dynamic content loading<br>
+           - Fixed bugs in blog update functionality for improved reliability<br>
+           - Added functionality that allows a user to see their favorited articles displayed in their profile<br>
+           - Designed and implemented the vintage detective aesthetic throughout the site<br>
+           - Project Documentation revision + B.T.S. webpage</p>
+      </div>
 
-      <section class="doc-section">
-        <h2>🛠️ Technologies Used</h2>
-        <ul>
-          <li><strong>HTML5</strong>: For structured content and semantic markup</li>
-          <li><strong>CSS3</strong>: For styling and responsive design, including custom animations and transitions</li>
-          <li><strong>JavaScript (Vanilla)</strong>: For client-side interactivity and dynamic content</li>
-          <li><strong>PHP 7+</strong>: For server-side processing and session management</li>
-          <li><strong>JSON</strong>: As a database substitute for flexible data storage and retrieval</li>
-          <li><strong>File System Management</strong>: For handling user-uploaded content and profile pictures</li>
-          <li><strong>Session Management</strong>: For maintaining user state across the application</li>
-        </ul>
-      </section>
+      <button class="accordion">🛠️ Technologies Used</button>
+      <div class="panel">
+        <p><strong>HTML5</strong>: For structured content and semantic markup</p>
+        <p><strong>CSS3</strong>: For styling and responsive design, including custom animations and transitions</p>
+        <p><strong>JavaScript (Vanilla)</strong>: For client-side interactivity and dynamic content</p>
+        <p><strong>PHP 7+</strong>: For server-side processing and session management</p>
+        <p><strong>JSON</strong>: As a database substitute for flexible data storage and retrieval</p>
+        <p><strong>File System Management</strong>: For handling user-uploaded content and profile pictures</p>
+        <p><strong>Session Management</strong>: For maintaining user state across the application</p>
+      </div>
 
-      <section class="doc-section">
-        <h2>🧪 Notes & Challenges</h2>
+      <button class="accordion">🧪 Notes & Challenges</button>
+      <div class="panel">
         <p>Since we used JSON files instead of a real database, we had to handle things like generating IDs and keeping the data consistent ourselves. This required custom implementation of:</p>
-        <ul>
-          <li>Unique ID generation for users, blog posts, and comments</li>
-          <li>Data integrity checks to prevent corruption or conflicts</li>
-          <li>Custom query-like functionality for searching and filtering data</li>
-        </ul>
+        <p>- Unique ID generation for users, blog posts, and comments<br>
+           - Data integrity checks to prevent corruption or conflicts<br>
+           - Custom query-like functionality for searching and filtering data</p>
         <p>We had to figure out a way to save the user's information temporally through session data, balancing security with user experience and persistent login states.</p>
         <p>Using PHP was quite difficult because getting real-time updates without full page refresh was a big learning moment for us. We implemented techniques to:</p>
-        <ul>
-          <li>Use AJAX for data updates without page refreshes</li>
-          <li>Structure backend responses for JSON consumption by the frontend</li>
-          <li>Manage asynchronous updates to maintain data consistency</li>
-        </ul>
+        <p>- Use AJAX for data updates without page refreshes<br>
+           - Structure backend responses for JSON consumption by the frontend<br>
+           - Manage asynchronous updates to maintain data consistency</p>
         <p>We also had to be really intentional about how we named things and organized routes so the frontend and PHP backend could communicate smoothly. This involved:</p>
-        <ul>
-          <li>Consistent naming conventions across files and functions</li>
-          <li>Structured API-like endpoints for frontend-backend communication</li>
-          <li>Thoughtful organization of files and directories</li>
-        </ul>
+        <p>- Consistent naming conventions across files and functions<br>
+           - Structured API-like endpoints for frontend-backend communication<br>
+           - Thoughtful organization of files and directories</p>
         <p>Getting the file paths right was a bit tricky, especially when it came to making sure image paths were correctly linked and displayed across different pages. We solved this by:</p>
-        <ul>
-          <li>Using both physical file paths for server operations and web-relative paths for client display</li>
-          <li>Implementing path translation functions for consistent referencing</li>
-          <li>Careful management of uploaded files and their associated references</li>
-        </ul>
-      </section>
+        <p>- Using both physical file paths for server operations and web-relative paths for client display<br>
+           - Implementing path translation functions for consistent referencing<br>
+           - Careful management of uploaded files and their associated references</p>
+      </div>
 
-      <section class="doc-section">
-        <h2>✅ Future Improvements</h2>
-        <ul>
-          <li>Add real authentication with session or JWT-based login for enhanced security</li>
-          <li>Integrate local storage or a lightweight database (like SQLite) for improved data management</li>
-          <li>Expand mystery game library with more levels and hints for greater user engagement</li>
-          <li>Allow users to edit or delete their submitted stories for better content management</li>
-          <li>Implement a rating system for movies and blogs for enhanced community features</li>
-          <li>Add more interactive elements to increase user engagement</li>
-          <li>Develop a notification system for users to track interactions with their content</li>
-        </ul>
-      </section>
+      <button class="accordion">✅ Future Improvements</button>
+      <div class="panel">
+        <p>- Add real authentication with session or JWT-based login for enhanced security</p>
+        <p>- Integrate local storage or a lightweight database (like SQLite) for improved data management</p>
+        <p>- Expand mystery game library with more levels and hints for greater user engagement</p>
+        <p>- Allow users to edit or delete their submitted stories for better content management</p>
+        <p>- Implement a rating system for movies and blogs for enhanced community features</p>
+        <p>- Add more interactive elements to increase user engagement</p>
+        <p>- Develop a notification system for users to track interactions with their content</p>
+      </div>
 
-      <section class="doc-section">
-        <h2>📌 Planned Features</h2>
-        <ul>
-          <li>Users will be able to play <strong>three fun mini mystery games</strong>, each with animations and graphics for an immersive experience.</li>
-          <li>Users will be able to read <strong>real-life mystery stories</strong>, cold cases, and true crime write-ups.
-            <ul>
-              <li>Comment on blog posts</li>
-              <li>Upload their own stories (as markdown files)</li>
-              <li>Favorite or save posts to their profile</li>
-            </ul>
-          </li>
-          <li>A <strong>slideshow page</strong> will showcase recommended mystery movies.
-            <ul>
-              <li>Rate movies (1 to 5 stars)</li>
-              <li>Save favorites</li>
-              <li>View average ratings</li>
-              <li>See rated movies on their profile</li>
-            </ul>
-          </li>
-          <li><strong>Register/Login system</strong> with secure PHP sessions</li>
-          <li><strong>Personal profile page</strong>
-            <ul>
-              <li>View/edit personal info</li>
-              <li>View saved games, stories, and movies</li>
-              <li>View movie ratings they've given</li>
-            </ul>
-          </li>
-          <li><strong>Admin dashboard</strong> (admin-only access)
-            <ul>
-              <li>View all registered users</li>
-              <li>Add new movies to the slideshow</li>
-              <li>Delete inappropriate blog posts or stories</li>
-              <li>Feature selected blog posts</li>
-            </ul>
-          </li>
-          <li>A <strong>real-time clock</strong> built using JavaScript</li>
-        </ul>
-      </section>
+      <button class="accordion">📌 Planned Features</button>
+      <div class="panel">
+        <p>Users will be able to play <strong>three fun mini mystery games</strong>, each with animations and graphics for an immersive experience.</p>
+        <p>Users will be able to read <strong>real-life mystery stories</strong>, cold cases, and true crime write-ups.</p>
+        <p>- Comment on blog posts<br>
+           - Upload their own stories (as markdown files)<br>
+           - Favorite or save posts to their profile</p>
+        <p>A <strong>slideshow page</strong> will showcase recommended mystery movies.</p>
+        <p>- Rate movies (1 to 5 stars)<br>
+           - Save favorites<br>
+           - View average ratings<br>
+           - See rated movies on their profile</p>
+        <p><strong>Register/Login system</strong> with secure PHP sessions</p>
+        <p><strong>Personal profile page</strong></p>
+        <p>- View/edit personal info<br>
+           - View saved games, stories, and movies<br>
+           - View movie ratings they've given</p>
+        <p><strong>Admin dashboard</strong> (admin-only access)</p>
+        <p>- View all registered users<br>
+           - Add new movies to the slideshow<br>
+           - Delete inappropriate blog posts or stories<br>
+           - Feature selected blog posts</p>
+        <p>A <strong>real-time clock</strong> built using JavaScript</p>
+      </div>
 
-      <section class="doc-section">
-        <h2>🌟 What We Actually Implemented</h2>
-        <ul>
-          <li>One <strong>Hangman-style mystery game</strong> with custom graphics and gameplay logic</li>
-          <li>Users can read <strong>real-life mystery stories</strong>, cold cases, and true crime write-ups.
-            <ul>
-              <li>Comment on blog posts with real-time updates</li>
-              <li>Upload their own stories (as markdown files) with formatting support</li>
-              <li>Save posts to their profile for later reading</li>
-              <li>Like blog posts to show appreciation for content</li>
-            </ul>
-          </li>
-          <li>A <strong>slideshow page</strong> showcasing recommended mystery movies with custom transitions</li>
-          <li><strong>Register/Login system</strong> using secure PHP sessions
-            <ul>
-              <li>Password hashing and secure authentication</li>
-              <li>Session management with proper security practices</li>
-              <li>Profile picture upload and management</li>
-              <li>Logout functionality with proper session destruction</li>
-            </ul>
-          </li>
-          <li><strong>Personal profile page</strong>
-            <ul>
-              <li>View/edit personal info with real-time updates</li>
-              <li>View saved blog posts in a personalized interface</li>
-              <li>Custom styling to match the "agent dossier" theme</li>
-            </ul>
-          </li>
-          <li><strong>Admin dashboard</strong>
-            <ul>
-              <li>View all registered users with detailed information</li>
-              <li>View user-submitted blog posts for moderation</li>
-              <li>Delete inappropriate stories/blogs to maintain community standards</li>
-              <li>Mark selected blog posts as "featured" to highlight quality content</li>
-            </ul>
-          </li>
-          <li>A <strong>real-time clock</strong> using JavaScript with custom styling that matches the theme</li>
-        </ul>
-      </section>
+      <button class="accordion">🌟 What We Actually Implemented</button>
+      <div class="panel">
+        <p>One <strong>Hangman-style mystery game</strong> with custom graphics and gameplay logic</p>
+        <p>Users can read <strong>real-life mystery stories</strong>, cold cases, and true crime write-ups.</p>
+        <p>- Comment on blog posts with real-time updates<br>
+           - Upload their own stories (as markdown files) with formatting support<br>
+           - Save posts to their profile for later reading<br>
+           - Like blog posts to show appreciation for content</p>
+        <p>A <strong>slideshow page</strong> showcasing recommended mystery movies with custom transitions</p>
+        <p><strong>Register/Login system</strong> using secure PHP sessions</p>
+        <p>- Password hashing and secure authentication<br>
+           - Session management with proper security practices<br>
+           - Profile picture upload and management<br>
+           - Logout functionality with proper session destruction</p>
+        <p><strong>Personal profile page</strong></p>
+        <p>- View/edit personal info with real-time updates<br>
+           - View saved blog posts in a personalized interface<br>
+           - Custom styling to match the "agent dossier" theme</p>
+        <p><strong>Admin dashboard</strong></p>
+        <p>- View all registered users with detailed information<br>
+           - View user-submitted blog posts for moderation<br>
+           - Delete inappropriate stories/blogs to maintain community standards<br>
+           - Mark selected blog posts as "featured" to highlight quality content</p>
+        <p>A <strong>real-time clock</strong> using JavaScript with custom styling that matches the theme</p>
+      </div>
 
-      <section class="doc-section">
-        <h2>❗ Why We Didn't Implement All Planned Features</h2>
+      <button class="accordion">❗ Why We Didn't Implement All Planned Features</button>
+      <div class="panel">
         <p>We originally planned to include three mystery games, but after developing the first one, we realized how much time and detail went into designing the gameplay logic, writing the story, and handling the logic with JavaScript. For example, in our current game, we had to build a clue system where players can click different hints to guess who the murderer is. All of this required thoughtful planning and testing. Rather than rush through the others, we decided to focus on the features on our site: blogs and movies.</p>
 
         <p>We were able to create the slideshow to display mystery movie recommendations, but we didn't have enough time to implement the rating system and saving functionality. These features would have required additional backend logic to store ratings per user and update averages, which we weren't able to complete before the deadline.</p>
@@ -247,12 +193,29 @@
         <p>While we got the basic profile and blog-saving features working, we didn't have time to extend the profile functionality to include saved games or show movies a user rated. We couldn't add the option for Admins to add movies through the dashboard also. This was all due to a lack of time, as, given more time, we know exactly how we would do this.</p>
             
         <p>Overall, we focused on building core features that would make the site usable, interactive, and meet all the requirements. We prioritized getting a working blog system, game, and admin controls up and running. The main reason we couldn't add all the features we originally planned was due to time constraints and the extra logic required for each feature, along with the time needed to test and make sure everything worked properly. However, we're proud of how much we accomplished with the time we had.</p>
-      </section>
+      </div>
     </div>
   </main>
 
   <footer>
     <p>&copy; 2025 MysteryHub - Created by Bintu Jalloh & Michelle Lawson</p>
   </footer>
+
+  <script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    }
+  </script>
 </body>
 </html>
