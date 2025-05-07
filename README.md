@@ -262,3 +262,22 @@ We were able to create the slideshow to display mystery movie recommendations, b
 While we got the basic profile and blog-saving features working, we didn't have time to extend the profile functionality to include saved games or show movies a user rated. We couldn't add the option for Admins to add movies through the dashboard also. This was all due to a lack of time, as, given more time, we know exactly how we would do this.
 
 Overall, we focused on building core features that would make the site usable, interactive, and meet all the requirements. We prioritized getting a working blog system, game, and admin controls up and running. The main reason we couldn't add all the features we originally planned was due to time constraints and the extra logic required for each feature, along with the time needed to test and make sure everything worked properly. However, we're proud of how much we accomplished with the time we had.
+
+## 📚 Sources 
+
+- https://www.youtube.com/watch?v=-v36WcbDs9k 
+- https://www.geeksforgeeks.org/build-a-hangman-game-using-javascript/?utm_source=auth&utm_medium=saved&utm_campaign=articles - Hangman Game
+- https://codepen.io/adamsullovey/pen/BoJrbb - Door opening animation
+- Image textures sourced from www.transparenttextures.com 
+- https://www.w3schools.com/howto/howto_js_accordion.asp - accordion 
+- https://www.w3schools.com/howto/howto_css_modals.asp - model
+- https://www.w3schools.com/php/php_sessions.asp - php start session
+- https://www.w3schools.com/php/func_filesystem_dirname.asp - PHP dirname() Function
+- https://www.geeksforgeeks.org/javascript-fetch-method/ - javascript fetch method 
+- https://www.w3schools.com/php/keyword_require_once.asp - require_once php method
+- https://www.w3schools.com/php/func_var_isset.asp - isset php
+- https://www.w3schools.com/PHP/func_misc_uniqid.asp - uniqid php
+- https://www.geeksforgeeks.org/how-to-make-a-redirect-in-php/ - redirecting php
+- https://w3schools.tech/tutorial/php/php_flash_messages - flash messages php
+
+

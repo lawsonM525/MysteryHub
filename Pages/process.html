@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../Assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Homemade+Apple&family=Cutive+Mono&display=swap" rel="stylesheet">
+  <script src="../Backend/JS/process.js" defer></script>
 </head>
 <body class="vintage-background">
   <header>
@@ -194,28 +195,27 @@
             
         <p>Overall, we focused on building core features that would make the site usable, interactive, and meet all the requirements. We prioritized getting a working blog system, game, and admin controls up and running. The main reason we couldn't add all the features we originally planned was due to time constraints and the extra logic required for each feature, along with the time needed to test and make sure everything worked properly. However, we're proud of how much we accomplished with the time we had.</p>
       </div>
+
+      <button class="accordion">📚 Sources </button>
+      <div class="panel">
+        <p>- https://www.youtube.com/watch?v=-v36WcbDs9k - clock</p>
+        <p>- https://www.geeksforgeeks.org/build-a-hangman-game-using-javascript/?utm_source=auth&utm_medium=saved&utm_campaign=articles - Hangman Game</p>
+        <p>- https://codepen.io/adamsullovey/pen/BoJrbb - Door opening animation</p>
+        <p>- https://www.w3schools.com/howto/howto_js_accordion.asp - accordion</p>
+        <p>- https://www.w3schools.com/php/php_sessions.asp - php start session</p>
+        <p>- https://www.w3schools.com/php/func_filesystem_dirname.asp - PHP dirname() Function</p>
+        <p>- https://www.geeksforgeeks.org/javascript-fetch-method/ - javascript fetch method</p>
+        <p>- https://www.w3schools.com/php/keyword_require_once.asp - require_once php method</p>
+        <p>- https://www.w3schools.com/php/func_var_isset.asp - isset php</p>
+        <p>- https://www.w3schools.com/PHP/func_misc_uniqid.asp - uniqid php</p>
+        <p>- https://www.geeksforgeeks.org/how-to-make-a-redirect-in-php/ - redirecting php</p>
+        <p>- https://w3schools.tech/tutorial/php/php_flash_messages - flash messages php</p>
+      </div>
     </div>
   </main>
 
   <footer>
     <p>&copy; 2025 MysteryHub - Created by Bintu Jalloh & Michelle Lawson</p>
   </footer>
-
-  <script>
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.maxHeight) {
-          panel.style.maxHeight = null;
-        } else {
-          panel.style.maxHeight = panel.scrollHeight + "px";
-        }
-      });
-    }
-  </script>
 </body>
 </html>
