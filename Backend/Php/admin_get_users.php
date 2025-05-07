@@ -1,1 +1,0 @@
-<!-- php to see all users from the database -->
