@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hangman - Who killed Kayla??</title>
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../Assets/css/style.css">
     <link rel="stylesheet" href="../../css/games.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Homemade+Apple&family=Cutive+Mono&display=swap" rel="stylesheet">
@@ -32,27 +32,40 @@
                 <li><a href="game1.html">Field Operations</a></li>
                 <li><a href="../blog/blog.html">Case Files</a></li>
                 <li><a href="../movies/movies.html">Surveillance Footage</a></li>
-                <li><a href="../login.html" class="active">Login</a></li>
+                <li><a href="../profile.html" >Profile</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="main-content">
         <div class="container">
-            <div class="game-container">
-                <div class="evidence-tag">EXHIBIT A</div>
-                <div class="case-status">ACTIVE</div>
-                <div class="paper-clip"></div>
+            <div class="game-container"> 
+
+                <h1> The Kayla Case Files </h1>
                 
-                <h1 class="game-title">The Kayla Case Files</h1>
-                <p class="game-description">
-                    <strong>MISSION BRIEFING:</strong> Kayla Bennett, 23, was found murdered in her apartment on April 12, 2025. 
-                    The killer left a series of cryptic clues at the crime scene. Your task is to decipher these clues by 
-                    completing this hangman puzzle to reveal the killer's identity. Each incorrect guess brings us closer 
-                    to losing crucial evidence. Proceed with caution, detective.
-                </p>
+                
+                <div class="tooltip-container">
+                    <p class="game-description">
+                        <strong>MISSION BRIEFING:</strong> Kayla Bennett, 23, was found murdered in her apartment on April 12, 2025. 
+                        The killer left a series of cryptic clues at the crime scene. Your task is to decipher these clues by 
+                        completing this hangman puzzle to reveal the killer's identity. Each incorrect guess brings us closer 
+                        to losing crucial evidence. Proceed with caution, detective.
+                    </p>
+                    <div class="help-icon" id="gameHelpIcon">?</div>
+                    <div class="tooltip-content" id="gameTooltip">
+                        <h3>How to Play:</h3>
+                        <p>1. Click on letters to make guesses about the killer's name</p>
+                        <p>2. Each correct guess reveals a letter</p>
+                        <p>3. Each wrong guess draws part of the hangman</p>
+                        <p>4. Use the "Request Evidence" button for hints (limited uses)</p>
+                        <p>5. Read the clues carefully for additional hints</p>
+                        <p>6. You have 6 wrong guesses before the game ends</p>
+                        <p>7. Solve the hangman puzzle to identify the killer!</p>
+                    </div>
+                </div>
                 
                 <div class="hangman-wrapper">
+                    
                     <div class="hangman-left">
                         <div class="word-display" id="wordDisplay">
                             <!-- Letter boxes will be generated here via JavaScript -->
@@ -101,13 +114,7 @@
     <footer class="vintage-footer">
         <div class="container">
             <div class="footer-content">
-                <ul class="footer-links">
-                    <li><a href="../index.html">Headquarters</a></li>
-                    <li><a href="game1.html">Field Operations</a></li>
-                    <li><a href="../blog/blog.html">Case Files</a></li>
-                    <li><a href="../movies/movies.html">Surveillance Footage</a></li>
-                    <li><a href="../Pages/login.html">Agent Login</a></li>
-                </ul>
+                
                 
                 <p class="copyright handwritten-note">Bintu Jalloh & Michelle Lawson, Mystery Hub</p>
             </div>
